@@ -58,6 +58,7 @@
     </noscript>
     <!-- /Yandex.Metrika counter -->
 </head>
+<body>
 <div class="container mx-auto px-4 py-8 max-w-md">
     <h1 class="text-3xl sm:text-4xl text-center mb-4">Дербичева Ирина</h1>
     <p class="text sm:text-base text-center">Клинический психолог, жизнь в путешествии.</p>
@@ -86,7 +87,6 @@
         <li>- Знаю, что переезд это трудно. Научу слушать себя, а не тревогу.</li>
         <li>- Помогу выйти из тупика в отношениях и реализовать желаемое.</li>
         <li>- Лучше понимать себя и других</li>
-        <li>- Научный подход, никакой магии</li>
         <li>- Помогу начать заботиться о себе</li>
         <li>- Добиться твоих целей</li>
     </uL>
@@ -95,62 +95,32 @@
     <hr class="mt-6 mb-6">
     <h1 class="text-3xl">Обо мне</h1>
     <p>Коротко о себе</p>
-    <div>
-
-        <div class="grid grid-rows-12 grid-flow-col gap-4">
-  <div class="col-span-2 flex items-center">
-    <svg
-      class="h-10 w-full align-middle text-center text-indigo-500"
-      xmlns="http://www.w3.org/2000/svg"
-      fill="none"
-      viewBox="0 0 24 24"
-      stroke="currentColor"
-    >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.697 50.697 0 0112 13.489a50.702 50.702 0 017.74-3.342M6.75 15a.75.75 0 100-1.5.75.75 0 000 1.5zm0 0v-3.675A55.378 55.378 0 0112 8.443m-7.007 1С1.55A5.981 5.981 0 006.75 15.75v-1.5"
-      />
-    </svg>
-  </div>
-  <div class="col-span-8 flex items-center">
-    <div class="flex flex-col">
-      <h3 class="font-semibold">
-        Клиническая психология, неврачебная психотерапия<br> Диплом 2022 года
-      </h3>
-      <p class="text-gray-600">ИТГИПП, 650 часов </p>
-    </div>
-  </div>
-  <div class="col-span-2 flex items-center">
-    <a href="src/clinic.png"><img src="src/clinic_small.jpg"></a>
-  </div>
-</div>
-
-
-
-
-        <!--
-        Привет, действуй как профессиональный веб-программист на tailwindcss.
-        Задача - подготовить элемент для блока со списком дипломов.
-
-        Элемент состоит из трех секций:
-        1. иконка диплома
-        2. центральная часть
-        3. мини-изображение диплома со ссылкой на полную версию
-
-        в центральной части - название вуза и название специальности
-        - когда наводишь мышку на блок - он становится более темным
-        - блоки разделяются небольшими линиями
-        - когда наводишь мышку на изображение диплома - оно выделяется
-        -->
-        <div class="">
-            <div>icon диплом</div>
-            <div>Название вуза</div>
-            <div>Название специальности</div>
-            <div>картинка диплома со ссылкой</div>
+    <div class="grid grid-rows-12 grid-flow-col gap-3 hover:bg-blue-50 rounded-2xl p-2">
+        <div class="col-span-2 flex items-center">
+            <svg
+                    class="h-10 w-full align-middle text-center text-indigo-500"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+            >
+                <path
+                        d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.697 50.697 0 0112 13.489a50.702 50.702 0 017.74-3.342M6.75 15a.75.75 0 100-1.5.75.75 0 000 1.5zm0 0v-3.675A55.378 55.378 0 0112 8.443m-7.007 1С1.55A5.981 5.981 0 006.75 15.75v-1.5"
+                />
+            </svg>
+        </div>
+        <div class="col-span-8 flex items-center">
+            <div class="flex flex-col">
+                <h3 class="font-semibold">
+                    Клиническая психология, неврачебная психотерапия<br> Диплом 2022 года
+                </h3>
+                <p class="text-gray-600">ИТГИПП, 650 часов </p>
+            </div>
+        </div>
+        <div class="col-span-2 flex items-center">
+            <a href="src/clinic.png" class="hover:bg-gray-200 p-2"><img src="src/clinic_small.jpg" alt="diplom"></a>
         </div>
     </div>
-
 
     <hr class="mt-6 mb-6">
     <h1 class="text-3xl">Отзывы</h1>
@@ -158,13 +128,27 @@
 
     <hr class="mt-6 mb-6">
     <h1 class="text-3xl">Как проходит сессия</h1>
-    <p>коротко о том как проходит сессия</p>
+    <ul>
+        <li>- Встреча проходит онлайн, по видеосвязи (whatsapp/telegram/zoom).
+        </li>
+        <li>- Мы общаемся примерно 20-30 минут.
+        </li>
+        <li>- Вы рассказываете о себе, возможно о своих запросах.
+        </li>
+        <li>- Я расскажу, как я могу быть вам полезна. Отвечу на все ваши вопросы.</li>
+    </ul>
+
+    <p>Сама эта встреча ни к чему вас не обязывает. Как итог, вам и мне станет понятнее, сможем ли мы работать в
+        продолжительном формате. И если да, то договоримся о дальнейших встречах. Сразу на будущее — моя консультация
+        стоит 2000₽, длится час.</p>
+
+    </p>
 
 
 </div>
 <link
         rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
         crossorigin="anonymous"
-></link>
+>
 </body>
 </html>
