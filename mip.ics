@@ -4,40 +4,40 @@ PRODID:-//My calendar product//mxm.dk//
 BEGIN:VEVENT
 SUMMARY:Организационное собрание - ПМ5А23/10 (в
  се профили)
-DTSTART:20230929T170000Z
-DTEND:20230929T180000Z
+DTSTART;TZID=Europe/Moscow:20230929T170000
+DTEND;TZID=Europe/Moscow:20230929T180000
 DESCRIPTION:Преподаватель: Ледовских Анна Ник
  олаевна
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:Социальная психология малых групп и
   личности - Вебинар 1 (лекция)
-DTSTART:20231003T185000Z
-DTEND:20231003T215000Z
+DTSTART;TZID=Europe/Moscow:20231003T185000
+DTEND;TZID=Europe/Moscow:20231003T215000
 DESCRIPTION:Преподаватель: Гордякова Ольга Вл
  адимировна
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:Теории личности в психологии - Вебин
  ар 1 (лекция)
-DTSTART:20231004T185000Z
-DTEND:20231004T215000Z
+DTSTART;TZID=Europe/Moscow:20231004T185000
+DTEND;TZID=Europe/Moscow:20231004T215000
 DESCRIPTION:Преподаватель: Фомина Татьяна Ген
  надьевна
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:Научные школы и теории в современно
  й психологии - Вебинар 1 ЛК
-DTSTART:20231006T185000Z
-DTEND:20231006T215000Z
+DTSTART;TZID=Europe/Moscow:20231006T185000
+DTEND;TZID=Europe/Moscow:20231006T215000
 DESCRIPTION:Преподаватель: Хватов Иван Алекса
  ндрович
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:Научные школы и теории в современно
  й психологии - Вебинар 2 ЛК
-DTSTART:20231009T185000Z
-DTEND:20231009T215000Z
+DTSTART;TZID=Europe/Moscow:20231009T185000
+DTEND;TZID=Europe/Moscow:20231009T215000
 DESCRIPTION:Преподаватель: Хватов Иван Алекса
  ндрович
 END:VEVENT
@@ -45,24 +45,24 @@ BEGIN:VEVENT
 SUMMARY:Теория\, методология и практика псих
  ологического консультирования - Вебинар
   1 (лекция)
-DTSTART:20231010T185000Z
-DTEND:20231010T215000Z
+DTSTART;TZID=Europe/Moscow:20231010T185000
+DTEND;TZID=Europe/Moscow:20231010T215000
 DESCRIPTION:Преподаватель: Морозова Елена Ана
  тольевна
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:Социальная психология малых групп и
   личности - Вебинар 2 (лекция)
-DTSTART:20231012T185000Z
-DTEND:20231012T215000Z
+DTSTART;TZID=Europe/Moscow:20231012T185000
+DTEND;TZID=Europe/Moscow:20231012T215000
 DESCRIPTION:Преподаватель: Гордякова Ольга Вл
  адимировна
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:Научные школы и теории в современно
  й психологии - Вебинар 3 ЛК
-DTSTART:20231013T185000Z
-DTEND:20231013T215000Z
+DTSTART;TZID=Europe/Moscow:20231013T185000
+DTEND;TZID=Europe/Moscow:20231013T215000
 DESCRIPTION:Преподаватель: Хватов Иван Алекса
  ндрович
 END:VEVENT
@@ -70,24 +70,24 @@ BEGIN:VEVENT
 SUMMARY:Теория\, методология и практика псих
  ологического консультирования - Вебинар
   2 (лекция)
-DTSTART:20231016T185000Z
-DTEND:20231016T215000Z
+DTSTART;TZID=Europe/Moscow:20231016T185000
+DTEND;TZID=Europe/Moscow:20231016T215000
 DESCRIPTION:Преподаватель: Морозова Елена Ана
  тольевна
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:Социальная психология малых групп и
   личности - Вебинар 3 (лекция)
-DTSTART:20231019T185000Z
-DTEND:20231019T215000Z
+DTSTART;TZID=Europe/Moscow:20231019T185000
+DTEND;TZID=Europe/Moscow:20231019T215000
 DESCRIPTION:Преподаватель: Гордякова Ольга Вл
  адимировна
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:Научные школы и теории в современно
  й психологии - Вебинар 4 ЛК
-DTSTART:20231020T185000Z
-DTEND:20231020T215000Z
+DTSTART;TZID=Europe/Moscow:20231020T185000
+DTEND;TZID=Europe/Moscow:20231020T215000
 DESCRIPTION:Преподаватель: Хватов Иван Алекса
  ндрович
 END:VEVENT
@@ -95,32 +95,32 @@ BEGIN:VEVENT
 SUMMARY:Теория\, методология и практика псих
  ологического консультирования - Вебинар
   3 (лекция)
-DTSTART:20231023T185000Z
-DTEND:20231023T215000Z
+DTSTART;TZID=Europe/Moscow:20231023T185000
+DTEND;TZID=Europe/Moscow:20231023T215000
 DESCRIPTION:Преподаватель: Морозова Елена Ана
  тольевна
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:Научные школы и теории в современно
  й психологии - Вебинар 5 ЛК
-DTSTART:20231024T185000Z
-DTEND:20231024T215000Z
+DTSTART;TZID=Europe/Moscow:20231024T185000
+DTEND;TZID=Europe/Moscow:20231024T215000
 DESCRIPTION:Преподаватель: Хватов Иван Алекса
  ндрович
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:Научные школы и теории в современно
  й психологии - Вебинар 6 ЛК
-DTSTART:20231027T185000Z
-DTEND:20231027T215000Z
+DTSTART;TZID=Europe/Moscow:20231027T185000
+DTEND;TZID=Europe/Moscow:20231027T215000
 DESCRIPTION:Преподаватель: Хватов Иван Алекса
  ндрович
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:Научные школы и теории в современно
  й психологии - Вебинар 7 ЛК
-DTSTART:20231030T185000Z
-DTEND:20231030T215000Z
+DTSTART;TZID=Europe/Moscow:20231030T185000
+DTEND;TZID=Europe/Moscow:20231030T215000
 DESCRIPTION:Преподаватель: Хватов Иван Алекса
  ндрович
 END:VEVENT
@@ -128,40 +128,40 @@ BEGIN:VEVENT
 SUMMARY:Теория\, методология и практика псих
  ологического консультирования - Вебинар
   4 (лекция)
-DTSTART:20231031T185000Z
-DTEND:20231031T215000Z
+DTSTART;TZID=Europe/Moscow:20231031T185000
+DTEND;TZID=Europe/Moscow:20231031T215000
 DESCRIPTION:Преподаватель: Морозова Елена Ана
  тольевна
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:Социальная психология малых групп и
   личности - Вебинар 4 (лекция)
-DTSTART:20231101T185000Z
-DTEND:20231101T215000Z
+DTSTART;TZID=Europe/Moscow:20231101T185000
+DTEND;TZID=Europe/Moscow:20231101T215000
 DESCRIPTION:Преподаватель: Гордякова Ольга Вл
  адимировна
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:Научные школы и теории в современно
  й психологии - Вебинар 8 ЛК
-DTSTART:20231103T185000Z
-DTEND:20231103T215000Z
+DTSTART;TZID=Europe/Moscow:20231103T185000
+DTEND;TZID=Europe/Moscow:20231103T215000
 DESCRIPTION:Преподаватель: Хватов Иван Алекса
  ндрович
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:Социальная психология малых групп и
   личности - Вебинар 5 (лекция)
-DTSTART:20231109T185000Z
-DTEND:20231109T215000Z
+DTSTART;TZID=Europe/Moscow:20231109T185000
+DTEND;TZID=Europe/Moscow:20231109T215000
 DESCRIPTION:Преподаватель: Гордякова Ольга Вл
  адимировна
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:Научные школы и теории в современно
  й психологии - Вебинар 9 ЛК
-DTSTART:20231110T185000Z
-DTEND:20231110T215000Z
+DTSTART;TZID=Europe/Moscow:20231110T185000
+DTEND;TZID=Europe/Moscow:20231110T215000
 DESCRIPTION:Преподаватель: Хватов Иван Алекса
  ндрович
 END:VEVENT
@@ -169,8 +169,8 @@ BEGIN:VEVENT
 SUMMARY:Теория\, методология и практика псих
  ологического консультирования - Вебинар
   5 (лекция)
-DTSTART:20231113T185000Z
-DTEND:20231113T215000Z
+DTSTART;TZID=Europe/Moscow:20231113T185000
+DTEND;TZID=Europe/Moscow:20231113T215000
 DESCRIPTION:Преподаватель: Морозова Елена Ана
  тольевна
 END:VEVENT
