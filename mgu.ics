@@ -199,8 +199,8 @@ TRANSP:OPAQUE
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:МГУ. Осознанность в контексте ТПО
-DTSTART;TZID=Europe/Moscow:20230111T180000
-DTEND;TZID=Europe/Moscow:20230111T210000
+DTSTART;TZID=Europe/Moscow:20240111T180000
+DTEND;TZID=Europe/Moscow:20240111T210000
 DESCRIPTION:Преподаватель: Янке Евгения Юрьев
  на\nКод доступа: act123!
 LOCATION:Online
@@ -208,8 +208,8 @@ TRANSP:OPAQUE
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:МГУ. Супервизия 2
-DTSTART;TZID=Europe/Moscow:20230116T180000
-DTEND;TZID=Europe/Moscow:20230116T210000
+DTSTART;TZID=Europe/Moscow:20240116T180000
+DTEND;TZID=Europe/Moscow:20240116T210000
 DESCRIPTION:Преподаватель: Чернов Никита Влад
  имирович\nКод доступа: act123!
 LOCATION:Online
@@ -217,8 +217,8 @@ TRANSP:OPAQUE
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:МГУ. Осознанность в контексте ТПО
-DTSTART;TZID=Europe/Moscow:20230118T180000
-DTEND;TZID=Europe/Moscow:20230118T210000
+DTSTART;TZID=Europe/Moscow:20240118T180000
+DTEND;TZID=Europe/Moscow:20240118T210000
 DESCRIPTION:Преподаватель: Янке Евгения Юрьев
  на\nКод доступа: act123!
 LOCATION:Online
@@ -226,8 +226,8 @@ TRANSP:OPAQUE
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:МГУ. ТПО депрессии
-DTSTART;TZID=Europe/Moscow:20230123T180000
-DTEND;TZID=Europe/Moscow:20230123T210000
+DTSTART;TZID=Europe/Moscow:20240123T180000
+DTEND;TZID=Europe/Moscow:20240123T210000
 DESCRIPTION:Преподаватель: Белякова Мария Але
  ксандровна\nКод доступа: act123!
 LOCATION:Online
@@ -235,8 +235,8 @@ TRANSP:OPAQUE
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:МГУ. Осознанность в контексте ТПО
-DTSTART;TZID=Europe/Moscow:20230125T180000
-DTEND;TZID=Europe/Moscow:20230125T210000
+DTSTART;TZID=Europe/Moscow:20240125T180000
+DTEND;TZID=Europe/Moscow:20240125T210000
 DESCRIPTION:Преподаватель: Янке Евгения Юрьев
  на\nКод доступа: act123!
 LOCATION:Online
@@ -244,8 +244,8 @@ TRANSP:OPAQUE
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:МГУ. ТПО депрессии
-DTSTART;TZID=Europe/Moscow:20230130T180000
-DTEND;TZID=Europe/Moscow:20230130T210000
+DTSTART;TZID=Europe/Moscow:20240130T180000
+DTEND;TZID=Europe/Moscow:20240130T210000
 DESCRIPTION:Преподаватель: Белякова Мария Але
  ксандровна\nКод доступа: act123!
 LOCATION:Online
@@ -253,8 +253,8 @@ TRANSP:OPAQUE
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:МГУ. Осознанность в контексте ТПО
-DTSTART;TZID=Europe/Moscow:20230201T180000
-DTEND;TZID=Europe/Moscow:20230201T210000
+DTSTART;TZID=Europe/Moscow:20240201T180000
+DTEND;TZID=Europe/Moscow:20240201T210000
 DESCRIPTION:Преподаватель: Янке Евгения Юрьев
  на\nКод доступа: act123!
 LOCATION:Online
@@ -262,8 +262,8 @@ TRANSP:OPAQUE
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:МГУ. Супервизия 3
-DTSTART;TZID=Europe/Moscow:20230206T180000
-DTEND;TZID=Europe/Moscow:20230206T210000
+DTSTART;TZID=Europe/Moscow:20240206T180000
+DTEND;TZID=Europe/Moscow:20240206T210000
 DESCRIPTION:Преподаватель: Белякова Мария Але
  ксандровна\nКод доступа: act123!
 LOCATION:Online
@@ -271,8 +271,8 @@ TRANSP:OPAQUE
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:МГУ. Осознанность в контексте ТПО
-DTSTART;TZID=Europe/Moscow:20230208T180000
-DTEND;TZID=Europe/Moscow:20230208T210000
+DTSTART;TZID=Europe/Moscow:20240208T180000
+DTEND;TZID=Europe/Moscow:20240208T210000
 DESCRIPTION:Преподаватель: Янке Евгения Юрьев
  на\nКод доступа: act123!
 LOCATION:Online
@@ -280,8 +280,8 @@ TRANSP:OPAQUE
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:МГУ. ТПО тревожных расстройств (ПР)
-DTSTART;TZID=Europe/Moscow:20230213T180000
-DTEND;TZID=Europe/Moscow:20230213T210000
+DTSTART;TZID=Europe/Moscow:20240213T180000
+DTEND;TZID=Europe/Moscow:20240213T210000
 DESCRIPTION:Преподаватель: Белякова Мария Але
  ксандровна\nКод доступа: act123!
 LOCATION:Online
@@ -290,8 +290,8 @@ END:VEVENT
 BEGIN:VEVENT
 SUMMARY:МГУ. ТПО тревожных расстройств (СТР\,
   ГТР)
-DTSTART;TZID=Europe/Moscow:20230215T180000
-DTEND;TZID=Europe/Moscow:20230215T210000
+DTSTART;TZID=Europe/Moscow:20240215T180000
+DTEND;TZID=Europe/Moscow:20240215T210000
 DESCRIPTION:Преподаватель: Белякова Мария Але
  ксандровна\nКод доступа: act123!
 LOCATION:Online
@@ -299,8 +299,8 @@ TRANSP:OPAQUE
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:МГУ. Супервизия 4
-DTSTART;TZID=Europe/Moscow:20230220T180000
-DTEND;TZID=Europe/Moscow:20230220T210000
+DTSTART;TZID=Europe/Moscow:20240220T180000
+DTEND;TZID=Europe/Moscow:20240220T210000
 DESCRIPTION:Преподаватель: Чернов Никита Влад
  имирович\nКод доступа: act123!
 LOCATION:Online
@@ -308,8 +308,8 @@ TRANSP:OPAQUE
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:МГУ. ТПО тревожных расстройств (ОКР)
-DTSTART;TZID=Europe/Moscow:20230222T180000
-DTEND;TZID=Europe/Moscow:20230222T210000
+DTSTART;TZID=Europe/Moscow:20240222T180000
+DTEND;TZID=Europe/Moscow:20240222T210000
 DESCRIPTION:Преподаватель: Белякова Мария Але
  ксандровна\nКод доступа: act123!
 LOCATION:Online
@@ -317,8 +317,8 @@ TRANSP:OPAQUE
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:МГУ. ТПО проблемного гнева
-DTSTART;TZID=Europe/Moscow:20230227T180000
-DTEND;TZID=Europe/Moscow:20230227T210000
+DTSTART;TZID=Europe/Moscow:20240227T180000
+DTEND;TZID=Europe/Moscow:20240227T210000
 DESCRIPTION:Преподаватель: Смирнова Татьяна А
  натольевна\nКод доступа: act123!
 LOCATION:Online
@@ -326,8 +326,8 @@ TRANSP:OPAQUE
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:МГУ. ТПО проблемного гнева
-DTSTART;TZID=Europe/Moscow:20230305T180000
-DTEND;TZID=Europe/Moscow:20230305T210000
+DTSTART;TZID=Europe/Moscow:20240305T180000
+DTEND;TZID=Europe/Moscow:20240305T210000
 DESCRIPTION:Преподаватель: Смирнова Татьяна А
  натольевна\nКод доступа: act123!
 LOCATION:Online
@@ -335,8 +335,8 @@ TRANSP:OPAQUE
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:МГУ. ТПО горя
-DTSTART;TZID=Europe/Moscow:20230307T180000
-DTEND;TZID=Europe/Moscow:20230307T210000
+DTSTART;TZID=Europe/Moscow:20240307T180000
+DTEND;TZID=Europe/Moscow:20240307T210000
 DESCRIPTION:Преподаватель: Смирнова Татьяна А
  натольевна\nКод доступа: act123!
 LOCATION:Online
@@ -344,8 +344,8 @@ TRANSP:OPAQUE
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:МГУ. супервизия 5
-DTSTART;TZID=Europe/Moscow:20230312T180000
-DTEND;TZID=Europe/Moscow:20230312T210000
+DTSTART;TZID=Europe/Moscow:20240312T180000
+DTEND;TZID=Europe/Moscow:20240312T210000
 DESCRIPTION:Преподаватель: Смирнова Татьяна А
  натольевна\nКод доступа: act123!
 LOCATION:Online
@@ -353,8 +353,8 @@ TRANSP:OPAQUE
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:МГУ. ТПО ПТСР
-DTSTART;TZID=Europe/Moscow:20230314T180000
-DTEND;TZID=Europe/Moscow:20230314T210000
+DTSTART;TZID=Europe/Moscow:20240314T180000
+DTEND;TZID=Europe/Moscow:20240314T210000
 DESCRIPTION:Преподаватель: Белякова Мария Але
  ксандровна\nКод доступа: act123!
 LOCATION:Online
@@ -362,8 +362,8 @@ TRANSP:OPAQUE
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:МГУ. ТПО ПТСР
-DTSTART;TZID=Europe/Moscow:20230319T180000
-DTEND;TZID=Europe/Moscow:20230319T210000
+DTSTART;TZID=Europe/Moscow:20240319T180000
+DTEND;TZID=Europe/Moscow:20240319T210000
 DESCRIPTION:Преподаватель: Белякова Мария Але
  ксандровна\nКод доступа: act123!
 LOCATION:Online
@@ -371,8 +371,8 @@ TRANSP:OPAQUE
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:МГУ. ТПО ПТСР
-DTSTART;TZID=Europe/Moscow:20230321T180000
-DTEND;TZID=Europe/Moscow:20230321T210000
+DTSTART;TZID=Europe/Moscow:20240321T180000
+DTEND;TZID=Europe/Moscow:20240321T210000
 DESCRIPTION:Преподаватель: Белякова Мария Але
  ксандровна\nКод доступа: act123!
 LOCATION:Online
@@ -380,8 +380,8 @@ TRANSP:OPAQUE
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:МГУ. Супервизия 6
-DTSTART;TZID=Europe/Moscow:20230326T180000
-DTEND;TZID=Europe/Moscow:20230326T210000
+DTSTART;TZID=Europe/Moscow:20240326T180000
+DTEND;TZID=Europe/Moscow:20240326T210000
 DESCRIPTION:Преподаватель: Чернов Никита Влад
  имирович\nКод доступа: act123!
 LOCATION:Online
@@ -389,8 +389,8 @@ TRANSP:OPAQUE
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:МГУ. ТПО алкогольной зависимости
-DTSTART;TZID=Europe/Moscow:20230328T180000
-DTEND;TZID=Europe/Moscow:20230328T210000
+DTSTART;TZID=Europe/Moscow:20240328T180000
+DTEND;TZID=Europe/Moscow:20240328T210000
 DESCRIPTION:Преподаватель: Лобусов Егор Викто
  рович\nКод доступа: act123!
 LOCATION:Online
@@ -398,8 +398,8 @@ TRANSP:OPAQUE
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:МГУ. Супервизия 7/ фидбек занятие
-DTSTART;TZID=Europe/Moscow:20230402T180000
-DTEND;TZID=Europe/Moscow:20230402T210000
+DTSTART;TZID=Europe/Moscow:20240402T180000
+DTEND;TZID=Europe/Moscow:20240402T210000
 DESCRIPTION:Преподаватель: Лобусов Егор Викто
  рович\nКод доступа: act123!
 LOCATION:Online
@@ -407,8 +407,8 @@ TRANSP:OPAQUE
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:МГУ. Итоговая аттестация
-DTSTART;TZID=Europe/Moscow:20230423T180000
-DTEND;TZID=Europe/Moscow:20230423T210000
+DTSTART;TZID=Europe/Moscow:20240423T180000
+DTEND;TZID=Europe/Moscow:20240423T210000
 DESCRIPTION:Преподаватель: -\nКод доступа: nan
 LOCATION:Online
 TRANSP:OPAQUE
