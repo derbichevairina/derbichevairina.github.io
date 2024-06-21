@@ -17,6 +17,73 @@
             }
         }
     </script>
+    <style>
+        .image-slider-container {
+            position: relative;
+            max-width: 100%;
+            overflow: hidden;
+            touch-action: pan-y; /* Disable horizontal touch actions */
+        }
+
+        .image-slider {
+            display: flex;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .slider-image {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            flex-shrink: 0; /* Prevent images from shrinking */
+        }
+
+        .slider-nav {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+        }
+
+        .prev-btn, .next-btn {
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: background-color 0.3s;
+        }
+
+        .prev-btn:hover, .next-btn:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        @media (max-width: 640px) {
+            .slider-nav {
+                display: none;
+            }
+        }
+
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            height: 0;
+            overflow: hidden;
+            max-width: 100%;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+    </style>
 
     <style>
         .rounded-img {
@@ -89,110 +156,67 @@
 <div class="container mx-auto px-4 py-8 max-w-md">
     <h1 class="text-3xl sm:text-4xl text-center mb-4">Дербичева Ирина</h1>
     <p class="text sm:text-base text-center">Клинический психолог, жизнь в путешествии.</p>
-<div class="image-slider-container mt-4 mb-8">
-  <div class="image-slider">
-    <img src="ira2.jpg" alt="Ирина" class="slider-image">
-    <img src="ira3.jpg" alt="Ирина" class="slider-image">
-      <img src="ira.png" alt="Ирина" class="slider-image">
-  </div>
-  <div class="slider-nav">
-    <button class="prev-btn">&lt;</button>
-    <button class="next-btn">&gt;</button>
-  </div>
-</div>
+    <div class="image-slider-container mt-4 mb-8">
+        <div class="image-slider">
+            <img src="ira2.jpg" alt="Ирина" class="slider-image">
+            <img src="ira3.jpg" alt="Ирина" class="slider-image">
+            <img src="ira.png" alt="Ирина" class="slider-image">
+        </div>
+        <div class="slider-nav">
+            <button class="prev-btn">&lt;</button>
+            <button class="next-btn">&gt;</button>
+        </div>
+    </div>
 
-<style>
-.image-slider-container {
-  position: relative;
-  max-width: 100%;
-  overflow: hidden;
-}
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const slider = document.querySelector('.image-slider');
+            const prevBtn = document.querySelector('.prev-btn');
+            const nextBtn = document.querySelector('.next-btn');
+            const images = document.querySelectorAll('.slider-image');
+            let currentIndex = 0;
 
-.image-slider {
-  display: flex;
-  transition: transform 0.3s ease-in-out;
-}
+            function showImage(index) {
+                slider.style.transform = `translateX(-${index * 100}%)`;
+            }
 
-.slider-image {
-  width: 100%;
-  height: auto;
-  object-fit: cover;
-}
+            function nextImage() {
+                currentIndex = (currentIndex + 1) % images.length;
+                showImage(currentIndex);
+            }
 
-.slider-nav {
-  position: absolute;
-  top: 50%;
-  left: 0;
-  right: 0;
-  display: flex;
-  justify-content: space-between;
-  transform: translateY(-50%);
-}
+            function prevImage() {
+                currentIndex = (currentIndex - 1 + images.length) % images.length;
+                showImage(currentIndex);
+            }
 
-.prev-btn, .next-btn {
-  background-color: rgba(0, 0, 0, 0.5);
-  color: white;
-  border: none;
-  padding: 10px 15px;
-  cursor: pointer;
-  font-size: 18px;
-  transition: background-color 0.3s;
-}
+            nextBtn.addEventListener('click', nextImage);
+            prevBtn.addEventListener('click', prevImage);
 
-.prev-btn:hover, .next-btn:hover {
-  background-color: rgba(0, 0, 0, 0.8);
-}
+            // Touch events for mobile
+            let touchStartX = 0;
+            let touchEndX = 0;
 
-@media (max-width: 640px) {
-  .slider-nav {
-    display: none;
-  }
-}
-</style>
+            slider.addEventListener('touchstart', e => {
+                touchStartX = e.changedTouches[0].screenX;
+                e.preventDefault(); // Prevent default touch behavior
+            }, {passive: false});
 
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-  const slider = document.querySelector('.image-slider');
-  const prevBtn = document.querySelector('.prev-btn');
-  const nextBtn = document.querySelector('.next-btn');
-  const images = document.querySelectorAll('.slider-image');
-  let currentIndex = 0;
+            slider.addEventListener('touchmove', e => {
+                e.preventDefault(); // Prevent default touch behavior
+            }, {passive: false});
 
-  function showImage(index) {
-    slider.style.transform = `translateX(-${index * 100}%)`;
-  }
+            slider.addEventListener('touchend', e => {
+                touchEndX = e.changedTouches[0].screenX;
+                if (touchEndX < touchStartX) nextImage();
+                if (touchEndX > touchStartX) prevImage();
+                e.preventDefault(); // Prevent default touch behavior
+            }, {passive: false});
 
-  function nextImage() {
-    currentIndex = (currentIndex + 1) % images.length;
-    showImage(currentIndex);
-  }
-
-  function prevImage() {
-    currentIndex = (currentIndex - 1 + images.length) % images.length;
-    showImage(currentIndex);
-  }
-
-  nextBtn.addEventListener('click', nextImage);
-  prevBtn.addEventListener('click', prevImage);
-
-  // Touch events for mobile
-  let touchStartX = 0;
-  let touchEndX = 0;
-
-  slider.addEventListener('touchstart', e => {
-    touchStartX = e.changedTouches[0].screenX;
-  });
-
-  slider.addEventListener('touchend', e => {
-    touchEndX = e.changedTouches[0].screenX;
-    if (touchEndX < touchStartX) nextImage();
-    if (touchEndX > touchStartX) prevImage();
-  });
-
-  // Auto-advance every 5 seconds
-  setInterval(nextImage, 5000);
-});
-</script>
+            // Auto-advance every 5 seconds
+            setInterval(nextImage, 5000);
+        });
+    </script>
 
     <h2 class="text-xl sm:text-2xl text-center mb-4">Помогу жить настоящим. <br>Понять и принять себя и мир</h2>
     <p class="text-center mb-2 mt-8">Запишись на диагностическую сессию сейчас</p>
@@ -443,10 +467,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
         <h1 class="text-2xl">Видео ответы на вопросы</h1>
         <p>Как я пришла в психологию? Как проходит первая встреча?</p>
-        <iframe width="416" height="255" src="https://www.youtube.com/embed/uD_y4S4gNAA?si=lbqmIY9Outn3Kjd4"
-                title="YouTube video player" frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowfullscreen></iframe>
+        <div class="video-container">
+            <iframe src="https://www.youtube.com/embed/uD_y4S4gNAA?si=lbqmIY9Outn3Kjd4"
+                    title="YouTube video player" frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowfullscreen></iframe>
+        </div>
 
 
     </div>
