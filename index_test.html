@@ -32,16 +32,9 @@
 
         .square-image {
             width: 100vw;
-            height: 100vw;
             object-fit: cover;
         }
 
-        @media (min-width: 768px) {
-            .square-image {
-                width: 50vw;
-                height: 50vw;
-            }
-        }
     </style>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
@@ -96,26 +89,110 @@
 <div class="container mx-auto px-4 py-8 max-w-md">
     <h1 class="text-3xl sm:text-4xl text-center mb-4">Дербичева Ирина</h1>
     <p class="text sm:text-base text-center">Клинический психолог, жизнь в путешествии.</p>
-    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"/>
+<div class="image-slider-container mt-4 mb-8">
+  <div class="image-slider">
+    <img src="ira2.jpg" alt="Ирина" class="slider-image">
+    <img src="ira3.jpg" alt="Ирина" class="slider-image">
+      <img src="ira.png" alt="Ирина" class="slider-image">
+  </div>
+  <div class="slider-nav">
+    <button class="prev-btn">&lt;</button>
+    <button class="next-btn">&gt;</button>
+  </div>
+</div>
 
-    <div class="swiper-container">
-        <div class="swiper-wrapper">
-            <div class="swiper-slide"><img src="ira.png" alt="Ирина" class="square-image"></div>
-            <div class="swiper-slide"><img src="ira.png" alt="Ирина" class="square-image"></div>
-            <div class="swiper-slide"><img src="ira.png" alt="Ирина" class="square-image"></div>
-        </div>
-        <div class="swiper-pagination"></div>
-    </div>
+<style>
+.image-slider-container {
+  position: relative;
+  max-width: 100%;
+  overflow: hidden;
+}
 
-    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-    <script>
-        new Swiper('.swiper-container', {
-            pagination: {
-                el: '.swiper-pagination',
-            },
-        });
-    </script>
+.image-slider {
+  display: flex;
+  transition: transform 0.3s ease-in-out;
+}
 
+.slider-image {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.slider-nav {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  transform: translateY(-50%);
+}
+
+.prev-btn, .next-btn {
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+  font-size: 18px;
+  transition: background-color 0.3s;
+}
+
+.prev-btn:hover, .next-btn:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+@media (max-width: 640px) {
+  .slider-nav {
+    display: none;
+  }
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const slider = document.querySelector('.image-slider');
+  const prevBtn = document.querySelector('.prev-btn');
+  const nextBtn = document.querySelector('.next-btn');
+  const images = document.querySelectorAll('.slider-image');
+  let currentIndex = 0;
+
+  function showImage(index) {
+    slider.style.transform = `translateX(-${index * 100}%)`;
+  }
+
+  function nextImage() {
+    currentIndex = (currentIndex + 1) % images.length;
+    showImage(currentIndex);
+  }
+
+  function prevImage() {
+    currentIndex = (currentIndex - 1 + images.length) % images.length;
+    showImage(currentIndex);
+  }
+
+  nextBtn.addEventListener('click', nextImage);
+  prevBtn.addEventListener('click', prevImage);
+
+  // Touch events for mobile
+  let touchStartX = 0;
+  let touchEndX = 0;
+
+  slider.addEventListener('touchstart', e => {
+    touchStartX = e.changedTouches[0].screenX;
+  });
+
+  slider.addEventListener('touchend', e => {
+    touchEndX = e.changedTouches[0].screenX;
+    if (touchEndX < touchStartX) nextImage();
+    if (touchEndX > touchStartX) prevImage();
+  });
+
+  // Auto-advance every 5 seconds
+  setInterval(nextImage, 5000);
+});
+</script>
 
     <h2 class="text-xl sm:text-2xl text-center mb-4">Помогу жить настоящим. <br>Понять и принять себя и мир</h2>
     <p class="text-center mb-2 mt-8">Запишись на диагностическую сессию сейчас</p>
