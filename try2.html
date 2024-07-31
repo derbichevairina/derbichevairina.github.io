@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ирина Дербичева - Клинический психолог</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#4A5568',
+                        secondary: '#718096',
+                        accent: '#48BB78',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+        .hero-image {
+            background-image: url('ira2.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <nav class="bg-white shadow-lg">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="flex justify-between">
+                <div class="flex space-x-7">
+                    <div>
+                        <a href="#" class="flex items-center py-4 px-2">
+                            <span class="font-semibold text-gray-500 text-lg">Ирина Дербичева</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="hidden md:flex items-center space-x-1">
+                    <a href="#about" class="py-4 px-2 text-gray-500 font-semibold hover:text-accent transition duration-300">Обо мне</a>
+                    <a href="#services" class="py-4 px-2 text-gray-500 font-semibold hover:text-accent transition duration-300">Услуги</a>
+                    <a href="#education" class="py-4 px-2 text-gray-500 font-semibold hover:text-accent transition duration-300">Образование</a>
+                    <a href="#contact" class="py-4 px-2 text-gray-500 font-semibold hover:text-accent transition duration-300">Контакты</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="hero-image h-96 flex items-center justify-center">
+        <div class="text-center">
+            <p class="text-xl text-white ">Клинический психолог, эксперт в личностном развитии</p>
+        </div>
+    </div>
+
+    <div class="container mx-auto px-4 py-8">
+        <section id="about" class="mb-12">
+            <h2 class="text-3xl font-bold text-primary mb-4">Обо мне</h2>
+            <p class="text-gray-700 leading-relaxed">
+                Я Ирина Дербичева, практикующий клинический психолог с опытом работы в онлайн-консультировании. Моя миссия - помочь людям жить настоящим, понять и принять себя и окружающий мир. Я специализируюсь на широком спектре психологических проблем, включая трудности в отношениях, тревоги, страхи, травмы и многое другое.
+            </p>
+        </section>
+
+        <section id="services" class="mb-12">
+            <h2 class="text-3xl font-bold text-primary mb-4">Чем я могу помочь</h2>
+            <ul class="list-disc list-inside text-gray-700">
+                <li>Обрести себя через личную терапию</li>
+                <li>Начать заботиться о себе</li>
+                <li>Научиться слушать себя, а не свою тревогу</li>
+                <li>Лучше понимать себя и других людей</li>
+                <li>Выйти из тупика в отношениях и реализовать желаемое</li>
+                <li>Добиться своих целей</li>
+            </ul>
+        </section>
+
+        <section id="education" class="mb-12">
+            <h2 class="text-3xl font-bold text-primary mb-4">Образование</h2>
+            <div class="grid md:grid-cols-2 gap-4">
+                <div class="bg-white p-4 rounded-lg shadow">
+                    <h3 class="font-semibold text-lg mb-2">Психологическое консультирование и диагностика личности</h3>
+                    <p class="text-gray-600">Московский институт психоанализа, 2020</p>
+                </div>
+                <div class="bg-white p-4 rounded-lg shadow">
+                    <h3 class="font-semibold text-lg mb-2">Клиническая психология, неврачебная психотерапия</h3>
+                    <p class="text-gray-600">ИТГИПП, 2022</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="mb-12">
+            <h2 class="text-3xl font-bold text-primary mb-4">Запись на консультацию</h2>
+            <p class="text-gray-700 mb-4">Запишитесь на диагностическую сессию прямо сейчас:</p>
+            <div class="flex space-x-4">
+                <a href="https://wa.me/+79028983895" target="_blank" class="bg-green-500 text-white px-4 py-2 rounded-lg shadow-md hover:bg-green-600 transition duration-300">
+                    WhatsApp
+                </a>
+                <a href="https://t.me/derbichevairina" target="_blank" class="bg-blue-500 text-white px-4 py-2 rounded-lg shadow-md hover:bg-blue-600 transition duration-300">
+                    Telegram
+                </a>
+            </div>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-3xl font-bold text-primary mb-4">Запись на встречу</h2>
+            <p class="text-gray-700 mb-4">Выберите подходящие дату и время, и я свяжусь с вами для подтверждения.</p>
+            <div class="calendly-inline-widget" data-url="https://calendly.com/derbichevairina/full_session?hide_event_type_details=1&hide_gdpr_banner=1&primary_color=4e80ee&background_color=f7fbfb" style="min-width:320px;height:630px;"></div>
+            <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+        </section>
+    </div>
+
+    <footer class="bg-gray-800 text-white py-4">
+        <div class="container mx-auto px-4 text-center">
+            <p>&copy; 2024 Ирина Дербичева. Все права защищены.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript">
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();
+        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+        ym(93488297, "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true,
+            webvisor:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/93488297" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+</body>
+</html>
