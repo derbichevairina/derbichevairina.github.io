@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Дербичева Ирина - Клинический психолог</title>
+    <meta name="description"
+          content="Ирина Дербичева - клинический психолог, специализирующийся на личной терапии, отношениях и самопознании. Онлайн-консультации из любой точки мира.">
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+          crossorigin="anonymous">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#4A90E2',
+                        secondary: '#F0F4F8',
+                        accent: '#FFA07A',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&display=swap');
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .image-slider-container {
+            position: relative;
+            max-width: 100%;
+            overflow: hidden;
+            touch-action: pan-y;
+        }
+
+        .image-slider {
+            display: flex;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .slider-image {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+
+        .slider-nav {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+        }
+
+        .prev-btn, .next-btn {
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: background-color 0.3s;
+        }
+
+        .prev-btn:hover, .next-btn:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        @media (max-width: 640px) {
+            .slider-nav {
+                display: none;
+            }
+        }
+
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            max-width: 100%;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        html, body {
+            max-width: 100%;
+            overflow-x: hidden;
+        }
+
+        * {
+            max-width: 100vw;
+            box-sizing: border-box;
+        }
+
+        .calendly-inline-widget {
+            min-width: 320px;
+            height: 630px;
+            overflow: hidden;
+        }
+
+        .education-item {
+            transition: all 0.3s ease;
+        }
+
+        .education-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript">
+        (function (m, e, t, r, i, k, a) {
+            m[i] = m[i] || function () {
+                (m[i].a = m[i].a || []).push(arguments)
+            };
+            m[i].l = 1 * new Date();
+            for (var j = 0; j < document.scripts.length; j++) {
+                if (document.scripts[j].src === r) {
+                    return;
+                }
+            }
+            k = e.createElement(t), a = e.getElementsByTagName(t)[0], k.async = 1, k.src = r, a.parentNode.insertBefore(k, a)
+        })
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+        ym(93488297, "init", {
+            clickmap: true,
+            trackLinks: true,
+            accurateTrackBounce: true,
+            webvisor: true
+        });
+    </script>
+    <noscript>
+        <div><img src="https://mc.yandex.ru/watch/93488297" style="position:absolute; left:-9999px;" alt=""/></div>
+    </noscript>
+    <!-- /Yandex.Metrika counter -->
+</head>
+<body class="bg-gradient-to-br from-secondary to-white min-h-screen text-gray-800">
+<div class="container mx-auto px-4 py-8 max-w-4xl">
+    <header class="text-center mb-8">
+        <h1 class="text-4xl sm:text-5xl font-bold mb-2 text-primary">Дербичева Ирина</h1>
+        <p class="text-xl sm:text-2xl text-gray-600">Клинический психолог, жизнь в путешествии</p>
+    </header>
+    <div class="image-slider-container mt-4 mb-8 rounded-lg overflow-hidden shadow-lg">
+        <div class="image-slider">
+            <img src="ira2.jpg" alt="Ирина Дербичева" class="slider-image">
+            <img src="ira3.jpg" alt="Ирина Дербичева" class="slider-image">
+            <img src="ira.png" alt="Ирина Дербичева" class="slider-image">
+        </div>
+        <div class="slider-nav">
+            <button class="prev-btn">&lt;</button>
+            <button class="next-btn">&gt;</button>
+        </div>
+    </div>
+
+    <section class="mb-12">
+        <h2 class="text-2xl sm:text-3xl font-semibold text-center mb-6">Помогу жить настоящим.<br>Понять и принять себя
+            и мир</h2>
+        <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6 mb-8">
+            <a href="https://wa.me/+79028983895" target="_blank"
+               class="bg-green-500 text-white px-6 py-3 rounded-lg shadow-md hover:bg-green-600 transition duration-300 text-center">
+                <i class="fab fa-whatsapp mr-2"></i> WhatsApp
+            </a>
+            <a href="https://t.me/derbichevairina" target="_blank"
+               class="bg-blue-500 text-white px-6 py-3 rounded-lg shadow-md hover:bg-blue-600 transition duration-300 text-center">
+                <i class="fab fa-telegram-plane mr-2"></i> Telegram
+            </a>
+        </div>
+    </section>
+
+    <section class="mb-12 bg-white p-6 rounded-lg shadow-md">
+        <h2 class="text-3xl font-semibold mb-4">Чем смогу помочь?</h2>
+        <ul class="list-disc ml-6 space-y-2">
+            <li>Обрести себя через личную терапию</li>
+            <li>Начать заботиться о себе</li>
+            <li>Научиться слушать себя, а не свою тревогу</li>
+            <li>Лучше понимать себя и других людей</li>
+            <li>Выйти из тупика в отношениях и реализовать желаемое</li>
+            <li>Добиться своих целей</li>
+        </ul>
+    </section>
+
+    <section class="mb-12 bg-white p-6 rounded-lg shadow-md">
+        <h2 class="text-3xl font-semibold mb-4">Обо мне</h2>
+        <p class="mb-4">
+            Меня зовут Ирина Дербичева, я практикующий клинический психолог. Я провожу психологические консультации для
+            взрослых, веду свою практику онлайн с людьми из разных стран, которые нуждаются в терапии по самым различным
+            причинам.
+        </p>
+        <p class="mb-4">
+            Основной задачей терапии является исследование контекста жизни человека и поиск осознанных решений, которые
+            он может интегрировать в свою жизнь.
+        </p>
+        <p class="font-semibold">Люди обращаются ко мне с абсолютно разными запросами:</p>
+        <ul class="list-disc ml-6 space-y-2 mb-4">
+            <li>трудности в отношениях</li>
+            <li>трудности с родителями, проблемы сепарации</li>
+            <li>трудности выбора и принятия решений</li>
+            <li>тревоги, страхи</li>
+            <li>травмы, потери</li>
+            <li>неуверенность в себе, низкая самооценка</li>
+            <li>поиск «своего» дела</li>
+            <li>пищевые привычки, работа с весом и образом тела</li>
+            <li>адаптация на новом месте</li>
+            <li>депрессия</li>
+        </ul>
+        <p class="mb-4">
+            Я клинический психолог, однако в терапии использую интегративный подход, то есть совмещаю знания и методы из
+            различных направлений психологии. Часто обращаюсь к экзистенциальной терапии, задачей которой является
+            научить клиента действовать из «свободной воли», самостоятельно выбирать свой жизненный путь и нести
+            ответственность за свой выбор.
+        </p>
+        <p class="mb-4">
+            Моя жизнь проходит в путешествиях, и я не остаюсь в одном месте дольше трёх месяцев, поэтому работаю
+            исключительно онлайн. Я не работаю с несовершеннолетними и не работаю с парами, но в остальном принимаю
+            любые случаи в рамках своей компетенции.
+        </p>
+        <p class="font-semibold">
+            Я приглашаю вас на Терапию.<br>
+            Предлагаю Вам безопасное пространство, где можно выражать и анализировать свои чувства и мысли не боясь, что
+            Вас осудят. Здесь можно просто быть.
+        </p>
+    </section>
+
+    <section class="mb-12 bg-white p-6 rounded-lg shadow-md">
+        <h2 class="text-3xl font-semibold mb-6">Образование</h2>
+        <div class="space-y-6">
+            <div class="education-item flex items-start p-4 bg-secondary rounded-lg">
+                <div class="flex-shrink-0 mr-4">
+                    <svg class="h-12 w-12 text-primary" xmlns="http://www.w3.org/2000/svg" fill="none"
+                         viewBox="0 0 24 24" stroke="currentColor">
+                        <path d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.697 50.697 0 0112 13.489a50.702 50.702 0 017.74-3.342M6.75 15a.75.75 0 100-1.5.75.75 0 000 1.5zm0 0v-3.675A55.378 55.378 0 0112 8.443m-7.007 11.55A5.981 5.981 0 006.75 15.75v-1.5"/>
+                    </svg>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold">Психологическое консультирование и диагностика личности</h3>
+                    <p class="text-gray-600">Московский институт психоанализа</p>
+                    <p class="text-sm text-gray-500">Диплом 2020 года | 1590 ч.</p>
+                </div>
+            </div>
+            <div class="education-item flex items-start p-4 bg-secondary rounded-lg">
+                <div class="flex-shrink-0 mr-4">
+                    <svg class="h-12 w-12 text-primary" xmlns="http://www.w3.org/2000/svg" fill="none"
+                         viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/>
+                    </svg>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold">Клиническая психология, неврачебная психотерапия</h3>
+                    <p class="text-gray-600">ИТГИПП</p>
+                    <p class="text-sm text-gray-500">Диплом 2022 года | 650 ч.</p>
+                </div>
+            </div>
+            <!-- Add more education items here -->
+        </div>
+    </section>
+
+    <section class="mb-12 bg-white p-6 rounded-lg shadow-md">
+        <h2 class="text-3xl font-semibold mb-4">Как проходит первая сессия</h2>
+        <ul class="list-disc ml-6 space-y-2 mb-4">
+            <li>Встреча проходит онлайн, по видеосвязи (WhatsApp/Telegram/Zoom/Google meet).</li>
+            <li>Мы общаемся 60 минут.</li>
+            <li>Вы рассказываете о себе, возможно о своих запросах.</li>
+            <li>Я расскажу, как я могу быть вам полезна. Отвечу на все ваши вопросы.</li>
+        </ul>
+        <p class="mb-4">
+            Сама эта встреча ни к чему вас не обязывает. Как итог, вам и мне станет понятнее, сможем ли мы работать в
+            продолжительном формате. И если да, то договоримся о дальнейших встречах.
+        </p>
+        <p class="font-semibold text-lg">Консультация стоит 4000₽.</p>
+    </section>
+    <section class="mb-12">
+        <h2 class="text-3xl font-semibold text-center mb-6">Запись на встречу</h2>
+        <p class="mb-4 text-center">
+            Вы можете записаться на сессию самостоятельно. Выберите подходящие дату и время, а я свяжусь с вами для
+            подтверждения.
+        </p>
+        <div class="calendly-inline-widget"
+             data-url="https://calendly.com/derbichevairina/full_session?hide_event_type_details=1&hide_gdpr_banner=1&primary_color=4e80ee&background_color=f7fbfb"></div>
+        <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+    </section>
+
+    <section class="mb-12 bg-white p-6 rounded-lg shadow-md">
+        <h2 class="text-3xl font-semibold mb-4">Видео ответы на вопросы</h2>
+        <p class="mb-4">Как я пришла в психологию? Как проходит первая встреча?</p>
+        <div class="video-container">
+            <iframe src="https://www.youtube.com/embed/uD_y4S4gNAA?si=lbqmIY9Outn3Kjd4"
+                    title="YouTube video player" frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowfullscreen></iframe>
+        </div>
+    </section>
+
+    <footer class="text-center text-gray-600 mt-12">
+        <p>&copy; 2023 Дербичева Ирина. Все права защищены.</p>
+    </footer>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const slider = document.querySelector('.image-slider');
+        const prevBtn = document.querySelector('.prev-btn');
+        const nextBtn = document.querySelector('.next-btn');
+        const images = document.querySelectorAll('.slider-image');
+        let currentIndex = 0;
+
+        function showImage(index) {
+            slider.style.transform = `translateX(-${index * 100}%)`;
+        }
+
+        function nextImage() {
+            currentIndex = (currentIndex + 1) % images.length;
+            showImage(currentIndex);
+        }
+
+        function prevImage() {
+            currentIndex = (currentIndex - 1 + images.length) % images.length;
+            showImage(currentIndex);
+        }
+
+        nextBtn.addEventListener('click', nextImage);
+        prevBtn.addEventListener('click', prevImage);
+
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        slider.addEventListener('touchstart', e => {
+            touchStartX = e.changedTouches[0].screenX;
+        }, {passive: true});
+
+        slider.addEventListener('touchend', e => {
+            touchEndX = e.changedTouches[0].screenX;
+            if (touchEndX < touchStartX) nextImage();
+            if (touchEndX > touchStartX) prevImage();
+        }, {passive: true});
+
+        setInterval(nextImage, 5000);
+    });
+</script>
