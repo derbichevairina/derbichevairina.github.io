@@ -1,82 +1,31 @@
+You are tasked with improving a website's user experience, SEO, optimization, loading speed, marketing, and design. Your goal is to enhance the site comprehensively, making bold changes where necessary. Here's the current code for the website:
+
+<website_code>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
+    <!-- Meta Tags -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Дербичева Ирина - Психолог</title>
-    <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
-
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        clifford: '#da373d',
-                    }
-                }
-            }
-        }
-    </script>
+    <title>Дербичева Ирина - Клинический психолог</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Favicon -->
+    <link rel="icon" href="favicon.ico">
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    <!-- Custom Styles -->
     <style>
-
-
-        .image-slider-container {
-            position: relative;
-            max-width: 100%;
-            overflow: hidden;
-            touch-action: pan-y; /* Disable horizontal touch actions */
+        body {
+            font-family: 'Montserrat', sans-serif;
         }
-
-        .image-slider {
-            display: flex;
-            transition: transform 0.3s ease-in-out;
-        }
-
-        .slider-image {
-            width: 100%;
-            height: auto;
-            object-fit: cover;
-            flex-shrink: 0; /* Prevent images from shrinking */
-        }
-
-        .slider-nav {
-            position: absolute;
-            top: 50%;
-            left: 0;
-            right: 0;
-            display: flex;
-            justify-content: space-between;
-            transform: translateY(-50%);
-        }
-
-        .prev-btn, .next-btn {
-            background-color: rgba(0, 0, 0, 0.5);
-            color: white;
-            border: none;
-            padding: 10px 15px;
-            cursor: pointer;
-            font-size: 18px;
-            transition: background-color 0.3s;
-        }
-
-        .prev-btn:hover, .next-btn:hover {
-            background-color: rgba(0, 0, 0, 0.8);
-        }
-
-        @media (max-width: 640px) {
-            .slider-nav {
-                display: none;
-            }
-        }
-
         .video-container {
             position: relative;
-            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            padding-bottom: 56.25%; /* 16:9 */
             height: 0;
             overflow: hidden;
             max-width: 100%;
         }
-
         .video-container iframe {
             position: absolute;
             top: 0;
@@ -84,438 +33,296 @@
             width: 100%;
             height: 100%;
         }
-
-        /* Styles to disable horizontal scroll */
-        html, body {
-            max-width: 100%;
-            overflow-x: hidden;
-        }
-
-        /* Ensure all content stays within viewport */
-        * {
-            max-width: 100vw;
-            box-sizing: border-box;
-        }
-
-
-        .container {
-            width: 100%;
-            max-width: 100%;
-            padding-left: 15px;
-            padding-right: 15px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        /* Calendly responsive styles */
-        .calendly-inline-widget {
-            min-width: 320px;
-            height: 630px;
-            overflow: hidden;
-        }
-
-    </style>
-
-    <style>
-        .rounded-img {
-            border-radius: 50%;
-            width: 190px;
-            height: 190px;
-            object-fit: cover;
-        }
-
-        .image-with-shadow {
-            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2), 0 2px 4px rgba(0, 0, 0, 0.08);
-        }
-
-        .square-image {
-            width: 100vw;
-            object-fit: cover;
-        }
-
-    </style>
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            let touchstartX = 0;
-            let touchendX = 0;
-            const slider = document.querySelector('.overflow-x-auto');
-
-            function handleGesture() {
-                if (touchendX < touchstartX) slider.scrollLeft += 200;
-                if (touchendX > touchstartX) slider.scrollLeft -= 200;
+        /* Custom scrollbar for desktop */
+        @media (min-width: 768px) {
+            ::-webkit-scrollbar {
+                width: 8px;
             }
-
-            slider.addEventListener('touchstart', e => {
-                touchstartX = e.changedTouches[0].screenX;
-            });
-
-            slider.addEventListener('touchend', e => {
-                touchendX = e.changedTouches[0].screenX;
-                handleGesture();
-            });
-        });
-    </script>
-    <!-- Yandex.Metrika counter -->
-    <script type="text/javascript">
-        (function (m, e, t, r, i, k, a) {
-            m[i] = m[i] || function () {
-                (m[i].a = m[i].a || []).push(arguments)
-            };
-            m[i].l = 1 * new Date();
-            for (var j = 0; j < document.scripts.length; j++) {
-                if (document.scripts[j].src === r) {
-                    return;
-                }
+            ::-webkit-scrollbar-track {
+                background: #f1f1f1;
             }
-            k = e.createElement(t), a = e.getElementsByTagName(t)[0], k.async = 1, k.src = r, a.parentNode.insertBefore(k, a)
-        })
-        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
-
-        ym(93488297, "init", {
-            clickmap: true,
-            trackLinks: true,
-            accurateTrackBounce: true,
-            webvisor: true
-        });
-    </script>
-    <noscript>
-        <div><img src="https://mc.yandex.ru/watch/93488297" style="position:absolute; left:-9999px;" alt=""/></div>
-    </noscript>
-    <!-- /Yandex.Metrika counter -->
+            ::-webkit-scrollbar-thumb {
+                background: #888;
+                border-radius: 4px;
+            }
+            ::-webkit-scrollbar-thumb:hover {
+                background: #555;
+            }
+        }
+    </style>
 </head>
-<body class="bg-gradient-to-br from-teal-50 to-gray-50 min-h-screen">
-<div class="container mx-auto px-4 py-8 max-w-md">
-    <h1 class="text-3xl sm:text-4xl text-center mb-4">Дербичева Ирина</h1>
-    <p class="text sm:text-base text-center">Клинический психолог, жизнь в путешествии.</p>
-    <div class="image-slider-container mt-4 mb-8">
-        <div class="image-slider">
-            <img src="ira2.jpg" alt="Ирина" class="slider-image">
-            <img src="ira3.jpg" alt="Ирина" class="slider-image">
-            <img src="ira.png" alt="Ирина" class="slider-image">
-            <img src="ira2.jpg" alt="Ирина" class="slider-image">
-            <img src="ira3.jpg" alt="Ирина" class="slider-image">
-            <img src="ira.png" alt="Ирина" class="slider-image">
-            <img src="ira2.jpg" alt="Ирина" class="slider-image">
-            <img src="ira3.jpg" alt="Ирина" class="slider-image">
-            <img src="ira.png" alt="Ирина" class="slider-image">
-        </div>
-        <div class="slider-nav">
-            <button class="prev-btn">&lt;</button>
-            <button class="next-btn">&gt;</button>
-        </div>
-    </div>
+<body class="bg-gray-50 text-gray-800">
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const slider = document.querySelector('.image-slider');
-            const prevBtn = document.querySelector('.prev-btn');
-            const nextBtn = document.querySelector('.next-btn');
-            const images = document.querySelectorAll('.slider-image');
-            let currentIndex = 0;
-
-            function showImage(index) {
-                slider.style.transform = `translateX(-${index * 100}%)`;
-            }
-
-            function nextImage() {
-                currentIndex = (currentIndex + 1) % images.length;
-                showImage(currentIndex);
-            }
-
-            function prevImage() {
-                currentIndex = (currentIndex - 1 + images.length) % images.length;
-                showImage(currentIndex);
-            }
-
-            nextBtn.addEventListener('click', nextImage);
-            prevBtn.addEventListener('click', prevImage);
-
-            // Touch events for mobile
-            let touchStartX = 0;
-            let touchEndX = 0;
-
-            slider.addEventListener('touchstart', e => {
-                touchStartX = e.changedTouches[0].screenX;
-                e.preventDefault(); // Prevent default touch behavior
-            }, {passive: false});
-
-            slider.addEventListener('touchmove', e => {
-                e.preventDefault(); // Prevent default touch behavior
-            }, {passive: false});
-
-            slider.addEventListener('touchend', e => {
-                touchEndX = e.changedTouches[0].screenX;
-                if (touchEndX < touchStartX) nextImage();
-                if (touchEndX > touchStartX) prevImage();
-                e.preventDefault(); // Prevent default touch behavior
-            }, {passive: false});
-
-            // Auto-advance every 5 seconds
-            setInterval(nextImage, 5000);
-        });
-    </script>
-
-    <h2 class="text-xl sm:text-2xl text-center mb-4">Помогу жить настоящим. <br>Понять и принять себя и мир</h2>
-    <p class="text-center mb-2 mt-8">Запишись на диагностическую сессию сейчас</p>
-    <div class="mt-2 flex space-x-6 mb-10 flex justify-center">
-        <a href="https://wa.me/+79028983895" target="_blank"
-           class="bg-green-500 text-white px-4 py-2 rounded-lg shadow-md">
-            <i class="fab fa-whatsapp"></i> Whatsapp
-        </a>
-        <a href="https://t.me/derbichevairina" target="_blank"
-           class="bg-blue-500 text-white px-4 py-2 rounded-lg shadow-md">
-            <i class="fab fa-telegram-plane"></i> Telegram
-        </a>
-    </div>
-    <div class="mt-6 mb-6">
-        <h2 class="text-3xl mb-1">Чем смогу помочь?</h2>
-        <ul class="list-disc ml-4">
-            <li class="my-2">Обрести себя через личную терапию</li>
-            <li class="my-2">Начать заботиться о себе</li>
-            <li class="my-2">Научиться слушать себя, а не свою тревогу</li>
-            <li class="my-2">Лучше понимать себя и других людей</li>
-            <li class="my-2">Выйти из тупика в отношениях и реализовать желаемое</li>
-            <li class="my-2">Добиться своих целей</li>
-        </ul>
-    </div>
-
-
-    <hr class="mt-6 mb-6">
-    <h1 class="text-3xl mb-2">Обо мне</h1>
-    <p>
-    <div class="mb-2">
-        <p class="mt-3">Меня зовут Ирина Дербичева, я практикующий клинический психолог. Я провожу психологические
-            консультации для взрослых, веду свою практику онлайн с людьми из разных стран, которые нуждаются в терапии
-            по самым различным причинам.</p>
-        <p class="mt-3">Мне часто задают вопрос, с какими трудностями я могу помочь, с какими основными темами я
-            работаю. Но я бы хотела отметить, что в терапии нет определенного узкого направления трудностей. Все что
-            связано с человеком так или иначе в компетенции терапии: трудности отношений, потеря близкого, тревоги,
-            страхи и т.д.</p>
-        <p class="mt-3">Основной задачей терапии является исследование контекста жизни человека и поиск осознанных
-            решений, которые он может интегрировать в свою жизнь.</p>
-        <p class="mt-3">Люди обращаются ко мне с абсолютно разными запросами:</p>
-        <p class="mt-3">
-
-
-        <ul class="list-disc ml-4">
-            <li class="my-2">трудности в отношениях</li>
-            <li class="my-2">трудности с родителями, проблемы сепарации</li>
-            <li class="my-2">трудности выбора и принятия решений</li>
-            <li class="my-2">тревоги, страхи</li>
-            <li class="my-2">травмы, потери</li>
-            <li class="my-2">неуверенность в себе, низкая самооценка</li>
-            <li class="my-2">поиск «своего» дела</li>
-            <li class="my-2">пищевые привычки, работа с весом и образом тела</li>
-            <li class="my-2">адаптация на новом месте</li>
-            <li class="my-2">депрессия</li>
-        </ul>
-        </p>
-        <p class="mt-6">
-            Я клинический психолог, однако в терапии использую интегративный подход, то есть совмещаю знания и методы из
-            различных направлений психологии. Часто обращаюсь к экзистенциальной терапии, задачей которой является
-            научить клиента действовать из «свободной воли», самостоятельно выбирать свой жизненный путь и нести
-            ответственность за свой выбор.
-        </p>
-        <p class="mt-3">
-            Будучи бывшим учителем, я часто работаю над повышением психологической грамотности своих пациентов,
-            рассказывая им о том, что с ними происходит, и, предлагая литературу, которая может быть им интересна или
-            полезна.
-        </p>
-        <p class="mt-3">
-            Моя жизнь проходит в путешествиях, и я не остаюсь в одном месте дольше трёх месяцев, поэтому работаю
-            исключительно онлайн. Я не работаю с несовершеннолетними и не работаю с парами, но в остальном принимаю
-            любые случаи в рамках своей компетенции.
-        </p>
-        <p class="mt-3">
-            Я Приглашаю Вас на терапию.<br>
-            Буду рада поддержать Вас на пути поиска и исследования себя.
-        </p>
-
-
-        <h3 class="mt-5 text-lg">Образование</h3>
-        <ul role="list" class="divide-y divide-gray-100 ">
-            <li class="flex justify-between gap-x-6 py-5  hover:bg-blue-50 rounded-2xl p-2">
-                <div class="flex gap-x-4">
-                    <svg
-                            class="h-12 w-12 align-middle text-center text-indigo-500"
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                    >
-                        <path d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.697 50.697 0 0112 13.489a50.702 50.702 0 017.74-3.342M6.75 15a.75.75 0 100-1.5.75.75 0 000 1.5zm0 0v-3.675A55.378 55.378 0 0112 8.443m-7.007 1С1.55A5.981 5.981 0 006.75 15.75v-1.5"/>
-                    </svg>
-                    <div class="min-w-0 flex-auto">
-                        <p class="text-sm font-semibold leading-6 text-gray-900">Психологическое консультирование и
-                            диагностика личности<br> Диплом 2020 года</p>
-                        <p class="mt-1 truncate text-xs leading-5 text-gray-500">Московский институт психоанализа</p>
-                    </div>
+    <!-- Header -->
+    <header class="bg-white shadow">
+        <div class="container mx-auto px-4 py-6 flex justify-between items-center">
+            <div class="flex items-center space-x-4">
+                <img src="ira2.jpg" alt="Ирина Дербичева" class="w-16 h-16 rounded-full object-cover">
+                <div>
+                    <h1 class="text-2xl font-semibold">Дербичева Ирина</h1>
+                    <p class="text-sm text-gray-600">Клинический психолог</p>
                 </div>
-                <div class="sm:flex sm:flex-col sm:items-end ">
-                    <div class="col-span-2 flex items-center">
-                        <a href="src/mip.jpg" class="hover:bg-gray-200 p-2 w-16"><img src="src/mip_min.jpg"
-                                                                                      alt="diplom"></a>
-                    </div>
-                    <p class="mt-1 text-xs leading-5 text-gray-500">1590 ч.
-                    </p>
-                </div>
-            </li>
-            <li class="flex justify-between gap-x-6 py-5  hover:bg-blue-50 rounded-2xl p-2">
-                <div class="flex gap-x-4">
-                    <svg
-                            class="h-12 w-12 align-middle text-center text-indigo-500"
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                    >
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/>
-                    </svg>
-                    <div class="min-w-0 flex-auto">
-                        <p class="text-sm font-semibold leading-6 text-gray-900">Клиническая психология, неврачебная
-                            психотерапия<br> Диплом 2022 года</p>
-                        <p class="mt-1 truncate text-xs leading-5 text-gray-500">ИТГИПП </p>
-                    </div>
-                </div>
-                <div class="sm:flex sm:flex-col sm:items-end">
-                    <div class="col-span-2 flex items-center">
-                        <a href="src/clinic.jpg" class="hover:bg-gray-200 p-2 w-16"><img src="src/clinic_min.jpg"
-                                                                                         alt="diplom"></a>
-                    </div>
-                    <p class="mt-1 text-xs leading-5 text-gray-500">650 ч.
-                    </p>
-                </div>
-            </li>
-            <li class="flex justify-between gap-x-6 py-5  hover:bg-blue-50 rounded-2xl p-2">
-                <div class="flex gap-x-4">
-                    <svg
-                            class="h-12 w-12 align-middle text-center text-indigo-500"
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                    >
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/>
-                    </svg>
-                    <div class="min-w-0 flex-auto">
-                        <p class="text-sm font-semibold leading-6 text-gray-900">Психология нарушений пищевого поведения<br>
-                            Удостоверение 2021</p>
-                        <p class="mt-1 truncate text-xs leading-5 text-gray-500">АНО ДПО «НАДПО» </p>
-                    </div>
-                </div>
-                <div class="sm:flex sm:flex-col sm:items-end">
-                    <div class="col-span-2 flex items-center">
-                        <a href="src/rpp.jpg" class="hover:bg-gray-200 p-2 w-16"><img src="src/rpp_min.jpg"
-                                                                                      alt="diplom"></a>
-                    </div>
-                    <p class="mt-1 text-xs leading-5 text-gray-500">230 ч.</p>
-                </div>
-            </li>
-            <li class="flex justify-between gap-x-6 py-5  hover:bg-blue-50 rounded-2xl p-2">
-                <div class="flex gap-x-4">
-                    <svg
-                            class="h-8 w-8 align-middle text-center text-indigo-500"
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                    >
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/>
-                    </svg>
-                    <div class="min-w-0 flex-auto">
-                        <p class="text-sm font-semibold leading-6 text-gray-900">Гештальт-терапия<br> Удостоверение 2020
-                        </p>
-                        <p class="mt-1 truncate text-xs leading-5 text-gray-500">Среда обучения </p>
-                    </div>
-                </div>
-                <div class="sm:flex sm:flex-col sm:items-end">
-                    <div class="col-span-2 flex items-center">
-                        <a href="src/gesh.jpg" class="hover:bg-gray-200 p-2 w-16"><img src="src/gesh_min.jpg"
-                                                                                       alt="diplom"></a>
-                    </div>
-                    <p class="mt-1 text-xs leading-5 text-gray-500">90 ч.</p>
-                </div>
-            </li>
-            <li class="flex justify-between gap-x-6 py-5  hover:bg-blue-50 rounded-2xl p-2">
-                <div class="flex gap-x-4">
-                    <svg
-                            class="h-8 w-8 align-middle text-center text-indigo-500"
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                    >
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/>
-                    </svg>
-                    <div class="min-w-0 flex-auto">
-                        <p class="text-sm font-semibold leading-6 text-gray-900">Коучинг. Теория и практика<br>
-                            удостоверение 2021</p>
-                        <p class="mt-1 truncate text-xs leading-5 text-gray-500">Среда обучения </p>
-                    </div>
-                </div>
-                <div class="sm:flex sm:flex-col sm:items-end">
-                    <div class="col-span-2 flex items-center">
-                        <a href="src/couch.jpg" class="hover:bg-gray-200 p-2 w-16"><img src="src/couch_min.jpg"
-                                                                                        alt="diplom"></a>
-                    </div>
-                    <p class="mt-1 text-xs leading-5 text-gray-500">107 ч.</p>
-                </div>
-            </li>
-        </ul>
-
-        <hr class="mt-6 mb-6">
-        <h1 class="text-3xl">Как проходит первая сессия</h1>
-        <ul class="list-disc ml-4 mt-2">
-            <li>Встреча проходит онлайн, по видеосвязи (WhatsApp/Telegram/Zoom/Google meet)..</li>
-            <li>Мы общаемся 60 минут.</li>
-            <li>Вы рассказываете о себе, возможно о своих запросах.</li>
-            <li>Я расскажу, как я могу быть вам полезна. Отвечу на все ваши вопросы..</li>
-        </ul>
-
-        <p class="mt-3">Сама эта встреча ни к чему вас не обязывает. Как итог, вам и мне станет понятнее, сможем ли мы
-            работать в продолжительном формате. И если да, то договоримся о дальнейших встречах.</p>
-        <p class="mt-2">Консультация стоит 3000₽.</p>
-
-
-        <p class="text-center mb-2 mt-8">Запишись на диагностическую сессию сейчас</p>
-        <div class="mt-2 flex space-x-6 mb-10 flex justify-center">
-            <a href="https://wa.me/+79028983895" target="_blank"
-               class="bg-green-500 text-white px-4 py-2 rounded-lg shadow-md">
-                <i class="fab fa-whatsapp"></i> Whatsapp
-            </a>
-            <a href="https://t.me/derbichevairina" target="_blank"
-               class="bg-blue-500 text-white px-4 py-2 rounded-lg shadow-md">
-                <i class="fab fa-telegram-plane"></i> Telegram
+            </div>
+            <nav class="hidden md:flex space-x-6">
+                <a href="#services" class="text-gray-700 hover:text-indigo-600">Услуги</a>
+                <a href="#about" class="text-gray-700 hover:text-indigo-600">Обо мне</a>
+                <a href="#contact" class="text-gray-700 hover:text-indigo-600">Контакты</a>
+            </nav>
+            <a href="https://wa.me/+79028983895" target="_blank" class="md:hidden bg-green-500 text-white px-4 py-2 rounded-lg shadow-md">
+                <i class="fab fa-whatsapp"></i> Написать
             </a>
         </div>
+    </header>
 
-        <h1 class="text-3xl mb-2">Запись на встречу</h1>
-        Вы можете записаться на диагностическую сессию самостоятельно. Выберите подходящие дату и время, а я свяжусь с
-        вами
-        для подтверждения.
-
-        <!-- Calendly inline widget begin -->
-        <div class="calendly-inline-widget"
-             data-url="https://calendly.com/derbichevairina/full_session?hide_event_type_details=1&hide_gdpr_banner=1&primary_color=4e80ee&background_color=f7fbfb"
-             style="min-width:320px;height:630px;"></div>
-        <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
-
-        <!-- Calendly inline widget end -->
-
-        <h1 class="text-2xl">Видео ответы на вопросы</h1>
-        <p>Как я пришла в психологию? Как проходит первая встреча?</p>
-        <div class="video-container">
-            <iframe src="https://www.youtube.com/embed/uD_y4S4gNAA?si=lbqmIY9Outn3Kjd4"
-                    title="YouTube video player" frameborder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    allowfullscreen></iframe>
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-br from-teal-50 to-gray-50 py-20">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-4xl font-semibold mb-4">Помогу жить настоящим</h2>
+            <p class="text-lg text-gray-700 mb-8">Понять и принять себя и мир</p>
+            <div class="flex justify-center space-x-4">
+                <a href="https://wa.me/+79028983895" target="_blank" class="bg-green-500 text-white px-6 py-3 rounded-lg shadow-md flex items-center">
+                    <i class="fab fa-whatsapp mr-2"></i> Whatsapp
+                </a>
+                <a href="https://t.me/derbichevairina" target="_blank" class="bg-blue-500 text-white px-6 py-3 rounded-lg shadow-md flex items-center">
+                    <i class="fab fa-telegram-plane mr-2"></i> Telegram
+                </a>
+            </div>
         </div>
+    </section>
 
+    <!-- Image Slider Section -->
+    <section class="py-10">
+        <div class="container mx-auto px-4">
+            <!-- Swiper -->
+            <div class="swiper-container max-w-xl mx-auto">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <img src="ira2.jpg" alt="Ирина" class="w-full h-auto object-cover rounded-lg shadow-md">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="ira3.jpg" alt="Ирина" class="w-full h-auto object-cover rounded-lg shadow-md">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="ira.png" alt="Ирина" class="w-full h-auto object-cover rounded-lg shadow-md">
+                    </div>
+                    <!-- Добавьте больше слайдов по мере необходимости -->
+                </div>
+                <!-- Add Arrows -->
+                <div class="swiper-button-next text-indigo-600"></div>
+                <div class="swiper-button-prev text-indigo-600"></div>
+            </div>
+        </div>
+        <!-- Swiper JS -->
+        <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"/>
+        <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+        <script>
+            var swiper = new Swiper('.swiper-container', {
+                loop: true,
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
+                },
+                autoplay: {
+                    delay: 5000,
+                },
+                slidesPerView: 1,
+                spaceBetween: 20,
+                breakpoints: {
+                    768: {
+                        slidesPerView: 1,
+                    },
+                },
+            });
+        </script>
+    </section>
 
-    </div>
-    <link
-            rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-            crossorigin="anonymous"
-    >
+    <!-- Services Section -->
+    <section id="services" class="py-20 bg-gray-100">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-semibold text-center mb-10">Чем смогу помочь?</h2>
+            <ul class="space-y-4 max-w-2xl mx-auto">
+                <li class="flex items-start">
+                    <span class="text-indigo-600 mt-1 mr-2">
+                        <!-- Icon -->
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
+                         viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round"
+                         stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                    </span>
+                    <p class="text-gray-700">Обрести себя через личную терапию</p>
+                </li>
+                <!-- Повторите для каждого пункта -->
+                <li class="flex items-start">
+                    <span class="text-indigo-600 mt-1 mr-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
+                         viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round"
+                         stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                    </span>
+                    <p class="text-gray-700">Начать заботиться о себе</p>
+                </li>
+                <li class="flex items-start">
+                    <span class="text-indigo-600 mt-1 mr-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
+                         viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round"
+                         stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                    </span>
+                    <p class="text-gray-700">Научиться слушать себя, а не свою тревогу</p>
+                </li>
+                <li class="flex items-start">
+                    <span class="text-indigo-600 mt-1 mr-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
+                         viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round"
+                         stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                    </span>
+                    <p class="text-gray-700">Лучше понимать себя и других людей</p>
+                </li>
+                <li class="flex items-start">
+                    <span class="text-indigo-600 mt-1 mr-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
+                         viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round"
+                         stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                    </span>
+                    <p class="text-gray-700">Выйти из тупика в отношениях и реализовать желаемое</p>
+                </li>
+                <li class="flex items-start">
+                    <span class="text-indigo-600 mt-1 mr-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
+                         viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round"
+                         stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                    </span>
+                    <p class="text-gray-700">Добиться своих целей</p>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="py-10">
+        <div class="container mx-auto px-4 text-center">
+            <p class="text-lg mb-4">Запишитесь на сессию сейчас</p>
+            <div class="flex justify-center space-x-4">
+                <a href="https://wa.me/+79028983895" target="_blank" class="bg-green-500 text-white px-6 py-3 rounded-lg shadow-md flex items-center">
+                    <i class="fab fa-whatsapp mr-2"></i> Whatsapp
+                </a>
+                <a href="https://t.me/derbichevairina" target="_blank" class="bg-blue-500 text-white px-6 py-3 rounded-lg shadow-md flex items-center">
+                    <i class="fab fa-telegram-plane mr-2"></i> Telegram
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Me Section -->
+    <section id="about" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-semibold text-center mb-10">Обо мне</h2>
+            <div class="md:flex md:space-x-10">
+                <div class="md:w-1/3 mb-8 md:mb-0">
+                    <img src="ira2.jpg" alt="Ирина Дербичева" class="w-full h-auto rounded-lg shadow-lg">
+                </div>
+                <div class="md:w-2/3">
+                    <p class="text-gray-700 mb-4">Меня зовут Ирина Дербичева, я практикующий клинический психолог. Я провожу психологические консультации для взрослых, веду свою практику онлайн с людьми из разных стран, которые нуждаются в терапии по самым различным причинам.</p>
+                    <p class="text-gray-700 mb-4">Мне часто задают вопрос, с какими трудностями я могу помочь, с какими основными темами я работаю. Но я бы хотела отметить, что в терапии нет определенного узкого направления трудностей. Всё, что связано с человеком, так или иначе в компетенции терапии: трудности в отношениях, потеря близкого, тревоги, страхи и т.д.</p>
+                    <p class="text-gray-700 mb-4">Основной задачей терапии является исследование контекста жизни человека и поиск осознанных решений, которые он может интегрировать в свою жизнь.</p>
+                    <h3 class="text-xl font-semibold mt-6 mb-4">Образование</h3>
+                    <ul class="list-disc list-inside text-gray-700 space-y-2">
+                        <li><span class="font-semibold">Московский институт психоанализа</span> — Психологическое консультирование и диагностика личности (Диплом 2020 года, 1590 ч.)</li>
+                        <li><span class="font-semibold">ИТГИПП</span> — Клиническая психология, неврачебная психотерапия (Диплом 2022 года, 650 ч.)</li>
+                        <li><span class="font-semibold">МГУ</span> — Терапия принятием и ответственностью (Удостоверение 2024 года, 178 ч.)</li>
+                        <li><span class="font-semibold">ИГТиПП</span> — Психоанализ (Сертификат 2023 год, 104 ч.)</li>
+                        <li><span class="font-semibold">АНО ДПО «НАДПО»</span> — Психология нарушений пищевого поведения (Удостоверение 2021 года, 230 ч.)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How Session Works -->
+    <section class="py-20">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-semibold text-center mb-10">Как проходит первая сессия</h2>
+            <ul class="list-disc list-inside text-gray-700 space-y-2 max-w-2xl mx-auto">
+                <li>Встреча проходит онлайн по видеосвязи (WhatsApp, Telegram, Zoom, Google Meet).</li>
+                <li>Мы общаемся 60 минут.</li>
+                <li>Вы рассказываете о себе и своих запросах.</li>
+                <li>Я расскажу, как могу быть вам полезна, и отвечу на все ваши вопросы.</li>
+            </ul>
+            <p class="text-gray-700 mt-6 text-center max-w-2xl mx-auto">Первая встреча ни к чему вас не обязывает. В результате нам станет понятнее, сможем ли мы работать в продолжительном формате. Если да, то договоримся о дальнейших встречах. Стоимость консультации — <span class="font-semibold">4000₽</span>.</p>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="py-10 bg-gray-100">
+        <div class="container mx-auto px-4 text-center">
+            <p class="text-lg mb-4">Запишитесь на сессию сейчас</p>
+            <div class="flex justify-center space-x-4">
+                <a href="https://wa.me/+79028983895" target="_blank" class="bg-green-500 text-white px-6 py-3 rounded-lg shadow-md flex items-center">
+                    <i class="fab fa-whatsapp mr-2"></i> Whatsapp
+                </a>
+                <a href="https://t.me/derbichevairina" target="_blank" class="bg-blue-500 text-white px-6 py-3 rounded-lg shadow-md flex items-center">
+                    <i class="fab fa-telegram-plane mr-2"></i> Telegram
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Calendly Section -->
+    <section id="contact" class="py-20">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-semibold text-center mb-10">Запись на встречу</h2>
+            <p class="text-gray-700 text-center mb-8">Вы можете записаться на сессию самостоятельно. Выберите подходящие дату и время, а я свяжусь с вами для подтверждения.</p>
+            <!-- Calendly inline widget begin -->
+            <div class="calendly-inline-widget" data-url="https://calendly.com/derbichevairina/full_session?hide_event_type_details=1&hide_gdpr_banner=1&primary_color=4e80ee&background_color=f7fbfb" style="min-width:320px;height:630px;"></div>
+            <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+            <!-- Calendly inline widget end -->
+        </div>
+    </section>
+
+    <!-- Video Section -->
+    <section class="py-20 bg-gray-50">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl font-semibold mb-6">Видео ответы на вопросы</h2>
+            <p class="text-gray-700 mb-8">Как я пришла в психологию? Как проходит первая встреча?</p>
+            <div class="video-container mx-auto" style="max-width: 800px;">
+                <iframe src="https://www.youtube.com/embed/uD_y4S4gNAA" title="YouTube video player" frameborder="0" allowfullscreen></iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-white py-6">
+        <div class="container mx-auto px-4 text-center">
+            <p class="text-gray-600">&copy; 2023 Дербичева Ирина. Все права защищены.</p>
+        </div>
+    </footer>
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous">
+
 </body>
 </html>
+</website_code>
+
+Your task is to improve this website in the following areas:
+1. User Experience (UX)
+2. Search Engine Optimization (SEO)
+3. Performance Optimization
+4. Loading Speed
+5. Marketing
+6. Design
+
+Approach this task methodically:
+
+1. Analyze the current code and identify areas for improvement in each category.
+2. Make necessary changes to the code, ensuring you address all the mentioned aspects.
+3. Be bold in your improvements - you have the freedom to completely redesign the site if you believe it will lead to significant enhancements.
+4. Follow a chain of thought process, continuously asking yourself "What else can be improved?" and making those improvements.
+5. Test your changes mentally, considering how they affect the user experience and other aspects.
+
+As you work on the improvements, use <thinking> tags to explain your thought process and reasoning behind each significant change. This will help understand your decision-making process.
+
+Once you've made all the improvements, provide the updated code within <improved_code> tags. After the improved code, use <explanations> tags to give a detailed breakdown of the changes you've made and how they address each of the improvement areas (UX, SEO, optimization, loading speed, marketing, and design).
+
+Finally, do a thorough review of your improvements. Ask yourself if there's anything else that could be enhanced. If you find additional improvements, iterate on your solution and update both the <improved_code> and <explanations> sections.
+
+Remember, the goal is to create a significantly improved website, so don't hesitate to make major changes if they will result in a better overall product.
+
+
