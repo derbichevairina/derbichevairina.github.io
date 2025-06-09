@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Связь СЖО и профессиональной идентичности</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom radio button styles */
+        input[type="radio"]:checked + .radio-indicator {
+            background-color: #3b82f6;
+            border-color: #3b82f6;
+        }
+
+        input[type="radio"]:checked + .radio-indicator::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: white;
+        }
+
+        /* Smooth transitions */
+        * {
+            transition: all 0.2s ease;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen py-8 px-4">
+    <div class="max-w-3xl mx-auto">
+        <!-- Header -->
+        <div class="text-center mb-8">
+            <h1 class="text-3xl md:text-4xl font-bold text-gray-800 mb-2">
+                Связь СЖО и профессиональной идентичности
+            </h1>
+            <p class="text-gray-600">Пожалуйста, заполните все поля. Все поля обязательны для заполнения.</p>
+        </div>
+
+        <!-- Form -->
+        <form id="surveyForm" class="bg-white rounded-lg shadow-lg p-6 md:p-8 space-y-6">
+
+            <!-- Name -->
+            <div class="space-y-3">
+                <label class="block text-lg font-semibold text-gray-700" for="name">
+                    <span class="text-red-500">*</span> Ваше имя
+                </label>
+                <input type="text"
+                       id="name"
+                       name="name"
+                       required
+                       class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
+                       placeholder="Введите ваше имя">
+            </div>
+
+            <!-- Gender -->
+            <div class="space-y-3">
+                <label class="block text-lg font-semibold text-gray-700">
+                    <span class="text-red-500">*</span> Ваш пол
+                </label>
+                <div class="space-y-2">
+                    <label class="flex items-center p-3 border rounded-lg cursor-pointer hover:bg-gray-50 transition-colors">
+                        <input type="radio" name="gender" value="237802" required class="sr-only peer">
+                        <span class="relative w-5 h-5 border-2 border-gray-300 rounded-full mr-3 peer-checked:border-blue-500 radio-indicator"></span>
+                        <span class="text-gray-700">Мужской</span>
+                    </label>
+                    <label class="flex items-center p-3 border rounded-lg cursor-pointer hover:bg-gray-50 transition-colors">
+                        <input type="radio" name="gender" value="237803" required class="sr-only peer">
+                        <span class="relative w-5 h-5 border-2 border-gray-300 rounded-full mr-3 peer-checked:border-blue-500 radio-indicator"></span>
+                        <span class="text-gray-700">Женский</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Age -->
+            <div class="space-y-3">
+                <label class="block text-lg font-semibold text-gray-700" for="age">
+                    <span class="text-red-500">*</span> Сколько вам полных лет
+                </label>
+                <input type="number"
+                       id="age"
+                       name="age"
+                       required
+                       class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
+                       placeholder="Enter your age">
+            </div>
+
+            <!-- Education -->
+            <div class="space-y-3">
+                <label class="block text-lg font-semibold text-gray-700">
+                    <span class="text-red-500">*</span> Образование
+                </label>
+                <div class="space-y-2">
+                    <label class="flex items-center p-3 border rounded-lg cursor-pointer hover:bg-gray-50 transition-colors">
+                        <input type="radio" name="education" value="166618441" required class="sr-only peer">
+                        <span class="relative w-5 h-5 border-2 border-gray-300 rounded-full mr-3 peer-checked:border-blue-500 radio-indicator"></span>
+                        <span class="text-gray-700">Среднее</span>
+                    </label>
+                    <label class="flex items-center p-3 border rounded-lg cursor-pointer hover:bg-gray-50 transition-colors">
+                        <input type="radio" name="education" value="166618448" class="sr-only peer">
+                        <span class="relative w-5 h-5 border-2 border-gray-300 rounded-full mr-3 peer-checked:border-blue-500 radio-indicator"></span>
+                        <span class="text-gray-700">Среднее профессиональное</span>
+                    </label>
+                    <label class="flex items-center p-3 border rounded-lg cursor-pointer hover:bg-gray-50 transition-colors">
+                        <input type="radio" name="education" value="166618449" class="sr-only peer">
+                        <span class="relative w-5 h-5 border-2 border-gray-300 rounded-full mr-3 peer-checked:border-blue-500 radio-indicator"></span>
+                        <span class="text-gray-700">Высшее</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Work Experience -->
+            <div class="space-y-3">
+                <label class="block text-lg font-semibold text-gray-700" for="experience">
+                    <span class="text-red-500">*</span> Трудовой стаж
+                </label>
+                <input type="text"
+                       id="experience"
+                       name="experience"
+                       required
+                       class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
+                       placeholder="Years of work experience">
+            </div>
+
+            <!-- Salary -->
+            <div class="space-y-3">
+                <label class="block text-lg font-semibold text-gray-700">
+                    <span class="text-red-500">*</span> Заработная плата
+                </label>
+                <div class="space-y-2">
+                    <label class="flex items-center p-3 border rounded-lg cursor-pointer hover:bg-gray-50 transition-colors">
+                        <input type="radio" name="salary" value="166618483" required class="sr-only peer">
+                        <span class="relative w-5 h-5 border-2 border-gray-300 rounded-full mr-3 peer-checked:border-blue-500 radio-indicator"></span>
+                        <span class="text-gray-700">до 50к</span>
+                    </label>
+                    <label class="flex items-center p-3 border rounded-lg cursor-pointer hover:bg-gray-50 transition-colors">
+                        <input type="radio" name="salary" value="166618502" class="sr-only peer">
+                        <span class="relative w-5 h-5 border-2 border-gray-300 rounded-full mr-3 peer-checked:border-blue-500 radio-indicator"></span>
+                        <span class="text-gray-700">50-100к</span>
+                    </label>
+                    <label class="flex items-center p-3 border rounded-lg cursor-pointer hover:bg-gray-50 transition-colors">
+                        <input type="radio" name="salary" value="166618503" class="sr-only peer">
+                        <span class="relative w-5 h-5 border-2 border-gray-300 rounded-full mr-3 peer-checked:border-blue-500 radio-indicator"></span>
+                        <span class="text-gray-700">100-150к</span>
+                    </label>
+                    <label class="flex items-center p-3 border rounded-lg cursor-pointer hover:bg-gray-50 transition-colors">
+                        <input type="radio" name="salary" value="166618504" class="sr-only peer">
+                        <span class="relative w-5 h-5 border-2 border-gray-300 rounded-full mr-3 peer-checked:border-blue-500 radio-indicator"></span>
+                        <span class="text-gray-700">Более 150k</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Family Status -->
+            <div class="space-y-3">
+                <label class="block text-lg font-semibold text-gray-700">
+                    <span class="text-red-500">*</span> Семейный статус
+                </label>
+                <div class="space-y-2">
+                    <label class="flex items-center p-3 border rounded-lg cursor-pointer hover:bg-gray-50 transition-colors">
+                        <input type="radio" name="family" value="166618505" required class="sr-only peer">
+                        <span class="relative w-5 h-5 border-2 border-gray-300 rounded-full mr-3 peer-checked:border-blue-500 radio-indicator"></span>
+                        <span class="text-gray-700">Не замужем / не женат</span>
+                    </label>
+                    <label class="flex items-center p-3 border rounded-lg cursor-pointer hover:bg-gray-50 transition-colors">
+                        <input type="radio" name="family" value="166618523" class="sr-only peer">
+                        <span class="relative w-5 h-5 border-2 border-gray-300 rounded-full mr-3 peer-checked:border-blue-500 radio-indicator"></span>
+                        <span class="text-gray-700">Женат / замужем</span>
+                    </label>
+                    <label class="flex items-center p-3 border rounded-lg cursor-pointer hover:bg-gray-50 transition-colors">
+                        <input type="radio" name="family" value="166618524" class="sr-only peer">
+                        <span class="relative w-5 h-5 border-2 border-gray-300 rounded-full mr-3 peer-checked:border-blue-500 radio-indicator"></span>
+                        <span class="text-gray-700">Разведен / разведена</span>
+                    </label>
+                    <label class="flex items-center p-3 border rounded-lg cursor-pointer hover:bg-gray-50 transition-colors">
+                        <input type="radio" name="family" value="166618525" class="sr-only peer">
+                        <span class="relative w-5 h-5 border-2 border-gray-300 rounded-full mr-3 peer-checked:border-blue-500 radio-indicator"></span>
+                        <span class="text-gray-700">Другое</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Profession Type -->
+            <div class="space-y-3">
+                <label class="block text-lg font-semibold text-gray-700">
+                    <span class="text-red-500">*</span> Тип профессии
+                </label>
+
+                <!-- Info text -->
+                <div class="bg-blue-50 p-4 rounded-lg text-sm text-gray-700 space-y-2">
+                    <p><strong>Человек – природа:</strong> сельское хозяйство, пищевая промышленность, медицина, биология, география</p>
+                    <p><strong>Человек – техника:</strong> технические объекты, машины, механизмы, материалы, энергия</p>
+                    <p><strong>Человек – человек:</strong> социальные системы, сообщества, группы населения</p>
+                    <p><strong>Человек – знаковые системы:</strong> условные знаки, цифры, коды, языки</p>
+                    <p><strong>Человек – художественный образ:</strong> артист, художник, музыкант</p>
+                </div>
+
+                <div class="space-y-2">
+                    <label class="flex items-center p-3 border rounded-lg cursor-pointer hover:bg-gray-50 transition-colors">
+                        <input type="radio" name="profession" value="166618531" required class="sr-only peer">
+                        <span class="relative w-5 h-5 border-2 border-gray-300 rounded-full mr-3 peer-checked:border-blue-500 radio-indicator"></span>
+                        <span class="text-gray-700">Человек-техника</span>
+                    </label>
+                    <label class="flex items-center p-3 border rounded-lg cursor-pointer hover:bg-gray-50 transition-colors">
+                        <input type="radio" name="profession" value="166618647" class="sr-only peer">
+                        <span class="relative w-5 h-5 border-2 border-gray-300 rounded-full mr-3 peer-checked:border-blue-500 radio-indicator"></span>
+                        <span class="text-gray-700">Человек-человек</span>
+                    </label>
+                    <label class="flex items-center p-3 border rounded-lg cursor-pointer hover:bg-gray-50 transition-colors">
+                        <input type="radio" name="profession" value="166618648" class="sr-only peer">
+                        <span class="relative w-5 h-5 border-2 border-gray-300 rounded-full mr-3 peer-checked:border-blue-500 radio-indicator"></span>
+                        <span class="text-gray-700">Человек-природа</span>
+                    </label>
+                    <label class="flex items-center p-3 border rounded-lg cursor-pointer hover:bg-gray-50 transition-colors">
+                        <input type="radio" name="profession" value="166618649" class="sr-only peer">
+                        <span class="relative w-5 h-5 border-2 border-gray-300 rounded-full mr-3 peer-checked:border-blue-500 radio-indicator"></span>
+                        <span class="text-gray-700">Человек-художественный образ</span>
+                    </label>
+                    <label class="flex items-center p-3 border rounded-lg cursor-pointer hover:bg-gray-50 transition-colors">
+                        <input type="radio" name="profession" value="166618650" class="sr-only peer">
+                        <span class="relative w-5 h-5 border-2 border-gray-300 rounded-full mr-3 peer-checked:border-blue-500 radio-indicator"></span>
+                        <span class="text-gray-700">Человек-знаковые системы</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="pt-6">
+                <button type="submit"
+                        class="w-full bg-blue-500 text-white font-semibold py-4 px-6 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors">
+                    Отправить
+                </button>
+            </div>
+        </form>
+
+        <!-- Status Message -->
+        <div id="statusMessage" class="mt-4 p-4 rounded-lg hidden"></div>
+
+        <!-- Success Screen -->
+        <div id="successScreen" class="bg-white rounded-lg shadow-lg p-6 md:p-8 space-y-6 text-center hidden">
+            <div class="text-3xl font-bold text-green-600 mb-4">Данные успешно отправлены</div>
+            <p class="text-lg text-gray-700 mb-6">Спасибо за участие в исследовании!</p>
+            <a id="testLink" href="#" 
+               class="inline-block bg-blue-500 text-white font-semibold py-4 px-8 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors text-xl">
+                Перейти к тестированию
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // Airtable configuration
+        const AIRTABLE_API_KEY = 'patuA2Tcem8VCTkns.177713b7852daa44e8085ebac26d8f6553bed10e0de17d35edb62e0fd0c50694';
+        const AIRTABLE_BASE_ID = 'appFTwKqsmQXmlyiH';
+        const AIRTABLE_TABLE_ID = 'tblVef1tJeDSzX7Nc';
+
+        // Base64 URL-safe encoding function
+        function encodeBase64Url(str) {
+            // Convert to UTF-8 and encode in base64
+            let utf8 = new TextEncoder().encode(str);
+            let binary = Array.from(utf8).map(b => String.fromCharCode(b)).join('');
+            let base64 = btoa(binary);
+            // Make base64 URL-safe
+            return base64.replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+        }
+
+        // Helper function to get readable text for radio values
+        function getReadableValue(fieldName, value) {
+            const mappings = {
+                gender: {
+                    '237802': 'Мужской',
+                    '237803': 'Женский'
+                },
+                education: {
+                    '166618441': 'Среднее',
+                    '166618448': 'Среднее профессиональное',
+                    '166618449': 'Высшее'
+                },
+                salary: {
+                    '166618483': 'до 50к',
+                    '166618502': '50-100к',
+                    '166618503': '100-150к',
+                    '166618504': 'Более 150k'
+                },
+                family: {
+                    '166618505': 'Не замужем / не женат',
+                    '166618523': 'Женат / замужем',
+                    '166618524': 'Разведен / разведена',
+                    '166618525': 'Другое'
+                },
+                profession: {
+                    '166618531': 'Человек-техника',
+                    '166618647': 'Человек-человек',
+                    '166618648': 'Человек-природа',
+                    '166618649': 'Человек-художественный образ',
+                    '166618650': 'Человек-знаковые системы'
+                }
+            };
+
+            return mappings[fieldName] && mappings[fieldName][value] ? mappings[fieldName][value] : value;
+        }
+
+        document.getElementById('surveyForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            // Get form data
+            const formData = new FormData(e.target);
+
+            // Generate shorter unique ID for the record (using seconds)
+            const uniqueId = Math.floor(Date.now() / 1000).toString();
+
+            // Prepare the data for Airtable
+            const airtableData = {
+                fields: {
+                    'fldMxTZHdwFPXzST2': uniqueId, // id field
+                    'fldwO2GmlLY4PefTq': formData.get('name') || '', // Name field
+                    'fldh2AJqPSJycwGox': getReadableValue('gender', formData.get('gender')), // Gender
+                    'fldaGr1RXz0nNmbkN': formData.get('age') || '', // Age
+                    'fldoLzNECV63qSrCf': getReadableValue('education', formData.get('education')), // Education
+                    'fldSA7Z2f2kNgubDu': formData.get('experience') || '', // Work experience
+                    'fldWRdXPpFZSxw2wH': getReadableValue('salary', formData.get('salary')), // Salary
+                    'fldchGBWEs8AXStK2': getReadableValue('family', formData.get('family')), // Family status
+                    'fldee4mlFsOy4fRQe': getReadableValue('profession', formData.get('profession')) // Profession type
+                }
+            };
+
+            // Show loading state
+            const submitButton = e.target.querySelector('button[type="submit"]');
+            const originalText = submitButton.textContent;
+            submitButton.textContent = 'Отправка...';
+            submitButton.disabled = true;
+
+            const statusMessage = document.getElementById('statusMessage');
+            statusMessage.classList.remove('hidden', 'bg-green-100', 'bg-red-100', 'text-green-800', 'text-red-800');
+
+            try {
+                // Make the API request to Airtable
+                const response = await fetch(`https://api.airtable.com/v0/${AIRTABLE_BASE_ID}/${AIRTABLE_TABLE_ID}`, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${AIRTABLE_API_KEY}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(airtableData)
+                });
+
+                if (response.ok) {
+                    const result = await response.json();
+
+                    // Hide the form and show success screen
+                    document.getElementById('surveyForm').classList.add('hidden');
+                    document.getElementById('successScreen').classList.remove('hidden');
+
+                    // Get the name from the form data
+                    const name = formData.get('name') || '';
+
+                    // Create the encoded parameter for the URL
+                    const encodedParam = encodeBase64Url(`${name}_${uniqueId}`);
+
+                    // Set the href attribute of the test link
+                    document.getElementById('testLink').href = `https://psytests.org/study.html?b=7286&n=${encodedParam}`;
+
+                    // Scroll to the success screen
+                    document.getElementById('successScreen').scrollIntoView({ behavior: 'smooth' });
+                } else {
+                    const errorData = await response.json();
+                    throw new Error(errorData.error?.message || 'Submission failed');
+                }
+            } catch (error) {
+                statusMessage.textContent = `Error submitting form: ${error.message}`;
+                statusMessage.classList.add('bg-red-100', 'text-red-800');
+                console.error('Submission error:', error);
+            } finally {
+                submitButton.textContent = originalText;
+                submitButton.disabled = false;
+                statusMessage.classList.remove('hidden');
+            }
+        });
+    </script>
+</body>
+</html>
