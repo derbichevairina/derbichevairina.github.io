@@ -308,8 +308,11 @@
             // Get form data
             const formData = new FormData(e.target);
 
-            // Generate shorter unique ID for the record (using seconds)
-            const uniqueId = Math.floor(Date.now() / 1000).toString();
+            // Get the name from the form data
+            const name = formData.get('name') || '';
+
+            // Generate shorter unique ID for the record (using seconds) with name
+            const uniqueId = `${name}_${Math.floor(Date.now() / 1000).toString()}`;
 
             // Prepare the data for Airtable
             const airtableData = {
@@ -353,11 +356,8 @@
                     document.getElementById('surveyForm').classList.add('hidden');
                     document.getElementById('successScreen').classList.remove('hidden');
 
-                    // Get the name from the form data
-                    const name = formData.get('name') || '';
-
                     // Create the encoded parameter for the URL
-                    const encodedParam = encodeBase64Url(`${name}_${uniqueId}`);
+                    const encodedParam = encodeBase64Url(`${uniqueId}`);
 
                     // Set the href attribute of the test link
                     document.getElementById('testLink').href = `https://psytests.org/study.html?b=7286&n=${encodedParam}`;
