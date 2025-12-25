@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="ru" class="h-full">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#fef9f3">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="icon-192.png">
+  <title>Карточки ВКР</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            display: ['Fraunces', 'Georgia', 'serif'],
+            sans: ['DM Sans', 'system-ui', 'sans-serif'],
+          },
+          colors: {
+            cream: '#fef9f3',
+            peach: {
+              50: '#fff8f5',
+              100: '#ffeee5',
+              200: '#ffd9c7',
+              300: '#ffbf9e',
+              400: '#ffa07a',
+              500: '#f08060',
+              600: '#d65f45',
+            },
+            mint: {
+              50: '#f0fdf7',
+              100: '#dcfce9',
+              200: '#b4f4d0',
+              300: '#7ae8af',
+              400: '#3dd684',
+              500: '#1cb966',
+            },
+            lavender: {
+              50: '#faf5ff',
+              100: '#f3e8ff',
+              200: '#e9d5ff',
+              300: '#d8b4fe',
+              400: '#c084fc',
+              500: '#a855f7',
+            },
+            warm: {
+              50: '#fdfaf7',
+              100: '#f5ebe0',
+              200: '#e8d5c4',
+              700: '#5c4a3d',
+              800: '#3d3129',
+              900: '#2a211a',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* Noise texture overlay */
+    .noise-bg::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0.03;
+      pointer-events: none;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    }
+
+    /* Card animations */
+    .card-container {
+      perspective: 1000px;
+    }
+
+    .card-inner {
+      transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+      transform-style: preserve-3d;
+    }
+
+    .card-inner.flipping {
+      transform: rotateY(10deg) scale(0.98);
+    }
+
+    /* Floating blob animations */
+    @keyframes float-slow {
+      0%, 100% { transform: translate(0, 0) rotate(0deg); }
+      25% { transform: translate(10px, -20px) rotate(5deg); }
+      50% { transform: translate(-5px, -10px) rotate(-3deg); }
+      75% { transform: translate(15px, 5px) rotate(2deg); }
+    }
+
+    @keyframes float-medium {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      33% { transform: translate(-15px, 10px) scale(1.05); }
+      66% { transform: translate(10px, -15px) scale(0.95); }
+    }
+
+    .blob-1 {
+      animation: float-slow 20s ease-in-out infinite;
+    }
+
+    .blob-2 {
+      animation: float-medium 15s ease-in-out infinite;
+      animation-delay: -5s;
+    }
+
+    .blob-3 {
+      animation: float-slow 25s ease-in-out infinite reverse;
+      animation-delay: -10s;
+    }
+
+    /* Button hover effects */
+    .rating-btn {
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .rating-btn:hover {
+      transform: translateY(-4px);
+    }
+
+    .rating-btn:active {
+      transform: translateY(-2px) scale(0.98);
+    }
+
+    /* Show answer button */
+    .show-btn {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .show-btn::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+      transform: translateX(-100%);
+      transition: transform 0.6s ease;
+    }
+
+    .show-btn:hover::before {
+      transform: translateX(100%);
+    }
+
+    /* Staggered entrance */
+    @keyframes slide-up {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .animate-in {
+      animation: slide-up 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    }
+
+    .delay-100 { animation-delay: 0.1s; }
+    .delay-200 { animation-delay: 0.2s; }
+    .delay-300 { animation-delay: 0.3s; }
+
+    /* Hide scrollbar */
+    .scrollbar-hide {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    .scrollbar-hide::-webkit-scrollbar {
+      display: none;
+    }
+
+    /* Category badge glow */
+    .badge-glow {
+      box-shadow: 0 0 20px rgba(255, 191, 158, 0.4);
+    }
+
+    /* Card shadow */
+    .card-shadow {
+      box-shadow:
+        0 4px 6px -1px rgba(92, 74, 61, 0.05),
+        0 10px 20px -5px rgba(92, 74, 61, 0.08),
+        0 25px 50px -12px rgba(92, 74, 61, 0.12);
+    }
+
+    /* Success state animation */
+    @keyframes success-bounce {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+
+    .success-icon {
+      animation: success-bounce 2s ease-in-out infinite;
+    }
+  </style>
+</head>
+<body class="h-full font-sans text-warm-800 noise-bg">
+  <!-- Gradient background -->
+  <div class="fixed inset-0 -z-10 overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-br from-cream via-peach-50 to-lavender-50"></div>
+
+    <!-- Floating blobs -->
+    <div class="blob-1 absolute -top-20 -right-20 w-96 h-96 rounded-full bg-gradient-to-br from-peach-200/40 to-peach-300/30 blur-3xl"></div>
+    <div class="blob-2 absolute top-1/3 -left-32 w-80 h-80 rounded-full bg-gradient-to-br from-mint-200/30 to-mint-300/20 blur-3xl"></div>
+    <div class="blob-3 absolute bottom-0 right-1/4 w-72 h-72 rounded-full bg-gradient-to-br from-lavender-200/30 to-lavender-300/20 blur-3xl"></div>
+  </div>
+
+  <div id="app" class="h-full flex flex-col max-w-lg mx-auto relative">
+
+    <!-- Header -->
+    <header class="flex items-center justify-between px-5 py-4 animate-in">
+      <h1 class="font-display text-2xl font-semibold text-warm-800 tracking-tight">
+        Карточки <span class="text-peach-500">ВКР</span>
+      </h1>
+      <div class="flex items-center gap-4">
+        <span id="progress-text" class="text-sm font-medium text-warm-700/70 bg-white/50 backdrop-blur-sm px-3 py-1.5 rounded-full">1 / 60</span>
+        <a href="stats.html" class="p-2.5 rounded-xl bg-white/50 backdrop-blur-sm hover:bg-white/80 transition-all duration-300 hover:scale-105">
+          <svg class="w-5 h-5 text-warm-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+          </svg>
+        </a>
+      </div>
+    </header>
+
+    <!-- Session Info Bar -->
+    <div class="px-5 py-3 animate-in delay-100">
+      <div class="flex items-center justify-between text-sm bg-white/40 backdrop-blur-sm rounded-2xl px-4 py-3 border border-white/60">
+        <div class="flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-mint-400"></span>
+          <span class="text-warm-700">
+            <span id="today-new" class="font-semibold text-mint-600">0</span> новых
+          </span>
+        </div>
+        <div class="w-px h-4 bg-warm-200"></div>
+        <div class="flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-lavender-400"></span>
+          <span class="text-warm-700">
+            <span id="today-review" class="font-semibold text-lavender-600">0</span> повторение
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card Container -->
+    <main class="flex-1 flex flex-col px-5 py-4 overflow-hidden card-container animate-in delay-200">
+
+      <!-- Card -->
+      <div id="card" class="card-inner flex-1 flex flex-col bg-white/80 backdrop-blur-md rounded-3xl card-shadow border border-white/60 overflow-hidden">
+
+        <!-- Category Badge -->
+        <div class="px-5 pt-5">
+          <span id="category-badge" class="inline-flex items-center gap-1.5 px-4 py-1.5 text-xs font-medium rounded-full bg-gradient-to-r from-peach-100 to-peach-200/80 text-peach-600 border border-peach-200/50 badge-glow">
+            <span class="w-1.5 h-1.5 rounded-full bg-peach-400"></span>
+            Категория
+          </span>
+        </div>
+
+        <!-- Question -->
+        <div id="question-container" class="flex-1 flex flex-col p-5 overflow-auto scrollbar-hide">
+          <p id="question-text" class="font-display text-xl font-medium leading-relaxed text-warm-800">
+            В чем заключается актуальность выбранной темы исследования?
+          </p>
+
+          <!-- Answer (hidden by default) -->
+          <div id="answer-container" class="hidden mt-5 pt-5 border-t border-warm-100">
+            <p class="text-xs uppercase tracking-widest text-warm-500 mb-3 flex items-center gap-2">
+              <span class="w-8 h-px bg-warm-300"></span>
+              Ответ
+            </p>
+            <p id="answer-text" class="text-base text-warm-700 leading-relaxed">
+              Связка «смысл жизни – профессиональная идентичность» особенно значима...
+            </p>
+          </div>
+        </div>
+
+        <!-- Show Answer Button -->
+        <div id="show-answer-container" class="p-5 pt-0">
+          <button id="show-answer-btn" class="show-btn w-full py-4 px-6 bg-gradient-to-r from-peach-400 to-peach-500 hover:from-peach-500 hover:to-peach-600 text-white font-semibold rounded-2xl transition-all duration-300 hover:shadow-lg hover:shadow-peach-300/40 active:scale-[0.98]">
+            Показать ответ
+          </button>
+        </div>
+
+      </div>
+    </main>
+
+    <!-- Rating Buttons (hidden by default) -->
+    <div id="rating-container" class="hidden px-5 pb-6 pt-2 animate-in">
+      <div class="grid grid-cols-3 gap-3">
+        <button id="btn-again" class="rating-btn flex flex-col items-center py-4 px-3 bg-gradient-to-b from-rose-50 to-rose-100/80 hover:from-rose-100 hover:to-rose-200/80 border border-rose-200/60 text-rose-600 rounded-2xl">
+          <span class="text-lg font-semibold mb-0.5">Снова</span>
+          <span class="text-xs opacity-70">&lt;1 мин</span>
+        </button>
+        <button id="btn-good" class="rating-btn flex flex-col items-center py-4 px-3 bg-gradient-to-b from-amber-50 to-amber-100/80 hover:from-amber-100 hover:to-amber-200/80 border border-amber-200/60 text-amber-600 rounded-2xl">
+          <span class="text-lg font-semibold mb-0.5">Помню</span>
+          <span class="text-xs opacity-70" id="good-interval">1 день</span>
+        </button>
+        <button id="btn-easy" class="rating-btn flex flex-col items-center py-4 px-3 bg-gradient-to-b from-emerald-50 to-emerald-100/80 hover:from-emerald-100 hover:to-emerald-200/80 border border-emerald-200/60 text-emerald-600 rounded-2xl">
+          <span class="text-lg font-semibold mb-0.5">Легко</span>
+          <span class="text-xs opacity-70" id="easy-interval">4 дня</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Empty State -->
+    <div id="empty-state" class="hidden flex-1 flex flex-col items-center justify-center p-8 text-center">
+      <div class="success-icon w-24 h-24 mb-6 rounded-full bg-gradient-to-br from-mint-100 to-mint-200 flex items-center justify-center border border-mint-200/50 shadow-lg shadow-mint-200/30">
+        <svg class="w-12 h-12 text-mint-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path>
+        </svg>
+      </div>
+      <h2 class="font-display text-2xl font-semibold text-warm-800 mb-2">Отлично!</h2>
+      <p class="text-warm-600 mb-8 max-w-xs">На сегодня всё. Отдохни и возвращайся завтра!</p>
+      <a href="stats.html" class="inline-flex items-center gap-2 px-6 py-3.5 bg-gradient-to-r from-lavender-400 to-lavender-500 hover:from-lavender-500 hover:to-lavender-600 text-white font-semibold rounded-2xl transition-all duration-300 hover:shadow-lg hover:shadow-lavender-300/40">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+        </svg>
+        Статистика
+      </a>
+    </div>
+
+  </div>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+  <script>
+    // Register service worker
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('sw.js');
+    }
+  </script>
+</body>
+</html>

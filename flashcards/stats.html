@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="ru" class="h-full">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#6366f1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <title>Статистика — Карточки ВКР</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+  </style>
+</head>
+<body class="h-full bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 font-sans">
+  <div id="app" class="h-full flex flex-col max-w-lg mx-auto">
+
+    <!-- Header -->
+    <header class="flex items-center justify-between px-4 py-3 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 shadow-sm">
+      <a href="index.html" class="flex items-center gap-2 text-gray-600 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+        </svg>
+        <span>Назад</span>
+      </a>
+      <h1 class="text-lg font-semibold text-indigo-600 dark:text-indigo-400">Статистика</h1>
+      <div class="w-16"></div>
+    </header>
+
+    <!-- Content -->
+    <main class="flex-1 overflow-auto p-4 space-y-4">
+
+      <!-- Progress Card -->
+      <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-700 p-4">
+        <h2 class="text-sm font-medium text-gray-500 dark:text-gray-400 mb-3">Общий прогресс</h2>
+
+        <!-- Progress Bar -->
+        <div class="mb-4">
+          <div class="flex justify-between text-sm mb-1">
+            <span class="text-gray-600 dark:text-gray-300">Изучено</span>
+            <span id="progress-percent" class="font-medium text-indigo-600 dark:text-indigo-400">0%</span>
+          </div>
+          <div class="h-3 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
+            <div id="progress-bar" class="h-full bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full transition-all duration-500" style="width: 0%"></div>
+          </div>
+        </div>
+
+        <!-- Stats Grid -->
+        <div class="grid grid-cols-3 gap-3">
+          <div class="text-center p-3 bg-green-50 dark:bg-green-900/30 rounded-xl">
+            <div id="stat-learned" class="text-2xl font-bold text-green-600 dark:text-green-400">0</div>
+            <div class="text-xs text-green-700 dark:text-green-300">Выучено</div>
+          </div>
+          <div class="text-center p-3 bg-amber-50 dark:bg-amber-900/30 rounded-xl">
+            <div id="stat-learning" class="text-2xl font-bold text-amber-600 dark:text-amber-400">0</div>
+            <div class="text-xs text-amber-700 dark:text-amber-300">Учу</div>
+          </div>
+          <div class="text-center p-3 bg-gray-100 dark:bg-gray-700 rounded-xl">
+            <div id="stat-new" class="text-2xl font-bold text-gray-600 dark:text-gray-300">0</div>
+            <div class="text-xs text-gray-500 dark:text-gray-400">Новые</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Today Card -->
+      <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-700 p-4">
+        <h2 class="text-sm font-medium text-gray-500 dark:text-gray-400 mb-3">Сегодня</h2>
+        <div class="grid grid-cols-2 gap-3">
+          <div class="flex items-center gap-3 p-3 bg-indigo-50 dark:bg-indigo-900/30 rounded-xl">
+            <div class="w-10 h-10 bg-indigo-100 dark:bg-indigo-800 rounded-full flex items-center justify-center">
+              <svg class="w-5 h-5 text-indigo-600 dark:text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+              </svg>
+            </div>
+            <div>
+              <div id="today-new" class="text-xl font-bold text-indigo-600 dark:text-indigo-400">0</div>
+              <div class="text-xs text-indigo-700 dark:text-indigo-300">Новых изучено</div>
+            </div>
+          </div>
+          <div class="flex items-center gap-3 p-3 bg-purple-50 dark:bg-purple-900/30 rounded-xl">
+            <div class="w-10 h-10 bg-purple-100 dark:bg-purple-800 rounded-full flex items-center justify-center">
+              <svg class="w-5 h-5 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+              </svg>
+            </div>
+            <div>
+              <div id="today-reviewed" class="text-xl font-bold text-purple-600 dark:text-purple-400">0</div>
+              <div class="text-xs text-purple-700 dark:text-purple-300">Повторено</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Categories Card -->
+      <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-700 p-4">
+        <h2 class="text-sm font-medium text-gray-500 dark:text-gray-400 mb-3">По категориям</h2>
+        <div id="categories-list" class="space-y-2">
+          <!-- Categories will be inserted here -->
+        </div>
+      </div>
+
+      <!-- Reset Button -->
+      <div class="pt-4">
+        <button id="reset-btn" class="w-full py-3 px-4 bg-red-100 dark:bg-red-900/40 hover:bg-red-200 dark:hover:bg-red-900/60 text-red-700 dark:text-red-300 font-medium rounded-xl transition-colors">
+          Сбросить весь прогресс
+        </button>
+      </div>
+
+    </main>
+  </div>
+
+  <script src="data.js"></script>
+  <script>
+    // Initialize dark mode
+    if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      document.documentElement.classList.add('dark');
+    }
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+      document.documentElement.classList.toggle('dark', e.matches);
+    });
+
+    // Create category row using safe DOM methods
+    function createCategoryRow(catName, learned, total) {
+      const percent = Math.round((learned / total) * 100);
+
+      const container = document.createElement('div');
+      container.className = 'flex items-center gap-3';
+
+      const inner = document.createElement('div');
+      inner.className = 'flex-1';
+
+      const header = document.createElement('div');
+      header.className = 'flex justify-between text-sm mb-1';
+
+      const nameSpan = document.createElement('span');
+      nameSpan.className = 'text-gray-700 dark:text-gray-300 truncate';
+      nameSpan.textContent = catName;
+
+      const countSpan = document.createElement('span');
+      countSpan.className = 'text-gray-500 dark:text-gray-400 ml-2';
+      countSpan.textContent = learned + '/' + total;
+
+      header.appendChild(nameSpan);
+      header.appendChild(countSpan);
+
+      const barContainer = document.createElement('div');
+      barContainer.className = 'h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden';
+
+      const bar = document.createElement('div');
+      bar.className = 'h-full bg-indigo-500 rounded-full';
+      bar.style.width = percent + '%';
+
+      barContainer.appendChild(bar);
+      inner.appendChild(header);
+      inner.appendChild(barContainer);
+      container.appendChild(inner);
+
+      return container;
+    }
+
+    // Load and display stats
+    function loadStats() {
+      const progress = JSON.parse(localStorage.getItem('flashcards_progress') || '{}');
+      const session = JSON.parse(localStorage.getItem('flashcards_session') || '{}');
+
+      let learned = 0;
+      let learning = 0;
+      let newCards = 0;
+
+      const categoryStats = {};
+
+      CARDS.forEach(card => {
+        const cat = card.category;
+        if (!categoryStats[cat]) {
+          categoryStats[cat] = { total: 0, learned: 0 };
+        }
+        categoryStats[cat].total++;
+
+        const cardProgress = progress[card.id];
+        if (!cardProgress || cardProgress.reviews === 0) {
+          newCards++;
+        } else if (cardProgress.interval >= 21) {
+          learned++;
+          categoryStats[cat].learned++;
+        } else {
+          learning++;
+          categoryStats[cat].learned++;
+        }
+      });
+
+      const total = CARDS.length;
+      const progressPercent = Math.round(((learned + learning) / total) * 100);
+
+      // Update UI
+      document.getElementById('progress-percent').textContent = progressPercent + '%';
+      document.getElementById('progress-bar').style.width = progressPercent + '%';
+      document.getElementById('stat-learned').textContent = learned;
+      document.getElementById('stat-learning').textContent = learning;
+      document.getElementById('stat-new').textContent = newCards;
+
+      // Today stats
+      const todayKey = new Date().toDateString();
+      if (session.date === todayKey) {
+        document.getElementById('today-new').textContent = session.newStudied || 0;
+        document.getElementById('today-reviewed').textContent = session.reviewed || 0;
+      }
+
+      // Group similar categories
+      const groupedCats = {};
+      Object.entries(categoryStats).forEach(function(entry) {
+        const cat = entry[0];
+        const stats = entry[1];
+        const mainCat = cat.split('(')[0].trim();
+        if (!groupedCats[mainCat]) {
+          groupedCats[mainCat] = { total: 0, learned: 0 };
+        }
+        groupedCats[mainCat].total += stats.total;
+        groupedCats[mainCat].learned += stats.learned;
+      });
+
+      // Render categories
+      const catList = document.getElementById('categories-list');
+      while (catList.firstChild) {
+        catList.removeChild(catList.firstChild);
+      }
+
+      const sortedCats = Object.entries(groupedCats).sort(function(a, b) {
+        return b[1].total - a[1].total;
+      });
+
+      sortedCats.forEach(function(entry) {
+        const catName = entry[0];
+        const stats = entry[1];
+        const row = createCategoryRow(catName, stats.learned, stats.total);
+        catList.appendChild(row);
+      });
+    }
+
+    // Reset progress
+    document.getElementById('reset-btn').addEventListener('click', function() {
+      if (confirm('Точно сбросить весь прогресс? Это действие нельзя отменить.')) {
+        localStorage.removeItem('flashcards_progress');
+        localStorage.removeItem('flashcards_session');
+        loadStats();
+        alert('Прогресс сброшен!');
+      }
+    });
+
+    loadStats();
+  </script>
+</body>
+</html>
