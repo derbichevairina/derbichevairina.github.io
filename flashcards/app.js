@@ -2,7 +2,7 @@
 
 // Constants
 const STORAGE_KEY = 'flashcards_progress';
-const NEW_CARDS_PER_DAY = 20;
+const NEW_CARDS_PER_DAY = 10;
 const INITIAL_EASE = 2.5;
 const MIN_EASE = 1.3;
 
