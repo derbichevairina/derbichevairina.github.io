@@ -1,11 +1,15 @@
-const CACHE_NAME = 'flashcards-v1';
+const CACHE_NAME = 'flashcards-v2';
 const ASSETS = [
   '/flashcards/',
   '/flashcards/index.html',
   '/flashcards/stats.html',
   '/flashcards/app.js',
-  '/flashcards/data.js',
   '/flashcards/manifest.json'
+];
+
+// Files that should always be fetched from network (not cached)
+const NETWORK_FIRST = [
+  'data.js'
 ];
 
 // Install - cache assets
@@ -37,6 +41,17 @@ self.addEventListener('fetch', (event) => {
 
   // Skip external requests (like Tailwind CDN)
   if (!event.request.url.startsWith(self.location.origin)) {
+    return;
+  }
+
+  // Check if this file should always be fetched from network
+  const isNetworkFirst = NETWORK_FIRST.some(file => event.request.url.includes(file));
+
+  if (isNetworkFirst) {
+    // Network first, no caching for data files
+    event.respondWith(
+      fetch(event.request).catch(() => caches.match(event.request))
+    );
     return;
   }
 
