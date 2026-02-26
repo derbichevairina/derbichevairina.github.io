@@ -2,12 +2,44 @@
 import Base from '../layouts/Base.astro';
 import CTA from '../components/CTA.astro';
 import TopicCard from '../components/TopicCard.astro';
+
+const professionalServiceSchema = {
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "name": "Ирина Дербичева — клинический психолог",
+  "description": "Клинический психолог, ACT-терапевт. Индивидуальные консультации онлайн для взрослых.",
+  "url": "https://psyholog-irina.ru",
+  "image": "https://psyholog-irina.ru/images/stol.png",
+  "telephone": "+79028983895",
+  "priceRange": "5000₽",
+  "areaServed": "Онлайн",
+  "availableLanguage": "Russian",
+  "provider": {
+    "@type": "Person",
+    "name": "Ирина Дербичева",
+    "jobTitle": "Клинический психолог, ACT-терапевт",
+    "image": "https://psyholog-irina.ru/images/stol.png",
+    "url": "https://psyholog-irina.ru",
+    "sameAs": [
+      "https://t.me/derbichevairina",
+      "https://wa.me/+79028983895"
+    ]
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "5000",
+    "priceCurrency": "RUB",
+    "description": "Индивидуальная онлайн-консультация, 60 минут"
+  }
+};
 ---
 
 <Base
   title="Ирина Дербичева — клинический психолог онлайн | ACT-терапевт"
   description="Клинический психолог, ACT-терапевт. Индивидуальные консультации онлайн для взрослых. Тревога, РПП, отношения, самооценка, выгорание."
 >
+  <script type="application/ld+json" set:html={JSON.stringify(professionalServiceSchema)} />
+
   <!-- Hero -->
   <section class="relative overflow-hidden">
     <!-- Decorative blobs -->

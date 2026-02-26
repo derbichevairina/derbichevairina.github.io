@@ -3,10 +3,14 @@ interface Props {
   title: string;
   description: string;
   canonicalUrl?: string;
+  ogImage?: string;
 }
 
-const { title, description, canonicalUrl } = Astro.props;
+const { title, description, canonicalUrl, ogImage } = Astro.props;
 const currentPath = Astro.url.pathname;
+const siteUrl = 'https://psyholog-irina.ru';
+const ogImageUrl = ogImage ? `${siteUrl}${ogImage}` : `${siteUrl}/images/stol.png`;
+const pageUrl = canonicalUrl || `${siteUrl}${currentPath}`;
 
 const navLinks = [
   { href: "/", label: "Главная", match: (p: string) => p === "/" },
@@ -25,6 +29,19 @@ const navLinks = [
     <meta name="description" content={description} />
     {canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
 
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={pageUrl} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:locale" content="ru_RU" />
+    <meta property="og:site_name" content="Ирина Дербичева — клинический психолог" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
+
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -35,6 +52,15 @@ const navLinks = [
 
     <!-- Calendly -->
     <script is:inline type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+
+    <!-- Google Analytics (GA4) -->
+    <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-SSVP38V9SN"></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-SSVP38V9SN');
+    </script>
 
     <!-- Yandex.Metrika -->
     <script is:inline>
