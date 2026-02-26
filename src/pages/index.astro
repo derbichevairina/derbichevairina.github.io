@@ -1,0 +1,229 @@
+---
+import Base from '../layouts/Base.astro';
+import CTA from '../components/CTA.astro';
+import TopicCard from '../components/TopicCard.astro';
+---
+
+<Base
+  title="Ирина Дербичева — клинический психолог онлайн | ACT-терапевт"
+  description="Клинический психолог, ACT-терапевт. Индивидуальные консультации онлайн для взрослых. Тревога, РПП, отношения, самооценка, выгорание."
+>
+  <!-- Hero -->
+  <section class="relative overflow-hidden">
+    <!-- Decorative blobs -->
+    <div class="absolute top-20 -left-32 w-96 h-96 bg-sage-200/40 rounded-full blur-3xl"></div>
+    <div class="absolute -bottom-20 right-0 w-80 h-80 bg-warm-200/30 rounded-full blur-3xl"></div>
+
+    <div class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16 lg:py-20">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
+        <!-- Text -->
+        <div class="max-w-xl order-2 lg:order-1">
+          <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-sage-100/80 text-sage-700 text-xs font-medium mb-4 sm:mb-6 backdrop-blur-sm">
+            <span class="w-1.5 h-1.5 rounded-full bg-sage-500"></span>
+            Онлайн-консультации для взрослых
+          </div>
+
+          <h1 class="font-display font-medium text-sage-900 leading-[1.1] mb-4 sm:mb-6 text-balance" style={`font-size: var(--text-fluid-4xl);`}>
+            Здесь можно
+            <span class="italic text-sage-600"> просто быть.</span>
+          </h1>
+
+          <p class="text-warm-500 leading-relaxed mb-6 sm:mb-10 max-w-md text-pretty text-base sm:text-lg">
+            Я Ирина Дербичева — клинический психолог, ACT-терапевт. Провожу индивидуальные консультации онлайн.
+          </p>
+
+          <div class="flex flex-col sm:flex-row gap-3">
+            <a
+              href="#booking"
+              class="inline-flex items-center justify-center gap-2.5 bg-sage-600 text-white px-6 sm:px-8 py-3.5 sm:py-4 rounded-full text-sm sm:text-base font-medium hover:bg-sage-700 hover:shadow-glow active:scale-[0.98] transition-all duration-300 ease-fluid"
+            >
+              Записаться на сессию
+            </a>
+            <a
+              href="#about"
+              class="inline-flex items-center justify-center gap-2 text-sage-600 px-6 sm:px-8 py-3.5 sm:py-4 rounded-full text-sm sm:text-base font-medium border border-sage-200 hover:border-sage-400 hover:bg-sage-50/50 active:scale-[0.98] transition-all duration-300 ease-fluid"
+            >
+              Узнать больше
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Photo -->
+        <div class="relative flex justify-center lg:justify-end order-1 lg:order-2">
+          <div class="relative w-full max-w-[420px] sm:max-w-[320px] lg:max-w-[420px]">
+            <!-- Background shape -->
+            <div class="absolute -inset-2 sm:-inset-3 bg-gradient-to-br from-sage-200/60 to-warm-200/40 rounded-[1.5rem] sm:rounded-[2rem] rotate-2"></div>
+            <img
+              src="/images/stol.png"
+              alt="Ирина Дербичева — клинический психолог"
+              class="relative rounded-[1.25rem] sm:rounded-[1.75rem] object-cover w-full shadow-elevated"
+              loading="eager"
+            />
+            <!-- Floating badge — hidden on small mobile -->
+            <div class="hidden sm:block absolute -bottom-5 -left-5 bg-white/90 backdrop-blur-md rounded-2xl px-5 py-3.5 shadow-medium border border-sage-100/50">
+              <p class="text-xs text-warm-500">Стаж практики</p>
+              <p class="text-lg font-display font-semibold text-sage-700">5+ лет</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Topics -->
+  <section style={`padding-top: var(--spacing-fluid-section); padding-bottom: var(--spacing-fluid-section);`}>
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-10 sm:mb-14">
+        <h2 class="font-display text-sage-800 mb-4 text-balance" style={`font-size: var(--text-fluid-3xl);`}>С чем я работаю</h2>
+        <p class="text-warm-500 max-w-xl mx-auto text-pretty" style={`font-size: var(--text-fluid-base);`}>
+          Каждый человек уникален. Я помогаю найти свой путь к гармонии через научно обоснованные подходы.
+        </p>
+      </div>
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4">
+        <TopicCard title="Тревога и панические атаки" href="/trevoga/" icon="🌊" />
+        <TopicCard title="Расстройства пищевого поведения" href="/rpp/" icon="🍃" />
+        <TopicCard title="Отношения и расставания" href="/otnosheniya/" icon="💬" />
+        <TopicCard title="Самооценка и уверенность" href="/#about" icon="🪞" />
+        <TopicCard title="Эмоциональное выгорание" href="/#about" icon="🔥" />
+        <TopicCard title="Сепарация от родителей" href="/#about" icon="🌱" />
+        <TopicCard title="Потеря близкого" href="/#about" icon="🕊️" />
+        <TopicCard title="Депрессия" href="/#about" icon="🌧️" />
+        <TopicCard title="Трудности выбора" href="/#about" icon="🔀" />
+        <TopicCard title="Поиск своего дела" href="/#about" icon="🧭" />
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about" class="relative">
+    <div class="absolute inset-0 bg-gradient-to-b from-white via-white to-warm-50/50"></div>
+    <div class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8" style={`padding-top: var(--spacing-fluid-section); padding-bottom: var(--spacing-fluid-section);`}>
+      <div class="grid grid-cols-1 lg:grid-cols-5 gap-10 lg:gap-16 items-start">
+        <div class="lg:col-span-3">
+          <p class="text-sage-500 text-sm font-medium tracking-wide uppercase mb-3">Обо мне</p>
+          <h2 class="font-display text-sage-800 mb-8" style={`font-size: var(--text-fluid-3xl);`}>Практикующий клинический психолог</h2>
+
+          <div class="space-y-5 text-warm-600 leading-relaxed" style={`font-size: var(--text-fluid-base);`}>
+            <p>
+              Меня зовут Ирина Дербичева. Провожу психологические консультации для взрослых,
+              веду свою практику онлайн с людьми из разных стран.
+            </p>
+            <p>
+              В терапии использую интегративный подход — совмещаю знания и методы из
+              различных направлений психологии. Часто обращаюсь к
+              ACT-терапии
+              и экзистенциальному подходу,
+              задачей которого является научить клиента действовать из «свободной воли»,
+              самостоятельно выбирать свой жизненный путь и нести ответственность за свой выбор.
+            </p>
+            <p>
+              Моя жизнь проходит в путешествиях, поэтому работаю исключительно онлайн.
+              Я не работаю с несовершеннолетними и не работаю с парами, но в остальном
+              принимаю любые случаи в рамках своей компетенции.
+            </p>
+          </div>
+
+          <blockquote class="mt-8 pl-5 border-l-2 border-sage-300">
+            <p class="text-sage-700 italic font-display" style={`font-size: var(--text-fluid-lg);`}>
+              Я приглашаю вас на терапию. Предлагаю безопасное пространство, где можно
+              выражать и анализировать свои чувства и мысли, не боясь осуждения.
+            </p>
+          </blockquote>
+        </div>
+
+        <!-- Photo -->
+        <div class="lg:col-span-2 flex justify-center lg:justify-end">
+          <div class="relative w-full max-w-sm">
+            <div class="absolute -inset-2 bg-gradient-to-tr from-sage-200/50 to-warm-200/30 rounded-3xl -rotate-1"></div>
+            <img
+              src="/images/okno.png"
+              alt="Ирина Дербичева"
+              class="relative rounded-2xl object-cover w-full shadow-medium"
+              loading="lazy"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section style={`padding-top: var(--spacing-fluid-section); padding-bottom: var(--spacing-fluid-section);`}>
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-10 sm:mb-14">
+        <p class="text-sage-500 text-sm font-medium tracking-wide uppercase mb-3">Формат работы</p>
+        <h2 class="font-display text-sage-800 text-balance" style={`font-size: var(--text-fluid-3xl);`}>Как проходит первая сессия</h2>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 max-w-4xl mx-auto">
+        {[
+          { step: "01", title: "Знакомство", text: "Встреча проходит онлайн, по видеосвязи. Вы рассказываете о себе и о том, что вас привело." },
+          { step: "02", title: "Понимание", text: "Я расскажу, как могу быть полезна, и отвечу на все ваши вопросы. Встреча длится 60 минут." },
+          { step: "03", title: "Решение", text: "Встреча ни к чему не обязывает. Мы вместе решим, подходим ли друг другу для дальнейшей работы." },
+        ].map((item) => (
+          <div class="relative p-6 sm:p-8 rounded-2xl bg-white border border-sage-100/80 hover:shadow-soft transition-shadow duration-300">
+            <span class="font-display text-4xl sm:text-5xl font-bold text-sage-100">{item.step}</span>
+            <h3 class="font-display text-sage-800 mt-2 mb-3" style={`font-size: var(--text-fluid-xl);`}>{item.title}</h3>
+            <p class="text-warm-500 leading-relaxed text-sm sm:text-base">{item.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Education -->
+  <section class="relative">
+    <div class="absolute inset-0 bg-gradient-to-b from-warm-50/50 via-white to-warm-50"></div>
+    <div class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8" style={`padding-top: var(--spacing-fluid-section); padding-bottom: var(--spacing-fluid-section);`}>
+      <div class="text-center mb-10 sm:mb-14">
+        <p class="text-sage-500 text-sm font-medium tracking-wide uppercase mb-3">Квалификация</p>
+        <h2 class="font-display text-sage-800 text-balance" style={`font-size: var(--text-fluid-3xl);`}>Образование и повышение квалификации</h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5 max-w-4xl mx-auto">
+        {[
+          { name: "Психологическое консультирование и диагностика личности", school: "Московский институт психоанализа", hours: "1590 ч.", year: "2020" },
+          { name: "Клиническая психология, неврачебная психотерапия", school: "ИТГИПП", hours: "650 ч.", year: "2022" },
+          { name: "Терапия принятием и ответственностью (ACT)", school: "МГУ", hours: "178 ч.", year: "2024" },
+          { name: "Психология нарушений пищевого поведения", school: "АНО ДПО «НАДПО»", hours: "230 ч.", year: "2021" },
+          { name: "Психоанализ", school: "ИГТиПП", hours: "104 ч.", year: "2023" },
+          { name: "Гештальт-терапия", school: "Среда обучения", hours: "90 ч.", year: "2020" },
+        ].map((edu) => (
+          <div class="flex gap-4 p-5 sm:p-6 rounded-xl bg-white/80 backdrop-blur-sm border border-sage-100/60 hover:border-sage-200 hover:shadow-soft transition-all duration-300">
+            <div class="flex-shrink-0 w-10 h-10 rounded-lg bg-sage-100/80 flex items-center justify-center">
+              <svg class="w-5 h-5 text-sage-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.697 50.697 0 0112 13.489a50.702 50.702 0 017.74-3.342M6.75 15a.75.75 0 100-1.5.75.75 0 000 1.5zm0 0v-3.675A55.378 55.378 0 0112 8.443m-7.007 11.55A5.981 5.981 0 006.75 15.75v-1.5" /></svg>
+            </div>
+            <div class="min-w-0">
+              <p class="font-semibold text-sage-800 text-sm leading-snug">{edu.name}</p>
+              <p class="text-warm-500 text-xs mt-1.5">{edu.school} · {edu.hours} · {edu.year}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Calendly -->
+  <section id="booking" style={`padding-top: var(--spacing-fluid-section); padding-bottom: var(--spacing-fluid-lg);`}>
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-8 sm:mb-10">
+        <p class="text-sage-500 text-sm font-medium tracking-wide uppercase mb-3">Запись</p>
+        <h2 class="font-display text-sage-800 text-balance" style={`font-size: var(--text-fluid-3xl);`}>Запись на встречу</h2>
+        <p class="text-warm-500 max-w-lg mx-auto mt-4 text-pretty">
+          Выберите подходящие дату и время, и я свяжусь с вами для подтверждения.
+        </p>
+      </div>
+      <div
+        class="calendly-inline-widget"
+        data-url="https://calendly.com/derbichevairina/full_session?hide_event_type_details=1&hide_gdpr_banner=1&primary_color=5f6e4e&background_color=faf9f7"
+        style="min-width:320px;height:660px;"
+      ></div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8" style={`padding-top: var(--spacing-fluid-lg); padding-bottom: var(--spacing-fluid-section);`}>
+    <CTA />
+  </section>
+</Base>

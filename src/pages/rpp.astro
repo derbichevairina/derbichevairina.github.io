@@ -1,0 +1,309 @@
+---
+import Base from '../layouts/Base.astro';
+import CTA from '../components/CTA.astro';
+---
+
+<Base
+  title="Расстройства пищевого поведения — психолог с профильным образованием | Ирина Дербичева"
+  description="Помощь при расстройствах пищевого поведения: булимия, компульсивное переедание, анорексия. Клинический психолог с 230 часами специализации по РПП. Консультации онлайн."
+>
+  <!-- Hero -->
+  <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
+    <nav class="text-sm text-warm-400 mb-8">
+      <a href="/" class="hover:text-sage-600 transition-colors">Главная</a>
+      <span class="mx-2">/</span>
+      <span class="text-warm-600">Расстройства пищевого поведения</span>
+    </nav>
+
+    <h1 class="font-display text-3xl sm:text-4xl lg:text-5xl font-medium text-sage-900 leading-tight mb-6">
+      Помощь при расстройствах пищевого поведения
+    </h1>
+    <p class="text-lg text-warm-500 leading-relaxed max-w-2xl">
+      Булимия, компульсивное переедание, анорексия — это не слабая воля и не вопрос дисциплины.
+      Это расстройства, за которыми почти всегда стоит психологическая история.
+      И с ними можно работать.
+    </p>
+  </section>
+
+  <!-- What is RPP -->
+  <section class="bg-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <h2 class="font-display text-2xl sm:text-3xl text-sage-800 mb-8">Что такое расстройство пищевого поведения</h2>
+      <div class="space-y-4 text-warm-600 leading-relaxed">
+        <p>
+          Расстройство пищевого поведения (РПП) — это группа состояний, при которых отношения
+          с едой перестают быть нормальными. Еда становится способом справиться с тревогой,
+          наказать себя, заполнить пустоту или восстановить контроль.
+        </p>
+        <p>
+          РПП — это заболевание, а не особенность характера. И оно требует профессиональной помощи,
+          а не очередной диеты.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Types of RPP -->
+  <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <h2 class="font-display text-2xl sm:text-3xl text-sage-800 mb-8">Виды расстройств пищевого поведения</h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="bg-white rounded-2xl p-6 shadow-soft">
+        <h3 class="font-display text-xl text-sage-800 mb-3">Нервная булимия</h3>
+        <p class="text-warm-600 text-sm leading-relaxed">
+          Циклы переедания и «компенсации» — рвота, голодание, изнурительные тренировки.
+          Человек стыдится своего поведения и тщательно его скрывает. Булимию трудно
+          заметить со стороны: вес часто остаётся в норме.
+        </p>
+      </div>
+      <div class="bg-white rounded-2xl p-6 shadow-soft">
+        <h3 class="font-display text-xl text-sage-800 mb-3">Компульсивное переедание</h3>
+        <p class="text-warm-600 text-sm leading-relaxed">
+          Регулярные эпизоды неконтролируемого поедания большого количества пищи без чувства голода.
+          После — вина, отвращение к себе, подавленность. Это самое распространённое РПП,
+          но о нём говорят реже всего.
+        </p>
+      </div>
+      <div class="bg-white rounded-2xl p-6 shadow-soft">
+        <h3 class="font-display text-xl text-sage-800 mb-3">Нервная анорексия</h3>
+        <p class="text-warm-600 text-sm leading-relaxed">
+          Жёсткое ограничение в еде, страх набрать вес, искажённое восприятие своего тела.
+          Анорексия опасна для здоровья и жизни. При подозрении на анорексию необходимо
+          обращение к врачу.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Signs checklist -->
+  <section class="bg-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <h2 class="font-display text-2xl sm:text-3xl text-sage-800 mb-8">Как понять, что у вас РПП</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        {[
+          "Вы постоянно думаете о еде, весе или форме тела",
+          "Регулярные эпизоды переедания, после которых стыдно",
+          "Чувство потери контроля во время еды",
+          "Строгие правила питания: «можно» и «нельзя»",
+          "Еда — способ справиться со стрессом или тревогой",
+          "Отказ от еды в компании или тайное переедание",
+          "Чувство вины после каждого приёма пищи",
+          "Многократные безуспешные попытки «сесть на диету»",
+        ].map((item) => (
+          <div class="flex gap-3 p-4 bg-sage-50 rounded-xl">
+            <div class="flex-shrink-0 w-6 h-6 rounded-full bg-sage-200 flex items-center justify-center mt-0.5">
+              <svg class="w-3.5 h-3.5 text-sage-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
+              </svg>
+            </div>
+            <span class="text-warm-700 text-sm">{item}</span>
+          </div>
+        ))}
+      </div>
+      <p class="text-warm-500 text-sm mt-6">
+        Если вы узнали себя в нескольких пунктах — это не приговор, но повод обратиться к специалисту.
+      </p>
+    </div>
+  </section>
+
+  <!-- Why it's not about willpower -->
+  <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <h2 class="font-display text-2xl sm:text-3xl text-sage-800 mb-8">Почему «просто перестать переедать» не работает</h2>
+    <div class="space-y-4 text-warm-600 leading-relaxed">
+      <p>
+        За расстройством пищевого поведения почти всегда стоит психологическая причина.
+        Это может быть
+        <a href="/trevoga/" class="text-sage-600 underline decoration-sage-300 hover:decoration-sage-500 transition-colors">тревога</a>,
+        стремление контролировать хоть что-то в жизни, сложные
+        <a href="/otnosheniya/" class="text-sage-600 underline decoration-sage-300 hover:decoration-sage-500 transition-colors">отношения</a>,
+        травматический опыт в детстве.
+      </p>
+      <p>
+        Еда становится способом справиться с тем, с чем человек не может справиться иначе.
+        Поэтому диеты и «сила воли» не помогают — они борются с симптомом, а не с причиной.
+      </p>
+      <p>
+        Именно поэтому работа с РПП требует психотерапии: нужно найти и проработать то,
+        что стоит за нарушенным пищевым поведением. А это бывает непросто — очень часто
+        за РПП стоит тяжёлая психологическая история, и не всегда клиенту хочется до неё доходить.
+      </p>
+    </div>
+  </section>
+
+  <!-- My expertise -->
+  <section class="bg-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <h2 class="font-display text-2xl sm:text-3xl text-sage-800 mb-8">Моё образование и подход к РПП</h2>
+      <div class="space-y-4 text-warm-600 leading-relaxed">
+        <p>
+          Помимо основного клинического образования, я прошла <strong>230 часов специализированного
+          обучения по расстройствам пищевого поведения</strong> в НАДПО (Национальная академия
+          дополнительного профессионального образования).
+        </p>
+        <p>
+          Это обучение дало мне понимание того, что невозможно вылечить расстройство пищевого
+          поведения, работая только с психикой, только со спортом или только с диетологами.
+          Эффективная помощь при РПП требует работы сразу в трёх направлениях:
+        </p>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 my-6">
+          <div class="bg-sage-50 rounded-xl p-5 text-center">
+            <div class="text-sage-600 font-medium mb-1">Психотерапия</div>
+            <p class="text-warm-500 text-sm">Работа с причинами, эмоциями, паттернами</p>
+          </div>
+          <div class="bg-sage-50 rounded-xl p-5 text-center">
+            <div class="text-sage-600 font-medium mb-1">Питание</div>
+            <p class="text-warm-500 text-sm">Восстановление здорового отношения к еде</p>
+          </div>
+          <div class="bg-sage-50 rounded-xl p-5 text-center">
+            <div class="text-sage-600 font-medium mb-1">Тело</div>
+            <p class="text-warm-500 text-sm">Возвращение контакта с телесными ощущениями</p>
+          </div>
+        </div>
+        <p>
+          Как правило, такие сведения получаешь только из узкоспециализированных обучений.
+          Большинство психологов имеют лишь общее представление о РПП из базового образования.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- How therapy works -->
+  <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <h2 class="font-display text-2xl sm:text-3xl text-sage-800 mb-8">Как проходит терапия при РПП</h2>
+    <div class="space-y-6">
+      <div class="flex gap-4">
+        <div class="flex-shrink-0 w-10 h-10 rounded-full bg-sage-100 flex items-center justify-center text-sage-700 font-medium">1</div>
+        <div>
+          <h3 class="font-medium text-sage-800 mb-1">Знакомство и оценка</h3>
+          <p class="text-warm-600 text-sm leading-relaxed">
+            На первой встрече мы разбираемся в вашей ситуации. Я оцениваю характер расстройства
+            и, если нужно, рекомендую обращение к диетологу или врачу параллельно с терапией.
+          </p>
+        </div>
+      </div>
+      <div class="flex gap-4">
+        <div class="flex-shrink-0 w-10 h-10 rounded-full bg-sage-100 flex items-center justify-center text-sage-700 font-medium">2</div>
+        <div>
+          <h3 class="font-medium text-sage-800 mb-1">Поиск причин</h3>
+          <p class="text-warm-600 text-sm leading-relaxed">
+            Мы исследуем, что стоит за нарушенным пищевым поведением — какие эмоции, переживания,
+            жизненные ситуации запускают цикл. Это самая непростая, но самая важная часть работы.
+          </p>
+        </div>
+      </div>
+      <div class="flex gap-4">
+        <div class="flex-shrink-0 w-10 h-10 rounded-full bg-sage-100 flex items-center justify-center text-sage-700 font-medium">3</div>
+        <div>
+          <h3 class="font-medium text-sage-800 mb-1">Новые способы справляться</h3>
+          <p class="text-warm-600 text-sm leading-relaxed">
+            Через подход
+            ACT-терапии
+            мы учимся иначе обходиться с трудными эмоциями — не заедать их, а проживать.
+            Выстраиваем жизнь вокруг ваших ценностей, а не вокруг еды и веса.
+          </p>
+        </div>
+      </div>
+      <div class="flex gap-4">
+        <div class="flex-shrink-0 w-10 h-10 rounded-full bg-sage-100 flex items-center justify-center text-sage-700 font-medium">4</div>
+        <div>
+          <h3 class="font-medium text-sage-800 mb-1">Закрепление результата</h3>
+          <p class="text-warm-600 text-sm leading-relaxed">
+            Формируем устойчивое, здоровое отношение к еде и к своему телу.
+            Работаем над тем, чтобы вы могли поддерживать результат самостоятельно.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- For whom -->
+  <section class="bg-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <h2 class="font-display text-2xl sm:text-3xl text-sage-800 mb-8">Для кого</h2>
+      <div class="bg-sage-50 rounded-2xl p-8 space-y-4 text-warm-600 leading-relaxed">
+        <p>Я работаю индивидуально, только со взрослыми, только онлайн.</p>
+        <p>
+          Если ваше состояние требует медицинского наблюдения (значительная потеря веса,
+          проблемы со здоровьем) — я рекомендую параллельное наблюдение у врача.
+          Психотерапия при РПП наиболее эффективна в сочетании с диетологической поддержкой.
+        </p>
+        <p>
+          Подробнее о первой сессии — в разделе частых вопросов (скоро).
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <h2 class="font-display text-2xl sm:text-3xl text-sage-800 mb-8">Частые вопросы</h2>
+    <div class="space-y-6">
+      <details class="group border border-sage-200 rounded-xl overflow-hidden">
+        <summary class="flex justify-between items-center cursor-pointer p-6 bg-sage-50 hover:bg-sage-100 transition-colors">
+          <span class="font-medium text-sage-800">Может ли психолог помочь при компульсивном переедании?</span>
+          <svg class="w-5 h-5 text-sage-500 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+        </summary>
+        <div class="p-6 text-warm-600 text-sm leading-relaxed">
+          Да. Компульсивное переедание — это расстройство, у которого есть психологические причины:
+          стресс, тревога, подавленные эмоции, травматический опыт. Психотерапия помогает найти
+          эти причины и выработать здоровые способы справляться с трудными состояниями.
+        </div>
+      </details>
+      <details class="group border border-sage-200 rounded-xl overflow-hidden">
+        <summary class="flex justify-between items-center cursor-pointer p-6 bg-sage-50 hover:bg-sage-100 transition-colors">
+          <span class="font-medium text-sage-800">Чем ваш подход отличается от диет и нутрициологии?</span>
+          <svg class="w-5 h-5 text-sage-500 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+        </summary>
+        <div class="p-6 text-warm-600 text-sm leading-relaxed">
+          Диетологи работают с питанием, я работаю с психологическими причинами расстройства.
+          Для устойчивого результата часто нужно и то, и другое. Но если не разобраться
+          с тем, что стоит за нарушенным пищевым поведением, никакая диета не поможет надолго.
+        </div>
+      </details>
+      <details class="group border border-sage-200 rounded-xl overflow-hidden">
+        <summary class="flex justify-between items-center cursor-pointer p-6 bg-sage-50 hover:bg-sage-100 transition-colors">
+          <span class="font-medium text-sage-800">Сколько длится терапия при РПП?</span>
+          <svg class="w-5 h-5 text-sage-500 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+        </summary>
+        <div class="p-6 text-warm-600 text-sm leading-relaxed">
+          Это зависит от конкретной ситуации. Расстройства пищевого поведения — сложная тема,
+          и работа с ними требует времени. Первые изменения в самоощущении обычно заметны
+          через несколько сессий, но устойчивый результат требует регулярной работы.
+          Мы будем отслеживать прогресс вместе.
+        </div>
+      </details>
+      <details class="group border border-sage-200 rounded-xl overflow-hidden">
+        <summary class="flex justify-between items-center cursor-pointer p-6 bg-sage-50 hover:bg-sage-100 transition-colors">
+          <span class="font-medium text-sage-800">Связаны ли РПП с тревогой?</span>
+          <svg class="w-5 h-5 text-sage-500 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+        </summary>
+        <div class="p-6 text-warm-600 text-sm leading-relaxed">
+          Очень часто. Тревога — один из самых частых спутников расстройств пищевого поведения.
+          Еда может становиться способом «заглушить» тревогу, а ограничение в еде — попыткой
+          вернуть ощущение контроля. Если это ваш случай, мы будем работать и с тревогой тоже.
+          <a href="/trevoga/" class="text-sage-600 underline decoration-sage-300 hover:decoration-sage-500 transition-colors ml-1">Подробнее о работе с тревогой →</a>
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <!-- Related -->
+  <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <p class="text-warm-400 text-sm mb-4">Связанные темы:</p>
+    <div class="flex flex-wrap gap-3">
+      <a href="/trevoga/" class="text-sm text-sage-600 bg-sage-50 px-4 py-2 rounded-full hover:bg-sage-100 transition-colors">
+        Тревога и панические атаки
+      </a>
+      <a href="/otnosheniya/" class="text-sm text-sage-600 bg-sage-50 px-4 py-2 rounded-full hover:bg-sage-100 transition-colors">
+        Отношения и расставания
+      </a>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <CTA
+      title="Вы заслуживаете свободных отношений с едой"
+      subtitle="Запишитесь на первую сессию — вместе разберёмся, что стоит за вашим расстройством, и найдём путь к здоровому отношению с едой."
+    />
+  </section>
+</Base>

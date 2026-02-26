@@ -1,0 +1,303 @@
+---
+import Base from '../layouts/Base.astro';
+import CTA from '../components/CTA.astro';
+---
+
+<Base
+  title="Отношения, расставания, созависимость — помощь психолога онлайн | Ирина Дербичева"
+  description="Как пережить расставание, выйти из созависимых отношений, отпустить прошлое. Клинический психолог, индивидуальные консультации онлайн."
+>
+  <!-- Hero -->
+  <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
+    <nav class="text-sm text-warm-400 mb-8">
+      <a href="/" class="hover:text-sage-600 transition-colors">Главная</a>
+      <span class="mx-2">/</span>
+      <span class="text-warm-600">Отношения и расставания</span>
+    </nav>
+
+    <h1 class="font-display text-3xl sm:text-4xl lg:text-5xl font-medium text-sage-900 leading-tight mb-6">
+      Отношения, расставания, созависимость — помощь психолога
+    </h1>
+    <p class="text-lg text-warm-500 leading-relaxed max-w-2xl">
+      Трудности в отношениях — один из самых частых запросов на консультации.
+      «Не могу уйти», «не могу забыть», «не понимаю, что происходит между нами» —
+      за каждой из этих фраз стоит реальная боль, с которой можно работать.
+    </p>
+  </section>
+
+  <!-- When relationships become a problem -->
+  <section class="bg-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <h2 class="font-display text-2xl sm:text-3xl text-sage-800 mb-8">Когда отношения становятся проблемой</h2>
+      <div class="space-y-4 text-warm-600 leading-relaxed">
+        <p>
+          Не все отношения, которые причиняют боль, нужно заканчивать. И не все
+          отношения, которые «вроде нормальные», действительно здоровы. Разобраться
+          в этом непросто — особенно изнутри.
+        </p>
+        <p>
+          Есть несколько типов проблемных отношений, с которыми ко мне обращаются чаще всего:
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+        <div class="bg-sage-50 rounded-2xl p-6">
+          <h3 class="font-display text-lg text-sage-800 mb-3">Созависимые отношения</h3>
+          <p class="text-warm-600 text-sm leading-relaxed">
+            Вы чувствуете, что не можете жить без партнёра, даже если рядом с ним вам плохо.
+            Ваше настроение, самооценка, ощущение себя полностью зависят от другого человека.
+            Вы «растворяетесь» в партнёре, теряя себя.
+          </p>
+        </div>
+        <div class="bg-sage-50 rounded-2xl p-6">
+          <h3 class="font-display text-lg text-sage-800 mb-3">Абьюзивные отношения</h3>
+          <p class="text-warm-600 text-sm leading-relaxed">
+            Партнёр контролирует, обесценивает, унижает — но вы находите этому оправдания.
+            Абьюз бывает не только физическим: эмоциональное насилие, манипуляции, газлайтинг
+            разрушают не менее сильно.
+          </p>
+        </div>
+        <div class="bg-sage-50 rounded-2xl p-6">
+          <h3 class="font-display text-lg text-sage-800 mb-3">Охлаждение в паре</h3>
+          <p class="text-warm-600 text-sm leading-relaxed">
+            Вроде всё хорошо, и любовь ещё есть — но что-то не так. Не хочется быть рядом,
+            обнимать, слушать. Это не значит, что отношения кончились, — но это сигнал,
+            который стоит исследовать.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Codependency -->
+  <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <h2 class="font-display text-2xl sm:text-3xl text-sage-800 mb-8">Созависимость: что это и как выйти</h2>
+    <div class="space-y-4 text-warm-600 leading-relaxed">
+      <p>
+        Созависимые отношения — это отношения, в которых мы реализуем через другого человека
+        что-то недостающее нам самим. Мы восполняем свою недополученную потребность за счёт
+        партнёра — и боимся потерять его не потому, что любим, а потому что без него
+        теряем часть себя.
+      </p>
+      <p>
+        Если вы понимаете, что отношения вас разрушают, но не можете из них выйти — это уже
+        важный шаг. Многие приходят ко мне с совершенно другими запросами, не осознавая,
+        что находятся в разрушающих отношениях.
+      </p>
+    </div>
+
+    <h3 class="font-display text-xl text-sage-700 mt-10 mb-6">Признаки созависимости</h3>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      {[
+        "Ваше настроение полностью зависит от партнёра",
+        "Вы боитесь остаться одни больше, чем страдать рядом",
+        "Вы постоянно жертвуете своими интересами ради другого",
+        "Вы не представляете свою жизнь без этого человека",
+        "Вы оправдываете неприемлемое поведение партнёра",
+        "Вы чувствуете себя «никем» вне отношений",
+      ].map((item) => (
+        <div class="flex gap-3 p-4 bg-sage-50 rounded-xl">
+          <div class="flex-shrink-0 w-6 h-6 rounded-full bg-sage-200 flex items-center justify-center mt-0.5">
+            <svg class="w-3.5 h-3.5 text-sage-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
+            </svg>
+          </div>
+          <span class="text-warm-700 text-sm">{item}</span>
+        </div>
+      ))}
+    </div>
+    <p class="text-warm-500 text-sm mt-6">
+      Созависимость тесно связана с
+      низкой самооценкой
+      — ощущением «я не заслуживаю лучшего».
+    </p>
+  </section>
+
+  <!-- Breakups -->
+  <section class="bg-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <h2 class="font-display text-2xl sm:text-3xl text-sage-800 mb-8">Как пережить расставание</h2>
+      <div class="space-y-4 text-warm-600 leading-relaxed">
+        <p>
+          Расставание — одно из самых болезненных переживаний. Неважно, ушли вы сами или
+          вас оставили — боль может быть одинаково сильной. К ней часто добавляется страх
+          одиночества, чувство вины, навязчивые мысли «а что, если я ошибся?».
+        </p>
+        <p>
+          Часто мы не решаемся расстаться не потому, что любим, а потому что
+          <strong>боимся остаться одинокими</strong>. И этот страх мешает принимать решения,
+          которые действительно важны для нашей жизни.
+        </p>
+        <p>
+          В
+          экзистенциальной терапии
+          мы работаем с этим через осознание: одиночество — нормальная часть человеческого опыта.
+          Оно не разрушит вас. Когда страх одиночества перестаёт управлять решениями —
+          появляется пространство для настоящего выбора.
+        </p>
+      </div>
+
+      <div class="bg-warm-50 rounded-2xl p-6 sm:p-8 mt-8 border border-warm-200">
+        <h3 class="font-display text-lg text-sage-800 mb-4">Что помогает пережить расставание</h3>
+        <ul class="space-y-3 text-warm-600 text-sm">
+          <li class="flex gap-3">
+            <span class="text-sage-500 font-medium">→</span>
+            <span>Разрешить себе горевать — не торопить процесс, не заставлять себя «взять себя в руки»</span>
+          </li>
+          <li class="flex gap-3">
+            <span class="text-sage-500 font-medium">→</span>
+            <span>Понять, какую потребность закрывали эти отношения — и научиться закрывать её самостоятельно</span>
+          </li>
+          <li class="flex gap-3">
+            <span class="text-sage-500 font-medium">→</span>
+            <span>Отделить страх одиночества от реальной привязанности к человеку</span>
+          </li>
+          <li class="flex gap-3">
+            <span class="text-sage-500 font-medium">→</span>
+            <span>Восстановить контакт с собой, своими ценностями и желаниями</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- How I work -->
+  <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <h2 class="font-display text-2xl sm:text-3xl text-sage-800 mb-8">Как я помогаю</h2>
+    <div class="space-y-4 text-warm-600 leading-relaxed">
+      <p>
+        Я работаю индивидуально — не с парами, а с конкретным человеком и его переживаниями.
+        Моя задача — помочь вам разобраться в своих чувствах и принять решение,
+        за которое вы сможете нести ответственность.
+      </p>
+      <p>
+        В работе с отношениями я использую два подхода:
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
+      <div class="border border-sage-200 rounded-2xl p-6">
+        <h3 class="font-display text-lg text-sage-800 mb-3">
+          ACT-терапия
+        </h3>
+        <p class="text-warm-600 text-sm leading-relaxed">
+          Помогает принять болезненные эмоции, не борясь с ними. Вместо того чтобы подавлять
+          боль или бесконечно анализировать прошлое, мы учимся жить в соответствии со своими
+          ценностями — даже когда больно.
+        </p>
+      </div>
+      <div class="border border-sage-200 rounded-2xl p-6">
+        <h3 class="font-display text-lg text-sage-800 mb-3">
+          Экзистенциальный подход
+        </h3>
+        <p class="text-warm-600 text-sm leading-relaxed">
+          Помогает осознать свободу выбора и ответственность за свою жизнь. Когда человек
+          стоит перед выбором — остаться или уйти — экзистенциальный подход помогает
+          увидеть этот выбор честно, без иллюзий.
+        </p>
+      </div>
+    </div>
+
+    <div class="bg-sage-50 rounded-2xl p-6 sm:p-8 mt-8">
+      <p class="text-warm-600 leading-relaxed italic">
+        «В созависимых отношениях мы реализуем через другого человека что-то недостающее нам.
+        Нужно понять: какую роль мы проживаем, какого себя мы видим рядом с этим человеком.
+        И если это действительно наша потребность — можно попытаться реализовать её
+        без "растворения" в другом. Присвоить эту потребность себе.»
+      </p>
+      <p class="text-warm-400 text-sm mt-3">— Ирина Дербичева</p>
+    </div>
+  </section>
+
+  <!-- For whom -->
+  <section class="bg-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <h2 class="font-display text-2xl sm:text-3xl text-sage-800 mb-8">Для кого</h2>
+      <div class="bg-sage-50 rounded-2xl p-8 space-y-4 text-warm-600 leading-relaxed">
+        <p>Я работаю индивидуально, только со взрослыми, только онлайн.</p>
+        <p>
+          Я не провожу парную терапию, но помогаю конкретному человеку разобраться
+          в своих отношениях: понять, что вы чувствуете, чего хотите и какой шаг
+          для вас будет правильным.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <h2 class="font-display text-2xl sm:text-3xl text-sage-800 mb-8">Частые вопросы</h2>
+    <div class="space-y-6">
+      <details class="group border border-sage-200 rounded-xl overflow-hidden">
+        <summary class="flex justify-between items-center cursor-pointer p-6 bg-sage-50 hover:bg-sage-100 transition-colors">
+          <span class="font-medium text-sage-800">Как выйти из созависимых отношений?</span>
+          <svg class="w-5 h-5 text-sage-500 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+        </summary>
+        <div class="p-6 text-warm-600 text-sm leading-relaxed">
+          Первый шаг — понять, что именно дают вам эти отношения. Какую потребность
+          вы реализуете через партнёра? Когда мы находим ответ, следующий шаг —
+          научиться закрывать эту потребность самостоятельно, не растворяясь
+          в другом человеке. Это постепенный процесс, который мы проходим вместе
+          в терапии.
+        </div>
+      </details>
+      <details class="group border border-sage-200 rounded-xl overflow-hidden">
+        <summary class="flex justify-between items-center cursor-pointer p-6 bg-sage-50 hover:bg-sage-100 transition-colors">
+          <span class="font-medium text-sage-800">Как пережить расставание — советы психолога</span>
+          <svg class="w-5 h-5 text-sage-500 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+        </summary>
+        <div class="p-6 text-warm-600 text-sm leading-relaxed">
+          Не торопите себя. Расставание — это потеря, и горевание по ней нормально.
+          Работа с психологом помогает не застрять в этом процессе: мы разбираемся,
+          что стоит за болью, отделяем реальную привязанность от страха одиночества
+          и помогаем вам вернуть контакт с собой. Обычно люди замечают изменения
+          уже через несколько сессий.
+        </div>
+      </details>
+      <details class="group border border-sage-200 rounded-xl overflow-hidden">
+        <summary class="flex justify-between items-center cursor-pointer p-6 bg-sage-50 hover:bg-sage-100 transition-colors">
+          <span class="font-medium text-sage-800">Как отпустить прошлые отношения?</span>
+          <svg class="w-5 h-5 text-sage-500 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+        </summary>
+        <div class="p-6 text-warm-600 text-sm leading-relaxed">
+          «Отпустить» — не значит забыть или перестать чувствовать. Это значит
+          перестать строить свою жизнь вокруг прошлого. В терапии мы работаем
+          с тем, что удерживает вас: незавершённость, вина, надежда на возвращение.
+          Когда эти чувства проработаны — отпускание происходит естественно.
+        </div>
+      </details>
+      <details class="group border border-sage-200 rounded-xl overflow-hidden">
+        <summary class="flex justify-between items-center cursor-pointer p-6 bg-sage-50 hover:bg-sage-100 transition-colors">
+          <span class="font-medium text-sage-800">Вы работаете с парами?</span>
+          <svg class="w-5 h-5 text-sage-500 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+        </summary>
+        <div class="p-6 text-warm-600 text-sm leading-relaxed">
+          Нет, я работаю только индивидуально. Но индивидуальная терапия очень эффективна
+          для работы с отношениями: вы лучше понимаете себя, свои паттерны, свои потребности —
+          и это меняет то, как вы строите отношения с другими.
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <!-- Related -->
+  <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <p class="text-warm-400 text-sm mb-4">Связанные темы:</p>
+    <div class="flex flex-wrap gap-3">
+      <a href="/trevoga/" class="text-sm text-sage-600 bg-sage-50 px-4 py-2 rounded-full hover:bg-sage-100 transition-colors">
+        Тревога и панические атаки
+      </a>
+      <a href="/rpp/" class="text-sm text-sage-600 bg-sage-50 px-4 py-2 rounded-full hover:bg-sage-100 transition-colors">
+        Расстройства пищевого поведения
+      </a>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <CTA
+      title="Отношения можно изменить — начните с себя"
+      subtitle="Запишитесь на первую сессию — вместе разберёмся, что происходит и что с этим делать."
+    />
+  </section>
+</Base>

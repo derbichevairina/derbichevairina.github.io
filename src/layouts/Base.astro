@@ -1,0 +1,180 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  canonicalUrl?: string;
+}
+
+const { title, description, canonicalUrl } = Astro.props;
+const currentPath = Astro.url.pathname;
+
+const navLinks = [
+  { href: "/", label: "Главная", match: (p: string) => p === "/" },
+  { href: "/trevoga/", label: "Тревога", match: (p: string) => p.startsWith("/trevoga") },
+  { href: "/rpp/", label: "РПП", match: (p: string) => p.startsWith("/rpp") },
+  { href: "/otnosheniya/", label: "Отношения", match: (p: string) => p.startsWith("/otnosheniya") },
+];
+---
+
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    {canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Calendly -->
+    <script is:inline type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+
+    <!-- Yandex.Metrika -->
+    <script is:inline>
+      (function (m, e, t, r, i, k, a) {
+        m[i] = m[i] || function () { (m[i].a = m[i].a || []).push(arguments) };
+        m[i].l = 1 * new Date();
+        for (var j = 0; j < document.scripts.length; j++) {
+          if (document.scripts[j].src === r) return;
+        }
+        k = e.createElement(t); a = e.getElementsByTagName(t)[0];
+        k.async = 1; k.src = r; a.parentNode.insertBefore(k, a);
+      })(window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+      ym(93488297, "init", { clickmap: true, trackLinks: true, accurateTrackBounce: true, webvisor: true });
+    </script>
+    <noscript>
+      <div><img src="https://mc.yandex.ru/watch/93488297" style="position:absolute; left:-9999px;" alt="" /></div>
+    </noscript>
+  </head>
+  <body class="min-h-screen flex flex-col">
+    <header class="sticky top-0 z-50 bg-warm-50/80 backdrop-blur-xl border-b border-sage-100/60">
+      <nav class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-16 sm:h-18">
+          <!-- Logo -->
+          <a href="/" class="font-display text-lg sm:text-xl font-semibold text-sage-800 hover:text-sage-600 transition-colors duration-300">
+            Ирина Дербичева
+          </a>
+
+          <!-- Desktop nav -->
+          <div class="hidden md:flex items-center gap-1">
+            {navLinks.map(link => (
+              <a
+                href={link.href}
+                class:list={[
+                  "px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300",
+                  link.match(currentPath)
+                    ? "text-sage-700 bg-sage-100/60"
+                    : "text-warm-500 hover:text-sage-700 hover:bg-sage-50",
+                ]}
+              >
+                {link.label}
+              </a>
+            ))}
+            <a
+              href="/#booking"
+              class="ml-3 bg-sage-600 text-white px-5 py-2 rounded-full text-sm font-medium hover:bg-sage-700 hover:shadow-glow active:scale-[0.98] transition-all duration-300 ease-fluid"
+            >
+              Записаться
+            </a>
+          </div>
+
+          <!-- Mobile menu button (unchanged) -->
+          <button id="mobile-menu-btn" class="md:hidden p-2 -mr-2 text-warm-600 hover:text-sage-700 transition-colors" aria-label="Menu">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </button>
+        </div>
+
+        <!-- Mobile nav -->
+        <div id="mobile-menu" class="hidden md:hidden pb-4">
+          <div class="flex flex-col gap-1 pt-3 border-t border-sage-100/60">
+            {navLinks.map(link => (
+              <a
+                href={link.href}
+                class:list={[
+                  "text-sm font-medium py-2.5 px-3 rounded-lg transition-colors",
+                  link.match(currentPath)
+                    ? "text-sage-700 bg-sage-100/60"
+                    : "text-warm-600 hover:text-sage-700 hover:bg-sage-50",
+                ]}
+              >
+                {link.label}
+              </a>
+            ))}
+            <a
+              href="/#booking"
+              class="bg-sage-600 text-white px-5 py-2.5 rounded-full text-sm font-medium text-center hover:bg-sage-700 transition-all duration-300 mt-2"
+            >
+              Записаться
+            </a>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="flex-1">
+      <slot />
+    </main>
+
+    <footer class="bg-sage-900 text-sage-300">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-8">
+          <!-- About -->
+          <div>
+            <h3 class="font-display text-lg text-white mb-3">Ирина Дербичева</h3>
+            <p class="text-sm text-sage-400 leading-relaxed">
+              Клинический психолог, ACT-терапевт. Индивидуальные консультации онлайн для взрослых.
+            </p>
+          </div>
+
+          <!-- Links -->
+          <div>
+            <h3 class="font-display text-lg text-white mb-3">С чем работаю</h3>
+            <ul class="space-y-2.5 text-sm">
+              <li><a href="/trevoga/" class="text-sage-400 hover:text-white transition-colors duration-300">Тревога и панические атаки</a></li>
+              <li><a href="/rpp/" class="text-sage-400 hover:text-white transition-colors duration-300">Расстройства пищевого поведения</a></li>
+              <li><a href="/otnosheniya/" class="text-sage-400 hover:text-white transition-colors duration-300">Отношения и расставания</a></li>
+            </ul>
+          </div>
+
+          <!-- Contact -->
+          <div>
+            <h3 class="font-display text-lg text-white mb-3">Связаться</h3>
+            <div class="flex flex-col gap-3 text-sm">
+              <a href="https://t.me/derbichevairina" target="_blank" rel="noopener" class="inline-flex items-center gap-2 text-sage-400 hover:text-white transition-colors duration-300">
+                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+                Telegram
+              </a>
+              <a href="https://wa.me/+79028983895" target="_blank" rel="noopener" class="inline-flex items-center gap-2 text-sage-400 hover:text-white transition-colors duration-300">
+                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                WhatsApp
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="border-t border-sage-800 mt-10 pt-8 text-center text-xs text-sage-500">
+          &copy; {new Date().getFullYear()} Ирина Дербичева. Все права защищены.
+        </div>
+      </div>
+    </footer>
+
+    <script is:inline>
+      document.getElementById('mobile-menu-btn')?.addEventListener('click', () => {
+        document.getElementById('mobile-menu')?.classList.toggle('hidden');
+      });
+    </script>
+  </body>
+</html>
+
+<style is:global>
+  @import "../styles/global.css";
+</style>

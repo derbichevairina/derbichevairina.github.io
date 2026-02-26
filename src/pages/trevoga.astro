@@ -1,0 +1,467 @@
+---
+import Base from '../layouts/Base.astro';
+import CTA from '../components/CTA.astro';
+
+const faqItems = [
+  {
+    question: "Может ли психолог помочь при панических атаках?",
+    answer: "Да, панические атаки — одна из наиболее частых причин обращения к психологу. ACT-терапия помогает научиться проживать панику, не избегая её, и постепенно снизить частоту и интенсивность приступов. Если состояние тяжёлое, я могу рекомендовать параллельно обратиться к психиатру для медикаментозной поддержки.",
+  },
+  {
+    question: "Нужен психолог или психиатр при тревожном расстройстве?",
+    answer: "Психолог работает с тревогой через психотерапию — помогает изменить отношение к тревоге и научиться с ней жить. Психиатр назначает медикаменты. Часто наилучший результат даёт сочетание обоих подходов. На первой встрече я помогу разобраться, что подходит в вашей ситуации, и при необходимости порекомендую психиатра.",
+  },
+  {
+    question: "Как перестать тревожиться и накручивать себя?",
+    answer: "Попытки подавить тревогу обычно усиливают её — это ловушка контроля. В ACT-терапии мы не боремся с тревожными мыслями, а учимся замечать их, не сливаясь с ними. Вы начинаете видеть мысли как мысли, а не как факты. Постепенно тревога теряет власть над вашими решениями, и вы возвращаете контроль над своей жизнью.",
+  },
+  {
+    question: "Сколько сессий нужно для работы с тревогой?",
+    answer: "Это зависит от ситуации. Многие клиенты замечают первые изменения уже после 3–5 сессий. Устойчивый результат при тревожных расстройствах обычно требует 10–20 сессий регулярной работы. Мы будем отслеживать прогресс вместе и решать, когда завершить терапию.",
+  },
+  {
+    question: "Можно ли полностью избавиться от тревоги?",
+    answer: "Тревога — нормальная и важная реакция психики, которая предупреждает нас об опасности. Полностью избавиться от неё невозможно и не нужно. Цель терапии — научиться отличать полезную тревогу от избыточной и перестать позволять ей управлять вашей жизнью. После терапии тревога остаётся, но перестаёт быть проблемой.",
+  },
+  {
+    question: "Как проходит онлайн-консультация при тревоге?",
+    answer: "Консультация длится 60 минут и проходит по видеосвязи. Первая встреча — это знакомство: вы рассказываете о своей ситуации, я объясняю, как могу помочь. Дальнейшая работа строится индивидуально. Онлайн-формат так же эффективен, как очный — это подтверждено исследованиями.",
+  },
+];
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqItems.map(item => ({
+    "@type": "Question",
+    "name": item.question,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": item.answer,
+    },
+  })),
+};
+---
+
+<Base
+  title="Тревога и панические атаки — помощь психолога онлайн | Ирина Дербичева"
+  description="Как справиться с тревогой и паническими атаками. Клинический психолог, ACT-терапевт Ирина Дербичева. Работа с тревожным расстройством онлайн. Запись на консультацию."
+  canonicalUrl="https://psyholog-irina.ru/trevoga/"
+>
+  <!-- FAQ Schema -->
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+
+  <!-- Hero -->
+  <section class="relative overflow-hidden">
+    <div class="absolute top-10 -right-32 w-96 h-96 bg-sage-200/30 rounded-full blur-3xl"></div>
+    <div class="absolute -bottom-20 left-0 w-80 h-80 bg-warm-200/20 rounded-full blur-3xl"></div>
+
+    <div class="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
+      <nav class="text-sm text-warm-400 mb-8">
+        <a href="/" class="hover:text-sage-600 transition-colors">Главная</a>
+        <span class="mx-2">/</span>
+        <span class="text-warm-600">Тревога и панические атаки</span>
+      </nav>
+
+      <h1 class="font-display text-3xl sm:text-4xl lg:text-5xl font-medium text-sage-900 leading-tight mb-6 text-balance">
+        Тревога и панические атаки — когда пора к&nbsp;психологу
+      </h1>
+      <p class="text-lg sm:text-xl text-warm-500 leading-relaxed max-w-2xl text-pretty">
+        Тревога есть у каждого — это нормально. Но когда она не отпускает, мешает спать,
+        работать, жить — это повод обратиться за помощью. Разберёмся, что происходит
+        и как с этим справиться.
+      </p>
+    </div>
+  </section>
+
+  <!-- Recognition block -->
+  <section class="bg-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
+      <h2 class="font-display text-2xl sm:text-3xl text-sage-800 mb-4">Вам знакомо это?</h2>
+      <p class="text-warm-500 mb-8 max-w-2xl">
+        С тревогой обычно приходят два типа людей. Одни говорят: «Раньше всё было нормально,
+        а потом что-то произошло — и теперь не могу успокоиться». Другие: «Я всегда был
+        тревожным человеком, сколько себя помню».
+      </p>
+      <p class="text-warm-600 leading-relaxed mb-8 max-w-2xl">
+        Обеих группы объединяет одно: тревога воспринимается как враг, от которого хочется
+        избавиться навсегда. Типичный запрос звучит так: <em>«Что мне сделать, чтобы
+        больше никогда не тревожиться?»</em>
+      </p>
+      <p class="text-warm-600 leading-relaxed max-w-2xl">
+        Если вы узнали себя — вы не одиноки. Тревожные расстройства занимают первое место
+        среди психических нарушений по распространённости. И с ними можно эффективно работать.
+      </p>
+    </div>
+  </section>
+
+  <!-- What is anxiety disorder -->
+  <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
+    <h2 class="font-display text-2xl sm:text-3xl text-sage-800 mb-8">Что такое тревожное расстройство</h2>
+    <div class="space-y-5 text-warm-600 leading-relaxed">
+      <p>
+        Тревожное расстройство — это не просто волнение перед экзаменом или важной встречей.
+        Это состояние, когда тревога становится постоянным фоном жизни. Вы ожидаете плохого
+        без объективных причин, не можете расслабиться, тело постоянно в напряжении.
+      </p>
+      <p>
+        Тревога сама по себе — нормальная и полезная реакция. Она сигнализирует:
+        «Что-то происходит, будь внимателен». Без неё мы были бы в опасности — не замечали бы
+        угроз. Проблема начинается, когда этот «сигнал» не выключается и звучит без причины.
+      </p>
+      <p>
+        При тревожном расстройстве вы можете испытывать постоянное беспокойство,
+        раздражительность, мышечное напряжение, проблемы с концентрацией, бессонницу.
+        Тревога начинает диктовать правила: куда ходить, с кем общаться, что делать.
+      </p>
+    </div>
+  </section>
+
+  <!-- Panic attacks -->
+  <section class="bg-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
+      <h2 class="font-display text-2xl sm:text-3xl text-sage-800 mb-8">Панические атаки — что это и как проявляется</h2>
+      <div class="space-y-5 text-warm-600 leading-relaxed">
+        <p>
+          Паническая атака — это внезапный приступ сильного страха, который сопровождается
+          физическими симптомами: учащённое сердцебиение, ощущение нехватки воздуха,
+          головокружение, дрожь, онемение конечностей, боль в груди.
+        </p>
+        <p>
+          Многие думают, что у них сердечный приступ или что они «сходят с ума». Паническая
+          атака пугает именно своей интенсивностью и непредсказуемостью. После первого приступа
+          часто возникает страх повторения — и этот страх сам по себе становится источником тревоги.
+        </p>
+        <p>
+          Панические атаки не опасны для здоровья, но существенно влияют на качество жизни.
+          Человек начинает избегать мест и ситуаций, где случился приступ, ограничивает
+          передвижения, отказывается от общения.
+        </p>
+      </div>
+
+      <div class="mt-10 grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div class="p-5 rounded-xl bg-sage-50 border border-sage-100/60">
+          <h3 class="font-display text-sage-800 text-lg mb-3">Физические симптомы</h3>
+          <ul class="space-y-2 text-sm text-warm-600">
+            <li class="flex gap-2"><span class="text-sage-500 mt-0.5">—</span> Учащённое сердцебиение</li>
+            <li class="flex gap-2"><span class="text-sage-500 mt-0.5">—</span> Ощущение удушья, нехватки воздуха</li>
+            <li class="flex gap-2"><span class="text-sage-500 mt-0.5">—</span> Головокружение и слабость</li>
+            <li class="flex gap-2"><span class="text-sage-500 mt-0.5">—</span> Дрожь, озноб или жар</li>
+            <li class="flex gap-2"><span class="text-sage-500 mt-0.5">—</span> Боль или давление в груди</li>
+          </ul>
+        </div>
+        <div class="p-5 rounded-xl bg-warm-50 border border-warm-100/60">
+          <h3 class="font-display text-warm-800 text-lg mb-3">Психологические симптомы</h3>
+          <ul class="space-y-2 text-sm text-warm-600">
+            <li class="flex gap-2"><span class="text-warm-400 mt-0.5">—</span> Страх смерти или потери контроля</li>
+            <li class="flex gap-2"><span class="text-warm-400 mt-0.5">—</span> Ощущение нереальности происходящего</li>
+            <li class="flex gap-2"><span class="text-warm-400 mt-0.5">—</span> Страх «сойти с ума»</li>
+            <li class="flex gap-2"><span class="text-warm-400 mt-0.5">—</span> Избегание определённых мест</li>
+            <li class="flex gap-2"><span class="text-warm-400 mt-0.5">—</span> Постоянное ожидание нового приступа</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Signs: norm vs disorder -->
+  <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
+    <h2 class="font-display text-2xl sm:text-3xl text-sage-800 mb-4">Как понять, что тревога стала проблемой</h2>
+    <p class="text-warm-500 mb-10 max-w-2xl">
+      Не всякая тревога требует помощи специалиста. Вот как отличить нормальную тревогу
+      от состояния, когда пора обратиться к психологу.
+    </p>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <!-- Norm -->
+      <div class="p-6 sm:p-8 rounded-2xl bg-sage-50/80 border border-sage-200/50">
+        <div class="flex items-center gap-3 mb-5">
+          <div class="w-10 h-10 rounded-full bg-sage-200 flex items-center justify-center">
+            <svg class="w-5 h-5 text-sage-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+            </svg>
+          </div>
+          <h3 class="font-display text-sage-800 text-lg">Тревога в норме</h3>
+        </div>
+        <ul class="space-y-3 text-sm text-warm-600">
+          <li class="flex gap-2.5">
+            <span class="text-sage-500 flex-shrink-0">+</span>
+            <span>Вы тревожитесь перед конкретными событиями, и это проходит</span>
+          </li>
+          <li class="flex gap-2.5">
+            <span class="text-sage-500 flex-shrink-0">+</span>
+            <span>Общаетесь с близкими, ходите на работу, нормально спите</span>
+          </li>
+          <li class="flex gap-2.5">
+            <span class="text-sage-500 flex-shrink-0">+</span>
+            <span>У вас есть хобби и вещи, которые приносят радость</span>
+          </li>
+          <li class="flex gap-2.5">
+            <span class="text-sage-500 flex-shrink-0">+</span>
+            <span>Тревога не мешает, хотя и ощущается время от времени</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Beyond norm -->
+      <div class="p-6 sm:p-8 rounded-2xl bg-warm-50/80 border border-warm-200/50">
+        <div class="flex items-center gap-3 mb-5">
+          <div class="w-10 h-10 rounded-full bg-warm-200 flex items-center justify-center">
+            <svg class="w-5 h-5 text-warm-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+            </svg>
+          </div>
+          <h3 class="font-display text-warm-800 text-lg">Пора к специалисту</h3>
+        </div>
+        <ul class="space-y-3 text-sm text-warm-600">
+          <li class="flex gap-2.5">
+            <span class="text-warm-500 flex-shrink-0">!</span>
+            <span>Тревога не проходит и не связана с конкретными событиями</span>
+          </li>
+          <li class="flex gap-2.5">
+            <span class="text-warm-500 flex-shrink-0">!</span>
+            <span>Вы перестали выходить из дома, видеться с людьми, нормально спать</span>
+          </li>
+          <li class="flex gap-2.5">
+            <span class="text-warm-500 flex-shrink-0">!</span>
+            <span>Тревога диктует правила: куда ходить, что делать, чего избегать</span>
+          </li>
+          <li class="flex gap-2.5">
+            <span class="text-warm-500 flex-shrink-0">!</span>
+            <span>Панические атаки, навязчивые мысли, постоянное «накручивание»</span>
+          </li>
+          <li class="flex gap-2.5">
+            <span class="text-warm-500 flex-shrink-0">!</span>
+            <span>Тревога заменяет собой все остальные мысли и чувства</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="text-warm-500 text-sm mt-8">
+      Важно: человек не может сам себе поставить диагноз «тревожное расстройство».
+      Для этого нужен как минимум психолог, а если есть подозрения на клиническое
+      состояние — психиатр.
+    </p>
+  </section>
+
+  <!-- How I work with anxiety -->
+  <section class="bg-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
+      <h2 class="font-display text-2xl sm:text-3xl text-sage-800 mb-4">Как я работаю с тревогой</h2>
+      <p class="text-warm-500 mb-8 max-w-2xl">
+        Я работаю в подходе ACT — терапии принятия и ответственности.
+        Это один из самых исследованных и эффективных методов для работы с тревогой.
+      </p>
+
+      <div class="space-y-5 text-warm-600 leading-relaxed mb-10">
+        <p>
+          ACT начинает с честного разговора: <strong>полностью избавиться от тревоги
+          невозможно</strong>. И не нужно. Тревога — это нормальный ответ психики, который
+          сигнализирует: «Обрати внимание, что-то происходит». Если бы мы не чувствовали
+          тревогу, мы были бы в опасности.
+        </p>
+        <p>
+          Проблема не в самой тревоге, а в том, что мы с ней делаем. Попытки подавить,
+          заглушить, контролировать тревогу обычно только усиливают её. Это ловушка:
+          чем больше боретесь — тем сильнее тревога.
+        </p>
+        <p>
+          В ACT мы меняем не саму тревогу, а ваше отношение к ней. Когда вы научитесь
+          воспринимать тревогу как сигнал, а не как врага — она перестанет управлять
+          вашей жизнью.
+        </p>
+      </div>
+
+      <div class="space-y-4">
+        <h3 class="font-display text-sage-700 text-xl">Чему вы научитесь в терапии</h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {[
+            {
+              title: "Замечать, а не сливаться",
+              text: "Видеть тревожные мысли как мысли, а не как факты. Мысль «всё будет плохо» — это просто мысль.",
+            },
+            {
+              title: "Позволять, а не бороться",
+              text: "Позволять тревоге быть, не позволяя ей управлять вашими решениями и поведением.",
+            },
+            {
+              title: "Жить по ценностям",
+              text: "Действовать в соответствии со своими ценностями, а не по требованиям тревоги.",
+            },
+            {
+              title: "Быть в настоящем",
+              text: "Возвращаться в текущий момент вместо того, чтобы жить в тревожных сценариях будущего.",
+            },
+          ].map((item) => (
+            <div class="p-5 rounded-xl bg-sage-50/70 border border-sage-100/60">
+              <p class="font-medium text-sage-800 mb-2">{item.title}</p>
+              <p class="text-sm text-warm-500 leading-relaxed">{item.text}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <blockquote class="mt-10 pl-5 border-l-2 border-sage-300">
+        <p class="text-sage-700 italic font-display text-lg sm:text-xl leading-relaxed">
+          Это отличается от «просто расслабься» и «думай позитивно». Мы не боремся
+          с тревогой — мы учимся с ней жить. И даже быть ей благодарны за то,
+          что она подсвечивает важное.
+        </p>
+      </blockquote>
+    </div>
+  </section>
+
+  <!-- Why not just "relax" -->
+  <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
+    <h2 class="font-display text-2xl sm:text-3xl text-sage-800 mb-8">Почему не работает «просто перестать тревожиться»</h2>
+    <div class="space-y-5 text-warm-600 leading-relaxed">
+      <p>
+        Многие до обращения к психологу уже пробовали справиться с тревогой самостоятельно:
+        дыхательные упражнения, аффирмации, медитации, советы из интернета. Что-то помогало
+        временно, но тревога возвращалась.
+      </p>
+      <p>
+        Дело в том, что большинство «советов от тревоги» направлены на подавление
+        или контроль эмоций. А наш мозг устроен так, что попытка <em>не думать</em>
+        о чём-то заставляет думать об этом ещё больше. Попробуйте не думать о белом
+        медведе — и вы поймёте, о чём речь.
+      </p>
+      <p>
+        Именно поэтому ACT-терапия работает иначе. Мы не пытаемся убрать тревогу.
+        Мы учимся замечать её, позволять ей быть — и при этом делать то, что для вас
+        действительно важно. Тревога перестаёт быть хозяином ваших решений.
+      </p>
+    </div>
+  </section>
+
+  <!-- Psychologist vs psychiatrist -->
+  <section class="bg-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
+      <h2 class="font-display text-2xl sm:text-3xl text-sage-800 mb-8">Психолог или психиатр — к кому обратиться при тревоге</h2>
+      <div class="space-y-5 text-warm-600 leading-relaxed mb-8">
+        <p>
+          Этот вопрос задают очень часто. Короткий ответ: начните с психолога.
+          На первой встрече я помогу разобраться в вашем состоянии и при необходимости
+          порекомендую обращение к психиатру.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="p-6 rounded-xl bg-sage-50 border border-sage-100/60">
+          <h3 class="font-display text-sage-800 text-lg mb-3">Психолог</h3>
+          <ul class="space-y-2.5 text-sm text-warm-600">
+            <li class="flex gap-2.5">
+              <span class="text-sage-500 flex-shrink-0 mt-0.5">→</span>
+              <span>Работает с тревогой через психотерапию</span>
+            </li>
+            <li class="flex gap-2.5">
+              <span class="text-sage-500 flex-shrink-0 mt-0.5">→</span>
+              <span>Помогает понять механизмы тревоги</span>
+            </li>
+            <li class="flex gap-2.5">
+              <span class="text-sage-500 flex-shrink-0 mt-0.5">→</span>
+              <span>Учит новым способам взаимодействия с тревогой</span>
+            </li>
+            <li class="flex gap-2.5">
+              <span class="text-sage-500 flex-shrink-0 mt-0.5">→</span>
+              <span>Не назначает медикаменты</span>
+            </li>
+          </ul>
+        </div>
+        <div class="p-6 rounded-xl bg-warm-50 border border-warm-100/60">
+          <h3 class="font-display text-warm-800 text-lg mb-3">Психиатр</h3>
+          <ul class="space-y-2.5 text-sm text-warm-600">
+            <li class="flex gap-2.5">
+              <span class="text-warm-400 flex-shrink-0 mt-0.5">→</span>
+              <span>Ставит клинические диагнозы</span>
+            </li>
+            <li class="flex gap-2.5">
+              <span class="text-warm-400 flex-shrink-0 mt-0.5">→</span>
+              <span>Назначает медикаментозное лечение</span>
+            </li>
+            <li class="flex gap-2.5">
+              <span class="text-warm-400 flex-shrink-0 mt-0.5">→</span>
+              <span>Необходим при тяжёлых тревожных расстройствах</span>
+            </li>
+            <li class="flex gap-2.5">
+              <span class="text-warm-400 flex-shrink-0 mt-0.5">→</span>
+              <span>Часто работает в паре с психологом</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <p class="text-warm-500 text-sm mt-6">
+        Лучший результат часто даёт сочетание психотерапии и медикаментов.
+        Подробнее о разнице между специалистами — на странице частых вопросов (скоро).
+      </p>
+    </div>
+  </section>
+
+  <!-- For whom -->
+  <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
+    <h2 class="font-display text-2xl sm:text-3xl text-sage-800 mb-8">Для кого</h2>
+    <div class="bg-sage-50/80 rounded-2xl p-6 sm:p-8 space-y-4 text-warm-600 leading-relaxed border border-sage-100/50">
+      <p>
+        Я провожу индивидуальные онлайн-консультации для взрослых. Работаю с тревогой,
+        паническими атаками, тревожно-депрессивными состояниями.
+      </p>
+      <p>
+        Формат — видеозвонок, 60 минут. Стоимость — 5 000 ₽ за сессию.
+      </p>
+      <p>
+        Тревога часто связана с другими сложностями:
+        <a href="/rpp/" class="text-sage-600 underline decoration-sage-300 underline-offset-4 hover:decoration-sage-500 transition-colors">расстройствами пищевого поведения</a>,
+        <a href="/otnosheniya/" class="text-sage-600 underline decoration-sage-300 underline-offset-4 hover:decoration-sage-500 transition-colors">проблемами в отношениях</a>,
+        низкой самооценкой,
+        эмоциональным выгоранием.
+        На консультации мы разберёмся с полной картиной.
+      </p>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="bg-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
+      <h2 class="font-display text-2xl sm:text-3xl text-sage-800 mb-4">Частые вопросы о тревоге</h2>
+      <p class="text-warm-500 mb-8">
+        Ответы на вопросы, которые чаще всего задают клиенты перед первой консультацией.
+      </p>
+      <div class="space-y-4">
+        {faqItems.map((item) => (
+          <details class="group border border-sage-200 rounded-xl overflow-hidden">
+            <summary class="flex justify-between items-center cursor-pointer p-5 sm:p-6 bg-sage-50/50 hover:bg-sage-50 transition-colors">
+              <span class="font-medium text-sage-800 text-sm sm:text-base pr-4">{item.question}</span>
+              <svg class="w-5 h-5 text-sage-400 transition-transform group-open:rotate-180 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+            </summary>
+            <div class="p-5 sm:p-6 pt-0 sm:pt-0 text-warm-600 text-sm leading-relaxed">
+              {item.answer}
+            </div>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Related topics -->
+  <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <p class="text-warm-400 text-sm mb-4">Связанные темы:</p>
+    <div class="flex flex-wrap gap-3">
+      <a href="/rpp/" class="text-sm text-sage-600 bg-sage-50 px-4 py-2 rounded-full hover:bg-sage-100 transition-colors border border-sage-100/60">
+        Расстройства пищевого поведения
+      </a>
+      <a href="/otnosheniya/" class="text-sm text-sage-600 bg-sage-50 px-4 py-2 rounded-full hover:bg-sage-100 transition-colors border border-sage-100/60">
+        Отношения и расставания
+      </a>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <CTA
+      title="Тревога не должна управлять вашей жизнью"
+      subtitle="Запишитесь на первую сессию — вместе разберёмся, что стоит за вашей тревогой и как вернуть себе спокойствие."
+    />
+  </section>
+</Base>
