@@ -55,13 +55,21 @@ const professionalServiceSchema = {
             Онлайн-консультации для взрослых
           </div>
 
-          <h1 class="font-display font-medium text-sage-900 leading-[1.1] mb-4 sm:mb-6 text-balance" style={`font-size: var(--text-fluid-4xl);`}>
+          <h1 class="font-display font-medium text-sage-900 leading-[1.1] mb-4 sm:mb-5 text-balance" style={`font-size: var(--text-fluid-4xl);`}>
             Здесь можно
             <span class="italic text-sage-600"> просто быть.</span>
           </h1>
 
+          <div class="flex flex-wrap gap-2 mb-5 sm:mb-6">
+            {["Магистр психологии", "Клинический психолог", "Экзистенциальный терапевт", "Логотерапевт", "ACT-терапевт"].map((tag) => (
+              <span class="px-3 py-1 rounded-full bg-sage-50 text-sage-600 text-xs font-medium border border-sage-100">
+                {tag}
+              </span>
+            ))}
+          </div>
+
           <p class="text-warm-500 leading-relaxed mb-6 sm:mb-10 max-w-md text-pretty text-base sm:text-lg">
-            Я Ирина Дербичева — клинический психолог, ACT-терапевт. Провожу индивидуальные консультации онлайн.
+            Я Ирина Дербичева. Сопровождаю людей в поиске ответов на важные жизненные вопросы — в диалоге о свободе, ответственности и личных смыслах.
           </p>
 
           <div class="flex flex-col sm:flex-row gap-3">
@@ -221,8 +229,9 @@ const professionalServiceSchema = {
           </div>
           <div class="min-w-0">
             <p class="text-sage-500 text-xs font-medium tracking-wide uppercase mb-1">Высшее образование</p>
-            <p class="font-semibold text-sage-800 leading-snug" style="font-size: clamp(0.95rem, 0.5vw + 0.85rem, 1.1rem);">Магистр психологии (37.04.01)</p>
-            <p class="text-warm-500 text-sm mt-1.5">Московский институт психоанализа · 2026</p>
+            <p class="font-semibold text-sage-800 leading-snug" style="font-size: clamp(0.95rem, 0.5vw + 0.85rem, 1.1rem);">Магистр психологии</p>
+            <p class="text-warm-600 text-sm mt-1">Экзистенциальная психология личности и логотерапия</p>
+            <p class="text-warm-500 text-xs mt-1.5">Московский институт психоанализа · 2026</p>
           </div>
         </div>
       </div>
@@ -230,6 +239,7 @@ const professionalServiceSchema = {
       <!-- Continuing education -->
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5 max-w-4xl mx-auto">
         {[
+          { name: "Психологическое консультирование и диагностика личности", school: "Московский институт психоанализа", hours: "1590 ч.", year: "2020" },
           { name: "Клиническая психология, неврачебная психотерапия", school: "ИТГИПП", hours: "650 ч.", year: "2022" },
           { name: "Терапия принятием и ответственностью (ACT)", school: "МГУ", hours: "178 ч.", year: "2024" },
           { name: "Психология нарушений пищевого поведения", school: "АНО ДПО «НАДПО»", hours: "230 ч.", year: "2021" },
