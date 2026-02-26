@@ -199,6 +199,22 @@ const navLinks = [
       document.getElementById('mobile-menu-btn')?.addEventListener('click', () => {
         document.getElementById('mobile-menu')?.classList.toggle('hidden');
       });
+
+      // Scroll reveal
+      var revealEls = document.querySelectorAll('.reveal, .reveal-stagger');
+      if (revealEls.length && 'IntersectionObserver' in window) {
+        var io = new IntersectionObserver(function(entries) {
+          entries.forEach(function(e) {
+            if (e.isIntersecting) {
+              e.target.classList.add('is-visible');
+              io.unobserve(e.target);
+            }
+          });
+        }, { threshold: 0.15 });
+        revealEls.forEach(function(el) { io.observe(el); });
+      } else {
+        revealEls.forEach(function(el) { el.classList.add('is-visible'); });
+      }
     </script>
   </body>
 </html>

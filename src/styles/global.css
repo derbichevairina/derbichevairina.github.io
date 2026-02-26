@@ -99,3 +99,49 @@
     display: none !important;
   }
 }
+
+/* === Scroll reveal animation === */
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(1.5rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.reveal {
+  opacity: 0;
+}
+
+.reveal.is-visible {
+  animation: fade-in-up 0.6s var(--ease-fluid) forwards;
+}
+
+/* Stagger children when parent has .reveal-stagger */
+.reveal-stagger.is-visible > * {
+  opacity: 0;
+  animation: fade-in-up 0.5s var(--ease-fluid) forwards;
+}
+
+.reveal-stagger.is-visible > *:nth-child(1) { animation-delay: 0ms; }
+.reveal-stagger.is-visible > *:nth-child(2) { animation-delay: 60ms; }
+.reveal-stagger.is-visible > *:nth-child(3) { animation-delay: 120ms; }
+.reveal-stagger.is-visible > *:nth-child(4) { animation-delay: 180ms; }
+.reveal-stagger.is-visible > *:nth-child(5) { animation-delay: 240ms; }
+.reveal-stagger.is-visible > *:nth-child(6) { animation-delay: 300ms; }
+.reveal-stagger.is-visible > *:nth-child(7) { animation-delay: 360ms; }
+.reveal-stagger.is-visible > *:nth-child(8) { animation-delay: 420ms; }
+.reveal-stagger.is-visible > *:nth-child(9) { animation-delay: 480ms; }
+.reveal-stagger.is-visible > *:nth-child(10) { animation-delay: 540ms; }
+
+/* Respect prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .reveal-stagger > * {
+    opacity: 1 !important;
+    animation: none !important;
+  }
+}

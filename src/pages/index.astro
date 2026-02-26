@@ -51,7 +51,6 @@ const professionalServiceSchema = {
         <!-- Text -->
         <div class="max-w-xl order-2 lg:order-1">
           <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-sage-100/80 text-sage-700 text-xs font-medium mb-4 sm:mb-6 backdrop-blur-sm">
-            <span class="w-1.5 h-1.5 rounded-full bg-sage-500"></span>
             Онлайн-консультации для взрослых
           </div>
 
@@ -60,7 +59,11 @@ const professionalServiceSchema = {
             <span class="italic text-sage-600"> просто быть.</span>
           </h1>
 
-          <div class="flex flex-wrap gap-2 mb-5 sm:mb-6">
+          <p class="text-warm-600 leading-relaxed mb-5 sm:mb-6 max-w-md text-pretty text-base sm:text-lg">
+            Я Ирина Дербичева, клинический психолог. Сопровождаю людей в поиске ответов на важные жизненные вопросы — в диалоге о свободе, ответственности и личных смыслах.
+          </p>
+
+          <div class="flex flex-wrap gap-2 mb-6 sm:mb-8">
             {["Магистр психологии", "Клинический психолог", "Экзистенциальный терапевт", "Логотерапевт", "ACT-терапевт"].map((tag) => (
               <span class="px-3 py-1 rounded-full bg-sage-50 text-sage-600 text-xs font-medium border border-sage-100">
                 {tag}
@@ -68,11 +71,7 @@ const professionalServiceSchema = {
             ))}
           </div>
 
-          <p class="text-warm-500 leading-relaxed mb-6 sm:mb-10 max-w-md text-pretty text-base sm:text-lg">
-            Я Ирина Дербичева. Сопровождаю людей в поиске ответов на важные жизненные вопросы — в диалоге о свободе, ответственности и личных смыслах.
-          </p>
-
-          <div class="flex flex-col sm:flex-row gap-3">
+          <div class="flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-5">
             <a
               href="#booking"
               class="inline-flex items-center justify-center gap-2.5 bg-sage-600 text-white px-6 sm:px-8 py-3.5 sm:py-4 rounded-full text-sm sm:text-base font-medium hover:bg-sage-700 hover:shadow-glow active:scale-[0.98] transition-all duration-300 ease-fluid"
@@ -81,7 +80,7 @@ const professionalServiceSchema = {
             </a>
             <a
               href="#about"
-              class="inline-flex items-center justify-center gap-2 text-sage-600 px-6 sm:px-8 py-3.5 sm:py-4 rounded-full text-sm sm:text-base font-medium border border-sage-200 hover:border-sage-400 hover:bg-sage-50/50 active:scale-[0.98] transition-all duration-300 ease-fluid"
+              class="inline-flex items-center gap-1.5 text-sage-600 text-sm sm:text-base font-medium hover:text-sage-700 transition-colors duration-300"
             >
               Узнать больше
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
@@ -113,24 +112,34 @@ const professionalServiceSchema = {
 
   <!-- Topics -->
   <section style={`padding-top: var(--spacing-fluid-section); padding-bottom: var(--spacing-fluid-section);`}>
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-10 sm:mb-14">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-8 sm:mb-10 reveal">
         <h2 class="font-display text-sage-800 mb-4 text-balance" style={`font-size: var(--text-fluid-3xl);`}>С чем я работаю</h2>
-        <p class="text-warm-500 max-w-xl mx-auto text-pretty" style={`font-size: var(--text-fluid-base);`}>
+        <p class="text-warm-600 max-w-xl mx-auto text-pretty" style={`font-size: var(--text-fluid-base);`}>
           Каждый человек уникален. Я помогаю найти свой путь к гармонии через научно обоснованные подходы.
         </p>
       </div>
-      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4">
-        <TopicCard title="Тревога и панические атаки" href="/trevoga/" icon="🌊" />
-        <TopicCard title="Расстройства пищевого поведения" href="/rpp/" icon="🍃" />
-        <TopicCard title="Отношения и расставания" href="/otnosheniya/" icon="💬" />
-        <TopicCard title="Самооценка и уверенность" href="/#about" icon="🪞" />
-        <TopicCard title="Эмоциональное выгорание" href="/#about" icon="🔥" />
-        <TopicCard title="Сепарация от родителей" href="/#about" icon="🌱" />
-        <TopicCard title="Потеря близкого" href="/#about" icon="🕊️" />
-        <TopicCard title="Депрессивные состояния" href="/#about" icon="🌧️" />
-        <TopicCard title="Трудности выбора" href="/#about" icon="🔀" />
-        <TopicCard title="Поиск своего дела" href="/#about" icon="🧭" />
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-1 reveal-stagger">
+        <TopicCard title="Тревога и панические атаки" href="/trevoga/"
+          iconPath='<polyline points="2 12 6 12 9 4 12 20 15 4 18 12 22 12" />' />
+        <TopicCard title="Расстройства пищевого поведения" href="/rpp/"
+          iconPath='<path d="M12 3C8 7 6 11 6 15a6 6 0 0012 0c0-4-2-8-6-12z" /><path d="M12 9v12" />' />
+        <TopicCard title="Отношения и расставания" href="/otnosheniya/"
+          iconPath='<path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z" />' />
+        <TopicCard title="Самооценка и уверенность" href="/#about"
+          iconPath='<path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z" />' />
+        <TopicCard title="Эмоциональное выгорание" href="/#about"
+          iconPath='<path d="M13 2L3 14h9l-1 8 10-12h-9z" />' />
+        <TopicCard title="Сепарация от родителей" href="/#about"
+          iconPath='<path d="M12 22v-8" /><path d="M12 14C8 14 5 11 5 7c7 0 7 3 7 7z" /><path d="M12 10c4 0 7-3 7-7-7 0-7 3-7 7z" />' />
+        <TopicCard title="Потеря близкого" href="/#about"
+          iconPath='<path d="M12 2c-2 3-3 5-3 7a3 3 0 006 0c0-2-1-4-3-7z" /><line x1="12" y1="12" x2="12" y2="20" /><line x1="8" y1="20" x2="16" y2="20" />' />
+        <TopicCard title="Депрессивные состояния" href="/#about"
+          iconPath='<path d="M20 17.58A5 5 0 0018 8h-1.26A8 8 0 104 16.25" /><line x1="8" y1="16" x2="8" y2="20" /><line x1="12" y1="16" x2="12" y2="20" /><line x1="16" y1="16" x2="16" y2="20" />' />
+        <TopicCard title="Трудности выбора" href="/#about"
+          iconPath='<path d="M12 2v10" /><path d="M5 22l7-10" /><path d="M19 22l-7-10" />' />
+        <TopicCard title="Поиск своего дела" href="/#about"
+          iconPath='<circle cx="12" cy="12" r="10" /><path d="M16.24 7.76l-2.12 6.36-6.36 2.12 2.12-6.36z" />' />
       </div>
     </div>
   </section>
@@ -139,7 +148,7 @@ const professionalServiceSchema = {
   <section id="about" class="relative">
     <div class="absolute inset-0 bg-gradient-to-b from-white via-white to-warm-50/50"></div>
     <div class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8" style={`padding-top: var(--spacing-fluid-section); padding-bottom: var(--spacing-fluid-section);`}>
-      <div class="grid grid-cols-1 lg:grid-cols-5 gap-10 lg:gap-16 items-start">
+      <div class="grid grid-cols-1 lg:grid-cols-5 gap-10 lg:gap-16 items-start reveal">
         <div class="lg:col-span-3">
           <p class="text-sage-500 text-sm font-medium tracking-wide uppercase mb-3">Обо мне</p>
           <h2 class="font-display text-sage-800 mb-8" style={`font-size: var(--text-fluid-3xl);`}>Клинический психолог</h2>
@@ -191,21 +200,21 @@ const professionalServiceSchema = {
   <!-- How it works -->
   <section style={`padding-top: var(--spacing-fluid-section); padding-bottom: var(--spacing-fluid-section);`}>
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-10 sm:mb-14">
+      <div class="text-center mb-10 sm:mb-14 reveal">
         <p class="text-sage-500 text-sm font-medium tracking-wide uppercase mb-3">Формат работы</p>
         <h2 class="font-display text-sage-800 text-balance" style={`font-size: var(--text-fluid-3xl);`}>Как проходит первая сессия</h2>
       </div>
 
-      <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 max-w-4xl mx-auto">
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 max-w-4xl mx-auto reveal-stagger">
         {[
           { step: "01", title: "Знакомство", text: "Встреча проходит онлайн, по видеосвязи. Вы рассказываете о себе и о том, что вас привело." },
           { step: "02", title: "Понимание", text: "Я расскажу, чем могу быть полезна, и отвечу на все ваши вопросы. Встреча длится 60 минут." },
           { step: "03", title: "Решение", text: "Встреча ни к чему не обязывает. Мы вместе решим, подходим ли друг другу для дальнейшей работы." },
         ].map((item) => (
           <div class="relative p-6 sm:p-8 rounded-2xl bg-white border border-sage-100/80 hover:shadow-soft transition-shadow duration-300">
-            <span class="font-display text-4xl sm:text-5xl font-bold text-sage-100">{item.step}</span>
+            <span class="font-display text-4xl sm:text-5xl font-bold text-sage-200">{item.step}</span>
             <h3 class="font-display text-sage-800 mt-2 mb-3" style={`font-size: var(--text-fluid-xl);`}>{item.title}</h3>
-            <p class="text-warm-500 leading-relaxed text-sm sm:text-base">{item.text}</p>
+            <p class="text-warm-600 leading-relaxed text-sm sm:text-base">{item.text}</p>
           </div>
         ))}
       </div>
@@ -216,13 +225,13 @@ const professionalServiceSchema = {
   <section class="relative">
     <div class="absolute inset-0 bg-gradient-to-b from-warm-50/50 via-white to-warm-50"></div>
     <div class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8" style={`padding-top: var(--spacing-fluid-section); padding-bottom: var(--spacing-fluid-section);`}>
-      <div class="text-center mb-10 sm:mb-14">
+      <div class="text-center mb-10 sm:mb-14 reveal">
         <p class="text-sage-500 text-sm font-medium tracking-wide uppercase mb-3">Квалификация</p>
         <h2 class="font-display text-sage-800 text-balance" style={`font-size: var(--text-fluid-3xl);`}>Образование и повышение квалификации</h2>
       </div>
 
       <!-- Master's degree -->
-      <div class="max-w-4xl mx-auto mb-4 sm:mb-5">
+      <div class="max-w-4xl mx-auto mb-4 sm:mb-5 reveal">
         <div class="flex gap-4 sm:gap-5 p-6 sm:p-7 rounded-xl bg-white border border-sage-200 shadow-soft">
           <div class="flex-shrink-0 w-12 h-12 rounded-lg bg-sage-600 flex items-center justify-center">
             <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.697 50.697 0 0112 13.489a50.702 50.702 0 017.74-3.342M6.75 15a.75.75 0 100-1.5.75.75 0 000 1.5zm0 0v-3.675A55.378 55.378 0 0112 8.443m-7.007 11.55A5.981 5.981 0 006.75 15.75v-1.5" /></svg>
@@ -237,7 +246,7 @@ const professionalServiceSchema = {
       </div>
 
       <!-- Continuing education -->
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5 max-w-4xl mx-auto">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5 max-w-4xl mx-auto reveal-stagger">
         {[
           { name: "Психологическое консультирование и диагностика личности", school: "Московский институт психоанализа", hours: "1590 ч.", year: "2020" },
           { name: "Клиническая психология, неврачебная психотерапия", school: "ИТГИПП", hours: "650 ч.", year: "2022" },
@@ -266,7 +275,7 @@ const professionalServiceSchema = {
       <div class="text-center mb-8 sm:mb-10">
         <p class="text-sage-500 text-sm font-medium tracking-wide uppercase mb-3">Запись</p>
         <h2 class="font-display text-sage-800 text-balance" style={`font-size: var(--text-fluid-3xl);`}>Запись на встречу</h2>
-        <p class="text-warm-500 max-w-lg mx-auto mt-4 text-pretty">
+        <p class="text-warm-600 max-w-lg mx-auto mt-4 text-pretty">
           Выберите подходящие дату и время, и я свяжусь с вами для подтверждения.
         </p>
       </div>
