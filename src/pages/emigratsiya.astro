@@ -1,0 +1,350 @@
+---
+import Base from '../layouts/Base.astro';
+import CTA from '../components/CTA.astro';
+
+const faqItems = [
+  {
+    question: "Сколько длится адаптация в новой стране?",
+    answer: "Не существует точного срока, который подходил бы всем. Это очень индивидуальный процесс, зависящий от множества факторов: вашей личности, страны переезда, наличия поддержки. Некоторые исследования говорят о периоде от двух до четырёх лет, но для кого-то он может быть короче или длиннее. Важнее не скорость, а качество этого процесса — возможность проживать его осознанно, не застревая в кризисе.",
+  },
+  {
+    question: "Нормально ли хотеть вернуться?",
+    answer: "Абсолютно нормально. Мысли о возвращении — это естественная реакция на стресс, тоска по знакомому и безопасному. Особенно часто они возникают в кризисной фазе адаптации. Важно понимать, что это желание не обязательно означает, что вы совершили ошибку. Это может быть проявлением скорби по утраченной жизни — и эту скорбь важно прожить.",
+  },
+  {
+    question: "Как понять — это адаптация или депрессия?",
+    answer: "Грусть, тревога, апатия — частые спутники адаптации. Однако при депрессии эти состояния становятся всеобъемлющими. Ключевое отличие — неспособность получать удовольствие от чего бы то ни было. Если вы не только тоскуете по дому, но и потеряли интерес ко всему, что раньше радовало, если нарушен сон и аппетит — это повод обратиться к специалисту для диагностики.",
+  },
+  {
+    question: "Я переехал давно, но до сих пор тяжело — это нормально?",
+    answer: "Да, и такое случается нередко. Иногда мы «застреваем» на одной из стадий адаптации, не прожив её до конца. Новые жизненные кризисы — потеря работы, разрыв отношений — тоже могут обострить чувство чужеродности. Работать с этим можно и нужно на любом этапе.",
+  },
+  {
+    question: "Как проходит онлайн-консультация?",
+    answer: "Это полноценная терапевтическая сессия по видеосвязи, 60 минут. Всё, что вам нужно — стабильный интернет и уединённое место. Первая встреча — это знакомство: вы рассказываете о своей ситуации, я объясняю, как могу помочь. Онлайн-формат так же эффективен, как очный — это подтверждено исследованиями.",
+  },
+];
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqItems.map(item => ({
+    "@type": "Question",
+    "name": item.question,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": item.answer,
+    },
+  })),
+};
+---
+
+<Base
+  title="Эмиграция и адаптация — помощь психолога онлайн | Ирина Дербичева"
+  description="Психологическая помощь при эмиграции и адаптации в новой стране. Русскоязычный психолог онлайн для эмигрантов. Тоска по родине, культурный шок, кризис идентичности."
+  canonicalUrl="https://psyholog-irina.ru/emigratsiya/"
+>
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+
+  <!-- Hero -->
+  <section class="relative overflow-hidden">
+    <div class="absolute top-10 -right-32 w-96 h-96 bg-sage-200/30 rounded-full blur-3xl"></div>
+    <div class="absolute -bottom-20 left-0 w-80 h-80 bg-warm-200/20 rounded-full blur-3xl"></div>
+
+    <div class="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
+      <nav class="text-sm text-warm-400 mb-8">
+        <a href="/" class="hover:text-sage-600 transition-colors">Главная</a>
+        <span class="mx-2">/</span>
+        <span class="text-warm-600">Эмиграция и адаптация</span>
+      </nav>
+
+      <h1 class="font-display text-3xl sm:text-4xl lg:text-5xl font-medium text-sage-900 leading-tight mb-6 text-balance">
+        Эмиграция и адаптация в новой стране — помощь психолога онлайн
+      </h1>
+      <p class="text-lg sm:text-xl text-warm-600 leading-relaxed max-w-2xl text-pretty">
+        Если вы переехали и вместо ожидаемой лёгкости чувствуете растерянность,
+        тоску и одиночество — это нормальная часть пути. Трудности адаптации
+        не означают, что вы приняли неверное решение. Они говорят о том, что ваша
+        психика проходит через сложный процесс перестройки.
+      </p>
+    </div>
+  </section>
+
+  <!-- Recognition block -->
+  <section class="bg-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
+      <h2 class="font-display text-2xl sm:text-3xl text-sage-800 mb-8">Вам знакомо это?</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        {[
+          "Вы чувствуете себя чужим, даже когда окружены людьми — и скучаете по ощущению, что вы «свой»",
+          "Вы постоянно сравниваете новую жизнь с прошлой — и сравнение часто не в пользу настоящего",
+          "Вы устали от необходимости объяснять простые вещи и чувствовать себя неловко из-за языка",
+          "Вы шутите — но никто не смеётся, потому что культурный код другой",
+          "Вы задаёте себе вопрос «а стоило ли оно того?» и не находите ответа, который бы успокоил",
+          "Вы скучаете по людям, местам и ощущениям, которых больше нет в вашей жизни",
+        ].map((item) => (
+          <div class="flex gap-3 p-4 bg-sage-50 rounded-xl">
+            <div class="flex-shrink-0 w-6 h-6 rounded-full bg-sage-200 flex items-center justify-center mt-0.5">
+              <svg class="w-3.5 h-3.5 text-sage-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
+              </svg>
+            </div>
+            <span class="text-warm-700 text-sm">{item}</span>
+          </div>
+        ))}
+      </div>
+      <p class="text-warm-500 text-sm mt-6">
+        Если вы узнали себя — вы не одиноки. Через это проходят миллионы людей, сменивших страну.
+        И с этим можно работать.
+      </p>
+    </div>
+  </section>
+
+  <!-- What happens during relocation -->
+  <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
+    <h2 class="font-display text-2xl sm:text-3xl text-sage-800 mb-8">Что происходит при переезде</h2>
+    <div class="space-y-5 text-warm-600 leading-relaxed">
+      <p>
+        Переезд — не одномоментное событие, а длительный процесс, который психологи
+        описывают как «культурный шок». Он редко бывает таким, каким мы его себе
+        представляем. У этого процесса есть свои стадии, и почти каждый эмигрант
+        проходит через них.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+      <div class="bg-sage-50 rounded-2xl p-6">
+        <h3 class="font-display text-lg text-sage-800 mb-3">«Медовый месяц»</h3>
+        <p class="text-warm-600 text-sm leading-relaxed">
+          Эйфория от новизны — всё кажется интересным и прекрасным. Вы полны
+          энергии и оптимизма, а трудности воспринимаются как временные приключения.
+        </p>
+      </div>
+      <div class="bg-warm-50 rounded-2xl p-6 border border-warm-200">
+        <h3 class="font-display text-lg text-warm-800 mb-3">Кризис</h3>
+        <p class="text-warm-600 text-sm leading-relaxed">
+          Новизна уходит, а бытовые, языковые и культурные проблемы остаются.
+          Накапливается усталость, раздражение, одиночество. Именно здесь
+          чаще всего возникает тоска по дому и сомнения.
+        </p>
+      </div>
+      <div class="bg-sage-50 rounded-2xl p-6">
+        <h3 class="font-display text-lg text-sage-800 mb-3">Восстановление</h3>
+        <p class="text-warm-600 text-sm leading-relaxed">
+          Если кризис прожит и осмыслен, наступает адаптация. Вы начинаете
+          понимать местную культуру, находите свой круг, выстраиваете рутину.
+          Жизнь обретает новую стабильность.
+        </p>
+      </div>
+    </div>
+
+    <p class="text-warm-500 text-sm mt-8">
+      Многие думают, что адаптировались, — а через полгода-год «накрывает» снова.
+      Это нормально. Адаптация не линейна, и откаты — часть процесса.
+    </p>
+  </section>
+
+  <!-- Loss of familiar world -->
+  <section class="bg-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
+      <h2 class="font-display text-2xl sm:text-3xl text-sage-800 mb-8">Потеря привычного мира</h2>
+      <div class="space-y-5 text-warm-600 leading-relaxed">
+        <p>
+          Эмиграция — это не только приобретение нового, но и потеря старого.
+          И речь не только о конкретных людях или местах. Мы теряем привычный мир,
+          в котором были понятны без слов. Теряем общий культурный код, сотканный
+          из сотен мелочей: общих книг, песен, исторических событий, шуток.
+        </p>
+        <p>
+          Это проявляется в мелочах: вы цитируете фразу из любимого с детства
+          фильма, а в ответ видите лишь недоумение. В этот момент вы особенно
+          остро ощущаете, как много осталось «там» — в мире, понятном без перевода.
+        </p>
+        <p>
+          Эта утрата может ощущаться как потеря части себя. Ведь наша идентичность
+          во многом опирается на окружение — на то, как нас видят и понимают другие.
+          Когда эти «зеркала» исчезают, возникает закономерный вопрос:
+          «А кто я теперь?». Это
+          <a href="/trevoga/" class="text-sage-600 underline decoration-sage-300 underline-offset-4 hover:decoration-sage-500 transition-colors">тревога</a>,
+          с которой можно работать.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- The eternal question -->
+  <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
+    <h2 class="font-display text-2xl sm:text-3xl text-sage-800 mb-8">«А правильно ли я поступил?»</h2>
+    <div class="space-y-5 text-warm-600 leading-relaxed">
+      <p>
+        Этот вопрос — один из самых мучительных для эмигранта. Он возникает
+        в моменты усталости и ностальгии. Он подпитывается чувством вины перед
+        теми, кто остался, и тоской по идеализированному прошлому.
+      </p>
+      <p>
+        Наша память избирательна. В трудные минуты в новой стране мы склонны
+        вспоминать только хорошее из прежней жизни, забывая о причинах,
+        которые побудили к переезду. В трудные моменты настоящее часто проигрывает
+        прошлому — потому что прошлое мы склонны приукрашивать.
+      </p>
+      <p>
+        Работа с этим вопросом — не поиск единственно верного ответа.
+        Это путь к принятию своего решения со всеми его последствиями —
+        и возможность перестать тратить силы на сомнения и направить их
+        на строительство жизни здесь и сейчас.
+      </p>
+    </div>
+
+    <div class="bg-warm-50 rounded-2xl p-6 sm:p-8 mt-8 border border-warm-200">
+      <h3 class="font-display text-lg text-sage-800 mb-4">С чем ещё сталкиваются эмигранты</h3>
+      <ul class="space-y-3 text-warm-600 text-sm">
+        <li class="flex gap-3">
+          <span class="text-sage-500 font-medium">→</span>
+          <span>Конфликты в паре из-за переезда — разные темпы адаптации, разные ожидания</span>
+        </li>
+        <li class="flex gap-3">
+          <span class="text-sage-500 font-medium">→</span>
+          <span>Потеря профессиональной идентичности — «я был успешным специалистом, а тут никто»</span>
+        </li>
+        <li class="flex gap-3">
+          <span class="text-sage-500 font-medium">→</span>
+          <span>
+            <a href="/trevoga/" class="text-sage-600 underline decoration-sage-300 underline-offset-4 hover:decoration-sage-500 transition-colors">Тревога</a>
+            за близких на родине, за будущее, за легализацию
+          </span>
+        </li>
+        <li class="flex gap-3">
+          <span class="text-sage-500 font-medium">→</span>
+          <span>Вынужденная сепарация от родителей и близких</span>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- How I help -->
+  <section class="bg-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
+      <h2 class="font-display text-2xl sm:text-3xl text-sage-800 mb-4">Как я помогаю</h2>
+      <p class="text-warm-600 mb-8 max-w-2xl">
+        Я сама живу в постоянных переездах и понимаю тему адаптации не только
+        по учебникам. В зависимости от того, на каком этапе вы находитесь,
+        мы работаем в разных направлениях.
+      </p>
+
+      <div class="space-y-6">
+        <div class="border border-sage-200 rounded-2xl p-6">
+          <h3 class="font-display text-lg text-sage-800 mb-3">
+            Экзистенциальная терапия — когда старые смыслы рухнули
+          </h3>
+          <p class="text-warm-600 text-sm leading-relaxed">
+            Когда привычный мир разрушен, а новый ещё не построен, мы вместе
+            исследуем ваши смыслы и то, что по-настоящему важно. Этот подход
+            помогает найти опору внутри себя в период неопределённости
+            и ответить на вопросы «Кто я?» и «Зачем я здесь?».
+          </p>
+        </div>
+        <div class="border border-sage-200 rounded-2xl p-6">
+          <h3 class="font-display text-lg text-sage-800 mb-3">
+            Логотерапия — когда вы боретесь с реальностью, которую не выбирали
+          </h3>
+          <p class="text-warm-600 text-sm leading-relaxed">
+            Подход Виктора Франкла помогает принять неизбежные изменения и найти
+            в них личный смысл. Перестать тратить силы на борьбу с тем,
+            что нельзя изменить, и направить их на то, что в вашей власти.
+          </p>
+        </div>
+        <div class="border border-sage-200 rounded-2xl p-6">
+          <h3 class="font-display text-lg text-sage-800 mb-3">
+            ACT-терапия — когда нужно строить жизнь, не дожидаясь, пока станет легко
+          </h3>
+          <p class="text-warm-600 text-sm leading-relaxed">
+            Этот подход учит не откладывать жизнь на «потом», когда пройдёт
+            боль или наступит стабильность. Мы находим то, что важно для вас
+            именно сейчас, и учимся делать маленькие, но значимые шаги
+            в этом направлении, даже если обстоятельства далеки от идеальных.
+          </p>
+        </div>
+      </div>
+
+      <div class="bg-sage-50 rounded-2xl p-6 sm:p-8 mt-8">
+        <p class="text-warm-600 leading-relaxed italic">
+          «Эмигранты задают те же вопросы, что и все, — но за каждым из них
+          стоит постоянное ощущение потери: языка, культурного кода, привычного мира.
+          Задача терапии — не вернуть старую жизнь, а помочь выстроить новую жизнь
+          в контакте с собой и своими ценностями.»
+        </p>
+        <p class="text-warm-400 text-sm mt-3">— Ирина Дербичева</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- For whom -->
+  <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
+    <h2 class="font-display text-2xl sm:text-3xl text-sage-800 mb-8">Для кого</h2>
+    <div class="bg-sage-50/80 rounded-2xl p-6 sm:p-8 space-y-4 text-warm-600 leading-relaxed border border-sage-100/50">
+      <p>
+        Я работаю с русскоязычными взрослыми, которые живут в любой стране мира
+        и сталкиваются с трудностями адаптации, поиска себя и новых смыслов
+        после переезда.
+      </p>
+      <p>
+        Формат — индивидуальные онлайн-консультации по видеосвязи, 60 минут.
+        Стоимость — 5 000 ₽ за сессию.
+      </p>
+      <p>
+        Проблемы эмиграции часто переплетаются с другими сложностями:
+        <a href="/trevoga/" class="text-sage-600 underline decoration-sage-300 underline-offset-4 hover:decoration-sage-500 transition-colors">тревогой</a>,
+        <a href="/otnosheniya/" class="text-sage-600 underline decoration-sage-300 underline-offset-4 hover:decoration-sage-500 transition-colors">проблемами в отношениях</a>,
+        <a href="/rpp/" class="text-sage-600 underline decoration-sage-300 underline-offset-4 hover:decoration-sage-500 transition-colors">расстройствами пищевого поведения</a>.
+        На консультации мы начнём разбираться с полной картиной.
+      </p>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="bg-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
+      <h2 class="font-display text-2xl sm:text-3xl text-sage-800 mb-4">Частые вопросы</h2>
+      <p class="text-warm-600 mb-8">
+        Ответы на вопросы, которые чаще всего задают клиенты, переехавшие в другую страну.
+      </p>
+      <div class="space-y-4">
+        {faqItems.map((item) => (
+          <details class="group border border-sage-200 rounded-xl overflow-hidden">
+            <summary class="flex justify-between items-center cursor-pointer p-5 sm:p-6 bg-sage-50/50 hover:bg-sage-50 transition-colors">
+              <span class="font-medium text-sage-800 text-sm sm:text-base pr-4">{item.question}</span>
+              <svg class="w-5 h-5 text-sage-400 transition-transform group-open:rotate-180 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+            </summary>
+            <div class="p-5 sm:p-6 pt-0 sm:pt-0 text-warm-600 text-sm leading-relaxed">
+              {item.answer}
+            </div>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Related topics -->
+  <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <p class="text-warm-400 text-sm mb-4">Связанные темы:</p>
+    <div class="flex flex-wrap gap-3">
+      <a href="/trevoga/" class="text-sm text-sage-600 bg-sage-50 px-4 py-2 rounded-full hover:bg-sage-100 transition-colors border border-sage-100/60">
+        Тревога и панические атаки
+      </a>
+      <a href="/otnosheniya/" class="text-sm text-sage-600 bg-sage-50 px-4 py-2 rounded-full hover:bg-sage-100 transition-colors border border-sage-100/60">
+        Отношения и расставания
+      </a>
+      <a href="/rpp/" class="text-sm text-sage-600 bg-sage-50 px-4 py-2 rounded-full hover:bg-sage-100 transition-colors border border-sage-100/60">
+        Расстройства пищевого поведения
+      </a>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <CTA
+      title="Переезд — не конец истории, а начало новой"
+      subtitle="Запишитесь на первую сессию — вместе разберёмся, что происходит и как с этим справиться."
+    />
+  </section>
+</Base>
