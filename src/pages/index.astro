@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import CTA from '../components/CTA.astro';
 import TopicCard from '../components/TopicCard.astro';
+import { PRICE, DURATION_MIN, PRICE_LABEL } from '../config';
 
 const professionalServiceSchema = {
   "@context": "https://schema.org",
@@ -11,7 +12,7 @@ const professionalServiceSchema = {
   "url": "https://psyholog-irina.ru",
   "image": "https://psyholog-irina.ru/images/stol.png",
   "telephone": "+79028983895",
-  "priceRange": "5000₽",
+  "priceRange": `${PRICE}₽`,
   "areaServed": "Онлайн",
   "availableLanguage": "Russian",
   "provider": {
@@ -27,9 +28,9 @@ const professionalServiceSchema = {
   },
   "offers": {
     "@type": "Offer",
-    "price": "5000",
+    "price": String(PRICE),
     "priceCurrency": "RUB",
-    "description": "Индивидуальная онлайн-консультация, 60 минут"
+    "description": `Индивидуальная онлайн-консультация, ${DURATION_MIN} минут`
   }
 };
 ---

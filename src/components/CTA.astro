@@ -1,4 +1,6 @@
 ---
+import { SESSION_LABEL } from '../config';
+
 interface Props {
   title?: string;
   subtitle?: string;
@@ -44,7 +46,7 @@ const {
       Выбрать время
     </a>
 
-    <p class="text-warm-400 text-sm mt-6">Консультация — 5 000 ₽ / 60 минут</p>
+    <p class="text-warm-400 text-sm mt-6">Консультация — {SESSION_LABEL}</p>
 
     <p class="text-warm-400 text-sm mt-3">
       или напишите в

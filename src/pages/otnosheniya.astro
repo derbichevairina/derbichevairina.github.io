@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import CTA from '../components/CTA.astro';
+import { priceFaqItem } from '../config';
 
 const faqItems = [
   {
@@ -19,6 +20,7 @@ const faqItems = [
     question: "Вы работаете с парами?",
     answer: "Нет, я работаю только индивидуально. Но индивидуальная терапия очень эффективна для работы с отношениями: вы лучше понимаете себя, свои паттерны, свои потребности — и это меняет то, как вы строите отношения с другими.",
   },
+  priceFaqItem,
 ];
 
 const faqSchema = {

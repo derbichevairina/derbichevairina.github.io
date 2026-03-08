@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import CTA from '../components/CTA.astro';
+import { priceFaqItem } from '../config';
 
 const faqItems = [
   {
@@ -19,6 +20,7 @@ const faqItems = [
     question: "Связаны ли РПП с тревогой?",
     answer: "Очень часто. Тревога — один из самых частых спутников расстройств пищевого поведения. Еда может становиться способом «заглушить» тревогу, а ограничение в еде — попыткой вернуть ощущение контроля. Если это ваш случай, мы будем работать и с тревогой тоже.",
   },
+  priceFaqItem,
 ];
 
 const faqSchema = {
