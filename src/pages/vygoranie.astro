@@ -1,0 +1,380 @@
+---
+import Base from '../layouts/Base.astro';
+import CTA from '../components/CTA.astro';
+import { PRICE_LABEL, priceFaqItem } from '../config';
+
+const faqItems = [
+  {
+    question: "Чем эмоциональное выгорание отличается от усталости или депрессии?",
+    answer: "Обычная усталость проходит после качественного отдыха. Выгорание — нет. Оно связано с потерей смысла и вовлечённости в конкретной сфере жизни. Депрессия — более глобальное клиническое состояние, которое затрагивает все сферы и диагностируется врачом-психиатром. Выгорание может привести к депрессии, но это не одно и то же.",
+  },
+  {
+    question: "Можно ли выгореть не на работе — например, в материнстве или отношениях?",
+    answer: "Да. Любая сфера жизни, требующая постоянной эмоциональной отдачи и интенсивности при недостатке поддержки и восполнения ресурсов, может стать причиной выгорания. Это может быть уход за близкими, сложные семейные отношения, творческий проект или даже период ярких позитивных событий.",
+  },
+  {
+    question: "Какие методы профилактики эмоционального выгорания существуют?",
+    answer: "Лучшая профилактика — осознанное отношение к себе: отслеживание уровня стресса, своевременное замечание первых признаков усталости. Ключевые элементы: качественный отдых и смена деятельности, здоровые границы в работе и личной жизни, регулярные занятия тем, что наполняет, и поддержание тёплого социального круга.",
+  },
+  {
+    question: "Сколько времени нужно, чтобы справиться с выгоранием в терапии?",
+    answer: "Это индивидуально и зависит от глубины состояния. Первые улучшения могут наступить уже после нескольких сессий — снизится тревога, появится ясность. Глубинная работа по перестройке отношения к себе и жизни занимает от нескольких месяцев до года регулярных встреч.",
+  },
+  {
+    question: "Можно ли справиться с выгоранием самостоятельно?",
+    answer: "На ранних стадиях — да, изменив образ жизни и отношение к нагрузкам. Но если апатия и цинизм стали постоянными спутниками, помощь специалиста будет наиболее эффективным путём. Психолог поможет увидеть «слепые зоны» и даст инструменты, которые сложно найти самостоятельно.",
+  },
+  priceFaqItem,
+];
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqItems.map(item => ({
+    "@type": "Question",
+    "name": item.question,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": item.answer,
+    },
+  })),
+};
+---
+
+<Base
+  title="Эмоциональное выгорание — признаки и помощь психолога онлайн | Ирина Дербичева"
+  description="Эмоциональное выгорание: симптомы, стадии и как справиться. Клинический психолог, ACT-терапевт Ирина Дербичева. Онлайн-консультации при выгорании. Запись на сессию."
+  canonicalUrl="https://psyholog-irina.ru/vygoranie/"
+>
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+
+  <!-- Hero -->
+  <section class="relative overflow-hidden">
+    <div class="absolute top-10 -right-32 w-96 h-96 bg-sage-200/30 rounded-full blur-3xl"></div>
+    <div class="absolute -bottom-20 left-0 w-80 h-80 bg-warm-200/20 rounded-full blur-3xl"></div>
+
+    <div class="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
+      <nav class="text-sm text-warm-400 mb-8">
+        <a href="/" class="hover:text-sage-600 transition-colors">Главная</a>
+        <span class="mx-2">/</span>
+        <span class="text-warm-600">Эмоциональное выгорание</span>
+      </nav>
+
+      <h1 class="font-display text-3xl sm:text-4xl lg:text-5xl font-medium text-sage-900 leading-tight mb-6 text-balance">
+        Эмоциональное выгорание — когда «просто отдохнуть» больше не&nbsp;работает
+      </h1>
+      <p class="text-lg sm:text-xl text-warm-600 leading-relaxed max-w-2xl text-pretty">
+        Если внутри поселилась звенящая пустота, а дела, которые раньше зажигали,
+        вызывают лишь глухое раздражение — это не лень и не слабость.
+        Это сигнал вашей психики о том, что ресурсы исчерпаны. И с этим можно работать.
+      </p>
+    </div>
+  </section>
+
+  <!-- Recognition block -->
+  <section class="bg-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
+      <h2 class="font-display text-2xl sm:text-3xl text-sage-800 mb-8">Вам знакомо это?</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        {[
+          "Раньше вы горели работой, а теперь каждое утро начинается с мысли «только не это снова» — и задачи кажутся бессмысленными",
+          "Вы отдали всё близким, детям, семье — и чувствуете, что внутри не осталось ничего для себя",
+          "Вы — врач, учитель или помогающий специалист, и чужая боль больше не трогает, а лишь утомляет",
+          "Вдохновение иссякло: раньше вы творили легко, а теперь попытки «выдавить» идею приводят только к тревоге",
+          "Вы пережили что-то яркое — свадьбу, запуск проекта, путешествие мечты — но после наступил оглушительный «откат» и апатия",
+          "Вы долго старались быть хорошим для всех — и в этой гонке потеряли контакт с самим собой",
+        ].map((item) => (
+          <div class="flex gap-3 p-4 bg-sage-50 rounded-xl">
+            <div class="flex-shrink-0 w-6 h-6 rounded-full bg-sage-200 flex items-center justify-center mt-0.5">
+              <svg class="w-3.5 h-3.5 text-sage-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
+              </svg>
+            </div>
+            <span class="text-warm-700 text-sm">{item}</span>
+          </div>
+        ))}
+      </div>
+      <p class="text-warm-500 text-sm mt-6">
+        Если хотя бы один пункт отозвался — вы не одиноки. И вероятно, столкнулись
+        с чем-то большим, чем просто усталость.
+      </p>
+    </div>
+  </section>
+
+  <!-- What is burnout -->
+  <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
+    <h2 class="font-display text-2xl sm:text-3xl text-sage-800 mb-8">Что такое эмоциональное выгорание</h2>
+    <div class="space-y-5 text-warm-600 leading-relaxed">
+      <p>
+        Синдром эмоционального выгорания — это состояние физического, эмоционального
+        и умственного истощения, которое возникает в результате длительного пребывания
+        в эмоционально перегруженных ситуациях. Чаще всего его связывают с профессиональной
+        деятельностью, особенно в сферах «человек — человек».
+      </p>
+      <p>
+        Но здесь кроется ключевое заблуждение. <strong>Выгорание — это не только
+        про непосильную работу, токсичного начальника или бесконечные дедлайны.</strong>
+        Это результат дисбаланса между тем, сколько ресурсов вы тратите, и тем,
+        сколько получаете взамен. И психике не всегда принципиально, на что именно
+        тратятся эти ресурсы — на негативный стресс или на позитивную, но запредельную
+        по интенсивности нагрузку.
+      </p>
+      <p>
+        Представьте: вы весь год усердно работали, мечтая об отпуске. И вот — неделя
+        безудержного веселья, скажем, на карнавале в Рио-де-Жанейро. Дни и ночи напролёт
+        вы танцуете, общаетесь, почти не спите и нерегулярно питаетесь. Возвращаетесь
+        с мыслью: «Я отдохнул на полную катушку!». Но вместо прилива сил чувствуете
+        опустошение. Мир кажется тусклым, работа — невыносимо скучной, а внутри —
+        странная
+        <a href="/trevoga/" class="text-sage-600 underline decoration-sage-300 underline-offset-4 hover:decoration-sage-500 transition-colors">тревога</a>
+        и апатия.
+      </p>
+      <p>
+        Это тоже эмоциональное выгорание. Ваша нервная система работала на пределе,
+        обрабатывая колоссальный объём стимулов — и неважно, были ли они со знаком «плюс»
+        или «минус». Ресурс был потрачен, а механизм восполнения не запущен.
+        Выгорание — это не про «плохие» события. Это про интенсивность, которая превышает
+        способность к восстановлению.
+      </p>
+    </div>
+  </section>
+
+  <!-- Signs and symptoms -->
+  <section class="bg-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
+      <h2 class="font-display text-2xl sm:text-3xl text-sage-800 mb-4">Признаки и симптомы эмоционального выгорания</h2>
+      <p class="text-warm-600 mb-10 max-w-2xl">
+        Симптомы выгорания часто маскируются под усталость или плохое настроение.
+        Они проявляются на трёх уровнях.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="p-6 rounded-2xl bg-sage-50 border border-sage-100/60">
+          <h3 class="font-display text-lg text-sage-800 mb-4">Эмоциональные</h3>
+          <ul class="space-y-2.5 text-sm text-warm-600">
+            <li class="flex gap-2"><span class="text-sage-500 mt-0.5">—</span> Чувство опустошённости и бессилия</li>
+            <li class="flex gap-2"><span class="text-sage-500 mt-0.5">—</span> Цинизм и отстранённость от людей</li>
+            <li class="flex gap-2"><span class="text-sage-500 mt-0.5">—</span> Ощущение бессмысленности деятельности</li>
+            <li class="flex gap-2"><span class="text-sage-500 mt-0.5">—</span> Потеря способности радоваться</li>
+            <li class="flex gap-2"><span class="text-sage-500 mt-0.5">—</span> Повышенная раздражительность и тревожность</li>
+          </ul>
+        </div>
+        <div class="p-6 rounded-2xl bg-warm-50 border border-warm-100/60">
+          <h3 class="font-display text-lg text-warm-800 mb-4">Физические</h3>
+          <ul class="space-y-2.5 text-sm text-warm-600">
+            <li class="flex gap-2"><span class="text-warm-400 mt-0.5">—</span> Хроническая усталость даже после сна</li>
+            <li class="flex gap-2"><span class="text-warm-400 mt-0.5">—</span> Проблемы со сном: бессонница или сонливость</li>
+            <li class="flex gap-2"><span class="text-warm-400 mt-0.5">—</span> Частые головные и мышечные боли</li>
+            <li class="flex gap-2"><span class="text-warm-400 mt-0.5">—</span> Снижение иммунитета, частые болезни</li>
+            <li class="flex gap-2"><span class="text-warm-400 mt-0.5">—</span> Изменения аппетита и веса</li>
+          </ul>
+        </div>
+        <div class="p-6 rounded-2xl bg-sage-50 border border-sage-100/60">
+          <h3 class="font-display text-lg text-sage-800 mb-4">Поведенческие</h3>
+          <ul class="space-y-2.5 text-sm text-warm-600">
+            <li class="flex gap-2"><span class="text-sage-500 mt-0.5">—</span> Самоизоляция, избегание общения</li>
+            <li class="flex gap-2"><span class="text-sage-500 mt-0.5">—</span> Прокрастинация даже в простых делах</li>
+            <li class="flex gap-2"><span class="text-sage-500 mt-0.5">—</span> Снижение продуктивности, частые ошибки</li>
+            <li class="flex gap-2"><span class="text-sage-500 mt-0.5">—</span> Злоупотребление алкоголем или едой</li>
+            <li class="flex gap-2"><span class="text-sage-500 mt-0.5">—</span> Отказ от хобби и увлечений</li>
+          </ul>
+        </div>
+      </div>
+
+      <p class="text-warm-500 text-sm mt-8">
+        Узнать в этом списке себя — уже большой шаг. Это значит признать, что проблема
+        существует и требует внимания.
+      </p>
+    </div>
+  </section>
+
+  <!-- Stages of burnout -->
+  <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
+    <h2 class="font-display text-2xl sm:text-3xl text-sage-800 mb-4">Стадии эмоционального выгорания</h2>
+    <p class="text-warm-600 mb-10 max-w-2xl">
+      Выгорание редко наступает внезапно. Это процесс, который можно условно разделить
+      на несколько этапов. Понимание стадий помогает заметить проблему раньше.
+    </p>
+
+    <div class="space-y-6">
+      {[
+        {
+          stage: "1",
+          title: "«Медовый месяц»",
+          text: "Высокая вовлечённость в новую деятельность — работу, проект, отношения. Вы полны энтузиазма, готовы работать сверхурочно и жертвовать отдыхом. Нагрузка уже высока, но позитивные эмоции пока её маскируют.",
+        },
+        {
+          stage: "2",
+          title: "Накопление стресса",
+          text: "Энтузиазм спадает. Вы замечаете, что устаёте больше обычного, появляются первые проблемы со сном и концентрацией. Возникают мысли: «Что-то идёт не так» и «Я должен стараться ещё больше». Потребности тела и психики активно игнорируются.",
+        },
+        {
+          stage: "3",
+          title: "Хронический стресс",
+          text: "Усталость становится постоянной. Раздражительность, апатия и цинизм выходят на первый план. Деятельность, вызвавшая выгорание, воспринимается как враждебная. Признаки выгорания становятся очевидны окружающим.",
+        },
+        {
+          stage: "4",
+          title: "Истощение",
+          text: "Полное физическое и эмоциональное опустошение. Могут обостряться хронические заболевания, возникать депрессивные состояния. Человек чувствует себя в ловушке и ощущает полную бессмысленность происходящего.",
+        },
+      ].map((item) => (
+        <div class="flex gap-5 p-5 rounded-xl bg-sage-50/70 border border-sage-100/60">
+          <div class="flex-shrink-0 w-10 h-10 rounded-full bg-sage-200 flex items-center justify-center">
+            <span class="font-display text-sage-700 font-medium">{item.stage}</span>
+          </div>
+          <div>
+            <p class="font-medium text-sage-800 mb-1">{item.title}</p>
+            <p class="text-sm text-warm-600 leading-relaxed">{item.text}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Why rest doesn't fix burnout -->
+  <section class="bg-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
+      <h2 class="font-display text-2xl sm:text-3xl text-sage-800 mb-8">Почему «просто отдохнуть» не работает</h2>
+      <div class="space-y-5 text-warm-600 leading-relaxed">
+        <p>
+          Самый частый совет, который слышит человек в состоянии истощения:
+          «Тебе просто нужно отдохнуть, возьми отпуск». Отпуск может дать временную
+          передышку, но он не устраняет корень проблемы. <strong>Эмоциональное
+          выгорание — это не просто физическая усталость. Это кризис смыслов, ценностей
+          и контакта с собой.</strong>
+        </p>
+        <p>
+          Выгорание — это как глубокая трещина в фундаменте. Отпуск — как косметический
+          ремонт: переклеили обои, стало красиво. Но трещина в основании никуда не делась.
+          Отдых на пляже не поможет понять, почему работа перестала приносить удовлетворение,
+          как выстраивать границы или что для вас по-настоящему важно.
+        </p>
+        <p>
+          Более того, отпуск может усугубить состояние. Резкий контраст между яркой,
+          беззаботной жизнью на отдыхе и серой рутиной, в которую предстоит вернуться,
+          провоцирует ещё более глубокий спад. Вы возвращаетесь — и проблема становится
+          только более выпуклой и невыносимой на фоне недавнего «рая».
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- How I work with burnout -->
+  <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
+    <h2 class="font-display text-2xl sm:text-3xl text-sage-800 mb-4">Как я работаю с выгоранием</h2>
+    <p class="text-warm-600 mb-8 max-w-2xl">
+      Я работаю в подходе ACT — терапии принятия и ответственности,
+      а также использую экзистенциальный подход. Наша цель — не «починить» вас,
+      а помочь создать более осознанную, гибкую и наполненную жизнь.
+    </p>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      {[
+        {
+          title: "Развитие осознанности",
+          text: "Учимся замечать мысли, чувства и телесные ощущения в настоящем моменте, без осуждения. Это помогает выйти из режима «автопилота» и понять, что с вами происходит.",
+        },
+        {
+          title: "Принятие сложных чувств",
+          text: "Вместо борьбы с апатией и раздражением учимся давать им место. Принятие — это не смирение, а шаг к тому, чтобы перестать тратить силы на внутреннюю войну.",
+        },
+        {
+          title: "Прояснение ценностей",
+          text: "Исследуем, что для вас по-настоящему важно, за пределами социальных ожиданий и ролей. Каким человеком вы хотите быть? Ценности — это компас, который помогает двигаться вперёд.",
+        },
+        {
+          title: "Осмысленные действия",
+          text: "Опираясь на ценности, делаем конкретные шаги в выбранном направлении. Это не про «достигаторство», а про осмысленное движение к той жизни, которую вы хотите прожить.",
+        },
+      ].map((item) => (
+        <div class="p-5 rounded-xl bg-sage-50/70 border border-sage-100/60">
+          <p class="font-medium text-sage-800 mb-2">{item.title}</p>
+          <p class="text-sm text-warm-600 leading-relaxed">{item.text}</p>
+        </div>
+      ))}
+    </div>
+
+    <div class="bg-sage-50 rounded-2xl p-6 sm:p-8 mt-8">
+      <p class="text-warm-600 leading-relaxed italic">
+        «Моя задача — не просто убрать симптомы выгорания. Моя задача — помочь вам
+        найти те внутренние опоры, которые позволят не только выйти из текущего кризиса,
+        но и выстроить жизнь так, чтобы не попадать в него снова.»
+      </p>
+      <p class="text-warm-400 text-sm mt-3">— Ирина Дербичева</p>
+    </div>
+  </section>
+
+  <!-- For whom -->
+  <section class="bg-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
+      <h2 class="font-display text-2xl sm:text-3xl text-sage-800 mb-8">Для кого</h2>
+      <div class="bg-sage-50/80 rounded-2xl p-6 sm:p-8 space-y-4 text-warm-600 leading-relaxed border border-sage-100/50">
+        <p>
+          Я провожу индивидуальные онлайн-консультации для взрослых. Работаю
+          с эмоциональным выгоранием на работе, в материнстве, в творчестве
+          и в других сферах жизни.
+        </p>
+        <p>
+          Формат — видеозвонок, 60 минут. Стоимость — {PRICE_LABEL} за сессию.
+        </p>
+        <p>
+          Выгорание часто связано с другими сложностями:
+          <a href="/trevoga/" class="text-sage-600 underline decoration-sage-300 underline-offset-4 hover:decoration-sage-500 transition-colors">тревогой</a>,
+          <a href="/otnosheniya/" class="text-sage-600 underline decoration-sage-300 underline-offset-4 hover:decoration-sage-500 transition-colors">проблемами в отношениях</a>,
+          <a href="/rpp/" class="text-sage-600 underline decoration-sage-300 underline-offset-4 hover:decoration-sage-500 transition-colors">расстройствами пищевого поведения</a>,
+          <a href="/emigratsiya/" class="text-sage-600 underline decoration-sage-300 underline-offset-4 hover:decoration-sage-500 transition-colors">трудностями адаптации после переезда</a>.
+          На консультации мы начнём разбираться с полной картиной.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
+    <h2 class="font-display text-2xl sm:text-3xl text-sage-800 mb-4">Частые вопросы о выгорании</h2>
+    <p class="text-warm-600 mb-8">
+      Ответы на вопросы, которые чаще всего задают клиенты перед первой консультацией.
+    </p>
+    <div class="space-y-4">
+      {faqItems.map((item) => (
+        <details class="group border border-sage-200 rounded-xl overflow-hidden">
+          <summary class="flex justify-between items-center cursor-pointer p-5 sm:p-6 bg-sage-50/50 hover:bg-sage-50 transition-colors">
+            <span class="font-medium text-sage-800 text-sm sm:text-base pr-4">{item.question}</span>
+            <svg class="w-5 h-5 text-sage-400 transition-transform group-open:rotate-180 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+          </summary>
+          <div class="p-5 sm:p-6 pt-0 sm:pt-0 text-warm-600 text-sm leading-relaxed">
+            {item.answer}
+          </div>
+        </details>
+      ))}
+    </div>
+  </section>
+
+  <!-- Related topics -->
+  <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <p class="text-warm-400 text-sm mb-4">Связанные темы:</p>
+    <div class="flex flex-wrap gap-3">
+      <a href="/trevoga/" class="text-sm text-sage-600 bg-sage-50 px-4 py-2 rounded-full hover:bg-sage-100 transition-colors border border-sage-100/60">
+        Тревога и панические атаки
+      </a>
+      <a href="/otnosheniya/" class="text-sm text-sage-600 bg-sage-50 px-4 py-2 rounded-full hover:bg-sage-100 transition-colors border border-sage-100/60">
+        Отношения и расставания
+      </a>
+      <a href="/emigratsiya/" class="text-sm text-sage-600 bg-sage-50 px-4 py-2 rounded-full hover:bg-sage-100 transition-colors border border-sage-100/60">
+        Эмиграция и адаптация
+      </a>
+      <a href="/rpp/" class="text-sm text-sage-600 bg-sage-50 px-4 py-2 rounded-full hover:bg-sage-100 transition-colors border border-sage-100/60">
+        Расстройства пищевого поведения
+      </a>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <CTA
+      title="Верните себе вкус жизни"
+      subtitle="Выгорание — не приговор. Запишитесь на первую сессию — вместе разберёмся, что стоит за вашим эмоциональным выгоранием, и начнём путь к восстановлению."
+    />
+  </section>
+</Base>
