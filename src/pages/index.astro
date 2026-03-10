@@ -1,11 +1,15 @@
 ---
-import { Image } from 'astro:assets';
+import { Image, getImage } from 'astro:assets';
 import Base from '../layouts/Base.astro';
 import CTA from '../components/CTA.astro';
 import TopicCard from '../components/TopicCard.astro';
 import { PRICE, DURATION_MIN, PRICE_LABEL } from '../config';
 import heroImage from '../assets/images/stol.png';
 import aboutImage from '../assets/images/okno.png';
+
+const heroAvif420 = await getImage({ src: heroImage, width: 420, format: 'avif', quality: 70 });
+const heroAvif640 = await getImage({ src: heroImage, width: 640, format: 'avif', quality: 70 });
+const heroAvif840 = await getImage({ src: heroImage, width: 840, format: 'avif', quality: 70 });
 
 const professionalServiceSchema = {
   "@context": "https://schema.org",
@@ -97,17 +101,24 @@ const professionalServiceSchema = {
           <div class="relative w-full max-w-[420px] sm:max-w-[320px] lg:max-w-[420px]">
             <!-- Background shape -->
             <div class="absolute -inset-2 sm:-inset-3 bg-gradient-to-br from-sage-200/60 to-warm-200/40 rounded-[1.5rem] sm:rounded-[2rem] rotate-2"></div>
-            <Image
-              src={heroImage}
-              alt="Ирина Дербичева — экзистенциальный психолог"
-              class="relative rounded-[1.25rem] sm:rounded-[1.75rem] object-cover w-full shadow-elevated"
-              widths={[420, 640, 840]}
-              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 320px, 420px"
-              fetchpriority="high"
-              loading="eager"
-              format="webp"
-              quality={80}
-            />
+            <picture>
+              <source
+                type="image/avif"
+                srcset={`${heroAvif420.src} 420w, ${heroAvif640.src} 640w, ${heroAvif840.src} 840w`}
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 320px, 420px"
+              />
+              <Image
+                src={heroImage}
+                alt="Ирина Дербичева — экзистенциальный психолог"
+                class="relative rounded-[1.25rem] sm:rounded-[1.75rem] object-cover w-full shadow-elevated"
+                widths={[420, 640, 840]}
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 320px, 420px"
+                fetchpriority="high"
+                loading="eager"
+                format="webp"
+                quality={80}
+              />
+            </picture>
             <!-- Floating badge — hidden on small mobile -->
             <div class="hidden sm:block absolute -bottom-5 -left-5 bg-white/90 backdrop-blur-md rounded-2xl px-5 py-3.5 shadow-medium border border-sage-100/50">
               <p class="text-xs text-warm-500">Стаж практики</p>
