@@ -1,0 +1,380 @@
+---
+import Base from '../layouts/Base.astro';
+import CTA from '../components/CTA.astro';
+import { PRICE_LABEL, priceFaqItem } from '../config';
+
+const faqItems = [
+  {
+    question: "Можно ли повысить самооценку с помощью психолога?",
+    answer: "Скорее, можно не «повысить», а сделать более реалистичной и устойчивой. Психолог помогает исследовать причины неуверенности, обнаружить реальные сильные стороны и научиться опираться на себя, а не на мнение окружающих. Мы работаем не с «оценкой», а с самоценностью — тем, что подтверждено вашим реальным опытом.",
+  },
+  {
+    question: "Сколько времени нужно, чтобы почувствовать изменения?",
+    answer: "Это индивидуальный процесс. Некоторые клиенты получают важные инсайты уже после первых сессий — когда удаётся увидеть, откуда пришли убеждения о себе. Глубинная работа по изменению устоявшихся паттернов требует больше времени — обычно от нескольких месяцев регулярных встреч.",
+  },
+  {
+    question: "Низкая самооценка — это диагноз или черта характера?",
+    answer: "Это не медицинский диагноз и не врождённая черта. Это устойчивый паттерн мышления, который сформировался под влиянием жизненного опыта — прежде всего, отношений со значимыми взрослыми в детстве. А раз он сформировался, значит, его можно переосмыслить и изменить.",
+  },
+  {
+    question: "Как понять, что мне нужен психолог, а не книга по саморазвитию?",
+    answer: "Книги дают общую информацию, но не видят ваших слепых зон. Психолог помогает обнаружить именно ваши убеждения, которые вы приняли без критики, и проверить их на соответствие реальности. Если вы читали книги, но ничего не менялось — скорее всего, нужен живой диалог и индивидуальный подход.",
+  },
+  priceFaqItem,
+];
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqItems.map(item => ({
+    "@type": "Question",
+    "name": item.question,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": item.answer,
+    },
+  })),
+};
+---
+
+<Base
+  title="Низкая самооценка и неуверенность в себе — помощь психолога онлайн | Ирина Дербичева"
+  description="Как повысить самооценку и обрести уверенность в себе. Клинический психолог, ACT-терапия, индивидуальные онлайн-консультации. Запишитесь."
+  canonicalUrl="https://psyholog-irina.ru/samootsenka/"
+>
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+
+  <!-- Hero -->
+  <section class="relative overflow-hidden">
+    <div class="absolute top-10 -right-32 w-96 h-96 bg-sage-200/30 rounded-full blur-3xl"></div>
+    <div class="absolute -bottom-20 left-0 w-80 h-80 bg-warm-200/20 rounded-full blur-3xl"></div>
+
+    <div class="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
+      <nav class="text-sm text-warm-400 mb-8">
+        <a href="/" class="hover:text-sage-600 transition-colors">Главная</a>
+        <span class="mx-2">/</span>
+        <span class="text-warm-600">Самооценка</span>
+      </nav>
+
+      <h1 class="font-display text-3xl sm:text-4xl lg:text-5xl font-medium text-sage-900 leading-tight mb-6 text-balance">
+        Низкая самооценка и&nbsp;неуверенность в&nbsp;себе — помощь психолога
+      </h1>
+      <p class="text-lg sm:text-xl text-warm-600 leading-relaxed max-w-2xl text-pretty">
+        Сомневаться в себе, искать одобрения, чувствовать себя «недостаточно хорошим» — это изматывает.
+        Внутренний критик обесценивает успехи и раздувает промахи.
+        Если вы устали от этой борьбы — с&nbsp;этим можно работать.
+      </p>
+    </div>
+  </section>
+
+  <!-- Recognition -->
+  <section class="bg-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
+      <h2 class="font-display text-2xl sm:text-3xl text-sage-800 mb-8">Вам знакомо это?</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        {[
+          "«Меня не ценят на работе» — хотя объективных причин так думать нет",
+          "Соглашаетесь на то, что вам не подходит, чтобы не расстроить другого",
+          "Боитесь просить повышения — кажется, вы «недостаточно ценный» сотрудник",
+          "В отношениях терпите то, что вам не нравится, из страха, что партнёр уйдёт",
+          "Смотрите на свою жизнь и чувствуете, что живёте «не свою жизнь» — работа не та, роль не та",
+          "Сравниваете себя с другими — и сравнение всегда не в вашу пользу",
+          "Внутренний голос повторяет: «Я ничего из себя не представляю»",
+          "Избегаете нового из страха ошибки — легче не пробовать, чем провалиться",
+        ].map((item) => (
+          <div class="flex gap-3 p-4 bg-sage-50 rounded-xl">
+            <div class="flex-shrink-0 w-6 h-6 rounded-full bg-sage-200 flex items-center justify-center mt-0.5">
+              <svg class="w-3.5 h-3.5 text-sage-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
+              </svg>
+            </div>
+            <span class="text-warm-700 text-sm">{item}</span>
+          </div>
+        ))}
+      </div>
+      <p class="text-warm-500 text-sm mt-6">
+        Если хотя бы несколько пунктов откликнулись — это не значит, что с вами «что-то не так».
+        Это значит, что система, по которой вы себя оцениваете, работает против вас.
+      </p>
+    </div>
+  </section>
+
+  <!-- What is low self-esteem -->
+  <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
+    <h2 class="font-display text-2xl sm:text-3xl text-sage-800 mb-8">Что такое низкая самооценка на&nbsp;самом деле</h2>
+    <div class="space-y-5 text-warm-600 leading-relaxed">
+      <p>
+        Принято считать, что самооценка — это то, что вы сами о себе думаете. Но это не совсем так.
+      </p>
+      <p>
+        <strong class="text-sage-800">Самооценка — это усвоенное без критики мнение других людей о&nbsp;вас.</strong>
+        В детстве мы полностью зависим от взрослых. Слова родителей, оценки учителей, реакции
+        сверстников — всё это формирует наш образ себя. «Ты неряха», «У тебя нет способностей»,
+        «Будь тише, не высовывайся». Ребёнок не может проверить эти утверждения —
+        он принимает их на веру и встраивает в свою личность.
+      </p>
+      <p>
+        Вырастая, мы продолжаем носить в себе эти чужие «зеркала», не осознавая этого.
+        Часто этот процесс тесно связан с незавершённой
+        <a href="/separatsiya/" class="text-sage-600 underline decoration-sage-300 underline-offset-4 hover:decoration-sage-500 transition-colors">сепарацией от родителей</a>
+        и их установок.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-10">
+      <div class="p-6 sm:p-8 rounded-2xl bg-warm-50/80 border border-warm-200/50">
+        <h3 class="font-display text-lg text-sage-800 mb-3">Самооценка</h3>
+        <p class="text-warm-600 text-sm leading-relaxed">
+          Внешняя конструкция. Мнение социума — родителей, учителей, окружения — которое вы
+          приняли без проверки. Может быть искажённым и не соответствовать реальности.
+        </p>
+      </div>
+      <div class="p-6 sm:p-8 rounded-2xl bg-sage-50/80 border border-sage-200/50">
+        <h3 class="font-display text-lg text-sage-800 mb-3">Самоценность</h3>
+        <p class="text-warm-600 text-sm leading-relaxed">
+          Внутреннее знание о себе, подтверждённое фактами. То, чем вы действительно ценны —
+          что проверено вашим реальным опытом, а не чужими словами.
+        </p>
+      </div>
+    </div>
+
+    <div class="bg-warm-50 rounded-2xl p-6 sm:p-8 mt-8 border border-warm-200">
+      <p class="text-warm-600 text-sm leading-relaxed">
+        <strong class="text-sage-800">Пример из практики:</strong>
+        Вам в школе говорили, что «не лингвист, никогда не выучишь иностранный язык».
+        Вы живёте с этой мыслью 20 лет. А потом жизнь заставляет за две недели освоить
+        разговорный английский для работы — и вы справляетесь. В этот момент факт сталкивается
+        с давним убеждением. И вы начинаете понимать: ваши реальные способности могут сильно
+        отличаться от того, что вы о себе думали.
+      </p>
+    </div>
+  </section>
+
+  <!-- How it affects life -->
+  <section class="bg-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
+      <h2 class="font-display text-2xl sm:text-3xl text-sage-800 mb-8">Как низкая самооценка влияет на&nbsp;жизнь</h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="bg-sage-50 rounded-2xl p-6">
+          <h3 class="font-display text-lg text-sage-800 mb-3">Отношения</h3>
+          <p class="text-warm-600 text-sm leading-relaxed">
+            Человек с низкой самооценкой часто вступает в
+            <a href="/otnosheniya/" class="text-sage-600 underline decoration-sage-300 underline-offset-4 hover:decoration-sage-500 transition-colors">созависимые отношения</a>,
+            где главная цель — заслужить любовь. Может терпеть неуважение,
+            потому что в глубине души уверен: «я не заслуживаю лучшего».
+          </p>
+        </div>
+        <div class="bg-sage-50 rounded-2xl p-6">
+          <h3 class="font-display text-lg text-sage-800 mb-3">Работа и карьера</h3>
+          <p class="text-warm-600 text-sm leading-relaxed">
+            Неуверенность в себе мешает оценивать свой вклад. Такие люди боятся проявлять
+            инициативу, выбирают работу ниже своих способностей, берут на себя чужие обязанности.
+            Исходя из самооценки мы примеряем роли, которые оказываются не нашими.
+          </p>
+        </div>
+        <div class="bg-sage-50 rounded-2xl p-6">
+          <h3 class="font-display text-lg text-sage-800 mb-3">Отношение к телу</h3>
+          <p class="text-warm-600 text-sm leading-relaxed">
+            Недовольство собой часто проецируется на внешность. Постоянная самокритика
+            и сравнение с идеализированными образами могут приводить к
+            <a href="/rpp/" class="text-sage-600 underline decoration-sage-300 underline-offset-4 hover:decoration-sage-500 transition-colors">расстройствам пищевого поведения</a>,
+            изнуряющим диетам или пренебрежению заботой о себе.
+          </p>
+        </div>
+        <div class="bg-sage-50 rounded-2xl p-6">
+          <h3 class="font-display text-lg text-sage-800 mb-3">Тревога и решения</h3>
+          <p class="text-warm-600 text-sm leading-relaxed">
+            Когда вы постоянно ждёте подтверждения своей «плохости», жизнь превращается в минное поле.
+            Любая мелочь запускает самобичевание. Страх ошибки парализует —
+            легче ничего не делать, чем столкнуться с
+            <a href="/trevoga/" class="text-sage-600 underline decoration-sage-300 underline-offset-4 hover:decoration-sage-500 transition-colors">тревогой</a>
+            от возможной неудачи.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why affirmations don't work -->
+  <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
+    <h2 class="font-display text-2xl sm:text-3xl text-sage-800 mb-8">Почему «просто полюби себя» не&nbsp;работает</h2>
+    <div class="space-y-5 text-warm-600 leading-relaxed">
+      <p>
+        Популярная психология предлагает простые решения: повторяй аффирмации, прими себя,
+        повысь самооценку. Звучит красиво, но на практике редко приносит устойчивый результат.
+      </p>
+      <p>
+        Главная проблема совета «полюби себя таким, какой ты есть» в том,
+        что <strong class="text-sage-800">ваше представление о себе может не соответствовать действительности</strong>.
+        Оно состоит из старых, непроверенных убеждений и ограничивающих установок.
+        Пытаться полюбить этот искажённый образ — значит пытаться полюбить карикатуру на самого себя.
+      </p>
+      <p>
+        Аффирмации создают внутренний конфликт. Вы говорите себе «я уверенный и успешный»,
+        а вся внутренняя система кричит: «Нет, это ложь!». Позитивная установка сталкивается
+        с мощным сопротивлением — и в итоге проигрывает, оставляя разочарование
+        и чувство вины: «даже это не помогло».
+      </p>
+      <p>
+        Настоящая работа с самооценкой — это не накладывание позитива поверх негатива.
+        Это честное исследование: а что&nbsp;стоит за моими убеждениями о&nbsp;себе? Кто мне это сказал?
+        И так ли это на самом деле?
+      </p>
+    </div>
+  </section>
+
+  <!-- How I work -->
+  <section class="bg-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
+      <h2 class="font-display text-2xl sm:text-3xl text-sage-800 mb-8">Как я работаю с&nbsp;самооценкой</h2>
+      <div class="space-y-5 text-warm-600 leading-relaxed">
+        <p>
+          В моём подходе мы не пытаемся искусственно «повысить самооценку». Мы стремимся обнаружить
+          вашу реальную самоценность, которая скрыта под слоем чужих мнений.
+        </p>
+        <p>
+          Основная концепция, с которой я работаю, — разрыв между
+          <strong class="text-sage-800">«Я-реальным»</strong> и
+          <strong class="text-sage-800">«Я-идеальным»</strong>.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
+        <div class="p-6 sm:p-8 rounded-2xl bg-warm-50/80 border border-warm-200/50">
+          <h3 class="font-display text-lg text-sage-800 mb-3">«Я-идеальное»</h3>
+          <p class="text-warm-600 text-sm leading-relaxed">
+            Образ того, каким вы <em>должны</em> быть. Часто сформирован не вами, а родителями,
+            социумом, культурой. «Настоящие девочки ходят только в платьях»,
+            «хороший сотрудник не спорит с начальством», «успешные люди не жалуются».
+          </p>
+        </div>
+        <div class="p-6 sm:p-8 rounded-2xl bg-sage-50/80 border border-sage-200/50">
+          <h3 class="font-display text-lg text-sage-800 mb-3">«Я-реальное»</h3>
+          <p class="text-warm-600 text-sm leading-relaxed">
+            То, каким вы себя воспринимаете — со всеми мнимыми или реальными недостатками.
+            Но и здесь много искажений: возможно, вы не так плохи, как вам кажется.
+          </p>
+        </div>
+      </div>
+
+      <div class="space-y-5 text-warm-600 leading-relaxed mt-8">
+        <p>
+          Когда разрыв между этими двумя «Я» огромен, человек смиряется — «вот такой я неудачник» —
+          и перестаёт верить, что что-то можно изменить. Наша работа идёт в двух направлениях:
+        </p>
+      </div>
+
+      <div class="bg-warm-50 rounded-2xl p-6 sm:p-8 mt-6 border border-warm-200">
+        <ul class="space-y-4 text-warm-600 text-sm">
+          <li class="flex gap-3">
+            <span class="text-sage-600 font-bold mt-0.5">1</span>
+            <span>
+              <strong class="text-sage-800">Проверяем «Я-идеальное».</strong>
+              Чей это идеал — ваш или навязанный? Действительно ли вы хотите ему соответствовать?
+              Мы отделяем ваши собственные ценности от чужих предписаний.
+            </span>
+          </li>
+          <li class="flex gap-3">
+            <span class="text-sage-600 font-bold mt-0.5">2</span>
+            <span>
+              <strong class="text-sage-800">Проверяем «Я-реальное».</strong>
+              Подвергаем сомнению негативное представление о себе. Вы считаете, что «ничего не умеете»?
+              Давайте посмотрим на факты: ваш опыт, ваши достижения, ваши реальные способности.
+            </span>
+          </li>
+        </ul>
+      </div>
+
+      <p class="text-warm-600 leading-relaxed mt-8">
+        В этой работе я опираюсь на методы
+        <a href="/act/" class="text-sage-600 underline decoration-sage-300 underline-offset-4 hover:decoration-sage-500 transition-colors">Терапии принятия и ответственности (ACT)</a>.
+        Этот подход помогает не бороться с негативными мыслями о себе,
+        а снижать их влияние на вашу жизнь, фокусируясь на том, что для вас действительно важно.
+      </p>
+
+      <div class="bg-sage-50 rounded-2xl p-6 sm:p-8 mt-8">
+        <p class="text-warm-600 leading-relaxed italic">
+          «Моя задача — не убедить вас в том, что вы прекрасны.
+          Моя задача — создать пространство, где вы сможете отделить навязанные оценки
+          от фактов вашей жизни, услышать свой собственный голос
+          и найти внутреннюю опору, которая не зависит от чужого мнения.»
+        </p>
+        <p class="text-warm-400 text-sm mt-3">— Ирина Дербичева</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- For whom -->
+  <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
+    <h2 class="font-display text-2xl sm:text-3xl text-sage-800 mb-8">Для кого</h2>
+    <div class="bg-sage-50/80 rounded-2xl p-6 sm:p-8 space-y-4 text-warm-600 leading-relaxed border border-sage-100/50">
+      <p>
+        Я провожу индивидуальные онлайн-консультации для взрослых.
+        Формат — видеозвонок, 60 минут. Стоимость — {PRICE_LABEL} за сессию.
+      </p>
+      <p>
+        Я не работаю с парами, детьми и подростками.
+      </p>
+      <p>
+        Самооценка часто переплетена с другими темами:
+        <a href="/trevoga/" class="text-sage-600 underline decoration-sage-300 underline-offset-4 hover:decoration-sage-500 transition-colors">тревогой</a>,
+        трудностями в
+        <a href="/otnosheniya/" class="text-sage-600 underline decoration-sage-300 underline-offset-4 hover:decoration-sage-500 transition-colors">отношениях</a>,
+        сложностями в
+        <a href="/separatsiya/" class="text-sage-600 underline decoration-sage-300 underline-offset-4 hover:decoration-sage-500 transition-colors">сепарации от родителей</a>.
+        На консультации мы не будем рассматривать проблему изолированно — посмотрим на полную картину.
+      </p>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="bg-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
+      <h2 class="font-display text-2xl sm:text-3xl text-sage-800 mb-4">Частые вопросы</h2>
+      <p class="text-warm-600 mb-8">
+        Ответы на вопросы, которые чаще всего задают перед первой консультацией.
+      </p>
+      <div class="space-y-4">
+        {faqItems.map((item) => (
+          <details class="group border border-sage-200 rounded-xl overflow-hidden">
+            <summary class="flex justify-between items-center cursor-pointer p-5 sm:p-6 bg-sage-50/50 hover:bg-sage-50 transition-colors">
+              <span class="font-medium text-sage-800 text-sm sm:text-base pr-4">{item.question}</span>
+              <svg class="w-5 h-5 text-sage-400 transition-transform group-open:rotate-180 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+            </summary>
+            <div class="p-5 sm:p-6 pt-0 sm:pt-0 text-warm-600 text-sm leading-relaxed">
+              {item.answer}
+            </div>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Related -->
+  <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <p class="text-warm-400 text-sm mb-4">Связанные темы:</p>
+    <div class="flex flex-wrap gap-3">
+      <a href="/otnosheniya/" class="text-sm text-sage-600 bg-sage-50 px-4 py-2 rounded-full hover:bg-sage-100 transition-colors border border-sage-100/60">
+        Отношения и созависимость
+      </a>
+      <a href="/trevoga/" class="text-sm text-sage-600 bg-sage-50 px-4 py-2 rounded-full hover:bg-sage-100 transition-colors border border-sage-100/60">
+        Тревога и панические атаки
+      </a>
+      <a href="/rpp/" class="text-sm text-sage-600 bg-sage-50 px-4 py-2 rounded-full hover:bg-sage-100 transition-colors border border-sage-100/60">
+        Расстройства пищевого поведения
+      </a>
+      <a href="/emigratsiya/" class="text-sm text-sage-600 bg-sage-50 px-4 py-2 rounded-full hover:bg-sage-100 transition-colors border border-sage-100/60">
+        Эмиграция и адаптация
+      </a>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <CTA
+      title="Ваша ценность не нуждается в доказательствах"
+      subtitle="Запишитесь на консультацию — вместе найдём опору, которая не зависит от чужого мнения."
+    />
+  </section>
+</Base>
