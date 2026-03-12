@@ -1,7 +1,11 @@
 ---
 import Base from '../layouts/Base.astro';
 import CTA from '../components/CTA.astro';
+import { Image } from 'astro:assets';
 import { priceFaqItem } from '../config';
+import otnosheniyaHero from '../assets/images/otnosheniya-hero.webp';
+import otnosheniyaCodependency from '../assets/images/otnosheniya-codependency.webp';
+import otnosheniyaBreakup from '../assets/images/otnosheniya-breakup.webp';
 
 const faqItems = [
   {
@@ -59,6 +63,17 @@ const faqSchema = {
       «Не могу уйти», «не могу забыть», «не понимаю, что происходит между нами» —
       за каждой из этих фраз стоит реальная боль, с которой можно работать.
     </p>
+
+    <Image
+      src={otnosheniyaHero}
+      alt="Женщина на развилке двух дорог — запутанные нити позади, чистый путь впереди"
+      class="rounded-3xl w-full mt-8"
+      widths={[896, 1280, 1792]}
+      sizes="(max-width: 1024px) 100vw, 896px"
+      loading="eager"
+      format="webp"
+      quality={82}
+    />
   </section>
 
   <!-- When relationships become a problem -->
@@ -123,6 +138,17 @@ const faqSchema = {
       </p>
     </div>
 
+    <Image
+      src={otnosheniyaCodependency}
+      alt="Два силуэта — один растворяется в контуре другого, метафора созависимости"
+      class="rounded-2xl w-64 sm:w-80 mx-auto mt-8"
+      widths={[256, 320, 640]}
+      sizes="(max-width: 640px) 256px, 320px"
+      loading="lazy"
+      format="webp"
+      quality={82}
+    />
+
     <h3 class="font-display text-xl text-sage-700 mt-10 mb-6">Признаки созависимости</h3>
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
       {[
@@ -165,6 +191,18 @@ const faqSchema = {
           <strong>боимся остаться одинокими</strong>. И этот страх мешает принимать решения,
           которые действительно важны для нашей жизни.
         </p>
+
+        <Image
+          src={otnosheniyaBreakup}
+          alt="Женщина сидит на скамейке одна, на горизонте рассвет и росток нового начала"
+          class="rounded-3xl w-full mt-8"
+          widths={[896, 1280, 1792]}
+          sizes="(max-width: 1024px) 100vw, 896px"
+          loading="lazy"
+          format="webp"
+          quality={82}
+        />
+
         <p>
           В
           экзистенциальной терапии

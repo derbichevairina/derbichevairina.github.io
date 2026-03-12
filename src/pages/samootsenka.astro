@@ -1,7 +1,9 @@
 ---
 import Base from '../layouts/Base.astro';
 import CTA from '../components/CTA.astro';
+import { Image } from 'astro:assets';
 import { PRICE_LABEL, priceFaqItem } from '../config';
+import samootsenkaProjector from '../assets/images/samootsenka-projector.webp';
 
 const faqItems = [
   {
@@ -64,6 +66,7 @@ const faqSchema = {
         Внутренний критик обесценивает успехи и раздувает промахи.
         Если вы устали от этой борьбы — с&nbsp;этим можно работать.
       </p>
+
     </div>
   </section>
 
@@ -220,6 +223,7 @@ const faqSchema = {
         Это честное исследование: а что&nbsp;стоит за моими убеждениями о&nbsp;себе? Кто мне это сказал?
         И так ли это на самом деле?
       </p>
+
     </div>
   </section>
 
@@ -284,6 +288,17 @@ const faqSchema = {
           </li>
         </ul>
       </div>
+
+      <Image
+        src={samootsenkaProjector}
+        alt="Слева проекция идеального силуэта с короной, справа девушка бережно держит живой росток — выбор между навязанным идеалом и подлинной самоценностью"
+        class="rounded-3xl w-full mt-8"
+        widths={[896, 1280, 1792]}
+        sizes="(max-width: 1024px) 100vw, 896px"
+        loading="lazy"
+        format="webp"
+        quality={82}
+      />
 
       <p class="text-warm-600 leading-relaxed mt-8">
         В этой работе я опираюсь на методы
