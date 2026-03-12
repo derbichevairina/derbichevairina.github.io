@@ -1,7 +1,11 @@
 ---
+import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
 import CTA from '../components/CTA.astro';
 import { PRICE_LABEL, priceFaqItem } from '../config';
+import emigratsiyaBridge from '../assets/images/emigratsiya-bridge.webp';
+import emigratsiyaStages from '../assets/images/emigratsiya-stages.webp';
+import emigratsiyaGlobe from '../assets/images/emigratsiya-globe.webp';
 
 const faqItems = [
   {
@@ -69,6 +73,17 @@ const faqSchema = {
         не означают, что вы приняли неверное решение. Они говорят о том, что ваша
         психика проходит через сложный процесс перестройки.
       </p>
+
+      <Image
+        src={emigratsiyaBridge}
+        alt="Человек с чемоданом на мосту между двумя берегами — знакомый город позади, новый впереди"
+        class="rounded-3xl w-full max-w-2xl mt-8 mix-blend-multiply block"
+        widths={[672, 1024, 1344]}
+        sizes="(max-width: 640px) calc(100vw - 32px), (max-width: 1024px) calc(100vw - 48px), 672px"
+        loading="eager"
+        format="webp"
+        quality={82}
+      />
     </div>
   </section>
 
@@ -140,6 +155,17 @@ const faqSchema = {
       </div>
     </div>
 
+    <Image
+      src={emigratsiyaStages}
+      alt="Три стадии адаптации: эйфория медового месяца, кризис с запутанными мыслями, восстановление с растением и домом"
+      class="rounded-3xl w-full mt-8 mix-blend-multiply"
+      widths={[896, 1280, 1792]}
+      sizes="(max-width: 1024px) 100vw, 896px"
+      loading="lazy"
+      format="webp"
+      quality={82}
+    />
+
     <p class="text-warm-500 text-sm mt-8">
       Многие думают, что адаптировались, — а через полгода-год «накрывает» снова.
       Это нормально. Адаптация не линейна, и откаты — часть процесса.
@@ -150,7 +176,17 @@ const faqSchema = {
   <section class="bg-white">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
       <h2 class="font-display text-2xl sm:text-3xl text-sage-800 mb-8">Потеря привычного мира</h2>
-      <div class="space-y-5 text-warm-600 leading-relaxed">
+      <div class="space-y-5 text-warm-600 leading-relaxed overflow-hidden">
+        <Image
+          src={emigratsiyaGlobe}
+          alt="Человек бережно держит прозрачный шар с миниатюрным уютным мирком — домик, дерево, книги. Шар с трещинками, из которых идёт мягкий свет"
+          class="rounded-2xl w-48 sm:w-64 float-right ml-6 mb-4 mix-blend-multiply"
+          widths={[192, 256, 512]}
+          sizes="(max-width: 640px) 192px, 256px"
+          loading="lazy"
+          format="webp"
+          quality={82}
+        />
         <p>
           Эмиграция — это не только приобретение нового, но и потеря старого.
           И речь не только о конкретных людях или местах. Мы теряем привычный мир,
