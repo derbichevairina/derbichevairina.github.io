@@ -1,7 +1,9 @@
 ---
+import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
 import CTA from '../components/CTA.astro';
 import { PRICE_LABEL, priceFaqItem } from '../config';
+import trevogaActImage from '../assets/images/trevoga-act.webp';
 
 const faqItems = [
   {
@@ -273,6 +275,19 @@ const faqSchema = {
           воспринимать тревогу как сигнал, а не как врага — она перестанет управлять
           вашей жизнью.
         </p>
+      </div>
+
+      <div class="mb-10 rounded-3xl overflow-hidden border border-sage-100/70 bg-sage-50/40 shadow-soft">
+        <Image
+          src={trevogaActImage}
+          alt="Иллюстрация: человек движется вперёд, а тревожный хаос остаётся позади"
+          class="block w-full h-auto"
+          widths={[896, 1280, 1792]}
+          sizes="(max-width: 1024px) 100vw, 896px"
+          loading="lazy"
+          format="webp"
+          quality={82}
+        />
       </div>
 
       <div class="space-y-4">
