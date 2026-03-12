@@ -1,7 +1,10 @@
 ---
 import Base from '../layouts/Base.astro';
 import CTA from '../components/CTA.astro';
+import { Image } from 'astro:assets';
 import { priceFaqItem } from '../config';
+import rppMirrorImage from '../assets/images/rpp-mirror.webp';
+import rppTriadImage from '../assets/images/rpp-triad.webp';
 
 const faqItems = [
   {
@@ -76,6 +79,16 @@ const faqSchema = {
           а не очередной диеты.
         </p>
       </div>
+      <Image
+        src={rppMirrorImage}
+        alt="Женщина смотрит в зеркало, отражение с волнистыми контурами — метафора искажённого восприятия себя при РПП"
+        class="rounded-3xl w-full mt-8"
+        widths={[896, 1280, 1792]}
+        sizes="(max-width: 1024px) 100vw, 896px"
+        loading="lazy"
+        format="webp"
+        quality={82}
+      />
     </div>
   </section>
 
@@ -194,10 +207,21 @@ const faqSchema = {
             <p class="text-warm-600 text-sm">Возвращение контакта с телесными ощущениями</p>
           </div>
         </div>
+        <Image
+          src={rppTriadImage}
+          alt="Три направления работы с РПП: психотерапия, питание и тело — женщина в спокойной позе в центре"
+          class="rounded-3xl w-full mt-6"
+          widths={[896, 1280, 1792]}
+          sizes="(max-width: 1024px) 100vw, 896px"
+          loading="lazy"
+          format="webp"
+          quality={82}
+        />
         <p>
           Специализированная подготовка позволяет глубже понимать механизмы РПП
           и применять наиболее эффективные подходы, выходящие за рамки базового курса.
         </p>
+
       </div>
     </div>
   </section>
