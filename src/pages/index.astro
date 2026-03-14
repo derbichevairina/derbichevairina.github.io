@@ -356,6 +356,13 @@ const professionalServiceSchema = {
           } else {
             loadCalendly();
           }
+
+          // Track Calendly booking as Yandex.Metrika goal
+          window.addEventListener('message', function(e) {
+            if (e.data.event === 'calendly.event_scheduled') {
+              ym(107099009, 'reachGoal', 'calendly_click');
+            }
+          });
         })();
       </script>
     </div>
