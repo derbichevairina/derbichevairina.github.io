@@ -357,8 +357,13 @@ const professionalServiceSchema = {
             loadCalendly();
           }
 
-          // Track Calendly booking as Yandex.Metrika goal
+          // Auto-resize container to match Calendly content height
           window.addEventListener('message', function(e) {
+            if (e.data.event === 'calendly.page_height') {
+              var height = e.data.payload.height;
+              container.style.height = height;
+            }
+            // Track Calendly booking as Yandex.Metrika goal
             if (e.data.event === 'calendly.event_scheduled') {
               ym(107099009, 'reachGoal', 'calendly_click');
             }
