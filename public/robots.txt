@@ -1,4 +1,6 @@
 User-agent: *
 Allow: /
 
+Clean-param: etext
+
 Sitemap: https://psyholog-irina.ru/sitemap-index.xml
