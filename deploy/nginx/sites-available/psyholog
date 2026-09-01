@@ -1,0 +1,45 @@
+# Site config for psyholog-irina.ru, installed at /etc/nginx/sites-available/psyholog.
+# Depends on conf.d/markdown-negotiation.conf and snippets/markdown-location.conf.
+
+server {
+    server_name psyholog-irina.ru www.psyholog-irina.ru 194.87.101.175;
+
+    root /var/www/psyholog;
+    index index.html;
+
+    gzip on;
+    gzip_types text/plain text/css text/markdown application/javascript application/json image/svg+xml;
+    gzip_min_length 256;
+
+    location ~* \.(js|css|png|jpg|jpeg|gif|ico|svg|webp|avif|woff2?)$ {
+        expires 30d;
+        add_header Cache-Control "public, immutable";
+    }
+
+    location / {
+        include /etc/nginx/snippets/markdown-location.conf;
+    }
+
+    error_page 404 /404.html;
+
+    listen [::]:443 ssl ipv6only=on; # managed by Certbot
+    listen 443 ssl; # managed by Certbot
+    ssl_certificate /etc/letsencrypt/live/psyholog-irina.ru/fullchain.pem; # managed by Certbot
+    ssl_certificate_key /etc/letsencrypt/live/psyholog-irina.ru/privkey.pem; # managed by Certbot
+    include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
+    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
+
+}
+server {
+    if ($host = psyholog-irina.ru) {
+        return 301 https://$host$request_uri;
+    } # managed by Certbot
+
+
+    listen 80;
+    listen [::]:80;
+    server_name psyholog-irina.ru www.psyholog-irina.ru 194.87.101.175;
+    return 404; # managed by Certbot
+
+
+}

@@ -10,6 +10,7 @@ const currentPath = Astro.url.pathname;
 const siteUrl = 'https://psyholog-irina.ru';
 const ogImageUrl = ogImage ? `${siteUrl}${ogImage}` : `${siteUrl}/images/stol.png`;
 const pageUrl = `${siteUrl}${currentPath}`;
+const markdownUrl = currentPath.endsWith('/') ? `${pageUrl}index.md` : `${pageUrl}.md`;
 
 const navLinks = [
   { href: "/", label: "Главная", match: (p: string) => p === "/" },
@@ -32,6 +33,7 @@ const navLinks = [
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={pageUrl} />
+    <link rel="alternate" type="text/markdown" href={markdownUrl} />
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
