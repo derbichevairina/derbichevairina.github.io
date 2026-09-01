@@ -4,6 +4,11 @@
 Runs on the web server every half hour, so it stays on the standard library:
 the box has python3.9 and no node. The files land outside the rsync target,
 otherwise the next site deploy would delete them.
+
+The endpoints below are the ones Calendly's own booking page calls. They need no
+token but are undocumented, so they can change without notice; the documented
+replacement is API v2 /event_type_available_times, which needs a personal access
+token and answers seven days at a time.
 """
 from __future__ import annotations
 
