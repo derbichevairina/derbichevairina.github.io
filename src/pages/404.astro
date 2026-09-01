@@ -1,0 +1,50 @@
+---
+import Base from '../layouts/Base.astro';
+
+const topics = [
+  { href: '/trevoga/', label: 'Тревога и панические атаки' },
+  { href: '/rpp/', label: 'Расстройства пищевого поведения' },
+  { href: '/otnosheniya/', label: 'Отношения и расставания' },
+  { href: '/emigratsiya/', label: 'Эмиграция и адаптация' },
+  { href: '/vygoranie/', label: 'Эмоциональное выгорание' },
+  { href: '/samootsenka/', label: 'Самооценка и уверенность' },
+  { href: '/kontakty/', label: 'Контакты и формат работы' },
+];
+---
+
+<Base
+  title="Страница не найдена — Ирина Дербичева"
+  description="Такой страницы на сайте нет. Выберите нужный раздел или запишитесь на консультацию."
+>
+  <Fragment slot="head">
+    <meta name="robots" content="noindex" />
+  </Fragment>
+
+  <section class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-28">
+    <p class="font-display text-6xl sm:text-7xl text-sage-200 mb-6">404</p>
+
+    <h1 class="font-display text-3xl sm:text-4xl font-medium text-sage-900 leading-tight mb-4 text-balance">
+      Такой страницы нет
+    </h1>
+    <p class="text-lg text-warm-600 leading-relaxed mb-10 text-pretty">
+      Возможно, ссылка устарела или в адресе опечатка. Вот что есть на сайте.
+    </p>
+
+    <ul class="space-y-3 mb-10">
+      {topics.map((topic) => (
+        <li>
+          <a href={topic.href} class="text-sage-600 hover:text-sage-700 underline underline-offset-2 transition-colors">
+            {topic.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+
+    <a
+      href="/"
+      class="inline-flex items-center justify-center bg-sage-600 text-white px-8 py-3.5 rounded-full font-medium hover:bg-sage-700 hover:shadow-glow active:scale-[0.98] transition-all duration-300 ease-fluid"
+    >
+      На главную
+    </a>
+  </section>
+</Base>
