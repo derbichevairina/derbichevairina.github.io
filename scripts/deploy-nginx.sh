@@ -10,8 +10,9 @@ repo_root="$(cd "$(dirname "$0")/.." && pwd)"
 
 $SSH "$HOST" 'mkdir -p /etc/nginx/snippets /etc/nginx/conf.d /root/nginx-backup'
 $SCP "$repo_root/deploy/nginx/conf.d/markdown-negotiation.conf" "$HOST:/etc/nginx/conf.d/markdown-negotiation.conf"
-$SCP "$repo_root/deploy/nginx/snippets/markdown-location.conf" "$HOST:/etc/nginx/snippets/markdown-location.conf"
-$SCP "$repo_root/deploy/nginx/snippets/slots-locations.conf" "$HOST:/etc/nginx/snippets/slots-locations.conf"
+for snippet in "$repo_root"/deploy/nginx/snippets/*.conf; do
+    $SCP "$snippet" "$HOST:/etc/nginx/snippets/$(basename "$snippet")"
+done
 $SCP "$repo_root/deploy/nginx/sites-available/psyholog" "$HOST:/etc/nginx/sites-available/psyholog.new"
 
 $SSH "$HOST" 'bash -euo pipefail -s' <<'REMOTE'

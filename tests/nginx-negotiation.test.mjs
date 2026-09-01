@@ -35,6 +35,8 @@ function writeSite() {
   writeFileSync(resolve(SITE_ROOT, '404.html'), '<html><body>404 html</body></html>');
   writeFileSync(resolve(SITE_ROOT, '404.md'), '# 404 markdown\n');
   writeFileSync(resolve(SITE_ROOT, 'robots.txt'), 'User-agent: *\n');
+  writeFileSync(resolve(SITE_ROOT, 'sitemap.xml'), '<urlset><url><loc>тест</loc></url></urlset>\n');
+  writeFileSync(resolve(SITE_ROOT, 'style.css'), 'body { color: red }\n');
   writeFileSync(resolve(SITE_ROOT, 'images/photo.png'), 'not really a png');
 }
 
@@ -73,6 +75,7 @@ before(async () => {
     '-v', `${resolve(REPO, 'deploy/nginx/conf.d/markdown-negotiation.conf')}:/etc/nginx/conf.d/markdown-negotiation.conf:ro`,
     '-v', `${resolve(REPO, 'deploy/nginx/snippets/markdown-location.conf')}:/etc/nginx/snippets/markdown-location.conf:ro`,
     '-v', `${SITE_ROOT}:/var/www/site:ro`,
+    '-v', `${resolve(REPO, 'deploy/nginx/snippets/charset.conf')}:/etc/nginx/snippets/charset.conf:ro`,
     '-v', `${resolve(REPO, 'deploy/nginx/snippets/slots-locations.conf')}:/etc/nginx/snippets/slots-locations.conf:ro`,
     '-v', `${SLOTS_ROOT}:/var/www/psyholog-slots:ro`,
     IMAGE,
@@ -235,3 +238,20 @@ test('lets a browser read the free slots too', async () => {
   assert.equal(response.status, 200);
   assert.equal(response.body, '{"days":[]}\n');
 });
+
+// Cyrillic in a .txt or .xml comes out as mojibake when nginx leaves the charset off.
+for (const [path, contentType] of [
+  ['/robots.txt', 'text/plain; charset=utf-8'],
+  ['/sitemap.xml', 'text/xml; charset=utf-8'],
+  ['/style.css', 'text/css; charset=utf-8'],
+  ['/slots.json', 'application/json; charset=utf-8'],
+  ['/slots.md', 'text/markdown; charset=utf-8'],
+  ['/trevoga/', 'text/html; charset=utf-8'],
+]) {
+  test(`declares utf-8 for ${path}`, async () => {
+    const response = await get(path, '*/*');
+
+    assert.equal(response.status, 200);
+    assert.equal(response.headers['content-type'], contentType);
+  });
+}
