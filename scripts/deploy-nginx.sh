@@ -11,6 +11,7 @@ repo_root="$(cd "$(dirname "$0")/.." && pwd)"
 $SSH "$HOST" 'mkdir -p /etc/nginx/snippets /etc/nginx/conf.d /root/nginx-backup'
 $SCP "$repo_root/deploy/nginx/conf.d/markdown-negotiation.conf" "$HOST:/etc/nginx/conf.d/markdown-negotiation.conf"
 $SCP "$repo_root/deploy/nginx/snippets/markdown-location.conf" "$HOST:/etc/nginx/snippets/markdown-location.conf"
+$SCP "$repo_root/deploy/nginx/snippets/slots-locations.conf" "$HOST:/etc/nginx/snippets/slots-locations.conf"
 $SCP "$repo_root/deploy/nginx/sites-available/psyholog" "$HOST:/etc/nginx/sites-available/psyholog.new"
 
 $SSH "$HOST" 'bash -euo pipefail -s' <<'REMOTE'
@@ -20,7 +21,6 @@ mv /etc/nginx/sites-available/psyholog.new /etc/nginx/sites-available/psyholog
 if ! nginx -t; then
     echo "config rejected, rolling back" >&2
     cp /root/nginx-backup/psyholog.bak /etc/nginx/sites-available/psyholog
-    rm -f /etc/nginx/conf.d/markdown-negotiation.conf /etc/nginx/snippets/markdown-location.conf
     nginx -t
     exit 1
 fi
