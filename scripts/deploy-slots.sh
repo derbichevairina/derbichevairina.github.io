@@ -17,9 +17,9 @@ chmod 755 /usr/local/bin/calendly-slots.py
 mkdir -p /var/www/psyholog-slots
 systemctl daemon-reload
 systemctl enable --now calendly-slots.timer
-# publish once now, so nginx has something to serve before the first timer tick
+# publish once now, so nginx has something to serve before the first timer tick;
+# a oneshot unit propagates the script's exit code, so a broken fetch fails the deploy
 systemctl start calendly-slots.service
-systemctl status calendly-slots.service --no-pager --lines 3
 REMOTE
 
 echo "slot publisher installed on $HOST"
