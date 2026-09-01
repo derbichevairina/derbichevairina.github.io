@@ -105,6 +105,13 @@ test('html responses vary on Accept', async () => {
   assert.equal(response.headers.vary, 'Accept, Accept-Encoding');
 });
 
+test('keeps serving html when the Accept header is empty', async () => {
+  const response = await get('/trevoga/', '');
+
+  assert.equal(response.status, 200);
+  assert.equal(response.body, '<html><body>trevoga html</body></html>');
+});
+
 test('keeps serving html to browsers', async () => {
   const browserAccept = 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8';
   const response = await get('/trevoga/', browserAccept);
@@ -117,37 +124,43 @@ test('keeps serving html to browsers', async () => {
 test('keeps serving html when no Accept header is sent', async () => {
   const response = await get('/trevoga/', null);
 
-  assert.match(response.headers['content-type'], /^text\/html/);
+  assert.equal(response.status, 200);
+  assert.equal(response.body, '<html><body>trevoga html</body></html>');
 });
 
 test('keeps serving html for a wildcard Accept', async () => {
   const response = await get('/trevoga/', '*/*');
 
-  assert.match(response.headers['content-type'], /^text\/html/);
+  assert.equal(response.status, 200);
+  assert.equal(response.body, '<html><body>trevoga html</body></html>');
 });
 
 test('honors q-values when html is preferred', async () => {
   const response = await get('/trevoga/', 'text/html;q=0.9, text/markdown;q=0.8');
 
-  assert.match(response.headers['content-type'], /^text\/html/);
+  assert.equal(response.status, 200);
+  assert.equal(response.body, '<html><body>trevoga html</body></html>');
 });
 
 test('honors q-values when markdown is preferred', async () => {
   const response = await get('/trevoga/', 'text/markdown;q=0.9, text/html;q=0.8');
 
-  assert.match(response.headers['content-type'], /^text\/markdown/);
+  assert.equal(response.status, 200);
+  assert.equal(response.body, '# trevoga markdown\n');
 });
 
 test('honors q-values when markdown and html are equally preferred', async () => {
   const response = await get('/trevoga/', 'text/markdown;q=0.5, text/html;q=0.5');
 
-  assert.match(response.headers['content-type'], /^text\/markdown/);
+  assert.equal(response.status, 200);
+  assert.equal(response.body, '# trevoga markdown\n');
 });
 
 test('treats markdown with q=0 as rejected', async () => {
   const response = await get('/trevoga/', 'text/markdown;q=0, text/html');
 
-  assert.match(response.headers['content-type'], /^text\/html/);
+  assert.equal(response.status, 200);
+  assert.equal(response.body, '<html><body>trevoga html</body></html>');
 });
 
 test('rejects a page request that accepts neither markdown nor html', async () => {
