@@ -2,15 +2,14 @@
 interface Props {
   title: string;
   description: string;
-  canonicalUrl?: string;
   ogImage?: string;
 }
 
-const { title, description, canonicalUrl, ogImage } = Astro.props;
+const { title, description, ogImage } = Astro.props;
 const currentPath = Astro.url.pathname;
 const siteUrl = 'https://psyholog-irina.ru';
 const ogImageUrl = ogImage ? `${siteUrl}${ogImage}` : `${siteUrl}/images/stol.png`;
-const pageUrl = canonicalUrl || `${siteUrl}${currentPath}`;
+const pageUrl = `${siteUrl}${currentPath}`;
 
 const navLinks = [
   { href: "/", label: "Главная", match: (p: string) => p === "/" },
@@ -32,7 +31,7 @@ const navLinks = [
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <title>{title}</title>
     <meta name="description" content={description} />
-    {canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
+    <link rel="canonical" href={pageUrl} />
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
@@ -199,6 +198,10 @@ const navLinks = [
         </div>
 
         <div class="border-t border-sage-800 mt-10 pt-8 text-center text-xs text-sage-500">
+          <div class="flex flex-wrap justify-center gap-x-5 gap-y-2 mb-4">
+            <a href="/kontakty/" class="hover:text-sage-300 transition-colors duration-300">Контакты</a>
+            <a href="/privacy/" class="hover:text-sage-300 transition-colors duration-300">Политика конфиденциальности</a>
+          </div>
           &copy; {new Date().getFullYear()} Ирина Дербичева. Все права защищены.
         </div>
       </div>

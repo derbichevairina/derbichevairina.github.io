@@ -11,34 +11,46 @@ const heroAvif420 = await getImage({ src: heroImage, width: 420, format: 'avif',
 const heroAvif640 = await getImage({ src: heroImage, width: 640, format: 'avif', quality: 70 });
 const heroAvif840 = await getImage({ src: heroImage, width: 840, format: 'avif', quality: 70 });
 
+// Person is a top-level node, not nested under provider: parsers that only scan
+// the graph's roots would otherwise miss the identity behind the practice.
 const professionalServiceSchema = {
   "@context": "https://schema.org",
-  "@type": "ProfessionalService",
-  "name": "Ирина Дербичева — экзистенциальный психолог",
-  "description": "Экзистенциальный психолог, ACT-терапевт. Индивидуальные консультации онлайн для взрослых.",
-  "url": "https://psyholog-irina.ru",
-  "image": "https://psyholog-irina.ru/images/stol.png",
-  "telephone": "+79028983895",
-  "priceRange": `${PRICE}₽`,
-  "areaServed": "Онлайн",
-  "availableLanguage": "Russian",
-  "provider": {
-    "@type": "Person",
-    "name": "Ирина Дербичева",
-    "jobTitle": "Экзистенциальный психолог, ACT-терапевт",
-    "image": "https://psyholog-irina.ru/images/stol.png",
-    "url": "https://psyholog-irina.ru",
-    "sameAs": [
-      "https://t.me/derbichevairina",
-      "https://wa.me/+79028983895"
-    ]
-  },
-  "offers": {
-    "@type": "Offer",
-    "price": String(PRICE),
-    "priceCurrency": "RUB",
-    "description": `Индивидуальная онлайн-консультация, ${DURATION_MIN} минут`
-  }
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": "https://psyholog-irina.ru/#irina",
+      "name": "Ирина Дербичева",
+      "description": "Клинический психолог, экзистенциальный терапевт и ACT-терапевт. Индивидуальные онлайн-консультации для взрослых.",
+      "jobTitle": "Экзистенциальный психолог, ACT-терапевт",
+      "image": "https://psyholog-irina.ru/images/stol.png",
+      "url": "https://psyholog-irina.ru",
+      "telephone": "+79028983895",
+      "knowsLanguage": "ru",
+      "sameAs": [
+        "https://t.me/derbichevairina",
+        "https://wa.me/+79028983895"
+      ]
+    },
+    {
+      "@type": "ProfessionalService",
+      "@id": "https://psyholog-irina.ru/#practice",
+      "name": "Ирина Дербичева — экзистенциальный психолог",
+      "description": "Экзистенциальный психолог, ACT-терапевт. Индивидуальные консультации онлайн для взрослых.",
+      "url": "https://psyholog-irina.ru",
+      "image": "https://psyholog-irina.ru/images/stol.png",
+      "telephone": "+79028983895",
+      "priceRange": `${PRICE}₽`,
+      "areaServed": "Онлайн",
+      "availableLanguage": "Russian",
+      "provider": { "@id": "https://psyholog-irina.ru/#irina" },
+      "offers": {
+        "@type": "Offer",
+        "price": String(PRICE),
+        "priceCurrency": "RUB",
+        "description": `Индивидуальная онлайн-консультация, ${DURATION_MIN} минут`
+      }
+    }
+  ]
 };
 ---
 
