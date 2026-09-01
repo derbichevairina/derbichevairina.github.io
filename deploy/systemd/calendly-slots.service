@@ -1,0 +1,8 @@
+[Unit]
+Description=Publish the nearest free Calendly slots
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/python3 /usr/local/bin/calendly-slots.py

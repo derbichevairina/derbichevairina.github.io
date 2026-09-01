@@ -1,0 +1,32 @@
+{
+  "invitee_publisher_error": false,
+  "today": "2026-09-01",
+  "availability_timezone": "Asia/Tbilisi",
+  "days": [
+    {
+      "date": "2026-09-01",
+      "status": "available",
+      "spots": [
+        { "status": "available", "start_time": "2026-09-01T10:00:00+03:00", "invitees_remaining": 1 },
+        { "status": "available", "start_time": "2026-09-01T18:00:00+03:00", "invitees_remaining": 1 },
+        { "status": "available", "start_time": "2026-09-01T18:30:00+03:00", "invitees_remaining": 1 }
+      ],
+      "invitee_events": []
+    },
+    {
+      "date": "2026-09-02",
+      "status": "available",
+      "spots": [
+        { "status": "available", "start_time": "2026-09-02T10:00:00+03:00", "invitees_remaining": 1 },
+        { "status": "unavailable", "start_time": "2026-09-02T10:30:00+03:00", "invitees_remaining": 0 }
+      ],
+      "invitee_events": []
+    },
+    {
+      "date": "2026-09-03",
+      "status": "unavailable",
+      "spots": [],
+      "invitee_events": []
+    }
+  ]
+}

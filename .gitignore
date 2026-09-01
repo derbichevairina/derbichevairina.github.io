@@ -4,3 +4,6 @@ dist/
 .DS_Store
 tailwindcss-fundamentals-v4.zip
 tests/.site
+tests/.slots
+__pycache__/
+.pytest_cache/

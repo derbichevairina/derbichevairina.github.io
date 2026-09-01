@@ -24,6 +24,7 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
+      - uses: astral-sh/setup-uv@v5
       - run: npm test
       - run: npm run build
       - uses: actions/upload-pages-artifact@v3
@@ -61,10 +62,15 @@ jobs:
           remote_user: root
           remote_key: ${{ secrets.VPS_SSH_KEY }}
 
-      - name: Deploy nginx config
+      - name: Set up ssh key
         run: |
           mkdir -p ~/.ssh
           echo "${{ secrets.VPS_SSH_KEY }}" > ~/.ssh/vps_key
           chmod 600 ~/.ssh/vps_key
           ssh-keyscan -H 194.87.101.175 >> ~/.ssh/known_hosts
-          SSH="ssh -i ~/.ssh/vps_key" SCP="scp -i ~/.ssh/vps_key" ./scripts/deploy-nginx.sh
+
+      - name: Deploy slot publisher
+        run: SSH="ssh -i ~/.ssh/vps_key" SCP="scp -i ~/.ssh/vps_key" ./scripts/deploy-slots.sh
+
+      - name: Deploy nginx config
+        run: SSH="ssh -i ~/.ssh/vps_key" SCP="scp -i ~/.ssh/vps_key" ./scripts/deploy-nginx.sh

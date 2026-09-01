@@ -7,7 +7,7 @@
     "build": "astro build && node scripts/generate-markdown.mjs",
     "preview": "astro preview",
     "astro": "astro",
-    "test": "node --test tests/*.test.mjs"
+    "test": "node --test tests/*.test.mjs && uv run --with pytest pytest tests -q"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.0",

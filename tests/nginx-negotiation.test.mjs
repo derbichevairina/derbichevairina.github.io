@@ -8,6 +8,7 @@ import { resolve } from 'node:path';
 // Runs the real nginx config from deploy/nginx/ against a fixture site inside Docker.
 const REPO = resolve(import.meta.dirname, '..');
 const SITE_ROOT = resolve(REPO, 'tests/.site');
+const SLOTS_ROOT = resolve(REPO, 'tests/.slots');
 const IMAGE = 'nginx:1.18-alpine';
 
 let containerId;
@@ -19,6 +20,10 @@ function docker(...args) {
 
 function writeSite() {
   rmSync(SITE_ROOT, { recursive: true, force: true });
+  rmSync(SLOTS_ROOT, { recursive: true, force: true });
+  mkdirSync(SLOTS_ROOT, { recursive: true });
+  writeFileSync(resolve(SLOTS_ROOT, 'slots.json'), '{"days":[]}\n');
+  writeFileSync(resolve(SLOTS_ROOT, 'slots.md'), '# slots markdown\n');
   for (const dir of ['trevoga', 'nomarkdown', 'images']) {
     mkdirSync(resolve(SITE_ROOT, dir), { recursive: true });
   }
@@ -68,6 +73,8 @@ before(async () => {
     '-v', `${resolve(REPO, 'deploy/nginx/conf.d/markdown-negotiation.conf')}:/etc/nginx/conf.d/markdown-negotiation.conf:ro`,
     '-v', `${resolve(REPO, 'deploy/nginx/snippets/markdown-location.conf')}:/etc/nginx/snippets/markdown-location.conf:ro`,
     '-v', `${SITE_ROOT}:/var/www/site:ro`,
+    '-v', `${resolve(REPO, 'deploy/nginx/snippets/slots-locations.conf')}:/etc/nginx/snippets/slots-locations.conf:ro`,
+    '-v', `${SLOTS_ROOT}:/var/www/psyholog-slots:ro`,
     IMAGE,
   );
   baseUrl = `http://${docker('port', containerId, '80').split('\n')[0]}`;
@@ -77,6 +84,7 @@ before(async () => {
 after(() => {
   if (containerId) docker('rm', '-f', containerId);
   rmSync(SITE_ROOT, { recursive: true, force: true });
+  rmSync(SLOTS_ROOT, { recursive: true, force: true });
 });
 
 test('serves markdown for Accept: text/markdown', async () => {
@@ -203,4 +211,27 @@ test('still resolves an extensionless page url', async () => {
 
   assert.equal(response.status, 200);
   assert.equal(response.body, '# trevoga markdown\n');
+});
+
+test('serves the free slots as json', async () => {
+  const response = await get('/slots.json', 'application/json');
+
+  assert.equal(response.status, 200);
+  assert.match(response.headers['content-type'], /^application\/json/);
+  assert.equal(response.body, '{"days":[]}\n');
+});
+
+test('serves the free slots as markdown', async () => {
+  const response = await get('/slots.md', '*/*');
+
+  assert.equal(response.status, 200);
+  assert.equal(response.headers['content-type'], 'text/markdown; charset=utf-8');
+  assert.equal(response.body, '# slots markdown\n');
+});
+
+test('lets a browser read the free slots too', async () => {
+  const response = await get('/slots.json', 'text/html');
+
+  assert.equal(response.status, 200);
+  assert.equal(response.body, '{"days":[]}\n');
 });

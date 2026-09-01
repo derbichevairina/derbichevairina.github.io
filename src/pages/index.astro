@@ -316,6 +316,56 @@ const professionalServiceSchema = {
           Выберите подходящие дату и время, и я свяжусь с вами для подтверждения.
         </p>
       </div>
+      <!-- Filled in by the browser; the markup stays empty so the markdown variant of the page has nothing dangling in it. -->
+      <div id="slots" class="mb-8 sm:mb-10 rounded-2xl border border-sage-100/60 bg-white/80 backdrop-blur-sm p-5 sm:p-6" style="display:none;"></div>
+      <script is:inline>
+        (function() {
+          var box = document.getElementById('slots');
+          if (!box) return;
+
+          var dayFormat = new Intl.DateTimeFormat('ru-RU', { weekday: 'long', day: 'numeric', month: 'long' });
+          var timeFormat = new Intl.DateTimeFormat('ru-RU', { hour: '2-digit', minute: '2-digit', hour12: false });
+
+          function groupByLocalDay(days) {
+            // slots arrive in Moscow time; the visitor's own day can start and end elsewhere
+            var grouped = [];
+            days.forEach(function(day) {
+              day.spots.forEach(function(spot) {
+                var at = new Date(spot);
+                var label = dayFormat.format(at);
+                var last = grouped[grouped.length - 1];
+                if (!last || last.label !== label) {
+                  last = { label: label, times: [] };
+                  grouped.push(last);
+                }
+                last.times.push(timeFormat.format(at));
+              });
+            });
+            return grouped;
+          }
+
+          function render(data) {
+            var html = '<p class="text-sage-800 font-semibold text-sm sm:text-base">Свободные окна на ближайшую неделю</p>';
+
+            if (!data.days.length) {
+              html += '<p class="text-warm-600 text-sm mt-4">Свободных окон на неделю вперёд нет. Напишите в <a class="text-sage-700 underline" href="https://t.me/derbichevairina">Telegram</a> — Ирина подберёт время.</p>';
+            } else {
+              html += '<div class="mt-4 space-y-2">' + groupByLocalDay(data.days).map(function(day) {
+                return '<p class="text-sm text-warm-600"><span class="text-sage-700 font-medium">' + day.label + '</span> — ' + day.times.join(', ') + '</p>';
+              }).join('') + '</div>';
+              html += '<p class="text-warm-500 text-xs mt-4">Время в вашем часовом поясе, обновлено в ' + timeFormat.format(new Date(data.generated_at)) + '. Выберите окно в календаре ниже.</p>';
+            }
+
+            box.innerHTML = html;
+            box.style.display = '';
+          }
+
+          fetch('/slots.json')
+            .then(function(response) { return response.ok ? response.json() : Promise.reject(); })
+            .then(render)
+            .catch(function() {});
+        })();
+      </script>
       <div
         id="calendly-container"
         class="calendly-inline-widget"
