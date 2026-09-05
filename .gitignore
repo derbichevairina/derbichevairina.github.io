@@ -7,3 +7,5 @@ tests/.site
 tests/.slots
 __pycache__/
 .pytest_cache/
+
+untracked/

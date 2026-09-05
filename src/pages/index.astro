@@ -3,6 +3,7 @@ import { Image, getImage } from 'astro:assets';
 import Base from '../layouts/Base.astro';
 import CTA from '../components/CTA.astro';
 import TopicCard from '../components/TopicCard.astro';
+import VideoInterview from '../components/VideoInterview.astro';
 import { PRICE, DURATION_MIN, PRICE_LABEL } from '../config';
 import heroImage from '../assets/images/stol.png';
 import aboutImage from '../assets/images/okno.png';
@@ -141,6 +142,8 @@ const professionalServiceSchema = {
       </div>
     </div>
   </section>
+
+  <VideoInterview />
 
   <!-- Topics -->
   <section style={`padding-top: var(--spacing-fluid-section); padding-bottom: var(--spacing-fluid-section);`}>
