@@ -20,6 +20,30 @@ server {
 
     include /etc/nginx/snippets/slots-locations.conf;
 
+    # The index2 picker's two Cal.com calls, same origin (no CORS) until book.psyholog-irina.ru has DNS.
+    # Cal.com runs on this box at 127.0.0.1:3000; its admin UI stays reachable only over SSH.
+    location = /cal-api/api/trpc/slots/getSchedule {
+        limit_except GET { deny all; }
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_set_header x-vercel-ip-country RU;      # phone field defaults to +7
+        proxy_set_header Accept-Language "ru-RU,ru";  # Cal.com answers in Russian
+        proxy_pass http://127.0.0.1:3000/api/trpc/slots/getSchedule;
+    }
+
+    location = /cal-api/api/book/event {
+        limit_except POST { deny all; }
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_set_header x-vercel-ip-country RU;      # phone field defaults to +7
+        proxy_set_header Accept-Language "ru-RU,ru";  # Cal.com answers in Russian
+        proxy_pass http://127.0.0.1:3000/api/book/event;
+    }
+
+    location ^~ /cal-api/ {
+        return 404;
+    }
+
     location / {
         include /etc/nginx/snippets/markdown-location.conf;
     }
