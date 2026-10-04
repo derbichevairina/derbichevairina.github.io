@@ -380,14 +380,10 @@ const professionalServiceSchema = {
         .pk-times { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.625rem; margin-top: 1.5rem; }
         @media (min-width: 640px) { .pk-times { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
         .pk-time { height: 3.5rem; border: 1.5px solid #486741; border-radius: 0.875rem; color: #365030; font-size: 1.125rem; font-weight: 600; font-variant-numeric: tabular-nums; }
-        /* desktop: step 2 keeps step 1's height (--pk-locked) and its times share what is left of the card */
+        /* desktop: step 2 keeps step 1's height; two wide button columns, top-aligned, the rest of the card stays white */
         @media (min-width: 1024px) {
-          #picker, #picker-view, #picker-view > div { display: flex; flex-direction: column; }
           #picker { min-height: var(--pk-locked, 0); }
-          #picker-view, #picker-view > div { flex: 1; }
-          .pk-back { align-self: flex-start; }
-          .pk-times { flex: 1; grid-template-columns: repeat(var(--pk-cols), minmax(0, 1fr)); grid-auto-rows: 1fr; }
-          .pk-time { height: auto; max-height: 9rem; }
+          .pk-times { grid-template-columns: repeat(2, minmax(0, 1fr)); }
         }
         .pk-form { display: grid; gap: 0.875rem; margin-top: 1.25rem; }
         .pk-form label { display: grid; gap: 0.375rem; font-size: 0.875rem; font-weight: 500; color: #3c332f; }
@@ -534,10 +530,9 @@ const professionalServiceSchema = {
 
           function showTimes(note = "") {
             const times = monthSlots[day] || [];
-            const columns = Math.ceil(times.length / Math.ceil(times.length / 4)); // balanced rows on desktop: 7 → 4 + 3
             show(back("month", "Выбрать другую дату") + `<h3 tabindex="-1">${dayTitle(day)}</h3><p class="pk-sub">60 минут · онлайн · время московское</p>`
               + (note ? `<p class="pk-msg" role="alert">${note}</p>` : "")
-              + `<div class="pk-times" style="--pk-cols: ${columns}">${times.map((s) => `<button type="button" class="pk-time" data-time="${s.time}">${clock(Date.parse(s.time))}</button>`).join("")}</div>`,
+              + `<div class="pk-times">${times.map((s) => `<button type="button" class="pk-time" data-time="${s.time}">${clock(Date.parse(s.time))}</button>`).join("")}</div>`,
               `${dayTitle(day)}, свободных времён: ${times.length}`, "h3", true);
             picker.style.setProperty("--pk-locked", `${calendarHeight}px`);
           }
