@@ -57,26 +57,6 @@ const navLinks = [
 
     <slot name="head" />
 
-    <!-- Deferred Analytics -->
-    {analytics && <Fragment>
-    <script is:inline>
-      window.addEventListener('load', function() {
-        setTimeout(function() {
-          // Google Analytics (GA4)
-          var gaScript = document.createElement('script');
-          gaScript.src = 'https://www.googletagmanager.com/gtag/js?id=G-SSVP38V9SN';
-          gaScript.async = true;
-          document.head.appendChild(gaScript);
-          gaScript.onload = function() {
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-SSVP38V9SN');
-          };
-        }, 3000);
-      });
-    </script>
-    </Fragment>}
   </head>
   <body class="min-h-screen flex flex-col">
     <header class="sticky top-0 z-50 bg-warm-50/80 backdrop-blur-xl border-b border-sage-100/60">
