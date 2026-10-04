@@ -73,24 +73,9 @@ const navLinks = [
             gtag('js', new Date());
             gtag('config', 'G-SSVP38V9SN');
           };
-
-          // Yandex.Metrika
-          (function (m, e, t, r, i, k, a) {
-            m[i] = m[i] || function () { (m[i].a = m[i].a || []).push(arguments) };
-            m[i].l = 1 * new Date();
-            for (var j = 0; j < document.scripts.length; j++) {
-              if (document.scripts[j].src === r) return;
-            }
-            k = e.createElement(t); a = e.getElementsByTagName(t)[0];
-            k.async = 1; k.src = r; a.parentNode.insertBefore(k, a);
-          })(window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
-          ym(107099009, "init", { clickmap: true, trackLinks: true, accurateTrackBounce: true, webvisor: true });
         }, 3000);
       });
     </script>
-    <noscript>
-      <div><img src="https://mc.yandex.ru/watch/107099009" style="position:absolute; left:-9999px;" alt="" /></div>
-    </noscript>
     </Fragment>}
   </head>
   <body class="min-h-screen flex flex-col">
@@ -217,6 +202,98 @@ const navLinks = [
         </div>
       </div>
     </footer>
+
+    {analytics && <Fragment>
+    <div
+      id="cookie-banner"
+      role="region"
+      aria-label="Согласие на cookie"
+      hidden
+      class="fixed inset-x-3 bottom-3 sm:inset-x-auto sm:right-6 sm:bottom-6 sm:max-w-md z-[60] bg-white rounded-2xl border border-sage-100 shadow-lg p-5 text-sm text-warm-600 leading-relaxed"
+    >
+      <p class="mb-4">
+        Яндекс Метрика считает посещения сайта и включается только с вашего согласия.
+        <a href="/privacy/" class="text-sage-600 hover:text-sage-700 underline underline-offset-2">Политика конфиденциальности</a>
+      </p>
+      <div class="flex gap-2">
+        <button
+          type="button"
+          id="cookie-accept"
+          class="flex-1 bg-sage-600 text-white px-4 py-2.5 rounded-full text-sm font-medium hover:bg-sage-700 transition-colors duration-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sage-600"
+        >
+          Принять
+        </button>
+        <button
+          type="button"
+          id="cookie-decline"
+          class="flex-1 border border-sage-200 text-sage-700 px-4 py-2.5 rounded-full text-sm font-medium hover:bg-sage-50 transition-colors duration-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sage-600"
+        >
+          Отказаться
+        </button>
+      </div>
+    </div>
+
+    <script is:inline>
+      (function () {
+        var KEY = 'cookie-consent';
+        var banner = document.getElementById('cookie-banner');
+        var metrikaLoaded = false;
+
+        function loadMetrika() {
+          if (metrikaLoaded || localStorage.getItem(KEY) !== 'accepted') return;
+          metrikaLoaded = true;
+          (function (m, e, t, r, i, k, a) {
+            m[i] = m[i] || function () { (m[i].a = m[i].a || []).push(arguments) };
+            m[i].l = 1 * new Date();
+            k = e.createElement(t); a = e.getElementsByTagName(t)[0];
+            k.async = 1; k.src = r; a.parentNode.insertBefore(k, a);
+          })(window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+          ym(107099009, "init", { clickmap: true, trackLinks: true, accurateTrackBounce: true, webvisor: false });
+        }
+
+        function deleteMetrikaCookies() {
+          var expired = '=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/';
+          document.cookie.split('; ').forEach(function (pair) {
+            var name = pair.split('=')[0];
+            if (name.indexOf('_ym') !== 0) return;
+            document.cookie = name + expired;
+            document.cookie = name + expired + '; domain=' + location.hostname;
+            document.cookie = name + expired + '; domain=.' + location.hostname;
+          });
+        }
+
+        function choose(value) {
+          localStorage.setItem(KEY, value);
+          banner.hidden = true;
+          if (value === 'accepted') {
+            loadMetrika();
+          } else {
+            deleteMetrikaCookies();
+            // the counter already running in this page only stops with a reload
+            if (metrikaLoaded) location.reload();
+          }
+        }
+
+        function showBanner() {
+          banner.hidden = false;
+          document.getElementById('cookie-accept').focus();
+        }
+
+        document.getElementById('cookie-accept').addEventListener('click', function () { choose('accepted'); });
+        document.getElementById('cookie-decline').addEventListener('click', function () { choose('declined'); });
+        document.querySelectorAll('[data-cookie-settings]').forEach(function (el) {
+          el.addEventListener('click', showBanner);
+        });
+
+        var saved = localStorage.getItem(KEY);
+        if (saved === 'accepted') {
+          window.addEventListener('load', function () { setTimeout(loadMetrika, 3000); });
+        } else if (saved !== 'declined') {
+          banner.hidden = false;
+        }
+      })();
+    </script>
+    </Fragment>}
 
     <script is:inline>
       document.getElementById('mobile-menu-btn')?.addEventListener('click', () => {
