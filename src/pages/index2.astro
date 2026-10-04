@@ -352,8 +352,7 @@ const professionalServiceSchema = {
       <style is:inline>
         #booking-grid { max-width: 40rem; margin-inline: auto; }
         @media (min-width: 1024px) {
-          #booking-grid { max-width: none; grid-template-columns: 22rem minmax(0, 640px); justify-content: center; align-items: stretch; }
-          #booking-grid > div:first-child > div { height: 100%; }
+          #booking-grid { max-width: none; grid-template-columns: 22rem minmax(0, 640px); justify-content: center; align-items: start; }
         }
         #picker { padding: 1.25rem 1rem 1.5rem; color: #3c332f; }
         @media (min-width: 640px) { #picker { padding: 2rem; } }
@@ -386,9 +385,12 @@ const professionalServiceSchema = {
         .pk-time { height: 3.25rem; border: 1.5px solid #486741; border-radius: 0.875rem; color: #365030; font-size: 1.0625rem; font-weight: 600; font-variant-numeric: tabular-nums; }
         /* from 768 px the card (640 px) makes room: calendar shrinks, one column of times to its right, no back link */
         @media (min-width: 768px) {
-          .pk-pick { display: flex; gap: 2rem; align-items: flex-start; }
+          .pk-pick { display: flex; gap: 2rem; }
           .pk-cal { flex: 1; min-width: 0; }
-          .pk-slots { flex: none; width: 10.5rem; margin-top: 3.75rem; }
+          /* contain: size keeps the times out of the row's height: the card stays the calendar's height, the list scrolls */
+          .pk-slots { flex: none; width: 10.5rem; margin-top: 3.75rem; display: flex; flex-direction: column; contain: size; }
+          .pk-times { flex: 1; min-height: 0; align-content: start; overflow-y: auto; scrollbar-width: thin; scrollbar-color: #c7dbc2 transparent; scrollbar-gutter: stable; padding: 3px; margin: -3px; }
+          .pk-times.pk-more { -webkit-mask-image: linear-gradient(#000 calc(100% - 2.5rem), transparent); mask-image: linear-gradient(#000 calc(100% - 2.5rem), transparent); }
           .pk-slots .pk-back { display: none; }
         }
         .pk-tz { position: relative; margin-top: 1.25rem; }
@@ -512,11 +514,17 @@ const professionalServiceSchema = {
             return slotsByMonth[key];
           }
 
+          function fadeTimesIfMore() { // the soft bottom edge shows while the times column has more below
+            const times = view.querySelector(".pk-times");
+            if (times) times.classList.toggle("pk-more", times.scrollTop + times.clientHeight < times.scrollHeight - 1);
+          }
+
           // focusSelector: null on page load (no scroll jump), the step heading on a step change
           function show(html, announcement, focusSelector, isNewStep) {
             view.innerHTML = `<div class="${isNewStep ? "pk-step" : ""}">${html}</div>`;
             picker.classList.remove("pk-moved");
             status.textContent = announcement;
+            fadeTimesIfMore();
             const target = focusSelector && view.querySelector(focusSelector);
             if (target) (target.disabled ? view.querySelector("h3") : target).focus();
           }
@@ -623,6 +631,8 @@ const professionalServiceSchema = {
             const list = view.querySelector(".pk-tzlist");
             if (list) { list.hidden = true; document.getElementById("pk-tzbtn").setAttribute("aria-expanded", "false"); }
           };
+          view.addEventListener("scroll", fadeTimesIfMore, true); // scroll does not bubble
+          new ResizeObserver(fadeTimesIfMore).observe(picker); // a size change (window, fonts) moves the end of the list
           picker.addEventListener("pointermove", () => picker.classList.add("pk-moved"));
           document.addEventListener("click", (e) => { if (!e.target.closest(".pk-tz")) closeZoneList(); });
           view.addEventListener("keydown", (e) => { if (e.key === "Escape" && !view.querySelector(".pk-tzlist")?.hidden) { closeZoneList(); document.getElementById("pk-tzbtn").focus(); } });
