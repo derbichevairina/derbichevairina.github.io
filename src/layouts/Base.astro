@@ -3,9 +3,10 @@ interface Props {
   title: string;
   description: string;
   ogImage?: string;
+  analytics?: boolean;
 }
 
-const { title, description, ogImage } = Astro.props;
+const { title, description, ogImage, analytics = true } = Astro.props;
 const currentPath = Astro.url.pathname;
 const siteUrl = 'https://psyholog-irina.ru';
 const ogImageUrl = ogImage ? `${siteUrl}${ogImage}` : `${siteUrl}/images/stol.png`;
@@ -55,6 +56,7 @@ const navLinks = [
     <slot name="head" />
 
     <!-- Deferred Analytics -->
+    {analytics && <Fragment>
     <script is:inline>
       window.addEventListener('load', function() {
         setTimeout(function() {
@@ -87,6 +89,7 @@ const navLinks = [
     <noscript>
       <div><img src="https://mc.yandex.ru/watch/107099009" style="position:absolute; left:-9999px;" alt="" /></div>
     </noscript>
+    </Fragment>}
   </head>
   <body class="min-h-screen flex flex-col">
     <header class="sticky top-0 z-50 bg-warm-50/80 backdrop-blur-xl border-b border-sage-100/60">

@@ -1,0 +1,455 @@
+---
+// The one line to change once Cal.com has a public address.
+const CALCOM_ORIGIN = "https://andrews-colours-tree-united.trycloudflare.com";
+
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import VideoInterview from '../components/VideoInterview.astro';
+import { PRICE, DURATION_MIN, PRICE_LABEL } from '../config';
+import heroImage from '../assets/images/stol.png';
+import aboutImage from '../assets/images/okno.png';
+
+const topics = [
+  { title: "Тревога и панические атаки", href: "/trevoga/", icon: '<polyline points="2 12 6 12 9 4 12 20 15 4 18 12 22 12" />' },
+  { title: "Расстройства пищевого поведения", href: "/rpp/", icon: '<path d="M12 3C8 7 6 11 6 15a6 6 0 0012 0c0-4-2-8-6-12z" /><path d="M12 9v12" />' },
+  { title: "Отношения и расставания", href: "/otnosheniya/", icon: '<path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z" />' },
+  { title: "Самооценка и уверенность", href: "/samootsenka/", icon: '<path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z" />' },
+  { title: "Эмоциональное выгорание", href: "/vygoranie/", icon: '<path d="M13 2L3 14h9l-1 8 10-12h-9z" />' },
+  { title: "Эмиграция и адаптация", href: "/emigratsiya/", icon: '<circle cx="12" cy="12" r="10" /><line x1="2" y1="12" x2="22" y2="12" /><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z" />' },
+  { title: "Сепарация от родителей", href: "#about", icon: '<path d="M12 22v-8" /><path d="M12 14C8 14 5 11 5 7c7 0 7 3 7 7z" /><path d="M12 10c4 0 7-3 7-7-7 0-7 3-7 7z" />' },
+  { title: "Потеря близкого", href: "#about", icon: '<path d="M12 2c-2 3-3 5-3 7a3 3 0 006 0c0-2-1-4-3-7z" /><line x1="12" y1="12" x2="12" y2="20" /><line x1="8" y1="20" x2="16" y2="20" />' },
+  { title: "Депрессивные состояния", href: "#about", icon: '<path d="M20 17.58A5 5 0 0018 8h-1.26A8 8 0 104 16.25" /><line x1="8" y1="16" x2="8" y2="20" /><line x1="12" y1="16" x2="12" y2="20" /><line x1="16" y1="16" x2="16" y2="20" />' },
+];
+
+const credentials = ["Магистр психологии", "Экзистенциальный психолог", "Логотерапевт", "ACT-терапевт", "Клинический психолог"];
+
+const stats = [
+  { value: "5+ лет", label: "частной практики" },
+  { value: "2 800+ ч.", label: "обучения психологии" },
+  { value: "Онлайн", label: "из любой точки мира" },
+];
+
+const steps = [
+  { step: "01", title: "Знакомство", text: "Встреча проходит онлайн, по видеосвязи. Вы рассказываете о себе и о том, что вас привело." },
+  { step: "02", title: "Понимание", text: `Я расскажу, чем могу быть полезна, и отвечу на ваши вопросы. Встреча длится ${DURATION_MIN} минут.` },
+  { step: "03", title: "Решение", text: "Встреча ни к чему не обязывает. Мы вместе решим, подходим ли друг другу для дальнейшей работы." },
+];
+
+const education = [
+  { name: "Психологическое консультирование и диагностика личности", school: "Московский институт психоанализа", hours: "1590 ч.", year: "2020" },
+  { name: "Терапия принятием и ответственностью (ACT)", school: "МГУ", hours: "178 ч.", year: "2024" },
+  { name: "Психоанализ", school: "ИТГИПП", hours: "104 ч.", year: "2023" },
+  { name: "Клиническая психология, неврачебная психотерапия", school: "ИТГИПП", hours: "650 ч.", year: "2022" },
+  { name: "Коучинг. Теория и практика", school: "Среда обучения", hours: "", year: "2021" },
+  { name: "Психология нарушений пищевого поведения", school: "АНО ДПО «НАДПО»", hours: "230 ч.", year: "2021" },
+  { name: "Гештальт-терапия", school: "Среда обучения", hours: "90 ч.", year: "2020" },
+];
+
+// Person is a top-level node, not nested under provider: parsers that only scan
+// the graph's roots would otherwise miss the identity behind the practice.
+const professionalServiceSchema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": "https://psyholog-irina.ru/#irina",
+      "name": "Ирина Дербичева",
+      "description": "Клинический психолог, экзистенциальный терапевт и ACT-терапевт. Индивидуальные онлайн-консультации для взрослых.",
+      "jobTitle": "Экзистенциальный психолог, ACT-терапевт",
+      "image": "https://psyholog-irina.ru/images/stol.png",
+      "url": "https://psyholog-irina.ru",
+      "telephone": "+79028983895",
+      "knowsLanguage": "ru",
+      "sameAs": [
+        "https://t.me/derbichevairina",
+        "https://wa.me/+79028983895"
+      ]
+    },
+    {
+      "@type": "ProfessionalService",
+      "@id": "https://psyholog-irina.ru/#practice",
+      "name": "Ирина Дербичева — экзистенциальный психолог",
+      "description": "Экзистенциальный психолог, ACT-терапевт. Индивидуальные консультации онлайн для взрослых.",
+      "url": "https://psyholog-irina.ru",
+      "image": "https://psyholog-irina.ru/images/stol.png",
+      "telephone": "+79028983895",
+      "priceRange": `${PRICE}₽`,
+      "areaServed": "Онлайн",
+      "availableLanguage": "Russian",
+      "provider": { "@id": "https://psyholog-irina.ru/#irina" },
+      "offers": {
+        "@type": "Offer",
+        "price": String(PRICE),
+        "priceCurrency": "RUB",
+        "description": `Индивидуальная онлайн-консультация, ${DURATION_MIN} минут`
+      }
+    }
+  ]
+};
+---
+
+<Base
+  title="Ирина Дербичева — экзистенциальный психолог онлайн | ACT-терапевт"
+  description="Экзистенциальный психолог, ACT-терапевт. Индивидуальные консультации онлайн для взрослых. Тревога, РПП, отношения, самооценка, выгорание."
+  analytics={false}
+>
+  <meta name="robots" content="noindex, nofollow" slot="head" />
+  <link rel="preconnect" href={CALCOM_ORIGIN} slot="head" />
+  <script type="application/ld+json" set:html={JSON.stringify(professionalServiceSchema)} />
+
+  <!-- Hero -->
+  <section class="relative overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-b from-sage-100/60 via-warm-50 to-warm-50"></div>
+    <div class="absolute -top-24 -right-32 w-[34rem] h-[34rem] bg-sage-200/50 rounded-full blur-3xl"></div>
+    <div class="absolute top-40 -left-40 w-96 h-96 bg-warm-200/40 rounded-full blur-3xl"></div>
+
+    <div class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 pb-14 sm:pt-16 sm:pb-20 lg:pt-20 lg:pb-24">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+
+        <div class="lg:col-span-7 order-2 lg:order-1">
+          <div class="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-white/80 border border-sage-200/70 shadow-soft text-sage-700 text-xs sm:text-sm font-medium mb-6 sm:mb-8 backdrop-blur-sm">
+            <span class="relative flex h-2 w-2">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-sage-500 opacity-60"></span>
+              <span class="relative inline-flex rounded-full h-2 w-2 bg-sage-600"></span>
+            </span>
+            Принимаю новых клиентов · онлайн
+          </div>
+
+          <h1 class="font-display font-medium text-sage-900 leading-[1.08] mb-5 sm:mb-6 text-balance" style="font-size: var(--text-fluid-4xl);">
+            Здесь можно<br />
+            <span class="italic text-sage-600">просто быть.</span>
+          </h1>
+
+          <p class="text-warm-600 leading-relaxed mb-7 sm:mb-8 max-w-lg text-pretty text-base sm:text-lg">
+            Я Ирина Дербичева, экзистенциальный психолог. Сопровождаю людей в поиске
+            ответов на важные жизненные вопросы — в диалоге о свободе,
+            ответственности и личных смыслах.
+          </p>
+
+          <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 mb-7 sm:mb-9">
+            <a
+              href="#booking"
+              class="inline-flex items-center justify-center gap-2.5 bg-sage-600 text-white px-7 sm:px-8 py-4 rounded-full text-sm sm:text-base font-medium hover:bg-sage-700 hover:shadow-glow hover:-translate-y-0.5 active:scale-[0.98] transition-all duration-300 ease-fluid"
+            >
+              Записаться на сессию
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+            </a>
+            <a
+              href="#video"
+              class="inline-flex items-center justify-center gap-2.5 px-7 py-4 rounded-full text-sm sm:text-base font-medium text-sage-700 border border-sage-300/80 bg-white/60 backdrop-blur-sm hover:bg-sage-50 hover:border-sage-400 active:scale-[0.98] transition-all duration-300"
+            >
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z" /></svg>
+              Познакомиться в видео
+            </a>
+          </div>
+
+          <div class="flex flex-wrap gap-2">
+            {credentials.map((tag) => (
+              <span class="px-3 py-1.5 rounded-full bg-white/70 text-sage-700 text-xs font-medium border border-sage-200/60">
+                {tag}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        <div class="lg:col-span-5 order-1 lg:order-2 flex justify-center lg:justify-end">
+          <div class="relative w-full max-w-[420px] sm:max-w-[320px] lg:max-w-[420px]">
+            <div class="absolute -inset-2 sm:-inset-3 bg-gradient-to-br from-sage-200/60 to-warm-200/40 rounded-[1.5rem] sm:rounded-[2rem] rotate-2"></div>
+            <Image
+              src={heroImage}
+              alt="Ирина Дербичева — экзистенциальный психолог"
+              class="relative rounded-[1.25rem] sm:rounded-[1.75rem] object-cover w-full shadow-elevated"
+              widths={[420, 640, 840]}
+              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 320px, 420px"
+              fetchpriority="high"
+              loading="eager"
+              format="webp"
+              quality={80}
+            />
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-14 sm:mt-20 pt-8 border-t border-sage-200/50 grid grid-cols-3 gap-4 sm:gap-8 max-w-3xl reveal">
+        {stats.map((s) => (
+          <div class="text-center sm:text-left">
+            <p class="font-display font-semibold text-sage-800" style="font-size: var(--text-fluid-xl);">{s.value}</p>
+            <p class="text-warm-500 text-xs sm:text-sm mt-1">{s.label}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <VideoInterview />
+
+  <!-- Topics -->
+  <section id="topics" style="padding-top: var(--spacing-fluid-lg); padding-bottom: var(--spacing-fluid-section);">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-8 sm:mb-12 reveal">
+        <div>
+          <p class="text-sage-500 text-sm font-medium tracking-wide uppercase mb-3">Направления</p>
+          <h2 class="font-display text-sage-900 text-balance" style="font-size: var(--text-fluid-3xl);">С чем я работаю</h2>
+        </div>
+        <p class="text-warm-500 max-w-sm text-pretty text-sm sm:text-base">
+          Научно обоснованные методы — экзистенциальная терапия, логотерапия, ACT.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 reveal-stagger">
+        {topics.map((t) => (
+          <a
+            href={t.href}
+            class="group relative flex items-center gap-4 p-5 rounded-2xl bg-white border border-sage-100 hover:border-sage-300 hover:shadow-medium hover:-translate-y-0.5 active:scale-[0.99] transition-all duration-300 ease-fluid"
+          >
+            <div class="flex-shrink-0 w-11 h-11 rounded-xl bg-sage-100/70 flex items-center justify-center group-hover:bg-sage-600 transition-colors duration-300">
+              <svg class="w-5 h-5 text-sage-600 group-hover:text-white transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <Fragment set:html={t.icon} />
+              </svg>
+            </div>
+            <span class="flex-1 text-sm sm:text-[15px] font-medium text-warm-800 group-hover:text-sage-800 transition-colors duration-300 leading-snug">{t.title}</span>
+            <svg class="w-4 h-4 flex-shrink-0 text-sage-300 group-hover:text-sage-600 group-hover:translate-x-0.5 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about" class="relative">
+    <div class="absolute inset-0 bg-gradient-to-b from-white via-white to-warm-50/50"></div>
+    <div class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8" style="padding-top: var(--spacing-fluid-section); padding-bottom: var(--spacing-fluid-section);">
+      <div class="grid grid-cols-1 lg:grid-cols-5 gap-10 lg:gap-16 items-start reveal">
+        <div class="lg:col-span-3">
+          <p class="text-sage-500 text-sm font-medium tracking-wide uppercase mb-3">Обо мне</p>
+          <h2 class="font-display text-sage-800 mb-8" style="font-size: var(--text-fluid-3xl);">Экзистенциальный психолог</h2>
+
+          <div class="space-y-5 text-warm-600 leading-relaxed" style="font-size: var(--text-fluid-base);">
+            <p>
+              Меня зовут Ирина Дербичева. Провожу психологические консультации для взрослых,
+              веду свою практику онлайн с людьми из разных стран.
+            </p>
+            <p>
+              В работе опираюсь на экзистенциальный подход и логотерапию: вместе ищем смысл,
+              опору и то, как обходиться со своей свободой и ответственностью. Дополняю это
+              методами ACT — терапии принятия и ответственности, которая помогает жить
+              в согласии с собственными ценностями.
+            </p>
+            <p>
+              Моя жизнь проходит в путешествиях, поэтому работаю исключительно онлайн.
+              Я не работаю с несовершеннолетними и парами, но открыта к
+              другим запросам в рамках своей компетенции.
+            </p>
+          </div>
+
+          <blockquote class="mt-8 pl-5 border-l-2 border-sage-300">
+            <p class="text-sage-700 italic font-display" style="font-size: var(--text-fluid-lg);">
+              Я приглашаю вас на терапию. Предлагаю безопасное пространство, где можно
+              выражать и анализировать свои чувства и мысли, не боясь осуждения.
+            </p>
+          </blockquote>
+        </div>
+
+        <div class="lg:col-span-2 flex justify-center lg:justify-end">
+          <div class="relative w-full max-w-sm">
+            <div class="absolute -inset-2 bg-gradient-to-tr from-sage-200/50 to-warm-200/30 rounded-3xl -rotate-1"></div>
+            <Image
+              src={aboutImage}
+              alt="Ирина Дербичева"
+              class="relative rounded-2xl object-cover w-full shadow-medium"
+              widths={[320, 480, 640]}
+              sizes="(max-width: 1024px) 100vw, 384px"
+              loading="lazy"
+              format="webp"
+              quality={80}
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- First session -->
+  <section style="padding-top: var(--spacing-fluid-section); padding-bottom: var(--spacing-fluid-section);">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-10 sm:mb-16 reveal">
+        <p class="text-sage-500 text-sm font-medium tracking-wide uppercase mb-3">Формат работы</p>
+        <h2 class="font-display text-sage-900 text-balance" style="font-size: var(--text-fluid-3xl);">Как проходит первая сессия</h2>
+      </div>
+
+      <div class="relative grid grid-cols-1 sm:grid-cols-3 gap-10 sm:gap-8 max-w-4xl mx-auto reveal-stagger steps-grid">
+        {steps.map((item) => (
+          <div class="relative text-center sm:text-left">
+            <div class="relative z-10 inline-flex items-center justify-center w-14 h-14 rounded-full bg-white border-2 border-sage-300 font-display font-semibold text-sage-700 text-lg mb-5">
+              {item.step}
+            </div>
+            <h3 class="font-display text-sage-900 mb-3" style="font-size: var(--text-fluid-xl);">{item.title}</h3>
+            <p class="text-warm-600 leading-relaxed text-sm sm:text-base">{item.text}</p>
+          </div>
+        ))}
+      </div>
+
+      <p class="text-center mt-10 sm:mt-14">
+        <a href="#video-5" class="inline-flex items-center gap-2 text-sage-700 font-medium hover:text-sage-800 transition-colors">
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z" /></svg>
+          Ирина рассказывает о первой встрече в видео
+        </a>
+      </p>
+    </div>
+  </section>
+
+  <!-- Education -->
+  <section class="relative">
+    <div class="absolute inset-0 bg-gradient-to-b from-warm-50 via-sage-50/40 to-warm-50"></div>
+    <div class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8" style="padding-top: var(--spacing-fluid-section); padding-bottom: var(--spacing-fluid-section);">
+      <div class="text-center mb-10 sm:mb-14 reveal">
+        <p class="text-sage-500 text-sm font-medium tracking-wide uppercase mb-3">Квалификация</p>
+        <h2 class="font-display text-sage-900 text-balance" style="font-size: var(--text-fluid-3xl);">Образование</h2>
+      </div>
+
+      <div class="max-w-3xl mx-auto mb-6 reveal">
+        <div class="relative overflow-hidden flex gap-5 sm:gap-6 p-6 sm:p-8 rounded-2xl bg-sage-700 text-white shadow-elevated">
+          <div class="absolute -top-16 -right-16 w-56 h-56 bg-sage-600/60 rounded-full blur-2xl"></div>
+          <div class="relative flex-shrink-0 w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-white/15 flex items-center justify-center">
+            <svg class="w-6 h-6 sm:w-7 sm:h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.697 50.697 0 0112 13.489a50.702 50.702 0 017.74-3.342M6.75 15a.75.75 0 100-1.5.75.75 0 000 1.5zm0 0v-3.675A55.378 55.378 0 0112 8.443m-7.007 11.55A5.981 5.981 0 006.75 15.75v-1.5" /></svg>
+          </div>
+          <div class="relative min-w-0">
+            <p class="text-sage-200 text-xs font-medium tracking-wide uppercase mb-1.5">Высшее образование</p>
+            <p class="font-display font-semibold leading-snug" style="font-size: var(--text-fluid-xl);">Магистр психологии</p>
+            <p class="text-sage-100 text-sm sm:text-base mt-1.5">Экзистенциальная психология личности и логотерапия</p>
+            <p class="text-sage-300 text-xs sm:text-sm mt-2">Московский институт психоанализа · 2026</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="max-w-3xl mx-auto rounded-2xl bg-white border border-sage-100 divide-y divide-sage-100/80 overflow-hidden reveal">
+        {education.map((edu) => (
+          <div class="flex items-center gap-4 px-5 sm:px-7 py-4 sm:py-5 hover:bg-sage-50/60 transition-colors duration-200">
+            <div class="min-w-0 flex-1">
+              <p class="font-medium text-sage-900 text-sm sm:text-[15px] leading-snug">{edu.name}</p>
+              <p class="text-warm-500 text-xs mt-1">{edu.school}{edu.hours && ` · ${edu.hours}`}</p>
+            </div>
+            <span class="flex-shrink-0 px-2.5 py-1 rounded-full bg-sage-100/70 text-sage-700 text-xs font-semibold tabular-nums">{edu.year}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Booking -->
+  <section id="booking" style="padding-top: var(--spacing-fluid-section); padding-bottom: var(--spacing-fluid-section);">
+    <div class="mx-auto px-4 sm:px-6 lg:px-8" style="max-width: 80rem;">
+      <div class="text-center mb-10 sm:mb-14">
+        <p class="text-sage-500 text-sm font-medium tracking-wide uppercase mb-3">Запись</p>
+        <h2 class="font-display text-sage-900 text-balance" style="font-size: var(--text-fluid-3xl);">Запись на встречу</h2>
+        <p class="text-warm-600 max-w-lg mx-auto mt-4 text-pretty">
+          Выберите подходящие дату и время — я свяжусь с вами для подтверждения.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-10 items-start">
+        <div class="lg:col-span-4 lg:sticky lg:top-24">
+          <div class="rounded-2xl bg-white border border-sage-200/70 shadow-soft p-6 sm:p-8">
+            <p class="text-warm-500 text-xs font-medium tracking-wide uppercase mb-2">Стоимость сессии</p>
+            <p class="font-display font-semibold text-sage-900" style="font-size: var(--text-fluid-3xl);">{PRICE_LABEL}</p>
+            <p class="text-warm-500 text-sm mt-1 mb-6">{DURATION_MIN} минут · видеосвязь</p>
+            <ul class="space-y-3.5 text-sm text-warm-700">
+              {[
+                "Первая встреча ни к чему не обязывает",
+                "Конфиденциально и безопасно",
+                "Работаю только со взрослыми",
+              ].map((item) => (
+                <li class="flex items-start gap-2.5">
+                  <svg class="w-5 h-5 flex-shrink-0 text-sage-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+            <div class="mt-7 pt-6 border-t border-sage-100">
+              <p class="text-warm-500 text-xs mb-3">Или напишите напрямую:</p>
+              <div class="flex gap-2.5">
+                <a href="https://t.me/derbichevairina" target="_blank" rel="noopener" class="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl border border-sage-200 text-sage-700 text-sm font-medium hover:bg-sage-50 hover:border-sage-300 transition-all duration-200">
+                  <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+                  Telegram
+                </a>
+                <a href="https://wa.me/+79028983895" target="_blank" rel="noopener" class="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl border border-sage-200 text-sage-700 text-sm font-medium hover:bg-sage-50 hover:border-sage-300 transition-all duration-200">
+                  <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                  WhatsApp
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="lg:col-span-8">
+          <p class="text-warm-500 text-sm mb-4">
+            Тестовая версия: запись не настоящая. Записаться сейчас можно в
+            <a href="https://t.me/derbichevairina" target="_blank" rel="noopener" class="underline hover:text-sage-700">Telegram</a> или
+            <a href="https://wa.me/+79028983895" target="_blank" rel="noopener" class="underline hover:text-sage-700">WhatsApp</a>.
+          </p>
+          <div id="cal-inline" style="min-width:320px;"></div>
+        </div>
+      </div>
+      <script is:inline define:vars={{ CALCOM_ORIGIN }}>
+        (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if (typeof namespace === "string") { cal.ns[namespace] = cal.ns[namespace] || api; p(cal.ns[namespace], ar); p(cal, ["initNamespace", namespace]); } else p(cal, ar); return; } p(cal, ar); }; })(window, CALCOM_ORIGIN + "/embed/embed.js", "init");
+        Cal("init", { origin: CALCOM_ORIGIN });
+        Cal("inline", { elementOrSelector: "#cal-inline", calLink: "irina/consultation", layout: "month_view", config: { theme: "light" } });
+        Cal("ui", {
+          theme: "light",
+          hideEventTypeDetails: true,
+          cssVarsPerTheme: { light: { "cal-brand": "#486741", "cal-bg": "#fbf8f5", "cal-bg-emphasis": "#efe7df" } },
+        });
+      </script>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8" style="padding-bottom: var(--spacing-fluid-section);">
+    <div class="relative overflow-hidden rounded-3xl bg-sage-900 text-center p-8 sm:p-14 lg:p-20 reveal">
+      <div class="absolute -top-24 -left-24 w-72 h-72 bg-sage-700/50 rounded-full blur-3xl"></div>
+      <div class="absolute -bottom-24 -right-24 w-72 h-72 bg-sage-600/40 rounded-full blur-3xl"></div>
+
+      <div class="relative z-10">
+        <h2 class="font-display text-white text-balance mb-4" style="font-size: var(--text-fluid-3xl);">
+          Запишитесь на первую сессию
+        </h2>
+        <p class="text-sage-300 max-w-md mx-auto mb-9 text-pretty">
+          Первая встреча — это знакомство. Она ни к чему вас не обязывает.
+        </p>
+
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
+          <a
+            href="#booking"
+            class="inline-flex items-center justify-center gap-2.5 bg-white text-sage-900 px-8 py-4 rounded-full font-medium hover:bg-sage-50 hover:-translate-y-0.5 active:scale-[0.98] transition-all duration-300 ease-fluid w-full sm:w-auto"
+          >
+            Выбрать время
+          </a>
+          <a
+            href="https://t.me/derbichevairina"
+            target="_blank"
+            rel="noopener"
+            class="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full font-medium text-white border border-sage-600 hover:bg-sage-800 hover:border-sage-500 active:scale-[0.98] transition-all duration-300 w-full sm:w-auto"
+          >
+            Написать в Telegram
+          </a>
+        </div>
+
+        <p class="text-sage-500 text-sm mt-8">Консультация — {PRICE_LABEL} / {DURATION_MIN} минут</p>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  /* Connector line between steps on desktop */
+  @media (min-width: 640px) {
+    .steps-grid::before {
+      content: "";
+      position: absolute;
+      top: 1.75rem; /* center of the 3.5rem number circles */
+      left: 12%;
+      right: 12%;
+      border-top: 2px dashed var(--color-sage-300);
+    }
+  }
+</style>
