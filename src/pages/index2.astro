@@ -347,15 +347,52 @@ const professionalServiceSchema = {
         </p>
       </div>
 
-      <!-- Cal.com's two steps (useSlotsViewOnSmallScreen below) work only in an iframe of 768 px or less:
-           the calendar alone, the times in a sheet after a date is picked. The iframe fills #cal-clip, which carries the card's frame. -->
+      <!-- Own date → time → form picker on Cal.com's public endpoints (script below). Plain CSS here, not Tailwind
+           classes: a class new to the build changes the shared CSS file and its hash on every page. -->
       <style is:inline>
-        #cal-clip { overflow: hidden; }
         #booking-grid { max-width: 40rem; margin-inline: auto; }
         @media (min-width: 1024px) {
           #booking-grid { max-width: none; grid-template-columns: 22rem minmax(0, 640px); justify-content: center; align-items: stretch; }
           #booking-grid > div:first-child > div { height: 100%; }
         }
+        #picker { padding: 1.25rem 1rem 1.5rem; color: #3c332f; }
+        @media (min-width: 640px) { #picker { padding: 2rem; } }
+        #picker h3 { font-family: var(--font-display); color: #1f2a1c; font-size: 1.5rem; line-height: 1.25; outline-style: none; }
+        #picker button:focus-visible, #picker a:focus-visible { outline-style: solid; outline-width: 2px; outline-color: #486741; outline-offset: 2px; }
+        #picker a { color: #486741; text-decoration: underline; }
+        .pk-step { animation: pk-in 0.22s ease-out; }
+        @keyframes pk-in { from { opacity: 0; translate: 0 6px; } }
+        .pk-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; }
+        .pk-nav { width: 2.75rem; height: 2.75rem; border-radius: 9999px; color: #486741; font-size: 1.75rem; line-height: 1; }
+        .pk-nav:hover:not(:disabled) { background: #f2f7f0; }
+        .pk-nav:disabled { color: #e5dcd4; }
+        .pk-grid { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 0.375rem; text-align: center; }
+        .pk-wd { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.05em; color: #9e867a; padding-bottom: 0.25rem; }
+        .pk-day, .pk-skel { position: relative; height: clamp(2.75rem, 11vw, 3.5rem); border-radius: 0.75rem; font-size: 1rem; }
+        .pk-day:disabled { color: #bcafa6; }
+        .pk-free { background: #dfecdd; color: #2a3b27; font-weight: 600; cursor: pointer; }
+        .pk-today::after { content: ""; position: absolute; left: 50%; bottom: 0.35rem; width: 0.3rem; height: 0.3rem; margin-left: -0.15rem; border-radius: 50%; background: currentColor; }
+        .pk-skel { background: #f3ede7; animation: pk-pulse 0.8s ease-in-out infinite alternate; }
+        @keyframes pk-pulse { to { opacity: 0.4; } }
+        .pk-back { color: #486741; font-weight: 500; padding: 0.25rem 0; margin-bottom: 0.75rem; }
+        .pk-back:hover { text-decoration: underline; }
+        .pk-sub { color: #847065; font-size: 0.9375rem; margin-top: 0.375rem; }
+        .pk-times { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.625rem; margin-top: 1.5rem; }
+        @media (min-width: 640px) { .pk-times { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+        .pk-time { height: 3.5rem; border: 1.5px solid #486741; border-radius: 0.875rem; color: #365030; font-size: 1.125rem; font-weight: 600; font-variant-numeric: tabular-nums; }
+        .pk-form { display: grid; gap: 0.875rem; margin-top: 1.25rem; }
+        .pk-form label { display: grid; gap: 0.375rem; font-size: 0.875rem; font-weight: 500; color: #3c332f; }
+        .pk-input { height: 3rem; padding: 0 0.875rem; border: 1px solid #c7dbc2; border-radius: 0.75rem; font-size: 1rem; background: #fff; }
+        .pk-input:focus { outline-style: solid; outline-width: 2px; outline-color: #486741; outline-offset: -1px; }
+        .pk-btn { height: 3.25rem; padding: 0 1.75rem; border-radius: 9999px; background: #486741; color: #fff; font-weight: 500; font-size: 1rem; }
+        .pk-btn:hover:not(:disabled) { background: #365030; }
+        .pk-btn:disabled { opacity: 0.6; }
+        .pk-note { color: #9e867a; font-size: 0.8125rem; line-height: 1.5; }
+        .pk-msg { color: #9b2c2c; background: #fbefec; border-radius: 0.75rem; padding: 0.75rem 1rem; font-size: 0.9375rem; margin-top: 1rem; }
+        .pk-empty { margin-top: 1.25rem; text-align: center; color: #847065; }
+        .pk-empty .pk-btn { margin-top: 0.75rem; }
+        @media (hover: hover) { .pk-free:hover, .pk-time:hover { background: #486741; color: #fff; } }
+        @media (prefers-reduced-motion: reduce) { .pk-step, .pk-skel { animation: none; } }
       </style>
       <div id="booking-grid" class="grid grid-cols-1 gap-6 lg:gap-10 items-start">
         <div class="lg:sticky lg:top-24">
@@ -391,8 +428,9 @@ const professionalServiceSchema = {
           </div>
         </div>
 
-        <div id="cal-clip" class="rounded-2xl bg-white border border-sage-200/70 shadow-soft">
-          <div id="cal-inline" style="min-width:320px;"></div>
+        <div id="picker" class="rounded-2xl bg-white border border-sage-200/70 shadow-soft">
+          <div id="picker-view"></div>
+          <p id="picker-status" class="sr-only" aria-live="polite"></p>
         </div>
       </div>
       <p class="text-warm-500 text-xs text-center mt-6">
@@ -401,14 +439,150 @@ const professionalServiceSchema = {
         <a href="https://wa.me/+79028983895" target="_blank" rel="noopener" class="underline hover:text-sage-700">WhatsApp</a>.
       </p>
       <script is:inline define:vars={{ CALCOM_ORIGIN }}>
-        (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if (typeof namespace === "string") { cal.ns[namespace] = cal.ns[namespace] || api; p(cal.ns[namespace], ar); p(cal, ["initNamespace", namespace]); } else p(cal, ar); return; } p(cal, ar); }; })(window, CALCOM_ORIGIN + "/embed/embed.js", "init");
-        Cal("init", { origin: CALCOM_ORIGIN });
-        Cal("inline", { elementOrSelector: "#cal-inline", calLink: "irina/consultation", layout: "month_view", config: { theme: "light", useSlotsViewOnSmallScreen: "true" } });
-        Cal("ui", {
-          theme: "light",
-          hideEventTypeDetails: true,
-          cssVarsPerTheme: { light: { "cal-brand": "#486741", "cal-bg": "#ffffff", "cal-bg-emphasis": "#efe7df", "cal-border-booker-width": "0px" } },
-        });
+        (() => {
+          const TZ = "Europe/Moscow", MSK_OFFSET = 3 * 3600e3, HOUR = 3600e3, EVENT_TYPE_ID = 1;
+          const view = document.getElementById("picker-view"), status = document.getElementById("picker-status");
+          const contacts = '<a href="https://t.me/derbichevairina" target="_blank" rel="noopener">Telegram</a> или <a href="https://wa.me/+79028983895" target="_blank" rel="noopener">WhatsApp</a>';
+          // Moscow wall clock read through UTC getters (Moscow has no DST)
+          const nowMsk = new Date(Date.now() + MSK_OFFSET);
+          const firstMonth = { y: nowMsk.getUTCFullYear(), m: nowMsk.getUTCMonth() };
+          const todayKey = nowMsk.toISOString().slice(0, 10);
+          const slotsByMonth = {}; // "2026-10" → promise of { "2026-10-07": [{ time }] }, only days with free slots
+          let month = firstMonth, monthSlots = {}, day = null, slot = null;
+          const contact = { name: "", email: "", phone: "+7" };
+
+          const pad = (n) => String(n).padStart(2, "0");
+          const monthKey = ({ y, m }) => `${y}-${pad(m + 1)}`;
+          const daysIn = ({ y, m }) => new Date(Date.UTC(y, m + 1, 0)).getUTCDate();
+          const upperFirst = (s) => s[0].toUpperCase() + s.slice(1);
+          const formatDay = (key, options) => new Date(key + "T12:00:00Z").toLocaleDateString("ru-RU", { timeZone: "UTC", ...options });
+          const dayTitle = (key) => upperFirst(formatDay(key, { weekday: "long", day: "numeric", month: "long" }));
+          const clock = (ms) => new Date(ms).toLocaleTimeString("ru-RU", { timeZone: TZ, hour: "2-digit", minute: "2-digit" });
+          const slotRange = (time) => `${clock(Date.parse(time))}–${clock(Date.parse(time) + HOUR)}`;
+          const mskIso = (ms) => new Date(ms + MSK_OFFSET).toISOString().slice(0, 19) + "+03:00";
+          const back = (to, label) => `<button type="button" class="pk-back" data-go="${to}">← ${label}</button>`;
+
+          function loadMonthSlots(m) {
+            const key = monthKey(m);
+            if (!slotsByMonth[key]) {
+              const input = { json: { eventTypeId: EVENT_TYPE_ID, startTime: `${key}-01T00:00:00+03:00`, endTime: `${key}-${daysIn(m)}T23:59:59+03:00`, timeZone: TZ } };
+              slotsByMonth[key] = fetch(`${CALCOM_ORIGIN}/api/trpc/slots/getSchedule?input=${encodeURIComponent(JSON.stringify(input))}`)
+                .then((r) => { if (!r.ok) throw new Error(`slots ${r.status}`); return r.json(); })
+                .then((body) => body.result.data.json.slots)
+                .catch((e) => { delete slotsByMonth[key]; throw e; });
+            }
+            return slotsByMonth[key];
+          }
+
+          // focusSelector: null on page load (no scroll jump), the step heading on a step change
+          function show(html, announcement, focusSelector, isNewStep) {
+            view.innerHTML = `<div class="${isNewStep ? "pk-step" : ""}">${html}</div>`;
+            status.textContent = announcement;
+            const target = focusSelector && view.querySelector(focusSelector);
+            if (target) (target.disabled ? view.querySelector("h3") : target).focus();
+          }
+
+          function calendarHtml(slots) {
+            const title = upperFirst(formatDay(`${monthKey(month)}-01`, { month: "long" })) + " " + month.y;
+            const isFirst = month.y === firstMonth.y && month.m === firstMonth.m;
+            let cells = ["ПН", "ВТ", "СР", "ЧТ", "ПТ", "СБ", "ВС"].map((d) => `<div class="pk-wd" aria-hidden="true">${d}</div>`).join("");
+            cells += "<div></div>".repeat((new Date(Date.UTC(month.y, month.m, 1)).getUTCDay() + 6) % 7);
+            for (let d = 1; d <= daysIn(month); d++) {
+              const key = `${monthKey(month)}-${pad(d)}`, free = slots?.[key]?.length > 0, today = key === todayKey;
+              const label = formatDay(key, { day: "numeric", month: "long" }) + (today ? ", сегодня" : "") + (free ? ", есть время" : ", нет времени");
+              cells += slots
+                ? `<button type="button" class="pk-day${free ? " pk-free" : ""}${today ? " pk-today" : ""}" data-day="${key}" aria-label="${label}"${free ? "" : " disabled"}>${d}</button>`
+                : '<div class="pk-skel"></div>';
+            }
+            const empty = slots && !Object.keys(slots).length
+              ? '<div class="pk-empty"><p>В этом месяце свободного времени нет.</p><button type="button" class="pk-btn" data-go="next">Следующий месяц</button></div>'
+              : "";
+            return `<div class="pk-head"><button type="button" id="pk-prev" class="pk-nav" data-go="prev" aria-label="Предыдущий месяц"${isFirst ? " disabled" : ""}>‹</button>`
+              + `<h3 tabindex="-1">${title}</h3><button type="button" id="pk-next" class="pk-nav" data-go="next" aria-label="Следующий месяц">›</button></div>`
+              + `<div class="pk-grid"${slots ? "" : ' aria-busy="true"'}>${cells}</div>${empty}`;
+          }
+
+          async function showMonth(focusSelector, isNewStep) {
+            const shown = month;
+            show(calendarHtml(null), "Загружаем расписание", focusSelector, isNewStep);
+            let slots;
+            try { slots = await loadMonthSlots(shown); } catch {
+              if (shown === month) show(`<h3 tabindex="-1">Расписание</h3><p class="pk-msg">Не удалось загрузить расписание — напишите в ${contacts}.</p>`, "Не удалось загрузить расписание", focusSelector);
+              return;
+            }
+            if (shown !== month) return; // the visitor already moved to another month
+            monthSlots = slots;
+            const freeDays = Object.keys(slots).length;
+            show(calendarHtml(slots), freeDays ? `Дней со свободным временем: ${freeDays}` : "В этом месяце свободного времени нет", focusSelector);
+          }
+
+          function showTimes(note = "") {
+            const times = monthSlots[day] || [];
+            show(back("month", "Выбрать другую дату") + `<h3 tabindex="-1">${dayTitle(day)}</h3><p class="pk-sub">60 минут · онлайн · время московское</p>`
+              + (note ? `<p class="pk-msg" role="alert">${note}</p>` : "")
+              + `<div class="pk-times">${times.map((s) => `<button type="button" class="pk-time" data-time="${s.time}">${clock(Date.parse(s.time))}</button>`).join("")}</div>`,
+              `${dayTitle(day)}, свободных времён: ${times.length}`, "h3", true);
+          }
+
+          function showForm() {
+            show(back("times", "Назад") + `<h3 tabindex="-1">${dayTitle(day)}, ${slotRange(slot)}</h3><p class="pk-sub">60 минут · онлайн · время московское</p>`
+              + '<form class="pk-form"><label>Имя<input class="pk-input" name="name" required autocomplete="name"></label>'
+              + '<label>Электронная почта<input class="pk-input" name="email" type="email" required autocomplete="email"></label>'
+              + '<label>Телефон<input class="pk-input" name="phone" type="tel" autocomplete="tel"></label>'
+              + '<p class="pk-msg" role="alert" hidden></p>'
+              + '<p class="pk-note">Продолжая, вы соглашаетесь с <a href="https://psyholog-irina.ru/privacy/" target="_blank" rel="noopener">политикой конфиденциальности</a></p>'
+              + '<button class="pk-btn">Записаться</button></form>', "Заполните контакты", "h3", true);
+            const form = view.querySelector("form");
+            for (const field in contact) form.elements.namedItem(field).value = contact[field];
+          }
+
+          async function book(form) {
+            const button = form.querySelector(".pk-btn"), message = form.querySelector(".pk-msg");
+            const phone = contact.phone.replace(/[^\d+]/g, ""), start = Date.parse(slot);
+            button.disabled = true; button.textContent = "Отправляем…"; message.hidden = true;
+            const response = await fetch(`${CALCOM_ORIGIN}/api/book/event`, {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                responses: { name: contact.name.trim(), email: contact.email.trim(), ...(phone.length > 2 && { attendeePhoneNumber: phone }) },
+                start: mskIso(start), end: mskIso(start + HOUR), eventTypeId: EVENT_TYPE_ID, timeZone: TZ, language: "ru", metadata: {},
+              }),
+            }).catch(() => null);
+            if (response?.ok || response?.status === 409) delete slotsByMonth[monthKey(month)]; // the slot is now held
+            if (response?.ok) {
+              return show(`<h3 tabindex="-1">Заявка отправлена — Ирина подтвердит время</h3><p class="pk-sub">${dayTitle(day)}, ${slotRange(slot)}, время московское</p>`
+                + `<p class="pk-note" style="margin-top: 1rem">Если планы изменятся, напишите в ${contacts}.</p>`, "Заявка отправлена", "h3", true);
+            }
+            if (response?.status === 409) {
+              try { monthSlots = await loadMonthSlots(month); } catch { monthSlots = {}; }
+              return showTimes("Это время уже занято — выберите другое.");
+            }
+            const problem = response?.status === 400 ? (await response.json().catch(() => ({}))).message || "" : "";
+            message.innerHTML = /email/.test(problem) ? "Проверьте адрес электронной почты."
+              : /phone/i.test(problem) ? "Проверьте номер телефона."
+              : /name/.test(problem) ? "Укажите имя."
+              : `Не получилось отправить заявку — напишите в ${contacts}.`;
+            message.hidden = false; button.disabled = false; button.textContent = "Записаться";
+          }
+
+          view.addEventListener("input", (e) => { if (e.target.name in contact) contact[e.target.name] = e.target.value; });
+          view.addEventListener("submit", (e) => { e.preventDefault(); book(e.target); });
+          view.addEventListener("click", (e) => {
+            const button = e.target.closest("button[type=button]");
+            if (!button) return;
+            const { go, day: pickedDay, time } = button.dataset;
+            if (go === "prev" || go === "next") {
+              const m = month.m + (go === "prev" ? -1 : 1);
+              month = { y: month.y + Math.floor(m / 12), m: (m + 12) % 12 };
+              showMonth(button.id ? `#${button.id}` : "h3");
+            } else if (go === "month") showMonth("h3", true);
+            else if (go === "times") showTimes();
+            else if (pickedDay) { day = pickedDay; showTimes(); }
+            else if (time) { slot = time; showForm(); }
+          });
+
+          showMonth(null);
+        })();
       </script>
     </div>
   </section>
