@@ -39,16 +39,18 @@ const videoSchema = {
     </div>
 
     <div id="interview" class="grid grid-cols-1 lg:grid-cols-[minmax(0,7fr)_minmax(0,4fr)] gap-5 lg:gap-x-8 lg:gap-y-5">
-      <div class="relative rounded-2xl overflow-hidden bg-sage-900 shadow-lg" style={`aspect-ratio: 16 / 9; background: url(/video/q${first.id}.jpg) center / cover;`}>
-        <iframe
-          data-player
-          class="absolute inset-0 w-full h-full border-0"
-          src={embedUrl(first.kinescopeId)}
-          title={first.question}
-          allow="autoplay; fullscreen; picture-in-picture; encrypted-media"
-          allowfullscreen
-          loading="lazy"
-        ></iframe>
+      <!-- Kinescope loads only after a click: until then the stage is a poster and a play button. -->
+      <div data-stage class="relative rounded-2xl overflow-hidden bg-sage-900 shadow-lg" style={`aspect-ratio: 16 / 9; background: url(/video/q${first.id}.jpg) center / cover;`}>
+        <button
+          type="button"
+          data-play
+          aria-label={`Смотреть: ${first.question}`}
+          class="group absolute inset-0 w-full h-full flex items-center justify-center bg-black/10 transition-colors duration-300 hover:bg-black/20"
+        >
+          <span class="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-white/90 text-sage-700 shadow-lg flex items-center justify-center transition-transform duration-300 group-hover:scale-105">
+            <svg class="w-7 h-7 sm:w-9 sm:h-9 ml-1" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z" /></svg>
+          </span>
+        </button>
       </div>
 
       <!-- The list takes the player's height on desktop and scrolls inside; below lg it just flows. -->
@@ -105,32 +107,51 @@ const videoSchema = {
     (function () {
       var root = document.getElementById('interview');
       if (!root) return;
-      var player = root.querySelector('[data-player]');
+      var stage = root.querySelector('[data-stage]');
       var picks = root.querySelectorAll('[data-pick]');
       var answers = root.querySelectorAll('[data-answer]');
+      var playButton = stage.querySelector('[data-play]');
+      var current = picks[0];
+
+      function loadPlayer() {
+        var iframe = document.createElement('iframe');
+        iframe.className = 'absolute inset-0 w-full h-full border-0';
+        iframe.title = current.dataset.title;
+        iframe.allow = 'autoplay; fullscreen; picture-in-picture; encrypted-media';
+        iframe.allowFullscreen = true;
+        iframe.src = current.dataset.src;
+        stage.replaceChildren(iframe);
+      }
+
+      function select(button) {
+        current = button;
+        picks.forEach(function (b) {
+          if (b === button) b.setAttribute('aria-current', 'true');
+          else b.removeAttribute('aria-current');
+        });
+        answers.forEach(function (a) { a.classList.toggle('hidden', a.dataset.answer !== button.dataset.pick); });
+        button.scrollIntoView({ block: 'nearest' });
+      }
+
+      playButton.addEventListener('click', loadPlayer);
 
       picks.forEach(function (button) {
         button.addEventListener('click', function () {
-          var id = button.dataset.pick;
-          picks.forEach(function (b) {
-            if (b === button) b.setAttribute('aria-current', 'true');
-            else b.removeAttribute('aria-current');
-          });
-          answers.forEach(function (a) { a.classList.toggle('hidden', a.dataset.answer !== id); });
-          button.scrollIntoView({ block: 'nearest' });
-
-          player.title = button.dataset.title;
-          player.src = button.dataset.src;
+          select(button);
+          loadPlayer();
         });
       });
 
-      // links elsewhere on the page point at #video-N to open a particular answer
+      // links elsewhere on the page point at #video-N: show that answer, the player still waits for a click
       function openFromHash() {
         if (!/^#video-\d$/.test(location.hash)) return;
         var wanted = root.querySelector(location.hash);
         if (!wanted) return;
-        wanted.click();
-        player.parentElement.scrollIntoView({ block: 'center' });
+        select(wanted);
+        stage.style.background = 'url(/video/q' + wanted.dataset.pick + '.jpg) center / cover';
+        playButton.setAttribute('aria-label', 'Смотреть: ' + wanted.dataset.title);
+        stage.replaceChildren(playButton);
+        stage.parentElement.scrollIntoView({ block: 'center' });
       }
       openFromHash();
       window.addEventListener('hashchange', openFromHash);
