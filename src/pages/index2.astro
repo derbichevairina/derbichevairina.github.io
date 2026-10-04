@@ -365,13 +365,13 @@ const professionalServiceSchema = {
         .pk-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; }
         .pk-nav { width: 2.75rem; height: 2.75rem; border-radius: 9999px; color: #486741; font-size: 1.75rem; line-height: 1; }
         .pk-nav:hover:not(:disabled) { background: #f2f7f0; }
-        .pk-nav:disabled { color: #e5dcd4; }
+        .pk-nav:disabled { color: #a89a90; }
         .pk-grid { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 0.375rem; text-align: center; }
         .pk-wd { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.05em; color: #9e867a; padding-bottom: 0.25rem; }
         .pk-day, .pk-skel { position: relative; height: clamp(2.75rem, 11vw, 3.5rem); border-radius: 0.75rem; font-size: 1rem; }
         .pk-day:disabled { color: #bcafa6; }
         .pk-free { background: #dfecdd; color: #2a3b27; font-weight: 600; cursor: pointer; }
-        .pk-today::after { content: ""; position: absolute; left: 50%; bottom: 0.35rem; width: 0.3rem; height: 0.3rem; margin-left: -0.15rem; border-radius: 50%; background: currentColor; }
+        .pk-today::after { content: ""; position: absolute; left: 50%; bottom: 0.35rem; width: 0.375rem; height: 0.375rem; margin-left: -0.1875rem; border-radius: 50%; background: #486741; }
         .pk-skel { background: #f3ede7; animation: pk-pulse 0.8s ease-in-out infinite alternate; }
         @keyframes pk-pulse { to { opacity: 0.4; } }
         .pk-back { color: #486741; font-weight: 500; padding: 0.25rem 0; margin-bottom: 0.75rem; }
@@ -380,6 +380,15 @@ const professionalServiceSchema = {
         .pk-times { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.625rem; margin-top: 1.5rem; }
         @media (min-width: 640px) { .pk-times { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
         .pk-time { height: 3.5rem; border: 1.5px solid #486741; border-radius: 0.875rem; color: #365030; font-size: 1.125rem; font-weight: 600; font-variant-numeric: tabular-nums; }
+        /* desktop: step 2 keeps step 1's height (--pk-locked) and its times share what is left of the card */
+        @media (min-width: 1024px) {
+          #picker, #picker-view, #picker-view > div { display: flex; flex-direction: column; }
+          #picker { min-height: var(--pk-locked, 0); }
+          #picker-view, #picker-view > div { flex: 1; }
+          .pk-back { align-self: flex-start; }
+          .pk-times { flex: 1; grid-template-columns: repeat(var(--pk-cols), minmax(0, 1fr)); grid-auto-rows: 1fr; }
+          .pk-time { height: auto; max-height: 9rem; }
+        }
         .pk-form { display: grid; gap: 0.875rem; margin-top: 1.25rem; }
         .pk-form label { display: grid; gap: 0.375rem; font-size: 0.875rem; font-weight: 500; color: #3c332f; }
         .pk-input { height: 3rem; padding: 0 0.875rem; border: 1px solid #c7dbc2; border-radius: 0.75rem; font-size: 1rem; background: #fff; }
@@ -391,7 +400,8 @@ const professionalServiceSchema = {
         .pk-msg { color: #9b2c2c; background: #fbefec; border-radius: 0.75rem; padding: 0.75rem 1rem; font-size: 0.9375rem; margin-top: 1rem; }
         .pk-empty { margin-top: 1.25rem; text-align: center; color: #847065; }
         .pk-empty .pk-btn { margin-top: 0.75rem; }
-        @media (hover: hover) { .pk-free:hover, .pk-time:hover { background: #486741; color: #fff; } }
+        /* hover only after the pointer moves: a new step appears under a still pointer, which would paint one button green */
+        @media (hover: hover) { .pk-moved .pk-free:hover, .pk-moved .pk-time:hover { background: #486741; color: #fff; } .pk-moved .pk-free:hover::after { background: #fff; } }
         @media (prefers-reduced-motion: reduce) { .pk-step, .pk-skel { animation: none; } }
       </style>
       <div id="booking-grid" class="grid grid-cols-1 gap-6 lg:gap-10 items-start">
@@ -441,14 +451,14 @@ const professionalServiceSchema = {
       <script is:inline define:vars={{ CALCOM_ORIGIN }}>
         (() => {
           const TZ = "Europe/Moscow", MSK_OFFSET = 3 * 3600e3, HOUR = 3600e3, EVENT_TYPE_ID = 1;
-          const view = document.getElementById("picker-view"), status = document.getElementById("picker-status");
+          const picker = document.getElementById("picker"), view = document.getElementById("picker-view"), status = document.getElementById("picker-status");
           const contacts = '<a href="https://t.me/derbichevairina" target="_blank" rel="noopener">Telegram</a> или <a href="https://wa.me/+79028983895" target="_blank" rel="noopener">WhatsApp</a>';
           // Moscow wall clock read through UTC getters (Moscow has no DST)
           const nowMsk = new Date(Date.now() + MSK_OFFSET);
           const firstMonth = { y: nowMsk.getUTCFullYear(), m: nowMsk.getUTCMonth() };
           const todayKey = nowMsk.toISOString().slice(0, 10);
           const slotsByMonth = {}; // "2026-10" → promise of { "2026-10-07": [{ time }] }, only days with free slots
-          let month = firstMonth, monthSlots = {}, day = null, slot = null;
+          let month = firstMonth, monthSlots = {}, day = null, slot = null, calendarHeight = 0;
           const contact = { name: "", email: "", phone: "+7" };
 
           const pad = (n) => String(n).padStart(2, "0");
@@ -477,6 +487,8 @@ const professionalServiceSchema = {
           // focusSelector: null on page load (no scroll jump), the step heading on a step change
           function show(html, announcement, focusSelector, isNewStep) {
             view.innerHTML = `<div class="${isNewStep ? "pk-step" : ""}">${html}</div>`;
+            picker.classList.remove("pk-moved");
+            picker.style.removeProperty("--pk-locked");
             status.textContent = announcement;
             const target = focusSelector && view.querySelector(focusSelector);
             if (target) (target.disabled ? view.querySelector("h3") : target).focus();
@@ -518,10 +530,12 @@ const professionalServiceSchema = {
 
           function showTimes(note = "") {
             const times = monthSlots[day] || [];
+            const columns = Math.ceil(times.length / Math.ceil(times.length / 4)); // balanced rows on desktop: 7 → 4 + 3
             show(back("month", "Выбрать другую дату") + `<h3 tabindex="-1">${dayTitle(day)}</h3><p class="pk-sub">60 минут · онлайн · время московское</p>`
               + (note ? `<p class="pk-msg" role="alert">${note}</p>` : "")
-              + `<div class="pk-times">${times.map((s) => `<button type="button" class="pk-time" data-time="${s.time}">${clock(Date.parse(s.time))}</button>`).join("")}</div>`,
+              + `<div class="pk-times" style="--pk-cols: ${columns}">${times.map((s) => `<button type="button" class="pk-time" data-time="${s.time}">${clock(Date.parse(s.time))}</button>`).join("")}</div>`,
               `${dayTitle(day)}, свободных времён: ${times.length}`, "h3", true);
+            picker.style.setProperty("--pk-locked", `${calendarHeight}px`);
           }
 
           function showForm() {
@@ -551,7 +565,7 @@ const professionalServiceSchema = {
             if (response?.ok || response?.status === 409) delete slotsByMonth[monthKey(month)]; // the slot is now held
             if (response?.ok) {
               return show(`<h3 tabindex="-1">Заявка отправлена — Ирина подтвердит время</h3><p class="pk-sub">${dayTitle(day)}, ${slotRange(slot)}, время московское</p>`
-                + `<p class="pk-note" style="margin-top: 1rem">Если планы изменятся, напишите в ${contacts}.</p>`, "Заявка отправлена", "h3", true);
+                + `<p class="pk-note" style="margin-top: 1rem">Если планы изменятся, напишите в ${contacts}.</p>`, "", "h3", true); // the focused heading is read out, an announcement would repeat it
             }
             if (response?.status === 409) {
               try { monthSlots = await loadMonthSlots(month); } catch { monthSlots = {}; }
@@ -565,6 +579,7 @@ const professionalServiceSchema = {
             message.hidden = false; button.disabled = false; button.textContent = "Записаться";
           }
 
+          picker.addEventListener("pointermove", () => picker.classList.add("pk-moved"));
           view.addEventListener("input", (e) => { if (e.target.name in contact) contact[e.target.name] = e.target.value; });
           view.addEventListener("submit", (e) => { e.preventDefault(); book(e.target); });
           view.addEventListener("click", (e) => {
@@ -577,7 +592,7 @@ const professionalServiceSchema = {
               showMonth(button.id ? `#${button.id}` : "h3");
             } else if (go === "month") showMonth("h3", true);
             else if (go === "times") showTimes();
-            else if (pickedDay) { day = pickedDay; showTimes(); }
+            else if (pickedDay) { day = pickedDay; calendarHeight = picker.offsetHeight; showTimes(); }
             else if (time) { slot = time; showForm(); }
           });
 
