@@ -1,6 +1,6 @@
 ---
 // The one line to change once Cal.com has a public address.
-const CALCOM_ORIGIN = "https://butler-outcome-upon-thumbzilla.trycloudflare.com";
+const CALCOM_ORIGIN = "https://stage-treatments-spokesman-hdtv.trycloudflare.com";
 
 import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
@@ -338,7 +338,7 @@ const professionalServiceSchema = {
 
   <!-- Booking -->
   <section id="booking" style="padding-top: var(--spacing-fluid-section); padding-bottom: var(--spacing-fluid-section);">
-    <div class="mx-auto px-4 sm:px-6 lg:px-8" style="max-width: 80rem;">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-10 sm:mb-14">
         <p class="text-sage-500 text-sm font-medium tracking-wide uppercase mb-3">Запись</p>
         <h2 class="font-display text-sage-900 text-balance" style="font-size: var(--text-fluid-3xl);">Запись на встречу</h2>
@@ -347,8 +347,17 @@ const professionalServiceSchema = {
         </p>
       </div>
 
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-10 items-start">
-        <div class="lg:col-span-4 lg:sticky lg:top-24">
+      <!-- Cal.com puts the slots beside the calendar only in an iframe of 768 px or more, and centres
+           its 520 px box in it: the iframe is 780 px, clipped to the box, so card and calendar sit side by side. -->
+      <style is:inline>
+        @media (min-width: 1024px) {
+          #booking-grid { grid-template-columns: 22rem 520px; justify-content: center; }
+          #cal-clip { overflow: hidden; }
+          #cal-inline { width: 780px; margin-left: -130px; }
+        }
+      </style>
+      <div id="booking-grid" class="grid grid-cols-1 gap-6 lg:gap-10 items-start">
+        <div class="lg:sticky lg:top-24">
           <div class="rounded-2xl bg-white border border-sage-200/70 shadow-soft p-6 sm:p-8">
             <p class="text-warm-500 text-xs font-medium tracking-wide uppercase mb-2">Стоимость сессии</p>
             <p class="font-display font-semibold text-sage-900" style="font-size: var(--text-fluid-3xl);">{PRICE_LABEL}</p>
@@ -381,15 +390,15 @@ const professionalServiceSchema = {
           </div>
         </div>
 
-        <div class="lg:col-span-8">
-          <p class="text-warm-500 text-sm mb-4">
-            Тестовая версия: запись не настоящая. Записаться сейчас можно в
-            <a href="https://t.me/derbichevairina" target="_blank" rel="noopener" class="underline hover:text-sage-700">Telegram</a> или
-            <a href="https://wa.me/+79028983895" target="_blank" rel="noopener" class="underline hover:text-sage-700">WhatsApp</a>.
-          </p>
+        <div id="cal-clip">
           <div id="cal-inline" style="min-width:320px;"></div>
         </div>
       </div>
+      <p class="text-warm-500 text-xs text-center mt-6">
+        Тестовая версия: запись не настоящая. Записаться сейчас можно в
+        <a href="https://t.me/derbichevairina" target="_blank" rel="noopener" class="underline hover:text-sage-700">Telegram</a> или
+        <a href="https://wa.me/+79028983895" target="_blank" rel="noopener" class="underline hover:text-sage-700">WhatsApp</a>.
+      </p>
       <script is:inline define:vars={{ CALCOM_ORIGIN }}>
         (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if (typeof namespace === "string") { cal.ns[namespace] = cal.ns[namespace] || api; p(cal.ns[namespace], ar); p(cal, ["initNamespace", namespace]); } else p(cal, ar); return; } p(cal, ar); }; })(window, CALCOM_ORIGIN + "/embed/embed.js", "init");
         Cal("init", { origin: CALCOM_ORIGIN });
