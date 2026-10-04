@@ -363,7 +363,7 @@ const professionalServiceSchema = {
         .pk-step { animation: pk-in 0.22s ease-out; }
         @keyframes pk-in { from { opacity: 0; translate: 0 6px; } }
         .pk-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; }
-        .pk-nav { width: 2.75rem; height: 2.75rem; border-radius: 9999px; color: #486741; font-size: 1.75rem; line-height: 1; }
+        .pk-nav { width: 2.75rem; height: 2.75rem; border-radius: 9999px; display: grid; place-items: center; color: #486741; }
         .pk-nav:hover:not(:disabled) { background: #f2f7f0; }
         .pk-nav:disabled { color: #a89a90; }
         .pk-grid { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 0.375rem; text-align: center; }
@@ -509,8 +509,8 @@ const professionalServiceSchema = {
             const empty = slots && !Object.keys(slots).length
               ? '<div class="pk-empty"><p>В этом месяце свободного времени нет.</p><button type="button" class="pk-btn" data-go="next">Следующий месяц</button></div>'
               : "";
-            return `<div class="pk-head"><button type="button" id="pk-prev" class="pk-nav" data-go="prev" aria-label="Предыдущий месяц"${isFirst ? " disabled" : ""}>‹</button>`
-              + `<h3 tabindex="-1">${title}</h3><button type="button" id="pk-next" class="pk-nav" data-go="next" aria-label="Следующий месяц">›</button></div>`
+            return `<div class="pk-head"><button type="button" id="pk-prev" class="pk-nav" data-go="prev" aria-label="Предыдущий месяц"${isFirst ? " disabled" : ""}><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12.5 4.5 7 10l5.5 5.5"/></svg></button>`
+              + `<h3 tabindex="-1">${title}</h3><button type="button" id="pk-next" class="pk-nav" data-go="next" aria-label="Следующий месяц"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7.5 4.5 13 10l-5.5 5.5"/></svg></button></div>`
               + `<div class="pk-grid"${slots ? "" : ' aria-busy="true"'}>${cells}</div>${empty}`;
           }
 
@@ -547,7 +547,6 @@ const professionalServiceSchema = {
               + '<p class="pk-msg" data-for="consent" role="alert" hidden>Чтобы записаться, поставьте галочку: нужно согласие на обработку персональных данных.</p>'
               + '<button class="pk-btn">Записаться</button></form>', "Заполните контакты", "h3", true);
             const form = view.querySelector("form");
-            form.elements.consent.setCustomValidity("Поставьте галочку согласия на обработку персональных данных"); // Russian text in the browser's own bubble
             for (const field in contact) form.elements.namedItem(field).value = contact[field];
           }
 
@@ -582,10 +581,14 @@ const professionalServiceSchema = {
 
           picker.addEventListener("pointermove", () => picker.classList.add("pk-moved"));
           view.addEventListener("input", (e) => { if (e.target.name in contact) contact[e.target.name] = e.target.value; });
-          view.addEventListener("invalid", (e) => { if (e.target.name === "consent") e.target.form.querySelector("[data-for=consent]").hidden = false; }, true); // does not bubble
+          view.addEventListener("invalid", (e) => { // does not bubble; preventDefault drops the browser bubble, our message is the only one
+            if (e.target.name !== "consent") return;
+            e.preventDefault();
+            e.target.form.querySelector("[data-for=consent]").hidden = false;
+            if (!e.target.form.querySelector(":invalid:not([name=consent])")) e.target.focus();
+          }, true);
           view.addEventListener("change", (e) => {
             if (e.target.name !== "consent") return;
-            e.target.setCustomValidity(e.target.checked ? "" : "Поставьте галочку согласия на обработку персональных данных");
             e.target.form.querySelector("[data-for=consent]").hidden = e.target.checked;
           });
           view.addEventListener("submit", (e) => { e.preventDefault(); book(e.target); });
