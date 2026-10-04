@@ -1,6 +1,6 @@
 ---
 // The one line to change once Cal.com has a public address.
-const CALCOM_ORIGIN = "https://stage-treatments-spokesman-hdtv.trycloudflare.com";
+const CALCOM_ORIGIN = "https://indoor-utilization-outer-willow.trycloudflare.com";
 
 import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
@@ -348,12 +348,17 @@ const professionalServiceSchema = {
       </div>
 
       <!-- Cal.com puts the slots beside the calendar only in an iframe of 768 px or more, and centres
-           its 520 px box in it: the iframe is 780 px, clipped to the box, so card and calendar sit side by side. -->
+           its 518 px box in it: the iframe is 780 px, clipped to the box, so card and calendar sit side by side.
+           #cal-clip carries the card's own frame; Cal.com's border is off (cal-border-booker-width below). -->
       <style is:inline>
+        #cal-clip { overflow: hidden; }
+        @media (max-width: 1023.98px) {
+          #cal-clip { padding: 1rem 0.75rem; }
+        }
         @media (min-width: 1024px) {
-          #booking-grid { grid-template-columns: 22rem 520px; justify-content: center; }
-          #cal-clip { overflow: hidden; }
-          #cal-inline { width: 780px; margin-left: -130px; }
+          #booking-grid { grid-template-columns: 22rem 520px; justify-content: center; align-items: stretch; }
+          #booking-grid > div:first-child > div { height: 100%; }
+          #cal-inline { width: 780px; margin-left: -131px; }
         }
       </style>
       <div id="booking-grid" class="grid grid-cols-1 gap-6 lg:gap-10 items-start">
@@ -390,7 +395,7 @@ const professionalServiceSchema = {
           </div>
         </div>
 
-        <div id="cal-clip">
+        <div id="cal-clip" class="rounded-2xl bg-white border border-sage-200/70 shadow-soft">
           <div id="cal-inline" style="min-width:320px;"></div>
         </div>
       </div>
@@ -406,7 +411,7 @@ const professionalServiceSchema = {
         Cal("ui", {
           theme: "light",
           hideEventTypeDetails: true,
-          cssVarsPerTheme: { light: { "cal-brand": "#486741", "cal-bg": "#fbf8f5", "cal-bg-emphasis": "#efe7df" } },
+          cssVarsPerTheme: { light: { "cal-brand": "#486741", "cal-bg": "#ffffff", "cal-bg-emphasis": "#efe7df", "cal-border-booker-width": "0px" } },
         });
       </script>
     </div>
