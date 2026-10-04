@@ -368,7 +368,7 @@ const professionalServiceSchema = {
         .pk-nav:disabled { color: #a89a90; }
         .pk-grid { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 0.375rem; text-align: center; }
         .pk-wd { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.05em; color: #9e867a; padding-bottom: 0.25rem; }
-        .pk-day, .pk-skel { position: relative; height: clamp(2.75rem, 11vw, 3.5rem); border-radius: 0.75rem; font-size: 1rem; }
+        .pk-day, .pk-skel { position: relative; height: clamp(2.5rem, 11vw, 3.25rem); border-radius: 0.75rem; font-size: 1rem; }
         .pk-day:disabled { color: #bcafa6; }
         .pk-free { background: #dfecdd; color: #2a3b27; font-weight: 600; cursor: pointer; }
         .pk-today::after { content: ""; position: absolute; left: 50%; bottom: 0.35rem; width: 0.375rem; height: 0.375rem; margin-left: -0.1875rem; border-radius: 50%; background: #486741; }
@@ -377,14 +377,30 @@ const professionalServiceSchema = {
         .pk-back { color: #486741; font-weight: 500; padding: 0.25rem 0; margin-bottom: 0.75rem; }
         .pk-back:hover { text-decoration: underline; }
         .pk-sub { color: #847065; font-size: 0.9375rem; margin-top: 0.375rem; }
-        .pk-times { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.625rem; margin-top: 1.5rem; }
-        @media (min-width: 640px) { .pk-times { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
-        .pk-time { height: 3.5rem; border: 1.5px solid #486741; border-radius: 0.875rem; color: #365030; font-size: 1.125rem; font-weight: 600; font-variant-numeric: tabular-nums; }
-        /* desktop: step 2 keeps step 1's height; two wide button columns, top-aligned, the rest of the card stays white */
-        @media (min-width: 1024px) {
-          #picker { min-height: var(--pk-locked, 0); }
-          .pk-times { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        .pk-sel, .pk-sel:disabled { background: #486741; color: #fff; }
+        .pk-sel::after { background: #fff; }
+        .pk-slots { margin-top: 1.5rem; scroll-margin-top: 1rem; }
+        .pk-slots .pk-back { display: block; }
+        #picker .pk-dayhead { font-family: inherit; font-size: 1rem; font-weight: 600; color: #1f2a1c; margin-bottom: 0.75rem; }
+        .pk-times { display: grid; gap: 0.625rem; }
+        .pk-time { height: 3.25rem; border: 1.5px solid #486741; border-radius: 0.875rem; color: #365030; font-size: 1.0625rem; font-weight: 600; font-variant-numeric: tabular-nums; }
+        /* from 768 px the card (640 px) makes room: calendar shrinks, one column of times to its right, no back link */
+        @media (min-width: 768px) {
+          .pk-pick { display: flex; gap: 2rem; align-items: flex-start; }
+          .pk-cal { flex: 1; min-width: 0; }
+          .pk-slots { flex: none; width: 10.5rem; margin-top: 3.75rem; }
+          .pk-slots .pk-back { display: none; }
         }
+        .pk-tz { position: relative; margin-top: 1.25rem; }
+        .pk-tzlabel { font-size: 0.8125rem; font-weight: 600; color: #3c332f; margin-bottom: 0.25rem; }
+        .pk-tzbtn { display: flex; align-items: center; gap: 0.5rem; min-height: 2.75rem; padding: 0 0.5rem; margin-left: -0.5rem; border-radius: 0.75rem; color: #365030; font-size: 0.9375rem; text-align: left; }
+        .pk-tzbtn:hover { background: #f2f7f0; }
+        .pk-tzbtn span { flex: 1; min-width: 0; }
+        .pk-tzlist { position: absolute; z-index: 20; left: 0; right: 0; top: 100%; max-height: 16rem; overflow-y: auto; margin-top: 0.25rem; padding: 0.375rem; background: #fff; border: 1px solid #c7dbc2; border-radius: 0.75rem; box-shadow: 0 8px 24px rgba(54, 80, 48, 0.14); }
+        .pk-tzlist[hidden] { display: none; }
+        .pk-tzlist button { display: block; width: 100%; min-height: 2.75rem; padding: 0 0.75rem; border-radius: 0.5rem; text-align: left; font-size: 0.9375rem; color: #3c332f; }
+        .pk-tzlist button:hover { background: #f2f7f0; }
+        .pk-tzlist [aria-selected=true] button { background: #dfecdd; font-weight: 600; }
         .pk-form { display: grid; gap: 0.875rem; margin-top: 1.25rem; }
         .pk-form label { display: grid; gap: 0.375rem; font-size: 0.875rem; font-weight: 500; color: #3c332f; }
         .pk-input { height: 3rem; padding: 0 0.875rem; border: 1px solid #c7dbc2; border-radius: 0.75rem; font-size: 1rem; background: #fff; }
@@ -450,32 +466,44 @@ const professionalServiceSchema = {
       </p>
       <script is:inline define:vars={{ CALCOM_ORIGIN }}>
         (() => {
-          const TZ = "Europe/Moscow", MSK_OFFSET = 3 * 3600e3, HOUR = 3600e3, EVENT_TYPE_ID = 1;
+          const HOUR = 3600e3, EVENT_TYPE_ID = 1, DEFAULT_ZONE = "Europe/Moscow";
+          const ZONE_NAMES = { "Europe/Moscow": "Москва", "Europe/Kaliningrad": "Калининград", "Asia/Yekaterinburg": "Екатеринбург", "Asia/Novosibirsk": "Новосибирск", "Asia/Vladivostok": "Владивосток", "Asia/Tbilisi": "Тбилиси", "Asia/Yerevan": "Ереван", "Asia/Almaty": "Алматы", "Europe/Istanbul": "Стамбул", "Asia/Dubai": "Дубай", "Europe/Berlin": "Берлин", "Europe/London": "Лондон", "America/New_York": "Нью-Йорк" };
           const picker = document.getElementById("picker"), view = document.getElementById("picker-view"), status = document.getElementById("picker-status");
           const contacts = '<a href="https://t.me/derbichevairina" target="_blank" rel="noopener">Telegram</a> или <a href="https://wa.me/+79028983895" target="_blank" rel="noopener">WhatsApp</a>';
-          // Moscow wall clock read through UTC getters (Moscow has no DST)
-          const nowMsk = new Date(Date.now() + MSK_OFFSET);
-          const firstMonth = { y: nowMsk.getUTCFullYear(), m: nowMsk.getUTCMonth() };
-          const todayKey = nowMsk.toISOString().slice(0, 10);
-          const slotsByMonth = {}; // "2026-10" → promise of { "2026-10-07": [{ time }] }, only days with free slots
-          let month = firstMonth, monthSlots = {}, day = null, slot = null, calendarHeight = 0;
+          const detectedZone = Intl.DateTimeFormat().resolvedOptions().timeZone || DEFAULT_ZONE;
+          const zones = [...new Set([detectedZone, DEFAULT_ZONE, ...Object.keys(ZONE_NAMES)])]; // an unknown detected zone is listed as is
+          let zone = detectedZone, month, monthSlots = {}, day = null, slot = null, pickId = 0;
+          const slotsByMonth = {}; // "zone|2026-10" → promise of { "2026-10-07": [{ time }] }, only days with free slots
           const contact = { name: "", email: "", phone: "+7" };
 
           const pad = (n) => String(n).padStart(2, "0");
+          const upperFirst = (s) => s[0].toUpperCase() + s.slice(1);
+          const isWide = () => matchMedia("(min-width: 768px)").matches;
+          // wall-clock parts of an instant in a zone
+          const zonedParts = (ms, tz) => Object.fromEntries(new Intl.DateTimeFormat("en-CA", { timeZone: tz, hourCycle: "h23", year: "numeric", month: "numeric", day: "numeric", hour: "numeric", minute: "numeric", second: "numeric" }).formatToParts(ms).map((p) => [p.type, Number(p.value)]));
+          const offsetMs = (ms, tz) => { const p = zonedParts(ms, tz); return Date.UTC(p.year, p.month - 1, p.day, p.hour, p.minute, p.second) - Math.floor(ms / 1000) * 1000; };
+          const instantOfZonedMidnight = (y, m, tz) => { const wall = Date.UTC(y, m, 1); return wall - offsetMs(wall - offsetMs(wall, tz), tz); }; // m: 0-based; two passes cross a DST change
           const monthKey = ({ y, m }) => `${y}-${pad(m + 1)}`;
           const daysIn = ({ y, m }) => new Date(Date.UTC(y, m + 1, 0)).getUTCDate();
-          const upperFirst = (s) => s[0].toUpperCase() + s.slice(1);
           const formatDay = (key, options) => new Date(key + "T12:00:00Z").toLocaleDateString("ru-RU", { timeZone: "UTC", ...options });
           const dayTitle = (key) => upperFirst(formatDay(key, { weekday: "long", day: "numeric", month: "long" }));
-          const clock = (ms) => new Date(ms).toLocaleTimeString("ru-RU", { timeZone: TZ, hour: "2-digit", minute: "2-digit" });
+          const clock = (ms) => new Date(ms).toLocaleTimeString("ru-RU", { timeZone: zone, hour: "2-digit", minute: "2-digit" });
           const slotRange = (time) => `${clock(Date.parse(time))}–${clock(Date.parse(time) + HOUR)}`;
-          const mskIso = (ms) => new Date(ms + MSK_OFFSET).toISOString().slice(0, 19) + "+03:00";
-          const back = (to, label) => `<button type="button" class="pk-back" data-go="${to}">← ${label}</button>`;
+          const zoneLabel = (tz, withClock) => {
+            const minutes = Math.round(offsetMs(Date.now(), tz) / 60000), abs = Math.abs(minutes);
+            const utc = `UTC${minutes < 0 ? "−" : "+"}${Math.floor(abs / 60)}${abs % 60 ? ":" + pad(abs % 60) : ""}`;
+            const time = withClock ? `, ${new Date().toLocaleTimeString("ru-RU", { timeZone: tz, hour: "2-digit", minute: "2-digit" })}` : "";
+            return `${ZONE_NAMES[tz] || tz.split("/").pop().replace(/_/g, " ")} (${utc})${time}`;
+          };
+          const today = () => { const p = zonedParts(Date.now(), zone); return { key: `${p.year}-${pad(p.month)}-${pad(p.day)}`, month: { y: p.year, m: p.month - 1 } }; };
+          const back = (to, label, extra = "") => `<button type="button" class="pk-back ${extra}" data-go="${to}">← ${label}</button>`;
+          month = today().month;
 
           function loadMonthSlots(m) {
-            const key = monthKey(m);
+            const key = `${zone}|${monthKey(m)}`, tz = zone;
             if (!slotsByMonth[key]) {
-              const input = { json: { eventTypeId: EVENT_TYPE_ID, startTime: `${key}-01T00:00:00+03:00`, endTime: `${key}-${daysIn(m)}T23:59:59+03:00`, timeZone: TZ } };
+              const next = { y: m.y + Math.floor((m.m + 1) / 12), m: (m.m + 1) % 12 };
+              const input = { json: { eventTypeId: EVENT_TYPE_ID, startTime: new Date(instantOfZonedMidnight(m.y, m.m, tz)).toISOString(), endTime: new Date(instantOfZonedMidnight(next.y, next.m, tz) - 1000).toISOString(), timeZone: tz } };
               slotsByMonth[key] = fetch(`${CALCOM_ORIGIN}/api/trpc/slots/getSchedule?input=${encodeURIComponent(JSON.stringify(input))}`)
                 .then((r) => { if (!r.ok) throw new Error(`slots ${r.status}`); return r.json(); })
                 .then((body) => body.result.data.json.slots)
@@ -488,57 +516,72 @@ const professionalServiceSchema = {
           function show(html, announcement, focusSelector, isNewStep) {
             view.innerHTML = `<div class="${isNewStep ? "pk-step" : ""}">${html}</div>`;
             picker.classList.remove("pk-moved");
-            picker.style.removeProperty("--pk-locked");
             status.textContent = announcement;
             const target = focusSelector && view.querySelector(focusSelector);
             if (target) (target.disabled ? view.querySelector("h3") : target).focus();
           }
 
-          function calendarHtml(slots) {
+          const chevron = (d) => `<svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="${d}"/></svg>`;
+          const globe = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9S14.5 18.4 12 21c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/></svg>';
+
+          function zoneSelectHtml() {
+            const options = zones.map((tz) => `<li role="option" aria-selected="${tz === zone}"><button type="button" data-tz="${tz}">${zoneLabel(tz, true)}</button></li>`).join("");
+            return `<div class="pk-tz"><p class="pk-tzlabel" id="pk-tzlabel">Часовой пояс</p>`
+              + `<button type="button" id="pk-tzbtn" class="pk-tzbtn" data-go="tz" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="pk-tzlabel pk-tzbtn">${globe}<span>${zoneLabel(zone, true)}</span>${chevron("M5.5 8 10 12.5 14.5 8")}</button>`
+              + `<ul class="pk-tzlist" role="listbox" aria-labelledby="pk-tzlabel" hidden>${options}</ul></div>`;
+          }
+
+          function slotsColumnHtml() {
+            const times = monthSlots[day] || [];
+            return `<div class="pk-slots" id="pk-slots">${back("calendar", "Выбрать другую дату")}<h4 class="pk-dayhead">${dayTitle(day)}</h4>`
+              + `<div class="pk-times">${times.map((s) => `<button type="button" class="pk-time" data-time="${s.time}">${clock(Date.parse(s.time))}</button>`).join("")}</div></div>`;
+          }
+
+          function pickHtml(slots, note) {
             const title = upperFirst(formatDay(`${monthKey(month)}-01`, { month: "long" })) + " " + month.y;
-            const isFirst = month.y === firstMonth.y && month.m === firstMonth.m;
+            const first = today(), isFirst = month.y === first.month.y && month.m === first.month.m;
             let cells = ["ПН", "ВТ", "СР", "ЧТ", "ПТ", "СБ", "ВС"].map((d) => `<div class="pk-wd" aria-hidden="true">${d}</div>`).join("");
             cells += "<div></div>".repeat((new Date(Date.UTC(month.y, month.m, 1)).getUTCDay() + 6) % 7);
             for (let d = 1; d <= daysIn(month); d++) {
-              const key = `${monthKey(month)}-${pad(d)}`, free = slots?.[key]?.length > 0, today = key === todayKey;
-              const label = formatDay(key, { day: "numeric", month: "long" }) + (today ? ", сегодня" : "") + (free ? ", есть время" : ", нет времени");
+              const key = `${monthKey(month)}-${pad(d)}`, free = slots?.[key]?.length > 0, isToday = key === first.key, selected = key === day;
+              const label = formatDay(key, { day: "numeric", month: "long" }) + (isToday ? ", сегодня" : "") + (free ? ", есть время" : ", нет времени");
               cells += slots
-                ? `<button type="button" class="pk-day${free ? " pk-free" : ""}${today ? " pk-today" : ""}" data-day="${key}" aria-label="${label}"${free ? "" : " disabled"}>${d}</button>`
+                ? `<button type="button" class="pk-day${free ? " pk-free" : ""}${isToday ? " pk-today" : ""}${selected ? " pk-sel" : ""}" data-day="${key}" aria-label="${label}" aria-pressed="${selected}"${free ? "" : " disabled"}>${d}</button>`
                 : '<div class="pk-skel"></div>';
             }
             const empty = slots && !Object.keys(slots).length
               ? '<div class="pk-empty"><p>В этом месяце свободного времени нет.</p><button type="button" class="pk-btn" data-go="next">Следующий месяц</button></div>'
               : "";
-            return `<div class="pk-head"><button type="button" id="pk-prev" class="pk-nav" data-go="prev" aria-label="Предыдущий месяц"${isFirst ? " disabled" : ""}><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12.5 4.5 7 10l5.5 5.5"/></svg></button>`
-              + `<h3 tabindex="-1">${title}</h3><button type="button" id="pk-next" class="pk-nav" data-go="next" aria-label="Следующий месяц"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7.5 4.5 13 10l-5.5 5.5"/></svg></button></div>`
-              + `<div class="pk-grid"${slots ? "" : ' aria-busy="true"'}>${cells}</div>${empty}`;
+            return (note ? `<p class="pk-msg" role="alert">${note}</p>` : "") + '<div class="pk-pick"><div class="pk-cal">'
+              + `<div class="pk-head"><button type="button" id="pk-prev" class="pk-nav" data-go="prev" aria-label="Предыдущий месяц"${isFirst ? " disabled" : ""}>${chevron("M12.5 4.5 7 10l5.5 5.5")}</button>`
+              + `<h3 tabindex="-1">${title}</h3><button type="button" id="pk-next" class="pk-nav" data-go="next" aria-label="Следующий месяц">${chevron("M7.5 4.5 13 10l-5.5 5.5")}</button></div>`
+              + `<div class="pk-grid"${slots ? "" : ' aria-busy="true"'}>${cells}</div>${empty}${zoneSelectHtml()}</div>${day && slots ? slotsColumnHtml() : ""}</div>`;
           }
 
-          async function showMonth(focusSelector, isNewStep) {
-            const shown = month;
-            show(calendarHtml(null), "Загружаем расписание", focusSelector, isNewStep);
+          async function showPick(focusSelector, isNewStep, note = "") {
+            const id = ++pickId;
+            show(pickHtml(null, note), "Загружаем расписание", focusSelector, isNewStep);
             let slots;
-            try { slots = await loadMonthSlots(shown); } catch {
-              if (shown === month) show(`<h3 tabindex="-1">Расписание</h3><p class="pk-msg">Не удалось загрузить расписание — напишите в ${contacts}.</p>`, "Не удалось загрузить расписание", focusSelector);
+            try { slots = await loadMonthSlots(month); } catch {
+              if (id === pickId) show(`<h3 tabindex="-1">Расписание</h3><p class="pk-msg">Не удалось загрузить расписание — напишите в ${contacts}.</p>`, "Не удалось загрузить расписание", focusSelector);
               return;
             }
-            if (shown !== month) return; // the visitor already moved to another month
+            if (id !== pickId) return; // the visitor already moved to another month or zone
             monthSlots = slots;
+            if (!slots[day]?.length) day = null; // the day is no longer free
             const freeDays = Object.keys(slots).length;
-            show(calendarHtml(slots), freeDays ? `Дней со свободным временем: ${freeDays}` : "В этом месяце свободного времени нет", focusSelector);
+            show(pickHtml(slots, note), freeDays ? `Дней со свободным временем: ${freeDays}` : "В этом месяце свободного времени нет", focusSelector);
           }
 
-          function showTimes(note = "") {
-            const times = monthSlots[day] || [];
-            show(back("month", "Выбрать другую дату") + `<h3 tabindex="-1">${dayTitle(day)}</h3><p class="pk-sub">60 минут · онлайн · время московское</p>`
-              + (note ? `<p class="pk-msg" role="alert">${note}</p>` : "")
-              + `<div class="pk-times">${times.map((s) => `<button type="button" class="pk-time" data-time="${s.time}">${clock(Date.parse(s.time))}</button>`).join("")}</div>`,
-              `${dayTitle(day)}, свободных времён: ${times.length}`, "h3", true);
-            picker.style.setProperty("--pk-locked", `${calendarHeight}px`);
+          function selectDay(key) {
+            day = key;
+            show(pickHtml(monthSlots), `${dayTitle(day)}, свободных времён: ${monthSlots[day].length}`, null);
+            view.querySelector(".pk-sel").focus({ preventScroll: true });
+            if (!isWide()) document.getElementById("pk-slots").scrollIntoView({ behavior: "smooth", block: "start" });
           }
 
           function showForm() {
-            show(back("times", "Назад") + `<h3 tabindex="-1">${dayTitle(day)}, ${slotRange(slot)}</h3><p class="pk-sub">60 минут · онлайн · время московское</p>`
+            show(back("pick", "Назад") + `<h3 tabindex="-1">${dayTitle(day)}, ${slotRange(slot)}</h3><p class="pk-sub">60 минут · онлайн · ${zoneLabel(zone)}</p>`
               + '<form class="pk-form"><label>Имя<input class="pk-input" name="name" required autocomplete="name"></label>'
               + '<label>Электронная почта<input class="pk-input" name="email" type="email" required autocomplete="email"></label>'
               + '<label>Телефон<input class="pk-input" name="phone" type="tel" autocomplete="tel"></label>'
@@ -559,18 +602,15 @@ const professionalServiceSchema = {
               headers: { "Content-Type": "application/json" },
               body: JSON.stringify({
                 responses: { name: contact.name.trim(), email: contact.email.trim(), ...(phone.length > 2 && { attendeePhoneNumber: phone }) },
-                start: mskIso(start), end: mskIso(start + HOUR), eventTypeId: EVENT_TYPE_ID, timeZone: TZ, language: "ru", metadata: { consent: "privacy-v1", consentAt: new Date().toISOString() },
+                start: new Date(start).toISOString(), end: new Date(start + HOUR).toISOString(), eventTypeId: EVENT_TYPE_ID, timeZone: zone, language: "ru", metadata: { consent: "privacy-v1", consentAt: new Date().toISOString() },
               }),
             }).catch(() => null);
-            if (response?.ok || response?.status === 409) delete slotsByMonth[monthKey(month)]; // the slot is now held
+            if (response?.ok || response?.status === 409) delete slotsByMonth[`${zone}|${monthKey(month)}`]; // the slot is now held
             if (response?.ok) {
-              return show(`<h3 tabindex="-1">Заявка отправлена — Ирина подтвердит время</h3><p class="pk-sub">${dayTitle(day)}, ${slotRange(slot)}, время московское</p>`
+              return show(`<h3 tabindex="-1">Заявка отправлена — Ирина подтвердит время</h3><p class="pk-sub">${dayTitle(day)}, ${slotRange(slot)}, ${zoneLabel(zone)}</p>`
                 + `<p class="pk-note" style="margin-top: 1rem">Если планы изменятся, напишите в ${contacts}.</p>`, "", "h3", true); // the focused heading is read out, an announcement would repeat it
             }
-            if (response?.status === 409) {
-              try { monthSlots = await loadMonthSlots(month); } catch { monthSlots = {}; }
-              return showTimes("Это время уже занято — выберите другое.");
-            }
+            if (response?.status === 409) return showPick("h3", true, "Это время уже занято — выберите другое.");
             const problem = response?.status === 400 ? (await response.json().catch(() => ({}))).message || "" : "";
             message.innerHTML = /email/.test(problem) ? "Проверьте адрес электронной почты."
               : /phone/i.test(problem) ? "Проверьте номер телефона."
@@ -579,7 +619,13 @@ const professionalServiceSchema = {
             message.hidden = false; button.disabled = false; button.textContent = "Записаться";
           }
 
+          const closeZoneList = () => {
+            const list = view.querySelector(".pk-tzlist");
+            if (list) { list.hidden = true; document.getElementById("pk-tzbtn").setAttribute("aria-expanded", "false"); }
+          };
           picker.addEventListener("pointermove", () => picker.classList.add("pk-moved"));
+          document.addEventListener("click", (e) => { if (!e.target.closest(".pk-tz")) closeZoneList(); });
+          view.addEventListener("keydown", (e) => { if (e.key === "Escape" && !view.querySelector(".pk-tzlist")?.hidden) { closeZoneList(); document.getElementById("pk-tzbtn").focus(); } });
           view.addEventListener("input", (e) => { if (e.target.name in contact) contact[e.target.name] = e.target.value; });
           view.addEventListener("invalid", (e) => { // does not bubble; preventDefault drops the browser bubble, our message is the only one
             if (e.target.name !== "consent") return;
@@ -595,18 +641,30 @@ const professionalServiceSchema = {
           view.addEventListener("click", (e) => {
             const button = e.target.closest("button[type=button]");
             if (!button) return;
-            const { go, day: pickedDay, time } = button.dataset;
+            const { go, day: pickedDay, time, tz } = button.dataset;
             if (go === "prev" || go === "next") {
               const m = month.m + (go === "prev" ? -1 : 1);
               month = { y: month.y + Math.floor(m / 12), m: (m + 12) % 12 };
-              showMonth(button.id ? `#${button.id}` : "h3");
-            } else if (go === "month") showMonth("h3", true);
-            else if (go === "times") showTimes();
-            else if (pickedDay) { day = pickedDay; calendarHeight = picker.offsetHeight; showTimes(); }
+              day = null;
+              showPick(button.id ? `#${button.id}` : "h3");
+            } else if (go === "tz") {
+              const list = view.querySelector(".pk-tzlist"), open = list.hidden;
+              list.hidden = !open; button.setAttribute("aria-expanded", String(open));
+              if (open) list.querySelector("[aria-selected=true] button").focus();
+            } else if (tz) {
+              zone = tz; day = null;
+              const first = today().month;
+              if (month.y * 12 + month.m < first.y * 12 + first.m) month = first;
+              showPick("#pk-tzbtn");
+            } else if (go === "calendar") {
+              view.querySelector(".pk-cal").scrollIntoView({ behavior: "smooth", block: "start" });
+              view.querySelector(".pk-sel")?.focus({ preventScroll: true });
+            } else if (go === "pick") showPick("h3", true);
+            else if (pickedDay) selectDay(pickedDay);
             else if (time) { slot = time; showForm(); }
           });
 
-          showMonth(null);
+          showPick(null);
         })();
       </script>
     </div>
