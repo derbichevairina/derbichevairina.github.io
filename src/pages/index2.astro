@@ -396,6 +396,10 @@ const professionalServiceSchema = {
         .pk-btn { height: 3.25rem; padding: 0 1.75rem; border-radius: 9999px; background: #486741; color: #fff; font-weight: 500; font-size: 1rem; }
         .pk-btn:hover:not(:disabled) { background: #365030; }
         .pk-btn:disabled { opacity: 0.6; }
+        .pk-form .pk-consent { display: flex; align-items: flex-start; gap: 0.75rem; min-height: 3rem; font-size: 0.9375rem; line-height: 1.45; cursor: pointer; }
+        .pk-consent input { flex: none; width: 1.5rem; height: 1.5rem; margin-top: 0.0625rem; accent-color: #486741; cursor: pointer; }
+        .pk-consent input:focus-visible { outline-style: solid; outline-width: 2px; outline-color: #486741; outline-offset: 2px; }
+        .pk-msg[data-for=consent] { margin-top: -0.375rem; }
         .pk-note { color: #9e867a; font-size: 0.8125rem; line-height: 1.5; }
         .pk-msg { color: #9b2c2c; background: #fbefec; border-radius: 0.75rem; padding: 0.75rem 1rem; font-size: 0.9375rem; margin-top: 1rem; }
         .pk-empty { margin-top: 1.25rem; text-align: center; color: #847065; }
@@ -544,9 +548,11 @@ const professionalServiceSchema = {
               + '<label>Электронная почта<input class="pk-input" name="email" type="email" required autocomplete="email"></label>'
               + '<label>Телефон<input class="pk-input" name="phone" type="tel" autocomplete="tel"></label>'
               + '<p class="pk-msg" role="alert" hidden></p>'
-              + '<p class="pk-note">Продолжая, вы соглашаетесь с <a href="https://psyholog-irina.ru/privacy/" target="_blank" rel="noopener">политикой конфиденциальности</a></p>'
+              + '<label class="pk-consent"><input type="checkbox" name="consent" required><span>Я согласен(на) на обработку персональных данных в соответствии с <a href="https://psyholog-irina.ru/privacy/" target="_blank" rel="noopener">политикой конфиденциальности</a></span></label>'
+              + '<p class="pk-msg" data-for="consent" role="alert" hidden>Чтобы записаться, поставьте галочку: нужно согласие на обработку персональных данных.</p>'
               + '<button class="pk-btn">Записаться</button></form>', "Заполните контакты", "h3", true);
             const form = view.querySelector("form");
+            form.elements.consent.setCustomValidity("Поставьте галочку согласия на обработку персональных данных"); // Russian text in the browser's own bubble
             for (const field in contact) form.elements.namedItem(field).value = contact[field];
           }
 
@@ -559,7 +565,7 @@ const professionalServiceSchema = {
               headers: { "Content-Type": "application/json" },
               body: JSON.stringify({
                 responses: { name: contact.name.trim(), email: contact.email.trim(), ...(phone.length > 2 && { attendeePhoneNumber: phone }) },
-                start: mskIso(start), end: mskIso(start + HOUR), eventTypeId: EVENT_TYPE_ID, timeZone: TZ, language: "ru", metadata: {},
+                start: mskIso(start), end: mskIso(start + HOUR), eventTypeId: EVENT_TYPE_ID, timeZone: TZ, language: "ru", metadata: { consent: "privacy-v1", consentAt: new Date().toISOString() },
               }),
             }).catch(() => null);
             if (response?.ok || response?.status === 409) delete slotsByMonth[monthKey(month)]; // the slot is now held
@@ -581,6 +587,12 @@ const professionalServiceSchema = {
 
           picker.addEventListener("pointermove", () => picker.classList.add("pk-moved"));
           view.addEventListener("input", (e) => { if (e.target.name in contact) contact[e.target.name] = e.target.value; });
+          view.addEventListener("invalid", (e) => { if (e.target.name === "consent") e.target.form.querySelector("[data-for=consent]").hidden = false; }, true); // does not bubble
+          view.addEventListener("change", (e) => {
+            if (e.target.name !== "consent") return;
+            e.target.setCustomValidity(e.target.checked ? "" : "Поставьте галочку согласия на обработку персональных данных");
+            e.target.form.querySelector("[data-for=consent]").hidden = e.target.checked;
+          });
           view.addEventListener("submit", (e) => { e.preventDefault(); book(e.target); });
           view.addEventListener("click", (e) => {
             const button = e.target.closest("button[type=button]");
