@@ -4,7 +4,7 @@ import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
   site: 'https://psyholog-irina.ru',
-  integrations: [sitemap({ filter: (page) => !page.includes('/index2') })],
+  integrations: [sitemap({ filter: (page) => !page.includes('/index2') && !page.includes('/soglasie') })],
   vite: {
     plugins: [tailwindcss()],
   },
