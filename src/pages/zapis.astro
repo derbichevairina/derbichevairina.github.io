@@ -1,0 +1,64 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import BookingPicker from '../components/BookingPicker.astro';
+import { DURATION_MIN, PRICE_LABEL } from '../config';
+import portrait from '../assets/images/ira.png';
+---
+
+<Base
+  title="Запись на консультацию — Ирина Дербичева, психолог"
+  description="Выберите дату и время онлайн-консультации с Ириной Дербичевой, экзистенциальным психологом."
+  analytics={false}
+>
+  <meta name="robots" content="noindex, nofollow" slot="head" />
+
+  <!-- The short link to hand out instead of Calendly: who, what, and the booking picker, nothing else. -->
+  <style is:inline>
+    /* on a phone the host card comes first, as on a Calendly page, and replaces the compact price line */
+    .zp-card { order: -1; }
+    #booking-grid .bk-miniprice { display: none; }
+  </style>
+  <section class="relative" style="padding-bottom: var(--spacing-fluid-section);">
+    <div class="absolute inset-0 bg-gradient-to-b from-sage-100/60 via-warm-50 to-warm-50"></div>
+    <div class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 sm:pt-12 lg:pt-16">
+      <BookingPicker>
+        <aside class="bk-price zp-card lg:sticky lg:top-24">
+          <div class="rounded-2xl bg-white border border-sage-200/70 shadow-soft p-6 sm:p-8">
+            <div class="flex items-center gap-4 lg:block">
+              <Image src={portrait} alt="Ирина Дербичева" width={160} height={160} class="w-16 h-16 lg:w-20 lg:h-20 rounded-full object-cover flex-shrink-0 lg:mb-5" loading="eager" />
+              <div>
+                <p class="text-warm-500 text-sm">Ирина Дербичева</p>
+                <h1 class="font-display font-semibold text-sage-900 leading-tight text-2xl lg:text-3xl lg:mt-1">Консультация психолога</h1>
+              </div>
+            </div>
+            <ul class="mt-5 space-y-2.5 text-warm-700">
+              <li class="flex items-center gap-3">
+                <svg class="w-5 h-5 flex-shrink-0 text-sage-600" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" /><path stroke-linecap="round" d="M12 7v5l3 2" /></svg>
+                {DURATION_MIN} минут
+              </li>
+              <li class="flex items-center gap-3">
+                <svg class="w-5 h-5 flex-shrink-0 text-sage-600" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="6" width="13" height="12" rx="2" /><path stroke-linejoin="round" d="m16 10 5-3v10l-5-3z" /></svg>
+                Онлайн, по видеосвязи
+              </li>
+              <li class="flex items-center gap-3">
+                <svg class="w-5 h-5 flex-shrink-0 text-sage-600" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="6" width="18" height="13" rx="2" /><path stroke-linecap="round" d="M3 10h18M7 15h3" /></svg>
+                {PRICE_LABEL}
+              </li>
+            </ul>
+            <p class="mt-5 pt-5 border-t border-sage-100 text-warm-600 text-sm leading-relaxed">
+              Экзистенциальный психолог и логотерапевт. Работаю только со взрослыми.
+              Первая встреча — знакомство: вы рассказываете, что вас привело, я объясняю,
+              чем могу помочь. Она ни к чему не обязывает.
+            </p>
+            <p class="mt-4 flex flex-wrap gap-x-4 gap-y-1 text-sm">
+              <a href="/" class="text-sage-600 hover:text-sage-700 underline underline-offset-2 transition-colors">Подробнее обо мне</a>
+              <a href="https://t.me/derbichevairina" target="_blank" rel="noopener" class="text-sage-600 hover:text-sage-700 underline underline-offset-2 transition-colors">Telegram</a>
+              <a href="https://wa.me/+79028983895" target="_blank" rel="noopener" class="text-sage-600 hover:text-sage-700 underline underline-offset-2 transition-colors">WhatsApp</a>
+            </p>
+          </div>
+        </aside>
+      </BookingPicker>
+    </div>
+  </section>
+</Base>
