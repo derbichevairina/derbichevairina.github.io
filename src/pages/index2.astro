@@ -567,7 +567,7 @@ const professionalServiceSchema = {
           const detectedZone = Intl.DateTimeFormat().resolvedOptions().timeZone || DEFAULT_ZONE;
           const zones = [...new Set([detectedZone, DEFAULT_ZONE, ...Object.keys(ZONE_NAMES)])]; // an unknown detected zone is listed as is
           let zone = detectedZone, month, monthSlots = {}, day = null, slot = null, pickId = 0, pendingDay = null;
-          let initialLoad = true, skipTries = 0; // on first load we skip months without free time and pre-select the nearest day
+          let initialLoad = true, skipTries = 0; // on first load we skip months without free time
           const slotsByMonth = {}; // "zone|2026-10" → promise of { "2026-10-07": [{ time }] }, only days with free slots
           let zoneSlots = {}; // merged free days of every loaded month for the current zone — feeds the quick-pick chips
           const contact = { name: "", email: "", phone: "+7" };
@@ -709,10 +709,7 @@ const professionalServiceSchema = {
               month = { y: month.y + Math.floor(m / 12), m: m % 12 };
               return showPick(focusSelector, isNewStep, note);
             }
-            if (initialLoad) {
-              initialLoad = false;
-              if (upcoming.length) pendingDay = upcoming[0]; // pre-select the nearest free day: times are visible right away
-            }
+            initialLoad = false;
             const freeDays = Object.keys(slots).length;
             show(pickHtml(slots, note), freeDays ? `Дней со свободным временем: ${freeDays}` : "В этом месяце свободного времени нет", focusSelector);
             setProgress(day ? 2 : 1);
