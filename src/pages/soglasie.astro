@@ -1,0 +1,93 @@
+---
+import Base from '../layouts/Base.astro';
+
+// bump with any wording change, together with metadata.consent in index2.astro: it proves which edition a client agreed to
+const edition = '1';
+const editionDate = '[дата публикации]';
+const link = 'text-sage-600 hover:text-sage-700 underline underline-offset-2 transition-colors';
+---
+
+<Base
+  title="Согласие на обработку персональных данных — psyholog-irina.ru"
+  description="Текст согласия на обработку персональных данных, которое вы даёте при записи на консультацию на сайте psyholog-irina.ru."
+>
+  <section class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
+    <nav class="text-sm text-warm-400 mb-8">
+      <a href="/" class="hover:text-sage-600 transition-colors">Главная</a>
+      <span class="mx-2">/</span>
+      <span class="text-warm-600">Согласие на обработку персональных данных</span>
+    </nav>
+
+    <h1 class="font-display text-3xl sm:text-4xl font-medium text-sage-900 leading-tight mb-4 text-balance">
+      Согласие на обработку персональных данных
+    </h1>
+    <p class="text-warm-400 text-sm mb-10">Редакция {edition} от {editionDate}</p>
+
+    <div class="space-y-6 text-warm-600 leading-relaxed">
+      <p>
+        Отмечая в форме записи на сайте psyholog-irina.ru пункт о согласии и отправляя форму,
+        я свободно, своей волей и в своём интересе даю согласие на обработку моих персональных
+        данных на условиях ниже (статья 9 Федерального закона от 27.07.2006 № 152-ФЗ
+        «О персональных данных»).
+      </p>
+
+      <div>
+        <h2 class="font-display text-xl sm:text-2xl text-sage-800 mb-3">1. Кому я даю согласие</h2>
+        <p>
+          Оператор — Дербичева Ирина [Отчество], самозанятая (плательщик налога на профессиональный
+          доход), ИНН [ИНН]. Адрес для обращений: [EMAIL],
+          <a href="https://t.me/derbichevairina" target="_blank" rel="noopener" class={link}>Telegram @derbichevairina</a>.
+        </p>
+      </div>
+
+      <div>
+        <h2 class="font-display text-xl sm:text-2xl text-sage-800 mb-3">2. Какие данные</h2>
+        <p>
+          Имя, адрес электронной почты, номер телефона (если я его указал(а)), выбранные дата
+          и время консультации, мой часовой пояс, а также IP-адрес, дата и время отправки формы —
+          для подтверждения факта согласия.
+        </p>
+      </div>
+
+      <div>
+        <h2 class="font-display text-xl sm:text-2xl text-sage-800 mb-3">3. Зачем</h2>
+        <p>
+          Чтобы записать меня на консультацию, подтвердить запись, прислать ссылку на видеозвонок,
+          напомнить о встрече и связаться со мной, если время придётся перенести или отменить.
+        </p>
+      </div>
+
+      <div>
+        <h2 class="font-display text-xl sm:text-2xl text-sage-800 mb-3">4. Что оператор может делать с данными</h2>
+        <p>
+          Сбор, запись, систематизация, накопление, хранение, уточнение (обновление, изменение),
+          извлечение, использование, передача (предоставление, доступ) лицам из раздела 5,
+          блокирование, удаление и уничтожение. Обработка ведётся с использованием средств
+          автоматизации и без них.
+        </p>
+      </div>
+
+      <div>
+        <h2 class="font-display text-xl sm:text-2xl text-sage-800 mb-3">5. Кому данные могут передаваться</h2>
+        <p>
+          Только тем, без кого запись не работает, и только в нужном для этого объёме:
+          хостинг-провайдеру сервера в России, на котором хранятся записи (RuVDS),
+          [почтовому сервису для писем с подтверждением], [Google Календарю — уточняется].
+          Подробно — в <a href="/privacy/" class={link}>Политике обработки персональных данных</a>.
+        </p>
+      </div>
+
+      <div>
+        <h2 class="font-display text-xl sm:text-2xl text-sage-800 mb-3">6. Срок действия и отзыв</h2>
+        <p class="mb-3">
+          Согласие действует 1 год после моей последней консультации или до его отзыва.
+        </p>
+        <p>
+          Я могу отозвать согласие в любой момент, написав оператору на [EMAIL] или в Telegram.
+          После отзыва оператор прекращает обработку и удаляет данные не позже чем через 30 дней,
+          если закон не требует хранить их дольше.
+        </p>
+      </div>
+    </div>
+  </section>
+</Base>

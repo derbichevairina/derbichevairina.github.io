@@ -737,7 +737,7 @@ const professionalServiceSchema = {
               + '<label class="pk-field">Электронная почта<input class="pk-input" name="email" type="email" required autocomplete="email"></label>'
               + '<label class="pk-field">Телефон <small>необязательно</small><input class="pk-input" name="phone" type="tel" autocomplete="tel"></label>'
               + '<p class="pk-msg" role="alert" hidden></p>'
-              + '<label class="pk-consent"><input type="checkbox" name="consent" required><span>Я согласен(на) на обработку персональных данных в соответствии с <a href="https://psyholog-irina.ru/privacy/" target="_blank" rel="noopener">политикой конфиденциальности</a></span></label>'
+              + '<label class="pk-consent"><input type="checkbox" name="consent" required><span>Даю <a href="/soglasie/" target="_blank" rel="noopener">согласие на обработку персональных данных</a> и подтверждаю, что ознакомлен(а) с <a href="/privacy/" target="_blank" rel="noopener">политикой обработки персональных данных</a></span></label>'
               + '<p class="pk-msg" data-for="consent" role="alert" hidden>Чтобы записаться, поставьте галочку: нужно согласие на обработку персональных данных.</p>'
               + `<button class="pk-btn pk-btn--submit"><span class="pk-btn-label">Записаться</span>${ARROW}</button>`
               + '<p class="pk-note">Это заявка, а не оплата: я свяжусь с вами, чтобы подтвердить время.</p></form>', "Заполните контакты", ".pk-summary", true);
@@ -754,7 +754,7 @@ const professionalServiceSchema = {
               headers: { "Content-Type": "application/json" },
               body: JSON.stringify({
                 responses: { name: contact.name.trim(), email: contact.email.trim(), ...(phone.length > 2 && { attendeePhoneNumber: phone }) },
-                start: new Date(start).toISOString(), end: new Date(start + HOUR).toISOString(), eventTypeId: EVENT_TYPE_ID, timeZone: zone, language: "ru", metadata: { consent: "privacy-v1", consentAt: new Date().toISOString() },
+                start: new Date(start).toISOString(), end: new Date(start + HOUR).toISOString(), eventTypeId: EVENT_TYPE_ID, timeZone: zone, language: "ru", metadata: { consent: "soglasie-v1", consentAt: new Date().toISOString() },
               }),
             }).catch(() => null);
             if (response?.ok || response?.status === 409) delete slotsByMonth[`${zone}|${monthKey(month)}`]; // the slot is now held
