@@ -9,7 +9,7 @@ const code = 'block rounded-xl bg-white border border-sage-200 px-4 py-3 font-mo
 
 <Base
   title="Запись через ИИ-ассистента — Ирина Дербичева, психолог"
-  description="Подключите Claude или ChatGPT к расписанию психолога Ирины Дербичевой: ассистент подскажет, подходит ли она под ваш запрос, покажет свободное время и даст ссылку на запись."
+  description="Подключите Claude или ChatGPT к моему расписанию: ассистент расскажет, с какими запросами я работаю, покажет свободное время и даст ссылку на запись."
 >
   <section class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
     <nav class="text-sm text-warm-400 mb-8">
@@ -25,7 +25,7 @@ const code = 'block rounded-xl bg-white border border-sage-200 px-4 py-3 font-mo
     <div class="space-y-8 text-warm-600 leading-relaxed">
       <p>
         Claude, ChatGPT или другой ИИ-ассистент можно подключить к моему расписанию. Ассистент расскажет
-        о моей работе — с какими темами я работаю и с какими нет, — покажет свободное время в вашем часовом
+        о моей практике — с какими темами я работаю и с какими нет, — покажет свободное время в вашем часовом
         поясе и даст ссылку, по которой вы запишетесь на сайте.
       </p>
 
@@ -58,11 +58,11 @@ const code = 'block rounded-xl bg-white border border-sage-200 px-4 py-3 font-mo
         <h2 class="font-display text-xl sm:text-2xl text-sage-800 mb-3">Что можно спросить</h2>
         <ul class="space-y-2 list-disc pl-5">
           <li>«С какими темами работает психолог Ирина Дербичева и в каком формате?»</li>
-          <li>«Когда у неё есть время на этой неделе вечером? Я в Тбилиси.»</li>
-          <li>«Хочу записаться на четверг в 19:00.»</li>
+          <li>«Когда у неё есть время на этой неделе вечером? Я в Тбилиси».</li>
+          <li>«Хочу записаться на четверг в 19:00».</li>
         </ul>
         <p class="mt-3">
-          На последний вопрос ассистент проверит, что время свободно, и даст ссылку. По ней откроется
+          В последнем случае ассистент проверит, что время свободно, и даст ссылку. По ней откроется
           <a href="/zapis/" class={link}>страница записи</a> с уже выбранным временем: остаётся указать имя
           и почту и подтвердить запись.
         </p>
@@ -81,7 +81,7 @@ const code = 'block rounded-xl bg-white border border-sage-200 px-4 py-3 font-mo
       <div>
         <h2 class="font-display text-xl sm:text-2xl text-sage-800 mb-3">Если что-то не работает</h2>
         <p>
-          Напишите на почту <a href="mailto:tsarkova.irina@gmail.com" class={link}>tsarkova.irina@gmail.com</a>
+          Напишите мне на почту <a href="mailto:tsarkova.irina@gmail.com" class={link}>tsarkova.irina@gmail.com</a>
           или запишитесь <a href="/zapis/" class={link}>на сайте</a> напрямую.
         </p>
       </div>
@@ -94,13 +94,13 @@ const code = 'block rounded-xl bg-white border border-sage-200 px-4 py-3 font-mo
           All three tools are read-only:
         </p>
         <ul class="space-y-2 list-disc pl-5 mb-3">
-          <li><code class="font-mono text-sage-900">get_psychologist_profile</code> — facts about her practice: approach, topics she works with and not, format, price, contacts.</li>
+          <li><code class="font-mono text-sage-900">get_psychologist_profile</code> — facts about her practice: approach, topics she does and does not work with, format, price, contacts.</li>
           <li><code class="font-mono text-sage-900">list_free_slots</code> — free 60-minute session times, grouped by day in the person's timezone.</li>
-          <li><code class="font-mono text-sage-900">get_booking_link</code> — checks a time is still free and returns the booking page with that time selected, or the nearest free times.</li>
+          <li><code class="font-mono text-sage-900">get_booking_link</code> — checks whether a time is still free and returns a link to the booking page with that time selected, or the nearest free times.</li>
         </ul>
         <p>
           The connector asks only for a date, a time and a timezone, never for names, contact details or health information,
-          and does not store what it is asked. The person finishes the booking
+          and does not store the contents of requests. The person finishes the booking
           and gives consent to personal data processing on the website. Privacy policy: <a href="/privacy/" class={link}>psyholog-irina.ru/privacy/</a>.
           Support: <a href="mailto:tsarkova.irina@gmail.com" class={link}>tsarkova.irina@gmail.com</a>.
         </p>
