@@ -2,7 +2,7 @@
 import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
 import BookingPicker from '../components/BookingPicker.astro';
-import { DURATION_MIN, PRICE_LABEL } from '../config';
+import { DURATION_MIN, PRICE_LABEL, MAX_URL } from '../config';
 import portrait from '../assets/images/ira.png';
 ---
 
@@ -53,6 +53,7 @@ import portrait from '../assets/images/ira.png';
             </p>
             <p class="mt-4 flex flex-wrap gap-x-4 gap-y-1 text-sm">
               <a href="/" class="text-sage-600 hover:text-sage-700 underline underline-offset-2 transition-colors">Подробнее обо мне</a>
+              <a href={MAX_URL} target="_blank" rel="noopener" class="text-sage-700 font-semibold hover:text-sage-800 underline underline-offset-2 transition-colors">MAX</a>
               <a href="https://t.me/derbichevairina" target="_blank" rel="noopener" class="text-sage-600 hover:text-sage-700 underline underline-offset-2 transition-colors">Telegram</a>
               <a href="https://wa.me/+79028983895" target="_blank" rel="noopener" class="text-sage-600 hover:text-sage-700 underline underline-offset-2 transition-colors">WhatsApp</a>
             </p>

@@ -1,5 +1,5 @@
 ---
-import { DURATION_MIN, PRICE_LABEL } from '../config';
+import { DURATION_MIN, PRICE_LABEL, MAX_URL } from '../config';
 
 // Cal.com on this server, reached same-origin through nginx (deploy/nginx)
 const CALCOM_ORIGIN = "/cal-api";
@@ -169,12 +169,12 @@ const CALCOM_ORIGIN = "/cal-api";
 
   <slot />{/* the side card, class "bk-price": price on the home page, who and what on /zapis/ */}
 </div>
-<script is:inline define:vars={{ CALCOM_ORIGIN, DURATION_MIN, PRICE_LABEL }}>
+<script is:inline define:vars={{ CALCOM_ORIGIN, DURATION_MIN, PRICE_LABEL, MAX_URL }}>
   (() => {
     const HOUR = 3600e3, EVENT_TYPE_ID = 1, DEFAULT_ZONE = "Europe/Moscow";
     const ZONE_NAMES = { "Europe/Moscow": "Москва", "Europe/Kaliningrad": "Калининград", "Asia/Yekaterinburg": "Екатеринбург", "Asia/Novosibirsk": "Новосибирск", "Asia/Vladivostok": "Владивосток", "Asia/Tbilisi": "Тбилиси", "Asia/Yerevan": "Ереван", "Asia/Almaty": "Алматы", "Europe/Istanbul": "Стамбул", "Asia/Dubai": "Дубай", "Europe/Berlin": "Берлин", "Europe/London": "Лондон", "America/New_York": "Нью-Йорк" };
     const picker = document.getElementById("picker"), view = document.getElementById("picker-view"), status = document.getElementById("picker-status"), progress = document.getElementById("pk-progress");
-    const contacts = '<a href="https://t.me/derbichevairina" target="_blank" rel="noopener">Telegram</a> или <a href="https://wa.me/+79028983895" target="_blank" rel="noopener">WhatsApp</a>';
+    const contacts = `<a href="${MAX_URL}" target="_blank" rel="noopener">MAX</a>, ` + '<a href="https://t.me/derbichevairina" target="_blank" rel="noopener">Telegram</a> или <a href="https://wa.me/+79028983895" target="_blank" rel="noopener">WhatsApp</a>';
     const detectedZone = Intl.DateTimeFormat().resolvedOptions().timeZone || DEFAULT_ZONE;
     const zones = [...new Set([detectedZone, DEFAULT_ZONE, ...Object.keys(ZONE_NAMES)])]; // an unknown detected zone is listed as is
     let zone = detectedZone, month, monthSlots = {}, day = null, slot = null, pickId = 0;

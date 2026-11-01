@@ -1,6 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
-import { SESSION_LABEL } from '../config';
+import { SESSION_LABEL, MAX_URL } from '../config';
 
 const contactPageSchema = {
   "@context": "https://schema.org",
@@ -14,6 +14,7 @@ const contactPageSchema = {
     "url": "https://psyholog-irina.ru",
     "telephone": "+79028983895",
     "sameAs": [
+      MAX_URL,
       "https://t.me/derbichevairina",
       "https://wa.me/+79028983895",
     ],
@@ -23,7 +24,7 @@ const contactPageSchema = {
 
 <Base
   title="Контакты — записаться к психологу Ирине Дербичевой"
-  description="Как связаться и записаться на консультацию: Telegram, WhatsApp, онлайн-запись. Формат встреч, стоимость, с чем я работаю и с чем не работаю."
+  description="Как связаться и записаться на консультацию: MAX, Telegram, WhatsApp, онлайн-запись. Формат встреч, стоимость, с чем я работаю и с чем не работаю."
 >
   <script type="application/ld+json" set:html={JSON.stringify(contactPageSchema)} />
 
@@ -52,6 +53,19 @@ const contactPageSchema = {
       <h2 class="font-display text-2xl sm:text-3xl text-sage-800 mb-8">Как связаться</h2>
 
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <a
+          href={MAX_URL}
+          target="_blank"
+          rel="noopener"
+          class="sm:col-span-2 flex items-center gap-4 p-5 bg-sage-700 rounded-xl hover:bg-sage-800 transition-colors duration-300"
+        >
+          <svg class="w-7 h-7 flex-shrink-0 text-white" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M12 1a11 11 0 0 0-9.53 16.5L1.2 22.2a.5.5 0 0 0 .62.6l4.68-1.3A11 11 0 1 0 12 1zm0 6a5 5 0 1 1 0 10 5 5 0 0 1 0-10z"/></svg>
+          <div>
+            <div class="text-white font-medium">MAX</div>
+            <div class="text-sage-200 text-sm">Удобнее всего написать сюда</div>
+          </div>
+        </a>
+
         <a
           href="https://t.me/derbichevairina"
           target="_blank"
@@ -103,7 +117,7 @@ const contactPageSchema = {
       </div>
       <div>
         <dt class="text-sage-800 font-medium">Как отменить или перенести</dt>
-        <dd>Напишите в Telegram или WhatsApp заранее — подберём другое время.</dd>
+        <dd>Напишите в MAX, Telegram или WhatsApp заранее — подберём другое время.</dd>
       </div>
     </dl>
   </section>

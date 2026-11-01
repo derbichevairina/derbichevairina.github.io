@@ -2,7 +2,7 @@
 import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
 import VideoInterview from '../components/VideoInterview.astro';
-import { PRICE, DURATION_MIN, PRICE_LABEL } from '../config';
+import { PRICE, DURATION_MIN, PRICE_LABEL, MAX_URL } from '../config';
 import heroImage from '../assets/images/stol.png';
 import aboutImage from '../assets/images/okno.png';
 
@@ -58,6 +58,7 @@ const professionalServiceSchema = {
       "telephone": "+79028983895",
       "knowsLanguage": "ru",
       "sameAs": [
+        MAX_URL,
         "https://t.me/derbichevairina",
         "https://wa.me/+79028983895"
       ]
@@ -362,7 +363,11 @@ const professionalServiceSchema = {
             </ul>
             <div class="mt-7 pt-6 border-t border-sage-100">
               <p class="text-warm-500 text-xs mb-3">Или напишите напрямую:</p>
-              <div class="flex gap-2.5">
+              <div class="flex flex-wrap gap-2.5">
+                <a href={MAX_URL} target="_blank" rel="noopener" class="basis-full inline-flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-sage-700 text-white text-sm font-semibold hover:bg-sage-800 transition-all duration-200">
+                  <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M12 1a11 11 0 0 0-9.53 16.5L1.2 22.2a.5.5 0 0 0 .62.6l4.68-1.3A11 11 0 1 0 12 1zm0 6a5 5 0 1 1 0 10 5 5 0 0 1 0-10z"/></svg>
+                  Написать в MAX
+                </a>
                 <a href="https://t.me/derbichevairina" target="_blank" rel="noopener" class="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl border border-sage-200 text-sage-700 text-sm font-medium hover:bg-sage-50 hover:border-sage-300 transition-all duration-200">
                   <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
                   Telegram
@@ -442,12 +447,12 @@ const professionalServiceSchema = {
             Выбрать время
           </a>
           <a
-            href="https://t.me/derbichevairina"
+            href={MAX_URL}
             target="_blank"
             rel="noopener"
             class="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full font-medium text-white border border-sage-600 hover:bg-sage-800 hover:border-sage-500 active:scale-[0.98] transition-all duration-300 w-full sm:w-auto"
           >
-            Написать в Telegram
+            Написать в MAX
           </a>
         </div>
 

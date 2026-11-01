@@ -1,5 +1,5 @@
 ---
-import { SESSION_LABEL } from '../config';
+import { SESSION_LABEL, MAX_URL } from '../config';
 
 interface Props {
   title?: string;
@@ -50,6 +50,8 @@ const {
 
     <p class="text-warm-400 text-sm mt-3">
       или напишите в
+      <a href={MAX_URL} target="_blank" rel="noopener" class="text-sage-600 hover:text-sage-700 underline underline-offset-2 transition-colors">MAX</a>
+      /
       <a href="https://t.me/derbichevairina" target="_blank" rel="noopener" class="text-sage-600 hover:text-sage-700 underline underline-offset-2 transition-colors">Telegram</a>
       /
       <a href="https://wa.me/+79028983895" target="_blank" rel="noopener" class="text-sage-600 hover:text-sage-700 underline underline-offset-2 transition-colors">WhatsApp</a>
