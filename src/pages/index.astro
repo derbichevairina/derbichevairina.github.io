@@ -2,6 +2,7 @@
 import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
 import VideoInterview from '../components/VideoInterview.astro';
+import BookingPicker from '../components/BookingPicker.astro';
 import { PRICE, DURATION_MIN, PRICE_LABEL, MAX_URL } from '../config';
 import heroImage from '../assets/images/stol.png';
 import aboutImage from '../assets/images/okno.png';
@@ -90,7 +91,6 @@ const professionalServiceSchema = {
   title="Ирина Дербичева — экзистенциальный психолог онлайн | ACT-терапевт"
   description="Экзистенциальный психолог, ACT-терапевт. Индивидуальные консультации онлайн для взрослых. Тревога, РПП, отношения, самооценка, выгорание."
 >
-  <link rel="preconnect" href="https://calendly.com" slot="head" />
   <script type="application/ld+json" set:html={JSON.stringify(professionalServiceSchema)} />
 
   <!-- Hero -->
@@ -339,12 +339,11 @@ const professionalServiceSchema = {
         <p class="text-sage-500 text-sm font-medium tracking-wide uppercase mb-3">Запись</p>
         <h2 class="font-display text-sage-900 text-balance" style="font-size: var(--text-fluid-3xl);">Запись на встречу</h2>
         <p class="text-warm-600 max-w-lg mx-auto mt-4 text-pretty">
-          Выберите подходящие дату и время — я свяжусь с вами для подтверждения.
+          Выберите подходящие дату и время — подтверждение придёт на почту.
         </p>
       </div>
-
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-10 items-start max-w-5xl mx-auto">
-        <div class="lg:col-span-4 lg:sticky lg:top-24">
+      <BookingPicker>
+        <div class="bk-price lg:sticky lg:top-24">
           <div class="rounded-2xl bg-white border border-sage-200/70 shadow-soft p-6 sm:p-8">
             <p class="text-warm-500 text-xs font-medium tracking-wide uppercase mb-2">Стоимость сессии</p>
             <p class="font-display font-semibold text-sage-900" style="font-size: var(--text-fluid-3xl);">{PRICE_LABEL}</p>
@@ -380,48 +379,7 @@ const professionalServiceSchema = {
             </div>
           </div>
         </div>
-
-        <!-- The calendar page draws its own 66px top margin; cut it off so it lines up with the price card. -->
-        <div class="lg:col-span-8 overflow-hidden">
-          <div id="calendly-container" style="min-width:320px;height:700px;margin-top:-66px;">
-            <iframe
-              id="calendly-frame"
-              data-url="https://calendly.com/derbichevairina/full_session?embed_type=Inline&hide_event_type_details=1&hide_gdpr_banner=1&primary_color=5f6e4e&background_color=ffffff"
-              title="Выбор даты и времени сессии"
-              class="w-full h-full border-0"
-            ></iframe>
-          </div>
-        </div>
-      </div>
-      <script is:inline>
-        (function() {
-          // Same iframe Calendly's widget.js would build, minus the script and stylesheet round trips.
-          // It starts loading once the page is idle instead of waiting for the visitor to scroll down.
-          var container = document.getElementById('calendly-container');
-          var frame = document.getElementById('calendly-frame');
-          if (!frame) return;
-
-          function loadCalendly() {
-            frame.src = frame.dataset.url + '&embed_domain=' + encodeURIComponent(location.host);
-          }
-          function whenIdle() {
-            if ('requestIdleCallback' in window) requestIdleCallback(loadCalendly, { timeout: 2000 });
-            else setTimeout(loadCalendly, 500);
-          }
-          if (document.readyState === 'complete') whenIdle();
-          else window.addEventListener('load', whenIdle);
-
-          window.addEventListener('message', function(e) {
-            if (e.data.event === 'calendly.page_height') {
-              var h = parseInt(e.data.payload.height, 10);
-              if (h > 300) container.style.height = h + 'px';
-            }
-            if (e.data.event === 'calendly.event_scheduled' && window.ym) {
-              ym(107099009, 'reachGoal', 'calendly_click');
-            }
-          });
-        })();
-      </script>
+      </BookingPicker>
     </div>
   </section>
 
