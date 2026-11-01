@@ -46,6 +46,11 @@ server {
 
     # Booking MCP server for Claude and ChatGPT (mcp/ in this repo, scripts/deploy-mcp.sh), on this box at 127.0.0.1:3200.
     location = /mcp {
+        # a browser opening the address would hang on an endless event stream; MCP clients send Accept: text/event-stream
+        set $mcp_browser "";
+        if ($request_method = GET) { set $mcp_browser "get"; }
+        if ($http_accept !~ "text/event-stream") { set $mcp_browser "${mcp_browser}-html"; }
+        if ($mcp_browser = "get-html") { return 302 /ai/; }
         client_max_body_size 64k;
         proxy_http_version 1.1;
         proxy_buffering off;
