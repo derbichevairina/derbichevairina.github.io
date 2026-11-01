@@ -39,13 +39,6 @@ const CALCOM_ORIGIN = "/cal-api";
   .pk-plink[data-state="done"] { background: var(--color-sage-300); }
   @media (max-width: 400px) { .pk-pstep:not([data-state="active"]) .pk-plabel { display: none; } }
 
-  /* quick-pick chips: nearest free days, jump straight to times */
-  .pk-chips { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.25rem; }
-  .pk-chips-label { width: 100%; margin: 0 0 0.125rem; font-size: 0.8125rem; color: var(--color-warm-500); }
-  .pk-chip { display: inline-flex; align-items: baseline; gap: 0.375rem; padding: 0.5rem 0.875rem; border-radius: 9999px; border: 1px solid var(--color-sage-300); background: var(--color-sage-50); color: var(--color-sage-800); font-size: 0.875rem; font-weight: 600; transition: background 0.2s, border-color 0.2s, color 0.2s, transform 0.15s; }
-  .pk-chip-time { font-weight: 400; font-size: 0.8125rem; color: var(--color-sage-600); }
-  .pk-chip--sel { background: var(--color-sage-700); border-color: var(--color-sage-700); color: #fff; }
-  .pk-chip--sel .pk-chip-time { color: var(--color-sage-200); }
 
   .pk-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; }
   .pk-nav { width: 2.5rem; height: 2.5rem; border-radius: 9999px; display: grid; place-items: center; color: var(--color-sage-700); border: 1px solid var(--color-sage-200); background: #fff; transition: background 0.2s, border-color 0.2s, opacity 0.2s; }
@@ -153,8 +146,6 @@ const CALCOM_ORIGIN = "/cal-api";
     .pk-moved .pk-free:hover { background: var(--color-sage-700); box-shadow: 0 6px 14px -6px var(--color-sage-700); color: #fff; transform: translateY(-1px); }
     .pk-moved .pk-free:hover::after { background: #fff; }
     .pk-moved .pk-time:hover { background: var(--color-sage-700); border-color: var(--color-sage-700); color: #fff; transform: translateY(-1px); }
-    .pk-moved .pk-chip:hover { background: var(--color-sage-700); border-color: var(--color-sage-700); color: #fff; }
-    .pk-moved .pk-chip:hover .pk-chip-time { color: var(--color-sage-200); }
   }
   @media (prefers-reduced-motion: reduce) { .pk-step, .pk-skel { animation: none; } }
 </style>
@@ -186,10 +177,9 @@ const CALCOM_ORIGIN = "/cal-api";
     const contacts = '<a href="https://t.me/derbichevairina" target="_blank" rel="noopener">Telegram</a> или <a href="https://wa.me/+79028983895" target="_blank" rel="noopener">WhatsApp</a>';
     const detectedZone = Intl.DateTimeFormat().resolvedOptions().timeZone || DEFAULT_ZONE;
     const zones = [...new Set([detectedZone, DEFAULT_ZONE, ...Object.keys(ZONE_NAMES)])]; // an unknown detected zone is listed as is
-    let zone = detectedZone, month, monthSlots = {}, day = null, slot = null, pickId = 0, pendingDay = null;
+    let zone = detectedZone, month, monthSlots = {}, day = null, slot = null, pickId = 0;
     let initialLoad = true, skipTries = 0; // on first load we skip months without free time
     const slotsByMonth = {}; // "zone|2026-10" → promise of { "2026-10-07": [{ time }] }, only days with free slots
-    let zoneSlots = {}; // merged free days of every loaded month for the current zone — feeds the quick-pick chips
     const contact = { name: "", email: "", phone: "+7" };
 
     const pad = (n) => String(n).padStart(2, "0");
@@ -269,17 +259,6 @@ const CALCOM_ORIGIN = "/cal-api";
         + `<ul class="pk-tzlist" role="listbox" aria-label="Часовой пояс" hidden>${options}</ul></div>`;
     }
 
-    function chipsHtml() {
-      const first = today().key;
-      const days = Object.keys(zoneSlots).filter((k) => k >= first && zoneSlots[k]?.length).sort().slice(0, 3);
-      if (!days.length) return "";
-      const chips = days.map((k) => {
-        const label = formatDay(k, { weekday: "short", day: "numeric", month: "short" }).replace(/\.$/, "");
-        return `<button type="button" class="pk-chip${k === day ? " pk-chip--sel" : ""}" data-chip="${k}">${label}<span class="pk-chip-time">с ${clock(Date.parse(zoneSlots[k][0].time))}</span></button>`;
-      }).join("");
-      return `<div class="pk-chips"><p class="pk-chips-label">Ближайшее свободное время</p>${chips}</div>`;
-    }
-
     function slotsColumnHtml() {
       const times = monthSlots[day] || [];
       return `<div class="pk-slots" id="pk-slots">${back("calendar", "Выбрать другую дату")}<h4 class="pk-dayhead">${dayTitle(day)}</h4>`
@@ -302,7 +281,7 @@ const CALCOM_ORIGIN = "/cal-api";
       const empty = slots && !Object.keys(slots).length
         ? '<div class="pk-empty"><p>В этом месяце свободного времени нет.</p><button type="button" class="pk-btn" data-go="next">Следующий месяц</button></div>'
         : "";
-      return (note ? `<p class="pk-msg" role="alert">${note}</p>` : "") + (slots ? chipsHtml() : "") + '<div class="pk-pick"><div class="pk-cal">'
+      return (note ? `<p class="pk-msg" role="alert">${note}</p>` : "") + '<div class="pk-pick"><div class="pk-cal">'
         + `<div class="pk-head"><button type="button" id="pk-prev" class="pk-nav" data-go="prev" aria-label="Предыдущий месяц"${isFirst ? " disabled" : ""}>${chevron("M12.5 4.5 7 10l5.5 5.5")}</button>`
         + `<h3 tabindex="-1">${title}</h3><button type="button" id="pk-next" class="pk-nav" data-go="next" aria-label="Следующий месяц">${chevron("M7.5 4.5 13 10l-5.5 5.5")}</button></div>`
         + `<div class="pk-grid"${slots ? "" : ' aria-busy="true"'}>${cells}</div>${empty}${zoneSelectHtml("cal")}</div>${day && slots ? slotsColumnHtml() : ""}</div>`;
@@ -318,7 +297,6 @@ const CALCOM_ORIGIN = "/cal-api";
       }
       if (id !== pickId) return; // the visitor already moved to another month or zone
       monthSlots = slots;
-      zoneSlots = { ...zoneSlots, ...slots };
       if (!slots[day]?.length) day = null; // the day is no longer free
       // first visit: never open on a dead month — walk forward to the first month that has time
       const upcoming = Object.keys(slots).filter((k) => k >= today().key).sort();
@@ -332,19 +310,14 @@ const CALCOM_ORIGIN = "/cal-api";
       const freeDays = Object.keys(slots).length;
       show(pickHtml(slots, note), freeDays ? `Дней со свободным временем: ${freeDays}` : "В этом месяце свободного времени нет", focusSelector);
       setProgress(day ? 2 : 1);
-      if (pendingDay && slots[pendingDay]?.length) {
-        const key = pendingDay;
-        pendingDay = null;
-        selectDay(key, { scroll: false, focusDay: false });
-      }
     }
 
-    function selectDay(key, { scroll = true, focusDay = true } = {}) {
+    function selectDay(key) {
       day = key;
       show(pickHtml(monthSlots), `${dayTitle(day)}, свободных времён: ${monthSlots[day].length}`, null);
       setProgress(2);
-      if (focusDay) view.querySelector(".pk-sel")?.focus({ preventScroll: true });
-      if (scroll && !isWide()) document.getElementById("pk-slots").scrollIntoView({ behavior: "smooth", block: "start" });
+      view.querySelector(".pk-sel")?.focus({ preventScroll: true });
+      if (!isWide()) document.getElementById("pk-slots").scrollIntoView({ behavior: "smooth", block: "start" });
     }
 
     function showForm() {
@@ -430,7 +403,7 @@ const CALCOM_ORIGIN = "/cal-api";
     view.addEventListener("click", (e) => {
       const button = e.target.closest("button[type=button]");
       if (!button) return;
-      const { go, day: pickedDay, time, tz, chip } = button.dataset;
+      const { go, day: pickedDay, time, tz } = button.dataset;
       if (go === "prev" || go === "next") {
         const m = month.m + (go === "prev" ? -1 : 1);
         month = { y: month.y + Math.floor(m / 12), m: (m + 12) % 12 };
@@ -444,14 +417,10 @@ const CALCOM_ORIGIN = "/cal-api";
           list.querySelector("[aria-selected=true] button").focus();
         }
       } else if (tz) {
-        zone = tz; day = null; zoneSlots = {};
+        zone = tz; day = null;
         const first = today().month;
         if (month.y * 12 + month.m < first.y * 12 + first.m) month = first;
         showPick("#pk-tzbtn-cal");
-      } else if (chip) {
-        const [y, m] = chip.split("-").map(Number);
-        if (y === month.y && m === month.m + 1 && monthSlots[chip]?.length) selectDay(chip);
-        else { month = { y, m: m - 1 }; day = null; pendingDay = chip; showPick(null); }
       } else if (go === "calendar") {
         view.querySelector(".pk-cal").scrollIntoView({ behavior: "smooth", block: "start" });
         view.querySelector(".pk-sel")?.focus({ preventScroll: true });
