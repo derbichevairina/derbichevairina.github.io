@@ -24,9 +24,9 @@ const code = 'block rounded-xl bg-white border border-sage-200 px-4 py-3 font-mo
 
     <div class="space-y-8 text-warm-600 leading-relaxed">
       <p>
-        Если вы обсуждаете свою ситуацию с Claude, ChatGPT или другим ИИ-ассистентом, его можно подключить
-        к моему расписанию. Ассистент расскажет, с какими запросами я работаю, покажет свободное время
-        в вашем часовом поясе и даст ссылку, по которой вы запишетесь на сайте.
+        Claude, ChatGPT или другой ИИ-ассистент можно подключить к моему расписанию. Ассистент расскажет
+        о моей работе — с какими темами я работаю и с какими нет, — покажет свободное время в вашем часовом
+        поясе и даст ссылку, по которой вы запишетесь на сайте.
       </p>
 
       <div>
@@ -57,7 +57,7 @@ const code = 'block rounded-xl bg-white border border-sage-200 px-4 py-3 font-mo
       <div>
         <h2 class="font-display text-xl sm:text-2xl text-sage-800 mb-3">Что можно спросить</h2>
         <ul class="space-y-2 list-disc pl-5">
-          <li>«Подойдёт ли мне Ирина Дербичева, если у меня тревога и бессонница?»</li>
+          <li>«С какими темами работает психолог Ирина Дербичева и в каком формате?»</li>
           <li>«Когда у неё есть время на этой неделе вечером? Я в Тбилиси.»</li>
           <li>«Хочу записаться на четверг в 19:00.»</li>
         </ul>
@@ -71,8 +71,9 @@ const code = 'block rounded-xl bg-white border border-sage-200 px-4 py-3 font-mo
       <div>
         <h2 class="font-display text-xl sm:text-2xl text-sage-800 mb-3">Какие данные получает подключение</h2>
         <p>
-          Только дату, время и часовой пояс, о которых спрашивает ассистент. Имя, почту, телефон
-          и сведения о самочувствии ассистенту сообщать не нужно: их вы вводите на сайте, в обычной форме записи.
+          Подключение запрашивает только дату, время и часовой пояс и не сохраняет эти запросы. Имя, почту,
+          телефон и сведения о самочувствии ассистенту сообщать не нужно: имя и почту вы вводите на сайте,
+          в обычной форме записи.
           Подробнее — в <a href="/privacy/" class={link}>политике обработки персональных данных</a>.
         </p>
       </div>
@@ -93,12 +94,13 @@ const code = 'block rounded-xl bg-white border border-sage-200 px-4 py-3 font-mo
           All three tools are read-only:
         </p>
         <ul class="space-y-2 list-disc pl-5 mb-3">
-          <li><code class="font-mono text-sage-900">get_psychologist_profile</code> — approach, who she works with and who not, format, price, contacts.</li>
+          <li><code class="font-mono text-sage-900">get_psychologist_profile</code> — facts about her practice: approach, topics she works with and not, format, price, contacts.</li>
           <li><code class="font-mono text-sage-900">list_free_slots</code> — free 60-minute session times, grouped by day in the person's timezone.</li>
           <li><code class="font-mono text-sage-900">get_booking_link</code> — checks a time is still free and returns the booking page with that time selected, or the nearest free times.</li>
         </ul>
         <p>
-          The connector never receives names, contact details or health information: the person finishes the booking
+          The connector asks only for a date, a time and a timezone, never for names, contact details or health information,
+          and does not store what it is asked. The person finishes the booking
           and gives consent to personal data processing on the website. Privacy policy: <a href="/privacy/" class={link}>psyholog-irina.ru/privacy/</a>.
           Support: <a href="mailto:tsarkova.irina@gmail.com" class={link}>tsarkova.irina@gmail.com</a>.
         </p>

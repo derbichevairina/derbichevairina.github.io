@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Builds and starts the booking MCP server container on the web server, then checks it lists its tools.
+# Builds and starts the booking MCP server container on the web server, then checks it reads the schedule.
 set -euo pipefail
 
 HOST="${1:-root@194.87.101.175}"
@@ -17,8 +17,9 @@ docker image prune -f >/dev/null
 for attempt in $(seq 1 30); do
     if curl -sf -X POST http://127.0.0.1:3200/mcp \
         -H 'Content-Type: application/json' -H 'Accept: application/json, text/event-stream' \
-        -d '{"jsonrpc":"2.0","id":1,"method":"tools/list"}' | grep -q get_booking_link; then
-        echo "booking MCP answers"
+        -d '{"jsonrpc":"2.0","id":1,"method":"tools/call","params":{"name":"list_free_slots","arguments":{}}}' \
+        | grep -q '"session_minutes"'; then
+        echo "booking MCP reads the schedule"
         exit 0
     fi
     sleep 2

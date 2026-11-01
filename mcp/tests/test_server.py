@@ -109,3 +109,72 @@ async def test_profile_names_who_irina_does_not_work_with():
     assert profile["name"] == "Ирина Дербичева"
     assert "Дети и подростки" in profile["does_not_work_with"]
     assert profile["booking_page"] == "https://psyholog-irina.ru/zapis/"
+
+
+def calcom_client_failing() -> CalcomSlotsClient:
+    http = httpx.AsyncClient(transport=httpx.MockTransport(lambda request: httpx.Response(503)))
+    return CalcomSlotsClient(http=http, schedule_url="http://calcom.test/api/trpc/slots/getSchedule", event_type_id=1)
+
+
+def calcom_payload_with_slots(*utc_starts: str) -> dict:
+    return {"result": {"data": {"json": {"slots": {"any": [{"time": start} for start in utc_starts]}}}}}
+
+
+async def test_unknown_timezone_error_does_not_repeat_the_input():
+    async with Client(booking_server()) as client:
+        result = await client.call_tool("list_free_slots", {"timezone_name": "Иван/Петров"})
+
+    assert result.is_error
+    assert "Иван" not in result.content[0].text
+
+
+async def test_calcom_outage_tells_where_to_book_instead():
+    server = build_booking_server(slots_client=calcom_client_failing(), now=lambda: MORNING_UTC)
+
+    async with Client(server) as client:
+        result = await client.call_tool("list_free_slots", {})
+
+    assert result.is_error
+    assert "https://psyholog-irina.ru/zapis/" in result.content[0].text
+
+
+async def test_hour_repeated_by_the_dst_change_still_finds_its_slot():
+    # 2026-11-01 05:30Z and 06:30Z are both 01:30 in New York, before and after clocks go back
+    slots_client = calcom_client_answering(calcom_payload_with_slots("2026-11-01T06:30:00.000Z"))
+    server = build_booking_server(slots_client=slots_client, now=lambda: datetime(2026, 10, 30, tzinfo=timezone.utc))
+
+    async with Client(server) as client:
+        result = await client.call_tool(
+            "get_booking_link",
+            {"date_local": "2026-11-01", "time_local": "01:30", "timezone_name": "America/New_York"},
+        )
+
+    link = result.structured_content
+    assert link["available"] is True
+    assert link["booking_url"] == "https://psyholog-irina.ru/zapis/?slot=2026-11-01T06%3A30%3A00Z"
+    assert link["session"] == "воскресенье, 1 ноября, 01:30–02:30 (America/New_York)"
+
+
+async def test_session_end_across_the_dst_change_is_one_real_hour_later():
+    # starts 01:30 EDT (05:30Z), ends 06:30Z which is 01:30 EST
+    slots_client = calcom_client_answering(calcom_payload_with_slots("2026-11-01T05:30:00.000Z"))
+    server = build_booking_server(slots_client=slots_client, now=lambda: datetime(2026, 10, 30, tzinfo=timezone.utc))
+
+    async with Client(server) as client:
+        result = await client.call_tool(
+            "get_booking_link",
+            {"date_local": "2026-11-01", "time_local": "01:30", "timezone_name": "America/New_York"},
+        )
+
+    assert result.structured_content["session"] == "воскресенье, 1 ноября, 01:30–01:30 (America/New_York)"
+
+
+async def test_no_free_time_at_all_says_which_period_was_checked():
+    server = build_booking_server(slots_client=calcom_client_answering(calcom_payload_with_slots()), now=lambda: MORNING_UTC)
+
+    async with Client(server) as client:
+        result = await client.call_tool("get_booking_link", {"date_local": "2026-09-01", "time_local": "18:00"})
+
+    link = result.structured_content
+    assert link["alternatives"] == []
+    assert "No free time between 2026-09-01 and 2026-10-31" in link["next_step"]

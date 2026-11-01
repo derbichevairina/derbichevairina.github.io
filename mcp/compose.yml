@@ -7,5 +7,10 @@ services:
     network_mode: host
     environment:
       PORT: "3200"
+    logging:  # only warnings and errors are logged; this caps how much of them is kept
+      driver: json-file
+      options:
+        max-size: 1m
+        max-file: "3"
     cpus: 0.25
     mem_limit: 128m
