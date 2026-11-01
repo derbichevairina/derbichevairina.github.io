@@ -123,7 +123,7 @@ def build_booking_server(slots_client: CalcomSlotsClient, now: Callable[[], date
         annotations=ToolAnnotations(title="Профиль психолога", **READ_ONLY),
     )
     def get_psychologist_profile() -> PsychologistProfile:
-        """Who Irina Derbicheva is, which requests she works with and which not, format, session length, price and contacts."""
+        """Retrieves details about Irina Derbicheva's practice, including her approach, topics she does and does not work with, format, session length, price, and contact information."""
         return PROFILE
 
     @server.tool(
@@ -134,7 +134,7 @@ def build_booking_server(slots_client: CalcomSlotsClient, now: Callable[[], date
         timezone_name: str = Field(default=DEFAULT_TIMEZONE, max_length=64, description="The person's IANA timezone, e.g. Europe/Moscow"),
         days_ahead: int = Field(default=14, ge=1, le=MAX_DAYS_AHEAD, description="How many days from today to look ahead"),
     ) -> FreeSlots:
-        """Irina's free 60-minute online session times, grouped by day in the given timezone."""
+        """Lists Irina's available 60-minute online session times, grouped by day in the specified timezone."""
         zone = resolve_timezone(timezone_name)
         current = now()
         starts = await fetch_free_starts(slots_client, current, current + timedelta(days=days_ahead))
@@ -154,7 +154,7 @@ def build_booking_server(slots_client: CalcomSlotsClient, now: Callable[[], date
         time_local: str = Field(max_length=5, description="Session start HH:MM in the given timezone"),
         timezone_name: str = Field(default=DEFAULT_TIMEZONE, max_length=64, description="The person's IANA timezone"),
     ) -> BookingLink:
-        """Check that a time is still free and return the link where the person finishes booking it on Irina's site; if it is taken, return the nearest free times."""
+        """Checks if a time slot is available and returns a link to Irina's booking page with that time pre-selected, where the user completes the booking, or returns the nearest available times if the slot is taken."""
         zone = resolve_timezone(timezone_name)
         try:
             wall_clock = datetime.combine(date.fromisoformat(date_local), time.fromisoformat(time_local))
