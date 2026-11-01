@@ -2,39 +2,40 @@
 import Base from '../layouts/Base.astro';
 import { MAX_URL } from '../config';
 
-const updatedAt = '[дата публикации]';
+// bump both with any wording change; the booking form links here next to the consent checkbox
+const edition = '1';
+const editionDate = '1 ноября 2026';
 const link = 'text-sage-600 hover:text-sage-700 underline underline-offset-2 transition-colors';
 ---
 
 <Base
-  title="Политика конфиденциальности — psyholog-irina.ru"
+  title="Политика обработки персональных данных — psyholog-irina.ru"
   description="Какие персональные данные собирает сайт psyholog-irina.ru, зачем, где они хранятся, кому передаются и как их удалить."
 >
   <section class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
     <nav class="text-sm text-warm-400 mb-8">
       <a href="/" class="hover:text-sage-600 transition-colors">Главная</a>
       <span class="mx-2">/</span>
-      <span class="text-warm-600">Политика конфиденциальности</span>
+      <span class="text-warm-600">Политика обработки персональных данных</span>
     </nav>
 
     <h1 class="font-display text-3xl sm:text-4xl font-medium text-sage-900 leading-tight mb-4 text-balance">
-      Политика конфиденциальности
+      Политика обработки персональных данных
     </h1>
-    <p class="text-warm-400 text-sm mb-10">Обновлено: {updatedAt}</p>
+    <p class="text-warm-400 text-sm mb-10">Редакция {edition} от {editionDate}</p>
 
     <div class="space-y-8 text-warm-600 leading-relaxed">
       <div>
         <h2 class="font-display text-xl sm:text-2xl text-sage-800 mb-3">Кто обрабатывает данные</h2>
         <p class="mb-3">
-          Оператор персональных данных — Дербичева Ирина [Отчество], психолог,
-          самозанятая (плательщик налога на профессиональный доход), ИНН [ИНН], Россия.
+          Оператор персональных данных — Дербичева Ирина Николаевна, психолог,
+          самозанятая (плательщик налога на профессиональный доход), ИНН 745207252520, Россия.
           Мне принадлежит сайт psyholog-irina.ru.
         </p>
         <p>
-          По любому вопросу о ваших данных пишите в
-          <a href="https://t.me/derbichevairina" target="_blank" rel="noopener" class={link}>Telegram</a>,
-          <a href={MAX_URL} target="_blank" rel="noopener" class={link}>MAX</a>
-          или на почту [EMAIL].
+          По любому вопросу о ваших данных пишите на почту <a href="mailto:tsarkova.irina@gmail.com" class={link}>tsarkova.irina@gmail.com</a>,
+          в <a href={MAX_URL} target="_blank" rel="noopener" class={link}>MAX</a>
+          или <a href="https://t.me/derbichevairina" target="_blank" rel="noopener" class={link}>Telegram</a>.
         </p>
       </div>
 
@@ -60,7 +61,9 @@ const link = 'text-sage-600 hover:text-sage-700 underline underline-offset-2 tra
         <h2 class="font-display text-xl sm:text-2xl text-sage-800 mb-3">На каком основании</h2>
         <p class="mb-3">
           Данные для записи я обрабатываю с вашего согласия. Вы даёте его отдельной отметкой
-          в форме записи; без отметки запись не отправится. Согласие можно отозвать в любой момент —
+          в форме записи; без отметки запись не отправится. Полный текст согласия —
+          на странице <a href="/soglasie/" class={link}>«Согласие на обработку персональных данных»</a>.
+          Вместе с записью сохраняются дата и время согласия и номер редакции его текста. Согласие можно отозвать в любой момент —
           достаточно написать мне.
         </p>
         <p>
@@ -74,7 +77,8 @@ const link = 'text-sage-600 hover:text-sage-700 underline underline-offset-2 tra
         <p>
           Форма записи работает на сервисе Cal.com, который установлен на моём собственном
           арендованном сервере в России (хостинг RuVDS, Москва). Ваши данные сразу попадают
-          на этот сервер: их сбор и хранение происходят в России. Доступ к ним есть только у меня [и у администратора сервера — уточняется].
+          на этот сервер: их сбор и хранение происходят в России. Доступ к ним есть только у меня и у администратора,
+          который по моему поручению обслуживает сервер.
         </p>
       </div>
 
@@ -89,7 +93,9 @@ const link = 'text-sage-600 hover:text-sage-700 underline underline-offset-2 tra
           </li>
           <li>
             <strong class="text-sage-800">Почтовый сервис.</strong>
-            Письмо с подтверждением записи отправляется через [почтовый сервис].
+            Письма о записи — вам подтверждение, мне уведомление — уходят через почту Gmail
+            компании Google. В них есть ваше имя, адрес почты, телефон, если вы его указали,
+            и время встречи. Серверы Google находятся за пределами России.
           </li>
           <li>
             <strong class="text-sage-800">Яндекс.</strong>
@@ -109,6 +115,15 @@ const link = 'text-sage-600 hover:text-sage-700 underline underline-offset-2 tra
           В Telegram, WhatsApp или MAX я вижу ваше имя или никнейм, номер телефона (если он виден
           в мессенджере) и переписку. Сайт эти данные не собирает: они хранятся у самого мессенджера.
           Telegram и WhatsApp — зарубежные сервисы, MAX — российский.
+        </p>
+      </div>
+
+      <div>
+        <h2 class="font-display text-xl sm:text-2xl text-sage-800 mb-3">Как защищены данные</h2>
+        <p>
+          Сайт и форма записи работают только по защищённому соединению (HTTPS). База с записями
+          недоступна из интернета, войти на сервер можно только по ключу, а в систему записи —
+          по паролю. Данные обрабатываются с помощью этих программ и вручную, когда я связываюсь с вами.
         </p>
       </div>
 
@@ -140,7 +155,7 @@ const link = 'text-sage-600 hover:text-sage-700 underline underline-offset-2 tra
           Видео на сайте размещено в сервисе Kinescope (компания Kinescope, Россия). Плеер загружается только после того, как вы нажали кнопку воспроизведения; до этого сайт не обращается к серверам Kinescope. После нажатия Kinescope получает обычные технические сведения (IP-адрес, данные браузера) и статистику просмотра.
         </p>
         <p>
-          Других счётчиков на сайте нет: Google Analytics и Calendly больше не используются.
+          Других счётчиков на сайте нет, Google Analytics больше не используется.
           Сайт и запись работают одинаково при любом вашем выборе.
         </p>
       </div>
@@ -149,10 +164,9 @@ const link = 'text-sage-600 hover:text-sage-700 underline underline-offset-2 tra
         <h2 class="font-display text-xl sm:text-2xl text-sage-800 mb-3">Ваши права</h2>
         <p class="mb-3">
           Вы можете узнать, какие данные о вас у меня есть, попросить исправить или удалить их
-          и отозвать согласие. Напишите в
-          <a href="https://t.me/derbichevairina" target="_blank" rel="noopener" class={link}>Telegram</a>,
-          <a href={MAX_URL} target="_blank" rel="noopener" class={link}>MAX</a>
-          или на почту [EMAIL]. Я отвечу в течение 10 рабочих дней. Чтобы не отдать данные
+          и отозвать согласие. Напишите на почту <a href="mailto:tsarkova.irina@gmail.com" class={link}>tsarkova.irina@gmail.com</a>,
+          в <a href={MAX_URL} target="_blank" rel="noopener" class={link}>MAX</a>
+          или <a href="https://t.me/derbichevairina" target="_blank" rel="noopener" class={link}>Telegram</a>. Я отвечу в течение 10 рабочих дней. Чтобы не отдать данные
           чужому человеку, я могу попросить подтвердить, что запрос пишете именно вы.
         </p>
         <p>
@@ -164,7 +178,7 @@ const link = 'text-sage-600 hover:text-sage-700 underline underline-offset-2 tra
       <div>
         <h2 class="font-display text-xl sm:text-2xl text-sage-800 mb-3">Изменения политики</h2>
         <p>
-          Если что-то в этом тексте изменится, я обновлю страницу и дату вверху.
+          Если что-то в этом тексте изменится, я опубликую новую редакцию с новым номером и датой.
           Если изменится цель или состав данных, я попрошу согласие заново.
         </p>
       </div>

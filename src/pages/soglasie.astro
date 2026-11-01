@@ -1,9 +1,10 @@
 ---
 import Base from '../layouts/Base.astro';
+import { MAX_URL } from '../config';
 
 // bump with any wording change, together with metadata.consent in index2.astro: it proves which edition a client agreed to
 const edition = '1';
-const editionDate = '[дата публикации]';
+const editionDate = '1 ноября 2026';
 const link = 'text-sage-600 hover:text-sage-700 underline underline-offset-2 transition-colors';
 ---
 
@@ -35,8 +36,9 @@ const link = 'text-sage-600 hover:text-sage-700 underline underline-offset-2 tra
         <h2 class="font-display text-xl sm:text-2xl text-sage-800 mb-3">1. Кому я даю согласие</h2>
         <p>
           Оператор — Дербичева Ирина Николаевна, самозанятая (плательщик налога на профессиональный
-          доход), ИНН 745207252520. Адрес для обращений: [EMAIL],
-          <a href="https://t.me/derbichevairina" target="_blank" rel="noopener" class={link}>Telegram @derbichevairina</a>.
+          доход), ИНН 745207252520. Адрес для обращений: <a href="mailto:tsarkova.irina@gmail.com" class={link}>tsarkova.irina@gmail.com</a>,
+          также можно написать в <a href={MAX_URL} target="_blank" rel="noopener" class={link}>MAX</a>
+          или <a href="https://t.me/derbichevairina" target="_blank" rel="noopener" class={link}>Telegram</a>.
         </p>
       </div>
 
@@ -44,8 +46,8 @@ const link = 'text-sage-600 hover:text-sage-700 underline underline-offset-2 tra
         <h2 class="font-display text-xl sm:text-2xl text-sage-800 mb-3">2. Какие данные</h2>
         <p>
           Имя, адрес электронной почты, номер телефона (если я его указал(а)), выбранные дата
-          и время консультации, мой часовой пояс, а также IP-адрес, дата и время отправки формы —
-          для подтверждения факта согласия.
+          и время консультации, мой часовой пояс, а также дата и время отправки формы и номер
+          редакции этого текста — для подтверждения факта согласия.
         </p>
       </div>
 
@@ -72,7 +74,9 @@ const link = 'text-sage-600 hover:text-sage-700 underline underline-offset-2 tra
         <p>
           Только тем, без кого запись не работает, и только в нужном для этого объёме:
           хостинг-провайдеру сервера в России, на котором хранятся записи (RuVDS),
-          [почтовому сервису для писем с подтверждением], [Google Календарю — уточняется].
+          и компании Google LLC (США): через её почту Gmail уходят письма о записи (имя, адрес почты,
+          телефон, время встречи), а в Google Календарь оператора попадают имя и время встречи.
+          Я согласен(на) на эту трансграничную передачу.
           Подробно — в <a href="/privacy/" class={link}>Политике обработки персональных данных</a>.
         </p>
       </div>
@@ -83,7 +87,8 @@ const link = 'text-sage-600 hover:text-sage-700 underline underline-offset-2 tra
           Согласие действует 1 год после моей последней консультации или до его отзыва.
         </p>
         <p>
-          Я могу отозвать согласие в любой момент, написав оператору на [EMAIL] или в Telegram.
+          Я могу отозвать согласие в любой момент, написав оператору на почту tsarkova.irina@gmail.com,
+          в MAX или Telegram.
           После отзыва оператор прекращает обработку и удаляет данные не позже чем через 30 дней,
           если закон не требует хранить их дольше.
         </p>
