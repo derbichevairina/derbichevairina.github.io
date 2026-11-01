@@ -1,5 +1,5 @@
 [Unit]
-Description=Refresh the free Calendly slots every half hour
+Description=Refresh the free booking slots every half hour
 
 [Timer]
 OnBootSec=2min

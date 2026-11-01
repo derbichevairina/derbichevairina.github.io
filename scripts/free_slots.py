@@ -1,14 +1,12 @@
 #!/usr/bin/env python3
-"""Publishes the nearest free Calendly slots as slots.json and slots.md.
+"""Publishes the nearest free booking slots as slots.json and slots.md for agents and readers.
 
 Runs on the web server every half hour, so it stays on the standard library:
 the box has python3.9 and no node. The files land outside the rsync target,
 otherwise the next site deploy would delete them.
 
-The endpoints below are the ones Calendly's own booking page calls. They need no
-token but are undocumented, so they can change without notice; the documented
-replacement is API v2 /event_type_available_times, which needs a personal access
-token and answers seven days at a time.
+The slots come from the self-hosted Cal.com on the same server, through the endpoint
+the site's own booking picker calls (no token, undocumented, may change with Cal.com).
 """
 from __future__ import annotations
 
@@ -19,16 +17,17 @@ from pathlib import Path
 from urllib.parse import urlencode
 from urllib.request import Request, urlopen
 
-PROFILE_SLUG = "derbichevairina"
-EVENT_TYPE_SLUG = "full_session"
-BOOKING_URL = "https://calendly.com/derbichevairina/full_session"
+EVENT_TYPE_ID = 1
+DURATION_MINUTES = 60
+SCHEDULE_URL = "http://127.0.0.1:3000/api/trpc/slots/getSchedule"
+BOOKING_URL = "https://psyholog-irina.ru/zapis/"
+MAX_URL = "https://max.ru/u/f9LHodD0cOLjSTb7GhaDmaB-R57UI5gU6Ay_nZvGKr6fKqEEcqWUjn0GDBs"
 TELEGRAM_URL = "https://t.me/derbichevairina"
-LOOKUP_URL = "https://calendly.com/api/booking/event_types/lookup"
 OUTPUT_DIR = Path("/var/www/psyholog-slots")
 DAYS_AHEAD = 7
 
-# Calendly is asked for Moscow time and answers with a +03:00 offset on every timestamp,
-# so a fixed offset is enough and no timezone database is needed. Moscow has no DST.
+# Cal.com is asked for Moscow days and answers in UTC; Moscow has no DST, so a fixed
+# offset turns them into Moscow time without a timezone database.
 MOSCOW = timezone(timedelta(hours=3))
 TIMEZONE_NAME = "Europe/Moscow"
 
@@ -43,17 +42,13 @@ MONTHS = [
 
 
 def available_days(payload: dict, now: datetime) -> list[dict]:
-    # keeps the days that still have bookable spots, dropping the ones already in the past
+    # Cal.com's free slots by Moscow date, as Moscow-time ISO strings, without days that have none or past slots
     days = []
-    for day in payload.get("days", []):
-        spots = [
-            spot["start_time"]
-            for spot in day.get("spots", [])
-            if spot.get("status") == "available"
-            and datetime.fromisoformat(spot["start_time"]) > now
-        ]
+    for date, slots in sorted(payload["result"]["data"]["json"]["slots"].items()):
+        starts = [datetime.fromisoformat(slot["time"].replace("Z", "+00:00")).astimezone(MOSCOW) for slot in slots]
+        spots = [start.isoformat(timespec="seconds") for start in starts if start > now]
         if spots:
-            days.append({"date": day["date"], "spots": spots})
+            days.append({"date": date, "spots": spots})
     return days
 
 
@@ -77,7 +72,7 @@ def render_markdown(days: list[dict], generated_at: datetime, duration_minutes: 
         return (
             header
             + "На ближайшую неделю свободных окон нет.\n\n"
-            + f"Напишите в Telegram {TELEGRAM_URL} — Ирина подберёт время.\n"
+            + f"Напишите в MAX {MAX_URL} или Telegram {TELEGRAM_URL} — Ирина подберёт время.\n"
         )
     lines = "\n".join(f"- {format_day(day)}" for day in days)
     return header + lines + f"\n\nЗаписаться: {BOOKING_URL}\n"
@@ -108,23 +103,16 @@ def write_atomically(path: Path, text: str) -> None:
 
 
 def main() -> None:
-    event_type = fetch_json(f"{LOOKUP_URL}?" + urlencode({
-        "event_type_slug": EVENT_TYPE_SLUG,
-        "profile_slug": PROFILE_SLUG,
-    }))
     now = datetime.now(MOSCOW)
-    calendar = fetch_json(
-        f"https://calendly.com/api/booking/event_types/{event_type['uuid']}/calendar/range?"
-        + urlencode({
-            "timezone": TIMEZONE_NAME,
-            "diagnostics": "false",
-            "range_start": now.date().isoformat(),
-            "range_end": (now.date() + timedelta(days=DAYS_AHEAD - 1)).isoformat(),
-        })
-    )
-
-    days = available_days(calendar, now)
-    duration = event_type["duration"]
+    first_day = datetime.combine(now.date(), datetime.min.time(), MOSCOW)
+    query = {"json": {
+        "eventTypeId": EVENT_TYPE_ID,
+        "startTime": first_day.isoformat(),
+        "endTime": (first_day + timedelta(days=DAYS_AHEAD, seconds=-1)).isoformat(),
+        "timeZone": TIMEZONE_NAME,
+    }}
+    days = available_days(fetch_json(f"{SCHEDULE_URL}?" + urlencode({"input": json.dumps(query)})), now)
+    duration = DURATION_MINUTES
 
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
     payload = build_json(days, now, duration)

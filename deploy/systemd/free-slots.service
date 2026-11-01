@@ -1,0 +1,8 @@
+[Unit]
+Description=Publish the nearest free booking slots from Cal.com
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/python3 /usr/local/bin/free-slots.py

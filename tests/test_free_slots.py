@@ -2,9 +2,9 @@ import json
 from datetime import datetime
 from pathlib import Path
 
-from calendly_slots import MOSCOW, available_days, build_json, render_markdown
+from free_slots import MOSCOW, available_days, build_json, render_markdown
 
-FIXTURE = json.loads((Path(__file__).parent / "fixtures/calendly-range.json").read_text())
+FIXTURE = json.loads((Path(__file__).parent / "fixtures/calcom-slots.json").read_text())
 MORNING = datetime(2026, 9, 1, 9, 0, tzinfo=MOSCOW)
 
 
@@ -14,7 +14,7 @@ def test_keeps_only_days_with_bookable_spots():
     assert [day["date"] for day in days] == ["2026-09-01", "2026-09-02"]
 
 
-def test_drops_spots_that_are_already_taken():
+def test_converts_utc_slots_to_moscow_time():
     days = available_days(FIXTURE, MORNING)
 
     assert days[1]["spots"] == ["2026-09-02T10:00:00+03:00"]
@@ -37,7 +37,14 @@ def test_says_so_when_the_week_is_empty():
     markdown = render_markdown([], MORNING, 60)
 
     assert "На ближайшую неделю свободных окон нет." in markdown
+    assert "https://max.ru/u/" in markdown
     assert "https://t.me/derbichevairina" in markdown
+
+
+def test_links_to_the_booking_page_on_the_site():
+    markdown = render_markdown(available_days(FIXTURE, MORNING), MORNING, 60)
+
+    assert "Записаться: https://psyholog-irina.ru/zapis/" in markdown
 
 
 def test_names_the_timezone_and_the_refresh_time():
