@@ -1,0 +1,108 @@
+---
+import Base from '../layouts/Base.astro';
+
+// documentation page of the booking MCP server (mcp/), linked from the Claude and ChatGPT directory listings
+const endpoint = 'https://psyholog-irina.ru/mcp';
+const link = 'text-sage-600 hover:text-sage-700 underline underline-offset-2 transition-colors';
+const code = 'block rounded-xl bg-white border border-sage-200 px-4 py-3 font-mono text-sage-900 text-sm sm:text-base break-all select-all';
+---
+
+<Base
+  title="Запись через ИИ-ассистента — Ирина Дербичева, психолог"
+  description="Подключите Claude или ChatGPT к расписанию психолога Ирины Дербичевой: ассистент подскажет, подходит ли она под ваш запрос, покажет свободное время и даст ссылку на запись."
+>
+  <section class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
+    <nav class="text-sm text-warm-400 mb-8">
+      <a href="/" class="hover:text-sage-600 transition-colors">Главная</a>
+      <span class="mx-2">/</span>
+      <span class="text-warm-600">Запись через ИИ-ассистента</span>
+    </nav>
+
+    <h1 class="font-display text-3xl sm:text-4xl font-medium text-sage-900 leading-tight mb-6 text-balance">
+      Запись через ИИ-ассистента
+    </h1>
+
+    <div class="space-y-8 text-warm-600 leading-relaxed">
+      <p>
+        Если вы обсуждаете свою ситуацию с Claude, ChatGPT или другим ИИ-ассистентом, его можно подключить
+        к моему расписанию. Ассистент расскажет, с какими запросами я работаю, покажет свободное время
+        в вашем часовом поясе и даст ссылку, по которой вы запишетесь на сайте.
+      </p>
+
+      <div>
+        <h2 class="font-display text-xl sm:text-2xl text-sage-800 mb-3">Адрес подключения</h2>
+        <code class={code}>{endpoint}</code>
+        <p class="mt-3 text-sm text-warm-500">Вход и регистрация не нужны.</p>
+      </div>
+
+      <div>
+        <h2 class="font-display text-xl sm:text-2xl text-sage-800 mb-3">Как подключить</h2>
+        <ul class="space-y-2 list-disc pl-5">
+          <li>
+            <strong class="text-sage-800">Claude.</strong>
+            Настройки → Коннекторы → «Добавить свой коннектор». Вставьте адрес выше и сохраните.
+          </li>
+          <li>
+            <strong class="text-sage-800">ChatGPT.</strong>
+            В настройках откройте раздел приложений (коннекторов), включите режим разработчика, если его попросят,
+            и добавьте приложение по адресу выше, без авторизации.
+          </li>
+          <li>
+            <strong class="text-sage-800">Другие ассистенты</strong>, которые поддерживают MCP-серверы:
+            добавьте адрес как удалённый сервер (Streamable HTTP).
+          </li>
+        </ul>
+      </div>
+
+      <div>
+        <h2 class="font-display text-xl sm:text-2xl text-sage-800 mb-3">Что можно спросить</h2>
+        <ul class="space-y-2 list-disc pl-5">
+          <li>«Подойдёт ли мне Ирина Дербичева, если у меня тревога и бессонница?»</li>
+          <li>«Когда у неё есть время на этой неделе вечером? Я в Тбилиси.»</li>
+          <li>«Хочу записаться на четверг в 19:00.»</li>
+        </ul>
+        <p class="mt-3">
+          На последний вопрос ассистент проверит, что время свободно, и даст ссылку. По ней откроется
+          <a href="/zapis/" class={link}>страница записи</a> с уже выбранным временем: остаётся указать имя
+          и почту и подтвердить запись.
+        </p>
+      </div>
+
+      <div>
+        <h2 class="font-display text-xl sm:text-2xl text-sage-800 mb-3">Какие данные получает подключение</h2>
+        <p>
+          Только дату, время и часовой пояс, о которых спрашивает ассистент. Имя, почту, телефон
+          и сведения о самочувствии ассистенту сообщать не нужно: их вы вводите на сайте, в обычной форме записи.
+          Подробнее — в <a href="/privacy/" class={link}>политике обработки персональных данных</a>.
+        </p>
+      </div>
+
+      <div>
+        <h2 class="font-display text-xl sm:text-2xl text-sage-800 mb-3">Если что-то не работает</h2>
+        <p>
+          Напишите на почту <a href="mailto:tsarkova.irina@gmail.com" class={link}>tsarkova.irina@gmail.com</a>
+          или запишитесь <a href="/zapis/" class={link}>на сайте</a> напрямую.
+        </p>
+      </div>
+
+      <div lang="en" class="border-t border-sage-200 pt-8">
+        <h2 class="font-display text-xl sm:text-2xl text-sage-800 mb-3">Booking connector (MCP), in English</h2>
+        <p class="mb-3">
+          A remote MCP server (Streamable HTTP, no authentication) at <code class="font-mono text-sage-900">{endpoint}</code>
+          for booking an online session with Irina Derbicheva, a Russian-speaking clinical psychologist.
+          All three tools are read-only:
+        </p>
+        <ul class="space-y-2 list-disc pl-5 mb-3">
+          <li><code class="font-mono text-sage-900">get_psychologist_profile</code> — approach, who she works with and who not, format, price, contacts.</li>
+          <li><code class="font-mono text-sage-900">list_free_slots</code> — free 60-minute session times, grouped by day in the person's timezone.</li>
+          <li><code class="font-mono text-sage-900">get_booking_link</code> — checks a time is still free and returns the booking page with that time selected, or the nearest free times.</li>
+        </ul>
+        <p>
+          The connector never receives names, contact details or health information: the person finishes the booking
+          and gives consent to personal data processing on the website. Privacy policy: <a href="/privacy/" class={link}>psyholog-irina.ru/privacy/</a>.
+          Support: <a href="mailto:tsarkova.irina@gmail.com" class={link}>tsarkova.irina@gmail.com</a>.
+        </p>
+      </div>
+    </div>
+  </section>
+</Base>

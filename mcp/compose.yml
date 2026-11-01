@@ -1,0 +1,11 @@
+# Booking MCP server, installed at /opt/psyholog-mcp by scripts/deploy-mcp.sh.
+# Host network: it reads Cal.com on 127.0.0.1:3000 and listens on 127.0.0.1:3200 for nginx.
+services:
+  booking-mcp:
+    build: .
+    restart: unless-stopped
+    network_mode: host
+    environment:
+      PORT: "3200"
+    cpus: 0.25
+    mem_limit: 128m

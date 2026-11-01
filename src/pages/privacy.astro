@@ -3,7 +3,7 @@ import Base from '../layouts/Base.astro';
 import { MAX_URL } from '../config';
 
 // bump both with any wording change; the booking form links here next to the consent checkbox
-const edition = '1';
+const edition = '2';
 const editionDate = '1 ноября 2026';
 const link = 'text-sage-600 hover:text-sage-700 underline underline-offset-2 transition-colors';
 ---
@@ -115,6 +115,22 @@ const link = 'text-sage-600 hover:text-sage-700 underline underline-offset-2 tra
           В Telegram, WhatsApp или MAX я вижу ваше имя или никнейм, номер телефона (если он виден
           в мессенджере) и переписку. Сайт эти данные не собирает: они хранятся у самого мессенджера.
           Telegram и WhatsApp — зарубежные сервисы, MAX — российский.
+        </p>
+      </div>
+
+      <div>
+        <h2 class="font-display text-xl sm:text-2xl text-sage-800 mb-3">Если вы записываетесь через ИИ-ассистента</h2>
+        <p class="mb-3">
+          Сайт можно подключить к ИИ-ассистенту — Claude, ChatGPT и похожим — по адресу
+          <a href="/ai/" class={link}>psyholog-irina.ru/mcp</a>. Через это подключение ассистент получает только
+          то, что и так опубликовано на сайте: описание моей работы и свободное время для записи.
+          От ассистента приходят лишь дата, время и часовой пояс, о которых он спрашивает.
+          Имя, почту, телефон и сведения о самочувствии подключение не принимает.
+        </p>
+        <p>
+          Записаться ассистент не может: он даёт ссылку, и запись вы завершаете здесь, на сайте, в обычной
+          форме и на тех же условиях. То, что вы пишете ассистенту, обрабатывает его разработчик
+          (Anthropic, OpenAI и другие, обычно за пределами России) по своим правилам — эту переписку я не получаю.
         </p>
       </div>
 

@@ -30,6 +30,7 @@
 ## Как записаться
 
 - Страница записи: https://psyholog-irina.ru/zapis/ (то же — календарь на главной: https://psyholog-irina.ru/#booking)
+- MCP-сервер для записи (Streamable HTTP, без авторизации): https://psyholog-irina.ru/mcp — профиль, свободное время в часовом поясе клиента и ссылка на запись с выбранным временем; описание: https://psyholog-irina.ru/ai/
 - Ближайшие свободные окна текстом: https://psyholog-irina.ru/slots.md, в JSON: https://psyholog-irina.ru/slots.json (московское время, обновляется каждые полчаса)
 - MAX: https://max.ru/u/f9LHodD0cOLjSTb7GhaDmaB-R57UI5gU6Ay_nZvGKr6fKqEEcqWUjn0GDBs
 - Telegram: https://t.me/derbichevairina

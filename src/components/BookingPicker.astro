@@ -431,6 +431,17 @@ const CALCOM_ORIGIN = "/cal-api";
       else if (time) { slot = time; showForm(); }
     });
 
-    showPick(null);
+    // /zapis/?slot=<ISO instant>, the link the booking connector gives out: straight to the form if that time is still free
+    async function openLinkedSlot(start) {
+      const p = zonedParts(start, zone);
+      month = { y: p.year, m: p.month - 1 }; day = `${p.year}-${pad(p.month)}-${pad(p.day)}`; initialLoad = false;
+      await showPick(null);
+      const free = monthSlots[day]?.find((s) => Date.parse(s.time) === start);
+      if (free) { slot = free.time; showForm(); }
+      else showPick(null, false, "Это время уже занято — выберите другое.");
+    }
+
+    const linkedStart = Date.parse(new URLSearchParams(location.search).get("slot"));
+    if (linkedStart > Date.now()) openLinkedSlot(linkedStart); else showPick(null);
   })();
 </script>
